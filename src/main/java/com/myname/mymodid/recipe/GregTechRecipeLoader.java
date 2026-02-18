@@ -13,6 +13,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
+import gregtech.api.util.GTUtility;
 
 public final class GregTechRecipeLoader {
 
@@ -35,6 +36,7 @@ public final class GregTechRecipeLoader {
         }
 
         GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(9))
             .fluidInputs(oxygen, nitrogen)
             .fluidOutputs(nitricOxide)
             .duration(6 * GTRecipeBuilder.SECONDS)
@@ -42,7 +44,7 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         MyMod.logInfo(
-            "Registered Large Chemical Reactor recipe (EV): 1000L Oxygen + 1000L Nitrogen -> 1000L Nitric Oxide.");
+            "Registered Large Chemical Reactor recipe (EV): IC-9 + 1000L Oxygen + 1000L Nitrogen -> 1000L Nitric Oxide.");
     }
 
     private static void registerDinitrogenPentoxideLargeChemicalReactorRecipe() {
