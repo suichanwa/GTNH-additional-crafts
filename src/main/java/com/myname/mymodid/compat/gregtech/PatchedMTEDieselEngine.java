@@ -15,11 +15,9 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     private static final int OXYGEN_BOOSTED_MAX_EFFICIENCY = 30000;
     private static final int DINITROGEN_TETROXIDE_BOOSTED_MAX_EFFICIENCY = 40000;
 
-    private static final int DINITROGEN_TETROXIDE_BASE_CONSUMPTION_PER_TICK = 1;
-    private static final int DINITROGEN_TETROXIDE_EXTRA_CONSUMPTION_INTERVAL_TICKS = 4;
+    private static final int DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK = 1;
 
     private boolean boostedByDinitrogenTetroxide = false;
-    private int dinitrogenTetroxideTickCounter = 0;
 
     public PatchedMTEDieselEngine(int id, String name, String nameRegional) {
         super(id, name, nameRegional);
@@ -39,7 +37,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Combustion Generator, LCE")
             .addInfo("Supply Diesel Fuels and 1000L of Lubricant per hour to run")
-            .addInfo("Supply 40L/s Oxygen or 25L/s Dinitrogen Tetroxide to boost output (optional)")
+            .addInfo("Supply 40L/s Oxygen or 20L/s Dinitrogen Tetroxide to boost output (optional)")
             .addInfo("Default: Produces 2048EU/t at 100% fuel efficiency")
             .addInfo("Boosted: Produces 6144EU/t at 150% fuel efficiency")
             .addInfo("N2O4 boost can reach 400% max efficiency (up to 8192EU/t)")
@@ -96,19 +94,14 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     }
 
     private boolean depleteDinitrogenTetroxideForBoost() {
-        int amountToConsume = DINITROGEN_TETROXIDE_BASE_CONSUMPTION_PER_TICK;
-        dinitrogenTetroxideTickCounter++;
-        if (dinitrogenTetroxideTickCounter >= DINITROGEN_TETROXIDE_EXTRA_CONSUMPTION_INTERVAL_TICKS) {
-            amountToConsume++;
-            dinitrogenTetroxideTickCounter = 0;
-        }
-
-        FluidStack dinitrogenTetroxideGas = Materials.DinitrogenTetroxide.getGas(amountToConsume);
+        FluidStack dinitrogenTetroxideGas = Materials.DinitrogenTetroxide
+            .getGas(DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK);
         if (dinitrogenTetroxideGas != null && super.depleteInput(dinitrogenTetroxideGas)) {
             return true;
         }
 
-        FluidStack dinitrogenTetroxideFluid = Materials.DinitrogenTetroxide.getFluid(amountToConsume);
+        FluidStack dinitrogenTetroxideFluid = Materials.DinitrogenTetroxide
+            .getFluid(DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK);
         return dinitrogenTetroxideFluid != null && super.depleteInput(dinitrogenTetroxideFluid);
     }
 }
