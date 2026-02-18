@@ -3,8 +3,6 @@ package com.myname.mymodid.compat.kekztech;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.annotation.Nonnull;
-
 import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.enums.Materials;
@@ -27,7 +25,8 @@ public class PatchedMTESOFuelCellMK1 extends MTESOFuelCellMK1 {
     private static final int HELIUM_PER_SEC = 20;
     private static final int OXYGEN_REDUCTION_PERCENT = 30;
     private static final int FUEL_REDUCTION_PERCENT = 5;
-    private static final int REDUCED_OXYGEN_PER_SEC = Math.max(1, OXYGEN_PER_SEC * (100 - OXYGEN_REDUCTION_PERCENT) / 100);
+    private static final int REDUCED_OXYGEN_PER_SEC = Math
+        .max(1, OXYGEN_PER_SEC * (100 - OXYGEN_REDUCTION_PERCENT) / 100);
 
     public PatchedMTESOFuelCellMK1(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -54,8 +53,12 @@ public class PatchedMTESOFuelCellMK1 extends MTESOFuelCellMK1 {
             .addInfo("Outputs " + EU_PER_TICK + "EU/t and " + STEAM_PER_SEC + "L/s Steam")
             .addInfo("Additionally, requires " + OXYGEN_PER_SEC + "L/s Oxygen gas")
             .addInfo(
-                "Optionally, consumes " + HELIUM_PER_SEC + "L/s Helium to reduce Oxygen usage by "
-                    + OXYGEN_REDUCTION_PERCENT + "% and fuel usage by " + FUEL_REDUCTION_PERCENT + "%")
+                "Optionally, consumes " + HELIUM_PER_SEC
+                    + "L/s Helium to reduce Oxygen usage by "
+                    + OXYGEN_REDUCTION_PERCENT
+                    + "% and fuel usage by "
+                    + FUEL_REDUCTION_PERCENT
+                    + "%")
             .beginStructureBlock(3, 3, 5, false)
             .addController("Front center")
             .addCasingInfoMin("Clean Stainless Steel Casing", 12, false)
@@ -71,7 +74,6 @@ public class PatchedMTESOFuelCellMK1 extends MTESOFuelCellMK1 {
         return tt;
     }
 
-    @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
         final ArrayList<FluidStack> storedFluids = super.getStoredFluids();
@@ -88,9 +90,8 @@ public class PatchedMTESOFuelCellMK1 extends MTESOFuelCellMK1 {
                     && hatchFluid.isFluidEqual(liquid)) {
 
                     int baseFuelPerSecond = (EU_PER_TICK * 20) / aFuel.mSpecialValue;
-                    int boostedFuelPerSecond = Math.max(
-                        1,
-                        (baseFuelPerSecond * (100 - FUEL_REDUCTION_PERCENT) + 99) / 100);
+                    int boostedFuelPerSecond = Math
+                        .max(1, (baseFuelPerSecond * (100 - FUEL_REDUCTION_PERCENT) + 99) / 100);
 
                     boolean canUseHeliumBoost = heliumPerSecond != null && oxygenReducedPerSecond != null
                         && hasFluid(heliumPerSecond)

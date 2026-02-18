@@ -38,8 +38,7 @@ public final class SOFCHeliumPatch {
         IMetaTileEntity existing = GregTechAPI.METATILEENTITIES[SOFC_MK1_META_TILE_ID];
         if (!(existing instanceof MTESOFuelCellMK1)) {
             MyMod.logInfo(
-                "Skipped SOFC MK1 helium patch: MetaTileEntity "
-                    + SOFC_MK1_META_TILE_ID + " is not MTESOFuelCellMK1.");
+                "Skipped SOFC MK1 helium patch: MetaTileEntity " + SOFC_MK1_META_TILE_ID + " is not MTESOFuelCellMK1.");
             return;
         }
 
