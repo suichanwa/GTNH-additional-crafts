@@ -1,5 +1,7 @@
 package com.myname.mymodid;
 
+import com.myname.mymodid.compat.kekztech.SOFCHeliumPatch;
+
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -14,6 +16,8 @@ public class CommonProxy {
 
         MyMod.logInfo(Config.greeting);
         MyMod.logInfo("I am MyMod at version " + Tags.VERSION);
+
+        SOFCHeliumPatch.schedule();
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
