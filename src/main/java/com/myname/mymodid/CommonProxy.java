@@ -1,6 +1,9 @@
 package com.myname.mymodid;
 
+import com.myname.mymodid.compat.gregtech.DieselEngineOxidizerPatch;
 import com.myname.mymodid.compat.kekztech.SOFCHeliumPatch;
+import com.myname.mymodid.fluid.ModFluids;
+import com.myname.mymodid.recipe.GregTechRecipeLoader;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -17,11 +20,15 @@ public class CommonProxy {
         MyMod.logInfo(Config.greeting);
         MyMod.logInfo("I am MyMod at version " + Tags.VERSION);
 
+        ModFluids.registerFluids();
+        DieselEngineOxidizerPatch.schedule();
         SOFCHeliumPatch.schedule();
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
-    public void init(FMLInitializationEvent event) {}
+    public void init(FMLInitializationEvent event) {
+        GregTechRecipeLoader.registerRecipes();
+    }
 
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {}
