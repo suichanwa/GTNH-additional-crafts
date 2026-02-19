@@ -17,6 +17,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.myname.mymodid.Config;
 
 import gregtech.api.enums.HatchElement;
 import gregtech.api.enums.Materials;
@@ -36,16 +37,6 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
 
     private static final IStructureDefinition<MTEDieselEngine> CUSTOM_STRUCTURE_DEFINITION = createStructureDefinition();
 
-    private static final int DEFAULT_MAX_EFFICIENCY = 10000;
-    private static final int OXYGEN_BOOSTED_MAX_EFFICIENCY = 30000;
-    private static final int DINITROGEN_TETROXIDE_BOOSTED_MAX_EFFICIENCY = 40000;
-    private static final int OVERCLOCKED_MAX_EFFICIENCY_NUMERATOR = 4;
-    private static final int OVERCLOCKED_MAX_EFFICIENCY_DENOMINATOR = 5;
-
-    private static final int OVERCLOCKED_NOMINAL_OUTPUT = 5120;
-
-    // 1 mB/t = 20 L/s at 20 TPS.
-    private static final int DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK = 1;
     private static final String NBT_KEY_OVERCLOCK_MODE = "OverclockMode";
 
     private BoostMode boostMode = BoostMode.NONE;
@@ -91,14 +82,43 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
+        int normalNominalOutput = super.getNominalOutput();
+        int overclockNominalOutput = Config.lceOverclockNominalOutput;
+        long dinitrogenConsumptionPerSecond = (long) Config.lceDinitrogenTetroxideConsumptionPerTick * 20L;
+        long normalOutput = calculateOutput(normalNominalOutput, Config.lceDefaultMaxEfficiency);
+        long oxygenBoostedOutput = calculateOutput(normalNominalOutput, Config.lceOxygenBoostedMaxEfficiency);
+        long dinitrogenOutput = calculateOutput(normalNominalOutput, Config.lceDinitrogenTetroxideBoostedMaxEfficiency);
+        long overclockDinitrogenOutput = calculateOutput(
+            overclockNominalOutput,
+            Config.lceDinitrogenTetroxideBoostedMaxEfficiency);
+
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Combustion Generator, LCE")
             .addInfo("Supply Diesel Fuels and 1000L of Lubricant per hour to run")
-            .addInfo("Supply 40L/s Oxygen or 20L/s Dinitrogen Tetroxide to boost output (optional)")
-            .addInfo("Default: Produces 2048EU/t at 100% fuel efficiency")
-            .addInfo("Boosted: Produces 6144EU/t at 150% fuel efficiency")
-            .addInfo("N2O4 boost can reach 400% max efficiency (up to 8192EU/t)")
+            .addInfo(
+                "Supply 40L/s Oxygen or " + GTUtility.formatNumbers(dinitrogenConsumptionPerSecond)
+                    + "L/s Dinitrogen Tetroxide to boost output (optional)")
+            .addInfo(
+                "Default: Produces " + GTUtility.formatNumbers(normalOutput)
+                    + "EU/t at "
+                    + (Config.lceDefaultMaxEfficiency / 100)
+                    + "% fuel efficiency")
+            .addInfo(
+                "Boosted: Produces " + GTUtility.formatNumbers(oxygenBoostedOutput)
+                    + "EU/t at "
+                    + (Config.lceOxygenBoostedMaxEfficiency / 100)
+                    + "% fuel efficiency")
+            .addInfo(
+                "N2O4 boost can reach " + (Config.lceDinitrogenTetroxideBoostedMaxEfficiency / 100)
+                    + "% max efficiency (up to "
+                    + GTUtility.formatNumbers(dinitrogenOutput)
+                    + "EU/t)")
             .addInfo("Screwdriver right-click toggles overclock mode (2x output, lower fuel efficiency)")
+            .addInfo(
+                "Overclock nominal output: " + GTUtility.formatNumbers(overclockNominalOutput)
+                    + "EU/t (up to "
+                    + GTUtility.formatNumbers(overclockDinitrogenOutput)
+                    + "EU/t with N2O4)")
             .addInfo("Supports standard and 16A dynamo hatches")
             .addPollutionAmount(getPollutionPerSecond(null))
             .beginStructureBlock(3, 3, 4, false)
@@ -136,7 +156,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     @Override
     protected int getNominalOutput() {
         if (overclockMode) {
-            return OVERCLOCKED_NOMINAL_OUTPUT;
+            return Config.lceOverclockNominalOutput;
         }
         return super.getNominalOutput();
     }
@@ -145,11 +165,11 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     public int getMaxEfficiency(ItemStack itemStack) {
         int maxEfficiency;
         if (!super.boostEu) {
-            maxEfficiency = DEFAULT_MAX_EFFICIENCY;
+            maxEfficiency = Config.lceDefaultMaxEfficiency;
         } else if (boostMode == BoostMode.DINITROGEN_TETROXIDE) {
-            maxEfficiency = DINITROGEN_TETROXIDE_BOOSTED_MAX_EFFICIENCY;
+            maxEfficiency = Config.lceDinitrogenTetroxideBoostedMaxEfficiency;
         } else {
-            maxEfficiency = OXYGEN_BOOSTED_MAX_EFFICIENCY;
+            maxEfficiency = Config.lceOxygenBoostedMaxEfficiency;
         }
         return applyOverclockEfficiencyPenalty(maxEfficiency);
     }
@@ -216,8 +236,10 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         if (player != null) {
             GTUtility.sendChatToPlayer(
                 player,
-                overclockMode ? "Overclock mode enabled: 2x output, lower fuel efficiency."
-                    : "Overclock mode disabled: normal output and fuel efficiency.");
+                overclockMode
+                    ? "Overclock mode enabled: nominal output " + GTUtility.formatNumbers(getNominalOutput()) + "EU/t."
+                    : "Overclock mode disabled: nominal output " + GTUtility.formatNumbers(super.getNominalOutput())
+                        + "EU/t.");
         }
     }
 
@@ -243,13 +265,13 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
 
     private boolean depleteDinitrogenTetroxideForBoost() {
         FluidStack dinitrogenTetroxideGas = Materials.DinitrogenTetroxide
-            .getGas(DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK);
+            .getGas(Config.lceDinitrogenTetroxideConsumptionPerTick);
         if (dinitrogenTetroxideGas != null && super.depleteInput(dinitrogenTetroxideGas)) {
             return true;
         }
 
         FluidStack dinitrogenTetroxideFluid = Materials.DinitrogenTetroxide
-            .getFluid(DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK);
+            .getFluid(Config.lceDinitrogenTetroxideConsumptionPerTick);
         return dinitrogenTetroxideFluid != null && super.depleteInput(dinitrogenTetroxideFluid);
     }
 
@@ -257,7 +279,8 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         if (!overclockMode) {
             return maxEfficiency;
         }
-        return maxEfficiency * OVERCLOCKED_MAX_EFFICIENCY_NUMERATOR / OVERCLOCKED_MAX_EFFICIENCY_DENOMINATOR;
+        int denominator = Math.max(1, Config.lceOverclockEfficiencyDenominator);
+        return GTUtility.safeInt((long) maxEfficiency * Config.lceOverclockEfficiencyNumerator / denominator);
     }
 
     private boolean addEnergyOutputToAllDynamos(long euToOutput, boolean allowMixedVoltageDynamos) {
@@ -416,5 +439,9 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
                         .dot(1)
                         .buildAndChain(mte.getCasingBlock(), mte.getCasingMeta())))
             .build();
+    }
+
+    private static long calculateOutput(int nominalOutput, int maxEfficiency) {
+        return (long) nominalOutput * maxEfficiency / 10000L;
     }
 }
