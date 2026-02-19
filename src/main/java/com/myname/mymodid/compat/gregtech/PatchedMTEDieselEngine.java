@@ -23,6 +23,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatchDynamo;
+import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.common.tileentities.machines.multi.MTEDieselEngine;
@@ -33,40 +34,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     private static final List<Class<? extends IMetaTileEntity>> DYNAMO_HATCH_TYPES = Arrays
         .<Class<? extends IMetaTileEntity>>asList(MTEHatchDynamo.class, MTEHatchDynamoMulti.class);
 
-    private static final ClassValue<IStructureDefinition<MTEDieselEngine>> CUSTOM_STRUCTURE_DEFINITION = new ClassValue<IStructureDefinition<MTEDieselEngine>>() {
-
-        @Override
-        protected IStructureDefinition<MTEDieselEngine> computeValue(Class<?> type) {
-            return StructureDefinition.<MTEDieselEngine>builder()
-                .addShape(
-                    "main",
-                    transpose(
-                        new String[][] { { "---", "iii", "chc", "chc", "ccc" }, { "---", "i~i", "hgh", "hgh", "cdc" },
-                            { "---", "iii", "chc", "chc", "ccc" } }))
-                .addElement('i', lazy(mte -> ofBlock(mte.getIntakeBlock(), mte.getIntakeMeta())))
-                .addElement('c', lazy(mte -> ofBlock(mte.getCasingBlock(), mte.getCasingMeta())))
-                .addElement('g', lazy(mte -> ofBlock(mte.getGearboxBlock(), mte.getGearboxMeta())))
-                .addElement(
-                    'd',
-                    lazy(
-                        mte -> HatchElement.Dynamo.withMteClasses(DYNAMO_HATCH_TYPES)
-                            .newAny(mte.getCasingTextureIndex(), 2)))
-                .addElement(
-                    'h',
-                    lazy(
-                        mte -> buildHatchAdder(MTEDieselEngine.class)
-                            .atLeast(
-                                HatchElement.InputHatch,
-                                HatchElement.InputHatch,
-                                HatchElement.InputHatch,
-                                HatchElement.Muffler,
-                                HatchElement.Maintenance)
-                            .casingIndex(mte.getCasingTextureIndex())
-                            .dot(1)
-                            .buildAndChain(mte.getCasingBlock(), mte.getCasingMeta())))
-                .build();
-        }
-    };
+    private static final IStructureDefinition<MTEDieselEngine> CUSTOM_STRUCTURE_DEFINITION = createStructureDefinition();
 
     private static final int DEFAULT_MAX_EFFICIENCY = 10000;
     private static final int OXYGEN_BOOSTED_MAX_EFFICIENCY = 30000;
@@ -76,12 +44,32 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
 
     private static final int OVERCLOCKED_NOMINAL_OUTPUT = 5120;
 
+    // 1 mB/t = 20 L/s at 20 TPS.
     private static final int DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK = 1;
     private static final String NBT_KEY_OVERCLOCK_MODE = "OverclockMode";
 
-    private boolean boostedByDinitrogenTetroxide = false;
+    private BoostMode boostMode = BoostMode.NONE;
     private boolean overclockMode = false;
     private final ArrayList<MTEHatchDynamoMulti> multiAmpDynamoHatches = new ArrayList<>();
+
+    private enum BoostMode {
+        NONE,
+        OXYGEN,
+        DINITROGEN_TETROXIDE
+    }
+
+    private static final class DynamoSink {
+
+        private final IGregTechTileEntity baseMetaTileEntity;
+        private final long voltage;
+        private long remainingAmperes;
+
+        private DynamoSink(IGregTechTileEntity baseMetaTileEntity, long voltage, long remainingAmperes) {
+            this.baseMetaTileEntity = baseMetaTileEntity;
+            this.voltage = voltage;
+            this.remainingAmperes = remainingAmperes;
+        }
+    }
 
     public PatchedMTEDieselEngine(int id, String name, String nameRegional) {
         super(id, name, nameRegional);
@@ -98,7 +86,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
 
     @Override
     public IStructureDefinition<MTEDieselEngine> getStructureDefinition() {
-        return CUSTOM_STRUCTURE_DEFINITION.get(getClass());
+        return CUSTOM_STRUCTURE_DEFINITION;
     }
 
     @Override
@@ -136,12 +124,12 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         }
 
         if (super.depleteInput(fluidStack)) {
-            boostedByDinitrogenTetroxide = false;
+            boostMode = BoostMode.OXYGEN;
             return true;
         }
 
         boolean consumedDinitrogenTetroxide = depleteDinitrogenTetroxideForBoost();
-        boostedByDinitrogenTetroxide = consumedDinitrogenTetroxide;
+        boostMode = consumedDinitrogenTetroxide ? BoostMode.DINITROGEN_TETROXIDE : BoostMode.NONE;
         return consumedDinitrogenTetroxide;
     }
 
@@ -158,12 +146,18 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         int maxEfficiency;
         if (!super.boostEu) {
             maxEfficiency = DEFAULT_MAX_EFFICIENCY;
-        } else if (boostedByDinitrogenTetroxide) {
+        } else if (boostMode == BoostMode.DINITROGEN_TETROXIDE) {
             maxEfficiency = DINITROGEN_TETROXIDE_BOOSTED_MAX_EFFICIENCY;
         } else {
             maxEfficiency = OXYGEN_BOOSTED_MAX_EFFICIENCY;
         }
         return applyOverclockEfficiencyPenalty(maxEfficiency);
+    }
+
+    @Override
+    public CheckRecipeResult checkProcessing() {
+        boostMode = BoostMode.NONE;
+        return super.checkProcessing();
     }
 
     @Override
@@ -207,6 +201,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     @Override
     public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer player, float x, float y, float z,
         ItemStack tool) {
+        // Intentionally bypass superclass screwdriver behavior: this click toggles overclock mode.
         IGregTechTileEntity baseMetaTileEntity = getBaseMetaTileEntity();
         if (baseMetaTileEntity != null && baseMetaTileEntity.isClientSide()) {
             return;
@@ -266,79 +261,160 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     }
 
     private boolean addEnergyOutputToAllDynamos(long euToOutput, boolean allowMixedVoltageDynamos) {
-        long totalOutputCapacity = 0L;
-        long referenceVoltage = -1L;
-        boolean hasMixedVoltageDynamos = false;
-
-        for (MTEHatchDynamo dynamoHatch : GTUtility.validMTEList(mDynamoHatches)) {
-            long hatchVoltage = dynamoHatch.maxEUOutput();
-            totalOutputCapacity += dynamoHatch.maxAmperesOut() * hatchVoltage;
-            if (referenceVoltage == -1L) {
-                referenceVoltage = hatchVoltage;
-            } else if (referenceVoltage != hatchVoltage) {
-                hasMixedVoltageDynamos = true;
-            }
-        }
-
-        for (MTEHatchDynamoMulti dynamoHatch : GTUtility.validMTEList(multiAmpDynamoHatches)) {
-            long hatchVoltage = dynamoHatch.maxEUOutput();
-            totalOutputCapacity += dynamoHatch.maxAmperesOut() * hatchVoltage;
-            if (referenceVoltage == -1L) {
-                referenceVoltage = hatchVoltage;
-            } else if (referenceVoltage != hatchVoltage) {
-                hasMixedVoltageDynamos = true;
-            }
-        }
-
+        List<DynamoSink> sinks = collectDynamoSinks();
+        long totalOutputCapacity = calculateTotalCapacity(sinks);
+        boolean hasMixedVoltageDynamos = hasMixedVoltageDynamos(sinks);
         if (totalOutputCapacity < euToOutput || (!allowMixedVoltageDynamos && hasMixedVoltageDynamos)) {
             explodeMultiblock();
             return false;
         }
 
-        long euInjected = 0L;
-        for (MTEHatchDynamo dynamoHatch : GTUtility.validMTEList(mDynamoHatches)) {
-            euInjected += outputEnergyToSingleDynamo(
-                euToOutput - euInjected,
-                dynamoHatch.maxEUOutput(),
-                dynamoHatch.maxAmperesOut(),
-                dynamoHatch.getBaseMetaTileEntity());
-            if (euInjected >= euToOutput) {
-                return true;
+        long euRemaining = euToOutput;
+
+        // Proportional first pass, then one-amp round-robin to distribute leftover fairly.
+        for (DynamoSink sink : sinks) {
+            if (euRemaining <= 0L) {
+                break;
+            }
+            long sinkCapacity = safeMultiplyClamp(sink.voltage, sink.remainingAmperes);
+            long proportionalShare = (long) Math
+                .floor((double) euToOutput * (double) sinkCapacity / (double) totalOutputCapacity);
+            long euForSink = Math.min(euRemaining, proportionalShare);
+            euRemaining -= outputEnergyToSingleDynamo(euForSink, sink);
+        }
+
+        while (euRemaining > 0L) {
+            boolean injectedAny = false;
+            for (DynamoSink sink : sinks) {
+                if (euRemaining <= 0L) {
+                    break;
+                }
+                long euForStep = Math.min(euRemaining, sink.voltage);
+                long injected = outputEnergyToSingleDynamo(euForStep, sink);
+                if (injected > 0L) {
+                    euRemaining -= injected;
+                    injectedAny = true;
+                }
+            }
+            if (!injectedAny) {
+                break;
             }
         }
 
-        for (MTEHatchDynamoMulti dynamoHatch : GTUtility.validMTEList(multiAmpDynamoHatches)) {
-            euInjected += outputEnergyToSingleDynamo(
-                euToOutput - euInjected,
-                dynamoHatch.maxEUOutput(),
-                dynamoHatch.maxAmperesOut(),
-                dynamoHatch.getBaseMetaTileEntity());
-            if (euInjected >= euToOutput) {
-                return true;
-            }
-        }
-
-        return euInjected > 0L;
+        return euRemaining < euToOutput;
     }
 
-    private long outputEnergyToSingleDynamo(long euRemaining, long maxVoltage, long maxAmperes,
-        IGregTechTileEntity dynamoBaseMetaTileEntity) {
-        if (euRemaining <= 0L || maxVoltage <= 0L || maxAmperes <= 0L || dynamoBaseMetaTileEntity == null) {
+    private long outputEnergyToSingleDynamo(long euRemaining, DynamoSink sink) {
+        if (euRemaining <= 0L || sink == null
+            || sink.baseMetaTileEntity == null
+            || sink.voltage <= 0L
+            || sink.remainingAmperes <= 0L) {
             return 0L;
         }
 
-        long fullAmperesNeeded = euRemaining / maxVoltage;
-        int amperesToInsert = (int) Math.min(maxAmperes, fullAmperesNeeded);
-        for (int i = 0; i < amperesToInsert; i++) {
-            dynamoBaseMetaTileEntity.increaseStoredEnergyUnits(maxVoltage, false);
+        long fullAmperesNeeded = euRemaining / sink.voltage;
+        long amperesToInsert = Math.min(sink.remainingAmperes, fullAmperesNeeded);
+        for (long i = 0L; i < amperesToInsert; i++) {
+            sink.baseMetaTileEntity.increaseStoredEnergyUnits(sink.voltage, false);
         }
+        sink.remainingAmperes -= amperesToInsert;
 
-        long euInjected = maxVoltage * amperesToInsert;
+        long euInjected = sink.voltage * amperesToInsert;
         long remainder = euRemaining - euInjected;
-        if (remainder > 0L && ((long) amperesToInsert) < maxAmperes) {
-            dynamoBaseMetaTileEntity.increaseStoredEnergyUnits(remainder, false);
+        if (remainder > 0L && sink.remainingAmperes > 0L) {
+            sink.baseMetaTileEntity.increaseStoredEnergyUnits(remainder, false);
+            sink.remainingAmperes--;
             euInjected += remainder;
         }
         return euInjected;
+    }
+
+    private List<DynamoSink> collectDynamoSinks() {
+        List<DynamoSink> sinks = new ArrayList<>();
+        for (MTEHatchDynamo dynamoHatch : GTUtility.validMTEList(mDynamoHatches)) {
+            sinks.add(
+                new DynamoSink(
+                    dynamoHatch.getBaseMetaTileEntity(),
+                    dynamoHatch.maxEUOutput(),
+                    Math.max(0L, dynamoHatch.maxAmperesOut())));
+        }
+        for (MTEHatchDynamoMulti dynamoHatch : GTUtility.validMTEList(multiAmpDynamoHatches)) {
+            sinks.add(
+                new DynamoSink(
+                    dynamoHatch.getBaseMetaTileEntity(),
+                    dynamoHatch.maxEUOutput(),
+                    Math.max(0L, dynamoHatch.maxAmperesOut())));
+        }
+        return sinks;
+    }
+
+    private long calculateTotalCapacity(List<DynamoSink> sinks) {
+        long totalCapacity = 0L;
+        for (DynamoSink sink : sinks) {
+            totalCapacity = safeAddClamp(totalCapacity, safeMultiplyClamp(sink.voltage, sink.remainingAmperes));
+        }
+        return totalCapacity;
+    }
+
+    private boolean hasMixedVoltageDynamos(List<DynamoSink> sinks) {
+        long referenceVoltage = -1L;
+        for (DynamoSink sink : sinks) {
+            if (sink.voltage <= 0L || sink.remainingAmperes <= 0L) {
+                continue;
+            }
+            if (referenceVoltage == -1L) {
+                referenceVoltage = sink.voltage;
+            } else if (referenceVoltage != sink.voltage) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static long safeMultiplyClamp(long left, long right) {
+        try {
+            return Math.multiplyExact(left, right);
+        } catch (ArithmeticException ignored) {
+            return Long.MAX_VALUE;
+        }
+    }
+
+    private static long safeAddClamp(long left, long right) {
+        try {
+            return Math.addExact(left, right);
+        } catch (ArithmeticException ignored) {
+            return Long.MAX_VALUE;
+        }
+    }
+
+    private static IStructureDefinition<MTEDieselEngine> createStructureDefinition() {
+        return StructureDefinition.<MTEDieselEngine>builder()
+            .addShape(
+                "main",
+                transpose(
+                    new String[][] { { "---", "iii", "chc", "chc", "ccc" }, { "---", "i~i", "hgh", "hgh", "cdc" },
+                        { "---", "iii", "chc", "chc", "ccc" } }))
+            .addElement('i', lazy(mte -> ofBlock(mte.getIntakeBlock(), mte.getIntakeMeta())))
+            .addElement('c', lazy(mte -> ofBlock(mte.getCasingBlock(), mte.getCasingMeta())))
+            .addElement('g', lazy(mte -> ofBlock(mte.getGearboxBlock(), mte.getGearboxMeta())))
+            .addElement(
+                'd',
+                lazy(
+                    mte -> HatchElement.Dynamo.withMteClasses(DYNAMO_HATCH_TYPES)
+                        .newAny(mte.getCasingTextureIndex(), 2)))
+            .addElement(
+                'h',
+                lazy(
+                    mte -> buildHatchAdder(MTEDieselEngine.class)
+                        .atLeast(
+                            HatchElement.InputHatch,
+                            HatchElement.InputHatch,
+                            HatchElement.InputHatch,
+                            HatchElement.Muffler,
+                            HatchElement.Maintenance)
+                        .casingIndex(mte.getCasingTextureIndex())
+                        .dot(1)
+                        .buildAndChain(mte.getCasingBlock(), mte.getCasingMeta())))
+            .build();
     }
 }
