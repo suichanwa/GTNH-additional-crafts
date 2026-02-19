@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
-import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+
+import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
 import gregtech.api.enums.HatchElement;
 import gregtech.api.enums.Materials;
@@ -41,9 +41,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
                 .addShape(
                     "main",
                     transpose(
-                        new String[][] {
-                            { "---", "iii", "chc", "chc", "ccc" },
-                            { "---", "i~i", "hgh", "hgh", "cdc" },
+                        new String[][] { { "---", "iii", "chc", "chc", "ccc" }, { "---", "i~i", "hgh", "hgh", "cdc" },
                             { "---", "iii", "chc", "chc", "ccc" } }))
                 .addElement('i', lazy(mte -> ofBlock(mte.getIntakeBlock(), mte.getIntakeMeta())))
                 .addElement('c', lazy(mte -> ofBlock(mte.getCasingBlock(), mte.getCasingMeta())))
@@ -51,8 +49,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
                 .addElement(
                     'd',
                     lazy(
-                        mte -> HatchElement.Dynamo
-                            .withMteClasses(DYNAMO_HATCH_TYPES)
+                        mte -> HatchElement.Dynamo.withMteClasses(DYNAMO_HATCH_TYPES)
                             .newAny(mte.getCasingTextureIndex(), 2)))
                 .addElement(
                     'h',
@@ -208,12 +205,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     }
 
     @Override
-    public void onScrewdriverRightClick(
-        ForgeDirection side,
-        EntityPlayer player,
-        float x,
-        float y,
-        float z,
+    public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer player, float x, float y, float z,
         ItemStack tool) {
         IGregTechTileEntity baseMetaTileEntity = getBaseMetaTileEntity();
         if (baseMetaTileEntity != null && baseMetaTileEntity.isClientSide()) {
@@ -329,10 +321,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         return euInjected > 0L;
     }
 
-    private long outputEnergyToSingleDynamo(
-        long euRemaining,
-        long maxVoltage,
-        long maxAmperes,
+    private long outputEnergyToSingleDynamo(long euRemaining, long maxVoltage, long maxAmperes,
         IGregTechTileEntity dynamoBaseMetaTileEntity) {
         if (euRemaining <= 0L || maxVoltage <= 0L || maxAmperes <= 0L || dynamoBaseMetaTileEntity == null) {
             return 0L;
