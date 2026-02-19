@@ -1,11 +1,15 @@
 package com.myname.mymodid.compat.gregtech;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.common.tileentities.machines.multi.MTEDieselEngine;
 
@@ -14,10 +18,16 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     private static final int DEFAULT_MAX_EFFICIENCY = 10000;
     private static final int OXYGEN_BOOSTED_MAX_EFFICIENCY = 30000;
     private static final int DINITROGEN_TETROXIDE_BOOSTED_MAX_EFFICIENCY = 40000;
+    private static final int OVERCLOCKED_MAX_EFFICIENCY_NUMERATOR = 4;
+    private static final int OVERCLOCKED_MAX_EFFICIENCY_DENOMINATOR = 5;
+
+    private static final int OVERCLOCKED_NOMINAL_OUTPUT = 5120;
 
     private static final int DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK = 1;
+    private static final String NBT_KEY_OVERCLOCK_MODE = "OverclockMode";
 
     private boolean boostedByDinitrogenTetroxide = false;
+    private boolean overclockMode = false;
 
     public PatchedMTEDieselEngine(int id, String name, String nameRegional) {
         super(id, name, nameRegional);
@@ -41,6 +51,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
             .addInfo("Default: Produces 2048EU/t at 100% fuel efficiency")
             .addInfo("Boosted: Produces 6144EU/t at 150% fuel efficiency")
             .addInfo("N2O4 boost can reach 400% max efficiency (up to 8192EU/t)")
+            .addInfo("Screwdriver right-click toggles overclock mode (2x output, lower fuel efficiency)")
             .addPollutionAmount(getPollutionPerSecond(null))
             .beginStructureBlock(3, 3, 4, false)
             .addController("Front center")
@@ -75,14 +86,63 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     }
 
     @Override
+    protected int getNominalOutput() {
+        if (overclockMode) {
+            return OVERCLOCKED_NOMINAL_OUTPUT;
+        }
+        return super.getNominalOutput();
+    }
+
+    @Override
     public int getMaxEfficiency(ItemStack itemStack) {
+        int maxEfficiency;
         if (!super.boostEu) {
-            return DEFAULT_MAX_EFFICIENCY;
+            maxEfficiency = DEFAULT_MAX_EFFICIENCY;
+        } else if (boostedByDinitrogenTetroxide) {
+            maxEfficiency = DINITROGEN_TETROXIDE_BOOSTED_MAX_EFFICIENCY;
+        } else {
+            maxEfficiency = OXYGEN_BOOSTED_MAX_EFFICIENCY;
         }
-        if (boostedByDinitrogenTetroxide) {
-            return DINITROGEN_TETROXIDE_BOOSTED_MAX_EFFICIENCY;
+        return applyOverclockEfficiencyPenalty(maxEfficiency);
+    }
+
+    @Override
+    public void onScrewdriverRightClick(
+        ForgeDirection side,
+        EntityPlayer player,
+        float x,
+        float y,
+        float z,
+        ItemStack tool) {
+        IGregTechTileEntity baseMetaTileEntity = getBaseMetaTileEntity();
+        if (baseMetaTileEntity != null && baseMetaTileEntity.isClientSide()) {
+            return;
         }
-        return OXYGEN_BOOSTED_MAX_EFFICIENCY;
+
+        overclockMode = !overclockMode;
+
+        if (baseMetaTileEntity != null) {
+            baseMetaTileEntity.issueTextureUpdate();
+        }
+
+        if (player != null) {
+            GTUtility.sendChatToPlayer(
+                player,
+                overclockMode ? "Overclock mode enabled: 2x output, lower fuel efficiency."
+                    : "Overclock mode disabled: normal output and fuel efficiency.");
+        }
+    }
+
+    @Override
+    public void saveNBTData(NBTTagCompound nbt) {
+        super.saveNBTData(nbt);
+        nbt.setBoolean(NBT_KEY_OVERCLOCK_MODE, overclockMode);
+    }
+
+    @Override
+    public void loadNBTData(NBTTagCompound nbt) {
+        super.loadNBTData(nbt);
+        overclockMode = nbt.getBoolean(NBT_KEY_OVERCLOCK_MODE);
     }
 
     private boolean isOxygenRequest(FluidStack fluidStack) {
@@ -103,5 +163,12 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         FluidStack dinitrogenTetroxideFluid = Materials.DinitrogenTetroxide
             .getFluid(DINITROGEN_TETROXIDE_CONSUMPTION_PER_TICK);
         return dinitrogenTetroxideFluid != null && super.depleteInput(dinitrogenTetroxideFluid);
+    }
+
+    private int applyOverclockEfficiencyPenalty(int maxEfficiency) {
+        if (!overclockMode) {
+            return maxEfficiency;
+        }
+        return maxEfficiency * OVERCLOCKED_MAX_EFFICIENCY_NUMERATOR / OVERCLOCKED_MAX_EFFICIENCY_DENOMINATOR;
     }
 }
