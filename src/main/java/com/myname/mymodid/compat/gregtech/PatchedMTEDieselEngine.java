@@ -1,19 +1,75 @@
 package com.myname.mymodid.compat.gregtech;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.lazy;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
+import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
+import gregtech.api.enums.HatchElement;
 import gregtech.api.enums.Materials;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.metatileentity.implementations.MTEHatchDynamo;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.common.tileentities.machines.multi.MTEDieselEngine;
+import tectech.thing.metaTileEntity.hatch.MTEHatchDynamoMulti;
 
 public class PatchedMTEDieselEngine extends MTEDieselEngine {
+
+    private static final List<Class<? extends IMetaTileEntity>> DYNAMO_HATCH_TYPES = Arrays
+        .<Class<? extends IMetaTileEntity>>asList(MTEHatchDynamo.class, MTEHatchDynamoMulti.class);
+
+    private static final ClassValue<IStructureDefinition<MTEDieselEngine>> CUSTOM_STRUCTURE_DEFINITION = new ClassValue<IStructureDefinition<MTEDieselEngine>>() {
+
+        @Override
+        protected IStructureDefinition<MTEDieselEngine> computeValue(Class<?> type) {
+            return StructureDefinition.<MTEDieselEngine>builder()
+                .addShape(
+                    "main",
+                    transpose(
+                        new String[][] {
+                            { "---", "iii", "chc", "chc", "ccc" },
+                            { "---", "i~i", "hgh", "hgh", "cdc" },
+                            { "---", "iii", "chc", "chc", "ccc" } }))
+                .addElement('i', lazy(mte -> ofBlock(mte.getIntakeBlock(), mte.getIntakeMeta())))
+                .addElement('c', lazy(mte -> ofBlock(mte.getCasingBlock(), mte.getCasingMeta())))
+                .addElement('g', lazy(mte -> ofBlock(mte.getGearboxBlock(), mte.getGearboxMeta())))
+                .addElement(
+                    'd',
+                    lazy(
+                        mte -> HatchElement.Dynamo
+                            .withMteClasses(DYNAMO_HATCH_TYPES)
+                            .newAny(mte.getCasingTextureIndex(), 2)))
+                .addElement(
+                    'h',
+                    lazy(
+                        mte -> buildHatchAdder(MTEDieselEngine.class)
+                            .atLeast(
+                                HatchElement.InputHatch,
+                                HatchElement.InputHatch,
+                                HatchElement.InputHatch,
+                                HatchElement.Muffler,
+                                HatchElement.Maintenance)
+                            .casingIndex(mte.getCasingTextureIndex())
+                            .dot(1)
+                            .buildAndChain(mte.getCasingBlock(), mte.getCasingMeta())))
+                .build();
+        }
+    };
 
     private static final int DEFAULT_MAX_EFFICIENCY = 10000;
     private static final int OXYGEN_BOOSTED_MAX_EFFICIENCY = 30000;
@@ -28,6 +84,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
 
     private boolean boostedByDinitrogenTetroxide = false;
     private boolean overclockMode = false;
+    private final ArrayList<MTEHatchDynamoMulti> multiAmpDynamoHatches = new ArrayList<>();
 
     public PatchedMTEDieselEngine(int id, String name, String nameRegional) {
         super(id, name, nameRegional);
@@ -43,6 +100,11 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     }
 
     @Override
+    public IStructureDefinition<MTEDieselEngine> getStructureDefinition() {
+        return CUSTOM_STRUCTURE_DEFINITION.get(getClass());
+    }
+
+    @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Combustion Generator, LCE")
@@ -52,6 +114,7 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
             .addInfo("Boosted: Produces 6144EU/t at 150% fuel efficiency")
             .addInfo("N2O4 boost can reach 400% max efficiency (up to 8192EU/t)")
             .addInfo("Screwdriver right-click toggles overclock mode (2x output, lower fuel efficiency)")
+            .addInfo("Supports standard and 16A dynamo hatches")
             .addPollutionAmount(getPollutionPerSecond(null))
             .beginStructureBlock(3, 3, 4, false)
             .addController("Front center")
@@ -104,6 +167,44 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
             maxEfficiency = OXYGEN_BOOSTED_MAX_EFFICIENCY;
         }
         return applyOverclockEfficiencyPenalty(maxEfficiency);
+    }
+
+    @Override
+    public boolean checkMachine(IGregTechTileEntity baseMetaTileEntity, ItemStack stack) {
+        multiAmpDynamoHatches.clear();
+        return super.checkMachine(baseMetaTileEntity, stack);
+    }
+
+    @Override
+    public boolean addDynamoToMachineList(IGregTechTileEntity tileEntity, int casingTextureIndex) {
+        if (tileEntity == null) {
+            return false;
+        }
+
+        IMetaTileEntity metaTileEntity = tileEntity.getMetaTileEntity();
+        if (metaTileEntity == null) {
+            return false;
+        }
+
+        if (metaTileEntity instanceof MTEHatchDynamoMulti) {
+            MTEHatchDynamoMulti multiAmpDynamo = (MTEHatchDynamoMulti) metaTileEntity;
+            multiAmpDynamo.updateTexture(casingTextureIndex);
+            multiAmpDynamo.updateCraftingIcon(getMachineCraftingIcon());
+            return multiAmpDynamoHatches.add(multiAmpDynamo);
+        }
+
+        return super.addDynamoToMachineList(tileEntity, casingTextureIndex);
+    }
+
+    @Override
+    public boolean addEnergyOutput(long euToOutput) {
+        if (euToOutput <= 0L) {
+            return true;
+        }
+        if (mDynamoHatches.isEmpty() && multiAmpDynamoHatches.isEmpty()) {
+            return false;
+        }
+        return addEnergyOutputToAllDynamos(euToOutput, true);
     }
 
     @Override
@@ -170,5 +271,85 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
             return maxEfficiency;
         }
         return maxEfficiency * OVERCLOCKED_MAX_EFFICIENCY_NUMERATOR / OVERCLOCKED_MAX_EFFICIENCY_DENOMINATOR;
+    }
+
+    private boolean addEnergyOutputToAllDynamos(long euToOutput, boolean allowMixedVoltageDynamos) {
+        long totalOutputCapacity = 0L;
+        long referenceVoltage = -1L;
+        boolean hasMixedVoltageDynamos = false;
+
+        for (MTEHatchDynamo dynamoHatch : GTUtility.validMTEList(mDynamoHatches)) {
+            long hatchVoltage = dynamoHatch.maxEUOutput();
+            totalOutputCapacity += dynamoHatch.maxAmperesOut() * hatchVoltage;
+            if (referenceVoltage == -1L) {
+                referenceVoltage = hatchVoltage;
+            } else if (referenceVoltage != hatchVoltage) {
+                hasMixedVoltageDynamos = true;
+            }
+        }
+
+        for (MTEHatchDynamoMulti dynamoHatch : GTUtility.validMTEList(multiAmpDynamoHatches)) {
+            long hatchVoltage = dynamoHatch.maxEUOutput();
+            totalOutputCapacity += dynamoHatch.maxAmperesOut() * hatchVoltage;
+            if (referenceVoltage == -1L) {
+                referenceVoltage = hatchVoltage;
+            } else if (referenceVoltage != hatchVoltage) {
+                hasMixedVoltageDynamos = true;
+            }
+        }
+
+        if (totalOutputCapacity < euToOutput || (!allowMixedVoltageDynamos && hasMixedVoltageDynamos)) {
+            explodeMultiblock();
+            return false;
+        }
+
+        long euInjected = 0L;
+        for (MTEHatchDynamo dynamoHatch : GTUtility.validMTEList(mDynamoHatches)) {
+            euInjected += outputEnergyToSingleDynamo(
+                euToOutput - euInjected,
+                dynamoHatch.maxEUOutput(),
+                dynamoHatch.maxAmperesOut(),
+                dynamoHatch.getBaseMetaTileEntity());
+            if (euInjected >= euToOutput) {
+                return true;
+            }
+        }
+
+        for (MTEHatchDynamoMulti dynamoHatch : GTUtility.validMTEList(multiAmpDynamoHatches)) {
+            euInjected += outputEnergyToSingleDynamo(
+                euToOutput - euInjected,
+                dynamoHatch.maxEUOutput(),
+                dynamoHatch.maxAmperesOut(),
+                dynamoHatch.getBaseMetaTileEntity());
+            if (euInjected >= euToOutput) {
+                return true;
+            }
+        }
+
+        return euInjected > 0L;
+    }
+
+    private long outputEnergyToSingleDynamo(
+        long euRemaining,
+        long maxVoltage,
+        long maxAmperes,
+        IGregTechTileEntity dynamoBaseMetaTileEntity) {
+        if (euRemaining <= 0L || maxVoltage <= 0L || maxAmperes <= 0L || dynamoBaseMetaTileEntity == null) {
+            return 0L;
+        }
+
+        long fullAmperesNeeded = euRemaining / maxVoltage;
+        int amperesToInsert = (int) Math.min(maxAmperes, fullAmperesNeeded);
+        for (int i = 0; i < amperesToInsert; i++) {
+            dynamoBaseMetaTileEntity.increaseStoredEnergyUnits(maxVoltage, false);
+        }
+
+        long euInjected = maxVoltage * amperesToInsert;
+        long remainder = euRemaining - euInjected;
+        if (remainder > 0L && ((long) amperesToInsert) < maxAmperes) {
+            dynamoBaseMetaTileEntity.increaseStoredEnergyUnits(remainder, false);
+            euInjected += remainder;
+        }
+        return euInjected;
     }
 }
