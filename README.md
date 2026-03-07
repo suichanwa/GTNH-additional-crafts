@@ -10,9 +10,9 @@ GTNH Additional Crafts is a Minecraft 1.7.10 addon for GregTech: New Horizons fo
 - Patches KekzTech SOFC MK1 so optional Helium usage reduces Oxygen and fuel consumption.
 - Adds Large Chemical Reactor recipes for:
   - `Oxygen + Nitrogen + IC-9 -> Nitric Oxide`
-  - `Nitric Acid -> Dinitrogen Pentoxide + Hydrogen`
+- Adds a Compressor recipe:
+  - `8x Algae Biomass -> 1x GT++ Compost`
 - Removes the matching regular Chemical Reactor Nitric Oxide recipe.
-- Registers a Dinitrogen Pentoxide fluid entry if one is not already present.
 
 ## Configuration
 

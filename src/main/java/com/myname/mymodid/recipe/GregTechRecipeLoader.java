@@ -3,10 +3,12 @@ package com.myname.mymodid.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.myname.mymodid.MyMod;
-import com.myname.mymodid.fluid.ModFluids;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
@@ -21,7 +23,7 @@ public final class GregTechRecipeLoader {
 
     public static void registerRecipes() {
         registerNitricOxideLargeChemicalReactorRecipe();
-        registerDinitrogenPentoxideLargeChemicalReactorRecipe();
+        registerAlgaeBiomassToCompostRecipe();
         removeNitricOxideRegularChemicalReactorRecipe();
     }
 
@@ -47,29 +49,28 @@ public final class GregTechRecipeLoader {
             "Registered Large Chemical Reactor recipe (EV): IC-9 + 1000L Oxygen + 1000L Nitrogen -> 1000L Nitric Oxide.");
     }
 
-    private static void registerDinitrogenPentoxideLargeChemicalReactorRecipe() {
-        FluidStack nitricAcid = Materials.NitricAcid.getFluid(2000L);
-        if (nitricAcid == null) {
-            nitricAcid = Materials.NitricAcid.getGas(2000L);
+    private static void registerAlgaeBiomassToCompostRecipe() {
+        Item basicAgrichemItem = GameRegistry.findItem("miscutils", "item.BasicAgrichemItem");
+        if (basicAgrichemItem == null) {
+            MyMod.logInfo("Skipped algae biomass -> compost recipe: GT++ BasicAgrichem item is unavailable.");
+            return;
         }
-        FluidStack dinitrogenPentoxide = ModFluids.getDinitrogenPentoxide(1000L);
-        FluidStack hydrogen = Materials.Hydrogen.getGas(1000L);
 
-        if (nitricAcid == null || dinitrogenPentoxide == null || hydrogen == null) {
-            MyMod.logInfo(
-                "Skipped Dinitrogen Pentoxide recipe: Nitric Acid, Dinitrogen Pentoxide, or Hydrogen fluid is unavailable.");
+        ItemStack algaeBiomass = new ItemStack(basicAgrichemItem, 8, 0);
+        ItemStack compost = new ItemStack(basicAgrichemItem, 1, 8);
+        if (algaeBiomass.getItem() == null || compost.getItem() == null) {
+            MyMod.logInfo("Skipped algae biomass -> compost recipe: invalid GT++ item stacks.");
             return;
         }
 
         GTValues.RA.stdBuilder()
-            .fluidInputs(nitricAcid)
-            .fluidOutputs(dinitrogenPentoxide, hydrogen)
-            .duration(6 * GTRecipeBuilder.SECONDS)
-            .eut(2048)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .itemInputs(algaeBiomass)
+            .itemOutputs(compost)
+            .duration(5 * GTRecipeBuilder.SECONDS)
+            .eut(2)
+            .addTo(RecipeMaps.compressorRecipes);
 
-        MyMod.logInfo(
-            "Registered Large Chemical Reactor recipe (EV): 2000L Nitric Acid -> 1000L Dinitrogen Pentoxide + 1000L Hydrogen.");
+        MyMod.logInfo("Registered Compressor recipe: 8x Algae Biomass -> 1x Compost.");
     }
 
     private static void removeNitricOxideRegularChemicalReactorRecipe() {

@@ -2,7 +2,6 @@ package com.myname.mymodid;
 
 import com.myname.mymodid.compat.gregtech.DieselEngineOxidizerPatch;
 import com.myname.mymodid.compat.kekztech.SOFCHeliumPatch;
-import com.myname.mymodid.fluid.ModFluids;
 import com.myname.mymodid.recipe.GregTechRecipeLoader;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -18,7 +17,6 @@ public class CommonProxy {
         MyMod.logInfo(Config.greeting);
         MyMod.logInfo("I am MyMod at version " + Tags.VERSION);
 
-        ModFluids.registerFluids();
         DieselEngineOxidizerPatch.schedule();
         SOFCHeliumPatch.schedule();
     }
