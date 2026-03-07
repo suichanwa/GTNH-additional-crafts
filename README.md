@@ -12,7 +12,6 @@ GTNH Additional Crafts is a Minecraft 1.7.10 addon for GregTech: New Horizons fo
   - `Oxygen + Nitrogen + IC-9 -> Nitric Oxide`
 - Adds a Compressor recipe:
   - `8x Algae Biomass -> 1x GT++ Compost`
-- Removes the matching regular Chemical Reactor Nitric Oxide recipe.
 
 ## Configuration
 

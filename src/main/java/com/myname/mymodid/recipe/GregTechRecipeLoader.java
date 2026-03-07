@@ -73,6 +73,7 @@ public final class GregTechRecipeLoader {
         MyMod.logInfo("Registered Compressor recipe: 8x Algae Biomass -> 1x Compost.");
     }
 
+
     private static void removeNitricOxideRegularChemicalReactorRecipe() {
         List<GTRecipe> recipesToRemove = new ArrayList<>();
         for (GTRecipe recipe : RecipeMaps.chemicalReactorRecipes.getAllRecipes()) {
@@ -121,4 +122,5 @@ public final class GregTechRecipeLoader {
         }
         return false;
     }
+
 }
