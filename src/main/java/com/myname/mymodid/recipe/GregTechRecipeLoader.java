@@ -28,7 +28,6 @@ public final class GregTechRecipeLoader {
         registerAlgaeBiomassToCompostRecipe();
         registerNitrogenRocketFuelUpgradeRecipe();
         registerAcetaldehydeHydrogenationRecipe();
-        registerAceticAcidHydrogenationRecipe();
         registerMethanolCarbonMonoxideHydrogenToEthanolRecipe();
         registerMethaneToAcetyleneDehydratorRecipe();
         removeNitricOxideRegularChemicalReactorRecipe();
@@ -71,7 +70,7 @@ public final class GregTechRecipeLoader {
         }
 
         GTValues.RA.stdBuilder()
-            .itemInputs(algaeBiomass)
+            .itemInputs(algaeBiomass, GTUtility.getIntegratedCircuit(1))
             .itemOutputs(compost)
             .duration(5 * GTRecipeBuilder.SECONDS)
             .eut(2)
@@ -117,6 +116,7 @@ public final class GregTechRecipeLoader {
         }
 
         GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(2))
             .fluidInputs(acetaldehyde, hydrogen)
             .fluidOutputs(ethanol)
             .duration(6 * GTRecipeBuilder.SECONDS)
@@ -124,26 +124,6 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.chemicalReactorRecipes);
 
         MyMod.logInfo("Registered Chemical Reactor recipe: 1000L Acetaldehyde + 1000L Hydrogen -> 1000L Ethanol.");
-    }
-
-    private static void registerAceticAcidHydrogenationRecipe() {
-        FluidStack aceticAcid = getFluidOrGas(Materials.AceticAcid, 1000L);
-        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 1000L);
-        FluidStack ethanol = getFluidOrGas(Materials.Ethanol, 1000L);
-
-        if (aceticAcid == null || hydrogen == null || ethanol == null) {
-            MyMod.logInfo("Skipped Acetic Acid + Hydrogen -> Ethanol recipe: required fluids unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
-            .fluidInputs(aceticAcid, hydrogen)
-            .fluidOutputs(ethanol)
-            .duration(6 * GTRecipeBuilder.SECONDS)
-            .eut(120)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
-
-        MyMod.logInfo("Registered Chemical Reactor recipe: 1000L Acetic Acid + 1000L Hydrogen -> 1000L Ethanol.");
     }
 
     private static void registerMethanolCarbonMonoxideHydrogenToEthanolRecipe() {
@@ -158,6 +138,7 @@ public final class GregTechRecipeLoader {
         }
 
         GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(3))
             .fluidInputs(methanol, carbonMonoxide, hydrogen)
             .fluidOutputs(ethanol)
             .duration(10 * GTRecipeBuilder.SECONDS)
@@ -178,6 +159,7 @@ public final class GregTechRecipeLoader {
         }
 
         GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(4))
             .fluidInputs(methane)
             .fluidOutputs(acetylene, hydrogen)
             .duration(12 * GTRecipeBuilder.SECONDS)

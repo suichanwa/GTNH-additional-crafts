@@ -13,7 +13,6 @@ GTNH Additional Crafts is a Minecraft 1.7.10 addon for GregTech: New Horizons fo
   - `RP-1 + Nitrogen + Oxygen + IC-22 -> CN3H7O3 Rocket Fuel` (conversion with volume loss)
 - Adds Chemical Reactor recipe:
   - `Acetaldehyde + Hydrogen -> Ethanol`
-  - `Acetic Acid + Hydrogen -> Ethanol`
 - Adds Large Chemical Reactor recipe:
   - `Methanol + CO + H2 -> Ethanol`
 - Adds GT++ Chemical Dehydrator recipe:
