@@ -138,14 +138,26 @@ public final class GregTechRecipeLoader {
         }
 
         GTValues.RA.stdBuilder()
-            .itemInputs(GTUtility.getIntegratedCircuit(3))
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
             .fluidInputs(methanol, carbonMonoxide, hydrogen)
             .fluidOutputs(ethanol)
             .duration(10 * GTRecipeBuilder.SECONDS)
             .eut(480)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        MyMod.logInfo("Registered LCR recipe: 1000L Methanol + 1000L CO + 1000L H2 -> 1000L Ethanol.");
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(24))
+            .fluidInputs(
+                getFluidOrGas(Materials.Methanol, 9000L),
+                getFluidOrGas(Materials.CarbonMonoxide, 9000L),
+                getFluidOrGas(Materials.Hydrogen, 9000L))
+            .fluidOutputs(getFluidOrGas(Materials.Ethanol, 9000L))
+            .duration(90 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipes: IC-1 1000L Methanol + 1000L CO + 1000L H2 -> 1000L Ethanol; IC-24 9x batch.");
     }
 
     private static void registerMethaneToAcetyleneDehydratorRecipe() {

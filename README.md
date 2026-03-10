@@ -8,13 +8,16 @@ GTNH Additional Crafts is a Minecraft 1.7.10 addon for GregTech: New Horizons fo
 - Adds an LCE overclock mode toggle (screwdriver right-click) with configurable output and efficiency scaling.
 - Adds support for 16A dynamo hatches on the patched LCE.
 - Patches KekzTech SOFC MK1 so optional Helium usage reduces Oxygen and fuel consumption.
+- Patches GT++ Rocket Fuel Generators:
+  - Screwdriver toggles overclock mode: 2x output, reduced fuel efficiency.
 - Adds Large Chemical Reactor recipes for:
   - `Oxygen + Nitrogen + IC-9 -> Nitric Oxide`
   - `RP-1 + Nitrogen + Oxygen + IC-22 -> CN3H7O3 Rocket Fuel` (conversion with volume loss)
 - Adds Chemical Reactor recipe:
   - `Acetaldehyde + Hydrogen -> Ethanol`
 - Adds Large Chemical Reactor recipe:
-  - `Methanol + CO + H2 -> Ethanol`
+  - `IC-1: Methanol + CO + H2 -> Ethanol`
+  - `IC-24: 9x Methanol + 9x CO + 9x H2 -> 9x Ethanol` (9x time, 9x output)
 - Adds GT++ Chemical Dehydrator recipe:
   - `2 CH4 -> C2H2 + 3 H2`
 - Adds a Compressor recipe:
