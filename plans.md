@@ -3,3 +3,4 @@
 3. coming up with some more uses for nitrogen sience it does feels pretty useless given that the freezer makes just way too much of it
 4. more uses for both helium and helium-3
 5. more uses for phenol
+6. more uses for kerosene

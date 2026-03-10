@@ -5,17 +5,19 @@ import java.util.List;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.myname.mymodid.MyMod;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
+import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public final class GregTechRecipeLoader {
 
@@ -24,6 +26,11 @@ public final class GregTechRecipeLoader {
     public static void registerRecipes() {
         registerNitricOxideLargeChemicalReactorRecipe();
         registerAlgaeBiomassToCompostRecipe();
+        registerNitrogenRocketFuelUpgradeRecipe();
+        registerAcetaldehydeHydrogenationRecipe();
+        registerAceticAcidHydrogenationRecipe();
+        registerMethanolCarbonMonoxideHydrogenToEthanolRecipe();
+        registerMethaneToAcetyleneDehydratorRecipe();
         removeNitricOxideRegularChemicalReactorRecipe();
     }
 
@@ -73,6 +80,112 @@ public final class GregTechRecipeLoader {
         MyMod.logInfo("Registered Compressor recipe: 8x Algae Biomass -> 1x Compost.");
     }
 
+    private static void registerNitrogenRocketFuelUpgradeRecipe() {
+        FluidStack rp1Fuel = getFirstAvailableFluid(1000, "rp1fuel", "rocketfuelmixb", "RP1Fuel", "RocketFuelMixB");
+        FluidStack nitrogen = Materials.Nitrogen.getGas(1000L);
+        FluidStack oxygen = Materials.Oxygen.getGas(500L);
+        FluidStack upgradedRocketFuel = getFirstAvailableFluid(750, "rocketfuelmixc", "RocketFuelMixC");
+
+        if (rp1Fuel == null || nitrogen == null || oxygen == null || upgradedRocketFuel == null) {
+            MyMod.logInfo(
+                "Skipped nitrogen RP-1 upgrade recipe: RP-1, Nitrogen, Oxygen, or upgraded rocket fuel fluid is unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(22))
+            .fluidInputs(rp1Fuel, nitrogen, oxygen)
+            .fluidOutputs(upgradedRocketFuel)
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo("Registered LCR recipe: 1000L RP-1 + 1000L Nitrogen + 500L Oxygen -> 750L CN3H7O3 Rocket Fuel.");
+    }
+
+    private static void registerAcetaldehydeHydrogenationRecipe() {
+        FluidStack acetaldehyde = getFirstAvailableFluid(1000, "acetaldehyde", "Acetaldehyde");
+        FluidStack hydrogen = Materials.Hydrogen.getGas(1000L);
+        if (hydrogen == null) {
+            hydrogen = Materials.Hydrogen.getFluid(1000L);
+        }
+        FluidStack ethanol = getFirstAvailableFluid(1000, "ethanol", "Ethanol");
+
+        if (acetaldehyde == null || hydrogen == null || ethanol == null) {
+            MyMod.logInfo("Skipped Acetaldehyde + Hydrogen -> Ethanol recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(acetaldehyde, hydrogen)
+            .fluidOutputs(ethanol)
+            .duration(6 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        MyMod.logInfo("Registered Chemical Reactor recipe: 1000L Acetaldehyde + 1000L Hydrogen -> 1000L Ethanol.");
+    }
+
+    private static void registerAceticAcidHydrogenationRecipe() {
+        FluidStack aceticAcid = getFluidOrGas(Materials.AceticAcid, 1000L);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 1000L);
+        FluidStack ethanol = getFluidOrGas(Materials.Ethanol, 1000L);
+
+        if (aceticAcid == null || hydrogen == null || ethanol == null) {
+            MyMod.logInfo("Skipped Acetic Acid + Hydrogen -> Ethanol recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(aceticAcid, hydrogen)
+            .fluidOutputs(ethanol)
+            .duration(6 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        MyMod.logInfo("Registered Chemical Reactor recipe: 1000L Acetic Acid + 1000L Hydrogen -> 1000L Ethanol.");
+    }
+
+    private static void registerMethanolCarbonMonoxideHydrogenToEthanolRecipe() {
+        FluidStack methanol = getFluidOrGas(Materials.Methanol, 1000L);
+        FluidStack carbonMonoxide = getFluidOrGas(Materials.CarbonMonoxide, 1000L);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 1000L);
+        FluidStack ethanol = getFluidOrGas(Materials.Ethanol, 1000L);
+
+        if (methanol == null || carbonMonoxide == null || hydrogen == null || ethanol == null) {
+            MyMod.logInfo("Skipped Methanol + CO + H2 -> Ethanol recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(methanol, carbonMonoxide, hydrogen)
+            .fluidOutputs(ethanol)
+            .duration(10 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo("Registered LCR recipe: 1000L Methanol + 1000L CO + 1000L H2 -> 1000L Ethanol.");
+    }
+
+    private static void registerMethaneToAcetyleneDehydratorRecipe() {
+        FluidStack methane = getFluidOrGas(Materials.Methane, 2000L);
+        FluidStack acetylene = getFirstAvailableFluid(1000, "acetylene", "Acetylene");
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 3000L);
+
+        if (methane == null || acetylene == null || hydrogen == null) {
+            MyMod.logInfo("Skipped Dehydrator recipe: required fluids for 2 CH4 -> C2H2 + 3 H2 unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(methane)
+            .fluidOutputs(acetylene, hydrogen)
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(GTPPRecipeMaps.chemicalDehydratorRecipes);
+
+        MyMod.logInfo("Registered Dehydrator recipe: 2000L Methane -> 1000L Acetylene + 3000L Hydrogen.");
+    }
 
     private static void removeNitricOxideRegularChemicalReactorRecipe() {
         List<GTRecipe> recipesToRemove = new ArrayList<>();
@@ -121,6 +234,27 @@ public final class GregTechRecipeLoader {
             }
         }
         return false;
+    }
+
+    private static FluidStack getFirstAvailableFluid(int amount, String... names) {
+        for (String name : names) {
+            FluidStack stack = FluidRegistry.getFluidStack(name, amount);
+            if (stack != null) {
+                return stack;
+            }
+        }
+        return null;
+    }
+
+    private static FluidStack getFluidOrGas(Materials material, long amount) {
+        if (material == null) {
+            return null;
+        }
+        FluidStack fluid = material.getFluid(amount);
+        if (fluid != null) {
+            return fluid;
+        }
+        return material.getGas(amount);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.myname.mymodid;
 
 import com.myname.mymodid.compat.gregtech.DieselEngineOxidizerPatch;
+import com.myname.mymodid.compat.gregtech.VacuumFreezerNitrogenPatch;
 import com.myname.mymodid.compat.kekztech.SOFCHeliumPatch;
 import com.myname.mymodid.recipe.GregTechRecipeLoader;
 
@@ -18,6 +19,7 @@ public class CommonProxy {
         MyMod.logInfo("I am MyMod at version " + Tags.VERSION);
 
         DieselEngineOxidizerPatch.schedule();
+        VacuumFreezerNitrogenPatch.schedule();
         SOFCHeliumPatch.schedule();
     }
 
