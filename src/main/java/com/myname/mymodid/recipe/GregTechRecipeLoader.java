@@ -26,6 +26,7 @@ public final class GregTechRecipeLoader {
     public static void registerRecipes() {
         registerNitricOxideLargeChemicalReactorRecipe();
         registerAlgaeBiomassToCompostRecipe();
+        registerAlgaeProcessingChainRecipes();
         registerNitrogenRocketFuelUpgradeRecipe();
         registerAcetaldehydeHydrogenationRecipe();
         registerMethanolCarbonMonoxideHydrogenToEthanolRecipe();
@@ -70,13 +71,77 @@ public final class GregTechRecipeLoader {
         }
 
         GTValues.RA.stdBuilder()
-            .itemInputs(algaeBiomass, GTUtility.getIntegratedCircuit(1))
+            .itemInputs(algaeBiomass)
             .itemOutputs(compost)
             .duration(5 * GTRecipeBuilder.SECONDS)
             .eut(2)
             .addTo(RecipeMaps.compressorRecipes);
 
         MyMod.logInfo("Registered Compressor recipe: 8x Algae Biomass -> 1x Compost.");
+    }
+
+    private static void registerAlgaeProcessingChainRecipes() {
+        Item basicAgrichemItem = GameRegistry.findItem("miscutils", "item.BasicAgrichemItem");
+        if (basicAgrichemItem == null) {
+            MyMod.logInfo("Skipped algae processing chain: GT++ BasicAgrichem item is unavailable.");
+            return;
+        }
+
+        Item basicAlgaeItem = GameRegistry.findItem("miscutils", "item.BasicAlgaeItem");
+        ItemStack algaeBiomass = new ItemStack(basicAgrichemItem, 1, 1);
+        ItemStack crushedAlgae = basicAlgaeItem == null ? new ItemStack(basicAgrichemItem, 1, 1)
+            : new ItemStack(basicAlgaeItem, 1, 0);
+        ItemStack organicResidue = new ItemStack(basicAgrichemItem, 1, 8);
+        if (algaeBiomass.getItem() == null || crushedAlgae.getItem() == null || organicResidue.getItem() == null) {
+            MyMod.logInfo("Skipped algae processing chain: invalid GT++ item stacks.");
+            return;
+        }
+
+        FluidStack water = getFluidOrGas(Materials.Water, 1000L);
+        FluidStack carbonDioxide = getFluidOrGas(Materials.CarbonDioxide, 1000L);
+        FluidStack biomass = getFirstAvailableFluid(1000, "biomass", "Biomass");
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 1000L);
+        FluidStack oxygen = getFluidOrGas(Materials.Oxygen, 1000L);
+
+        if (water == null || carbonDioxide == null || biomass == null || hydrogen == null || oxygen == null) {
+            MyMod.logInfo("Skipped algae processing chain: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(algaeBiomass)
+            .itemOutputs(crushedAlgae)
+            .duration(5 * GTRecipeBuilder.SECONDS)
+            .eut(8)
+            .addTo(RecipeMaps.fermentingRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(crushedAlgae, GTUtility.getIntegratedCircuit(6))
+            .fluidInputs(getFluidOrGas(Materials.Water, 140L))
+            .fluidOutputs(getFirstAvailableFluid(140, "biomass", "Biomass"))
+            .duration(10 * GTRecipeBuilder.SECONDS)
+            .eut(24)
+            .addTo(RecipeMaps.brewingRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(7))
+            .itemOutputs(organicResidue)
+            .fluidInputs(biomass)
+            .fluidOutputs(water, carbonDioxide)
+            .duration(8 * GTRecipeBuilder.SECONDS)
+            .eut(30)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(organicResidue, GTUtility.getIntegratedCircuit(8))
+            .fluidInputs(water, carbonDioxide)
+            .fluidOutputs(hydrogen, oxygen)
+            .duration(10 * GTRecipeBuilder.SECONDS)
+            .eut(60)
+            .addTo(RecipeMaps.electrolyzerRecipes);
+
+        MyMod.logInfo(
+            "Registered algae processing chain recipes (macerator -> mixer -> chemical reactor -> electrolyzer).");
     }
 
     private static void registerNitrogenRocketFuelUpgradeRecipe() {

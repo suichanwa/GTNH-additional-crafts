@@ -22,6 +22,11 @@ GTNH Additional Crafts is a Minecraft 1.7.10 addon for GregTech: New Horizons fo
   - `2 CH4 -> C2H2 + 3 H2`
 - Adds a Compressor recipe:
   - `8x Algae Biomass -> 1x GT++ Compost`
+- Adds an algae processing chain:
+  - `Green Algae Biomass -> (Fermenter) -> Crushed Algae (Breedable Algae or fallback)`
+  - `Crushed Algae + 140L Water -> (Brewery) -> 140L Biomass`
+  - `Biomass -> (Chemical Reactor) -> Water + CO2 + Organic Residue (Compost)`
+  - `Water + CO2 + Organic Residue -> (Electrolyzer) -> Hydrogen + Oxygen`
 - Patches the Vacuum Freezer:
   - If Nitrogen is available in input hatches, it consumes `250 L/s` and runs `8%` faster.
 

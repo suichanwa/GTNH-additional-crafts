@@ -22,7 +22,8 @@ public class PatchedMTERocketFuelGenerator extends MTERocketFuelGenerator {
         super(id, name, nameRegional, tier);
     }
 
-    public PatchedMTERocketFuelGenerator(String name, int tier, String[] description, gregtech.api.interfaces.ITexture[][][] textures) {
+    public PatchedMTERocketFuelGenerator(String name, int tier, String[] description,
+        gregtech.api.interfaces.ITexture[][][] textures) {
         super(name, tier, description, textures);
     }
 
@@ -64,8 +65,7 @@ public class PatchedMTERocketFuelGenerator extends MTERocketFuelGenerator {
         if (player != null) {
             GTUtility.sendChatToPlayer(
                 player,
-                overclockMode
-                    ? "Overclock enabled: 2x output, reduced fuel efficiency."
+                overclockMode ? "Overclock enabled: 2x output, reduced fuel efficiency."
                     : "Overclock disabled: normal output and efficiency.");
         }
     }
