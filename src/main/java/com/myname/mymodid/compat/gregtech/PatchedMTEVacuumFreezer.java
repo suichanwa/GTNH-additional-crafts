@@ -1,5 +1,7 @@
 package com.myname.mymodid.compat.gregtech;
 
+import java.util.ArrayList;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -15,6 +17,7 @@ public class PatchedMTEVacuumFreezer extends MTEVacuumFreezer {
     private static final int TICKS_PER_SECOND = 20;
     private static final double SPEED_MULTIPLIER_WITH_NITROGEN = 0.92D;
 
+    private boolean ignoreNitrogenForRecipe = false;
     private boolean nitrogenBoostActive = false;
     private int nitrogenTickCounter = 0;
 
@@ -34,9 +37,20 @@ public class PatchedMTEVacuumFreezer extends MTEVacuumFreezer {
     @Override
     public CheckRecipeResult checkProcessing() {
         resetNitrogenBoostState();
-        CheckRecipeResult result = super.checkProcessing();
+        CheckRecipeResult result;
+
+        ignoreNitrogenForRecipe = true;
+        try {
+            result = super.checkProcessing();
+        } finally {
+            ignoreNitrogenForRecipe = false;
+        }
+
         if (!result.wasSuccessful()) {
-            return result;
+            result = super.checkProcessing();
+            if (!result.wasSuccessful()) {
+                return result;
+            }
         }
 
         if (consumeNitrogenSecond()) {
@@ -81,6 +95,37 @@ public class PatchedMTEVacuumFreezer extends MTEVacuumFreezer {
     private void resetNitrogenBoostState() {
         nitrogenBoostActive = false;
         nitrogenTickCounter = 0;
+    }
+
+    @Override
+    public ArrayList<FluidStack> getStoredFluids() {
+        ArrayList<FluidStack> stored = super.getStoredFluids();
+        if (!ignoreNitrogenForRecipe || stored == null || stored.isEmpty()) {
+            return stored;
+        }
+
+        ArrayList<FluidStack> filtered = new ArrayList<>(stored.size());
+        for (FluidStack stack : stored) {
+            if (!isNitrogen(stack)) {
+                filtered.add(stack);
+            }
+        }
+
+        return filtered;
+    }
+
+    private boolean isNitrogen(FluidStack stack) {
+        if (stack == null || stack.getFluid() == null) {
+            return false;
+        }
+
+        FluidStack nitrogenGas = Materials.Nitrogen.getGas(1);
+        if (nitrogenGas != null && nitrogenGas.getFluid() == stack.getFluid()) {
+            return true;
+        }
+
+        FluidStack nitrogenFluid = Materials.Nitrogen.getFluid(1);
+        return nitrogenFluid != null && nitrogenFluid.getFluid() == stack.getFluid();
     }
 
     private boolean consumeNitrogenSecond() {
