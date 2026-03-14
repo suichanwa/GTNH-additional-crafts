@@ -1,6 +1,6 @@
 # GTNH Additional Crafts
 
-GTNH Additional Crafts is a Minecraft 1.7.10 addon for GregTech: New Horizons focused on machine behavior patches and recipe adjustments.
+GTNH Additional Crafts is a addon for GregTech: New Horizons focused adding more content to the game throw patching existing machines by adding new fuctionallity to them and adding new repecies to improve the game variability
 
 ## What This Mod Adds
 

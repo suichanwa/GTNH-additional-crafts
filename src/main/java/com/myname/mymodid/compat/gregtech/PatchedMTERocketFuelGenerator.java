@@ -1,5 +1,7 @@
 package com.myname.mymodid.compat.gregtech;
 
+import java.util.Arrays;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,6 +32,17 @@ public class PatchedMTERocketFuelGenerator extends MTERocketFuelGenerator {
     @Override
     public MetaTileEntity newMetaEntity(IGregTechTileEntity tileEntity) {
         return new PatchedMTERocketFuelGenerator(super.mName, super.mTier, super.mDescriptionArray, super.mTextures);
+    }
+
+    @Override
+    public String[] getDescription() {
+        String[] base = super.getDescription();
+        if (base == null) {
+            base = new String[0];
+        }
+        String[] extended = Arrays.copyOf(base, base.length + 1);
+        extended[base.length] = "Screwdriver right-click toggles overclock (2x output, reduced fuel efficiency).";
+        return extended;
     }
 
     @Override

@@ -15,10 +15,12 @@ public final class RocketFuelGeneratorPatch {
     private RocketFuelGeneratorPatch() {}
 
     public static void schedule() {
-        if (patchScheduled || patchApplied) {
+        if (patchApplied) {
             return;
         }
-        patchScheduled = true;
+        if (!patchScheduled) {
+            patchScheduled = true;
+        }
 
         if (GregTechAPI.sLoadFinished) {
             apply();
@@ -43,7 +45,7 @@ public final class RocketFuelGeneratorPatch {
             if (existing instanceof PatchedMTERocketFuelGenerator) {
                 continue;
             }
-            if (existing.getClass() != MTERocketFuelGenerator.class) {
+            if (!(existing instanceof MTERocketFuelGenerator)) {
                 continue;
             }
 
@@ -66,13 +68,20 @@ public final class RocketFuelGeneratorPatch {
             }
         }
 
-        patchApplied = true;
         if (patchedCount == 0) {
             MyMod.logInfo("Skipped Rocket Fuel Generator patch: MTERocketFuelGenerator not found.");
             return;
         }
 
+        patchApplied = true;
         MyMod.logInfo("Applied Rocket Fuel Generator patch to " + patchedCount + " MetaTileEntity instance(s).");
+    }
+
+    public static void applyIfNeeded() {
+        if (patchApplied) {
+            return;
+        }
+        apply();
     }
 
     private static int resolveTier(IMetaTileEntity metaTileEntity) {
