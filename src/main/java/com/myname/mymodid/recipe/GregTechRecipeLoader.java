@@ -171,9 +171,9 @@ public final class GregTechRecipeLoader {
     }
 
     private static void registerCelluloseFiberBiomassRecipe() {
-        ItemStack celluloseFiber = GregtechItemList.CelluloseFiber.get(1L, new Object[0]);
+        ItemStack celluloseFiber = GregtechItemList.CelluloseFiber.get(6L, new Object[0]);
         FluidStack water = getFluidOrGas(Materials.Water, 1000L);
-        FluidStack biomass = getFirstAvailableFluid(1000, "ic2biomass", "biomass", "Biomass");
+        FluidStack biomass = getFirstAvailableFluid(500, "ic2biomass", "biomass", "Biomass");
 
         if (celluloseFiber == null || celluloseFiber.getItem() == null || water == null || biomass == null) {
             MyMod.logInfo("Skipped Cellulose Fiber -> Biomass brewery recipe: required item or fluids unavailable.");
@@ -188,7 +188,7 @@ public final class GregTechRecipeLoader {
             .eut(4)
             .addTo(RecipeMaps.brewingRecipes);
 
-        MyMod.logInfo("Registered Brewery recipe: 1x Cellulose Fiber + 1000L Water -> 1000L Biomass.");
+        MyMod.logInfo("Registered Brewery recipe: 6x Cellulose Fiber + 1000L Water -> 500L Biomass.");
     }
 
     private static void registerJetFuelRocketFuelRecipe() {

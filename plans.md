@@ -44,4 +44,20 @@ add alage slurry as a new liquid
 2.7 maybe more uses for glycelor? what is it even used for tho? i need some studying
 2.8 Adding so the large semifluid burner (the multiblock) can also be build with the Titanium gearbox casing istead of steel gearbox engine, which in this case will increaes it's power output and fuel use 
 2.9 performance mode for the large semilfuid burner in which it'll use more fuel and lubricand and oxygen, be less efficient, and give more power, also let's make so the large semifluid burner will support 16A hatches
-3.0 celulose fiber (from GT++ )to plantbal (throw a brewery that takes water and celusole fiber) and output biomass [needds testing]
+
+3.1 more uses to biomass, currently biomass can be made into biogass, which is not very efficient, then it can be fermented, thorw a machine and distiled, giveing a few byproducts, but what can we come up for uses of biomass for it to be efficeint, or processing chains with it?
+
+
+3.2 new recepie chain
+    Machine: Pyrolysis Oven / Industrial Coke Oven
+    Voltage: MV (120 EU/t)
+    Duration: 12.5 seconds (250 ticks)
+
+    Input:
+    ├── 1000mb Biomass
+    └── 250mb Nitrogen
+
+    Output:
+    ├── 400mb Bio-tar
+    ├── 200mb Biogas
+    └── 2x Carbon Dust

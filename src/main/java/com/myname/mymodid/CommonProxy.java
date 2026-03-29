@@ -1,6 +1,7 @@
 package com.myname.mymodid;
 
 import com.myname.mymodid.compat.gregtech.DieselEngineOxidizerPatch;
+import com.myname.mymodid.compat.gregtech.LargeSemifluidGeneratorPatch;
 import com.myname.mymodid.compat.gregtech.RocketFuelGeneratorPatch;
 import com.myname.mymodid.compat.gregtech.VacuumFreezerNitrogenPatch;
 import com.myname.mymodid.compat.kekztech.SOFCHeliumPatch;
@@ -20,6 +21,7 @@ public class CommonProxy {
         MyMod.logInfo("I am MyMod at version " + Tags.VERSION);
 
         DieselEngineOxidizerPatch.schedule();
+        LargeSemifluidGeneratorPatch.schedule();
         RocketFuelGeneratorPatch.schedule();
         VacuumFreezerNitrogenPatch.schedule();
         SOFCHeliumPatch.schedule();
@@ -31,6 +33,7 @@ public class CommonProxy {
 
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {
+        LargeSemifluidGeneratorPatch.applyIfNeeded();
         RocketFuelGeneratorPatch.applyIfNeeded();
     }
 
