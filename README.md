@@ -10,6 +10,7 @@ GTNH Additional Crafts is a addon for GregTech: New Horizons focused adding more
 - Patches KekzTech SOFC MK1 so optional Helium usage reduces Oxygen and fuel consumption.
 - Patches GT++ Rocket Fuel Generators:
   - Screwdriver toggles overclock mode: 2x output, reduced fuel efficiency.
+- Adds Jet Fuel A as a valid rocket fuel for GT++ rocket engines and Rocketdyne.
 - Adds Large Chemical Reactor recipes for:
   - `Oxygen + Nitrogen + IC-9 -> Nitric Oxide`
   - `RP-1 + Nitrogen + Oxygen + IC-22 -> CN3H7O3 Rocket Fuel` (conversion with volume loss)

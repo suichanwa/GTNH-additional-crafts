@@ -33,3 +33,10 @@ Electrolyzer
 Hydrogen + Oxygen
 
 add alage slurry as a new liquid
+
+2. maybe new types of peat for forestry? 
+2.1 maybe more options for the combustion engine from the buildcraft (optinal fuel i think)
+2.3 more ways to craft naphthalene
+    2.1 in game the way of making it is throw mixing coal tar oil with the sulfric acid and then the player gets sulfuric coal tar which after distilation becomes naphthalene however i want to and think of more ways to make naphthalene like for exmple can the fish oil a good way of making it? well i'd have to reasearch that to make a proper integrateion into the pack
+2.4
+

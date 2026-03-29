@@ -28,6 +28,7 @@ public final class GregTechRecipeLoader {
         registerAlgaeBiomassToCompostRecipe();
         registerAlgaeProcessingChainRecipes();
         registerNitrogenRocketFuelUpgradeRecipe();
+        registerJetFuelRocketFuelRecipe();
         registerAcetaldehydeHydrogenationRecipe();
         registerMethanolCarbonMonoxideHydrogenToEthanolRecipe();
         registerMethaneToAcetyleneDehydratorRecipe();
@@ -167,6 +168,35 @@ public final class GregTechRecipeLoader {
         MyMod.logInfo("Registered LCR recipe: 1000L RP-1 + 1000L Nitrogen + 500L Oxygen -> 750L CN3H7O3 Rocket Fuel.");
     }
 
+    private static void registerJetFuelRocketFuelRecipe() {
+        FluidStack jetFuel = getFirstAvailableFluid(
+            1000,
+            "jetfuela",
+            "jetfuel_a",
+            "jet_fuel_a",
+            "jetfuel",
+            "jet_fuel",
+            "jet fuel a",
+            "jet fuel",
+            "JetFuelA",
+            "JetFuel",
+            "Jet Fuel A",
+            "Jet Fuel");
+
+        if (jetFuel == null) {
+            MyMod.logInfo("Skipped Jet Fuel A rocket fuel recipe: Jet Fuel A fluid is unavailable.");
+            return;
+        }
+
+        if (hasRocketFuelRecipe(jetFuel)) {
+            MyMod.logInfo("Skipped Jet Fuel A rocket fuel recipe: fuel already registered.");
+            return;
+        }
+
+        addRocketFuelRecipe(jetFuel, 512);
+        MyMod.logInfo("Registered rocket fuel: 1000L Jet Fuel A -> rocket fuel value 512.");
+    }
+
     private static void registerAcetaldehydeHydrogenationRecipe() {
         FluidStack acetaldehyde = getFirstAvailableFluid(1000, "acetaldehyde", "Acetaldehyde");
         FluidStack hydrogen = Materials.Hydrogen.getGas(1000L);
@@ -293,6 +323,41 @@ public final class GregTechRecipeLoader {
             }
         }
         return false;
+    }
+
+    private static boolean hasRocketFuelRecipe(FluidStack fuel) {
+        if (fuel == null || GTPPRecipeMaps.rocketFuels == null) {
+            return false;
+        }
+        for (GTRecipe recipe : GTPPRecipeMaps.rocketFuels.getAllRecipes()) {
+            if (recipe == null || recipe.mFluidInputs == null) {
+                continue;
+            }
+            for (FluidStack input : recipe.mFluidInputs) {
+                if (input != null && input.isFluidEqual(fuel)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static void addRocketFuelRecipe(FluidStack fuel, int fuelValue) {
+        if (fuel == null || fuel.getFluid() == null || GTPPRecipeMaps.rocketFuels == null) {
+            return;
+        }
+        GTPPRecipeMaps.rocketFuels.add(
+            new GTRecipe(
+                false,
+                GTValues.emptyItemStackArray,
+                GTValues.emptyItemStackArray,
+                null,
+                GTValues.emptyIntArray,
+                new FluidStack[] { new FluidStack(fuel.getFluid(), 1000) },
+                GTValues.emptyFluidStackArray,
+                0,
+                0,
+                fuelValue));
     }
 
     private static FluidStack getFirstAvailableFluid(int amount, String... names) {
