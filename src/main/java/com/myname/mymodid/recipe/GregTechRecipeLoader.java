@@ -18,6 +18,7 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 
 public final class GregTechRecipeLoader {
 
@@ -27,6 +28,7 @@ public final class GregTechRecipeLoader {
         registerNitricOxideLargeChemicalReactorRecipe();
         registerAlgaeBiomassToCompostRecipe();
         registerAlgaeProcessingChainRecipes();
+        registerCelluloseFiberBiomassRecipe();
         registerNitrogenRocketFuelUpgradeRecipe();
         registerJetFuelRocketFuelRecipe();
         registerAcetaldehydeHydrogenationRecipe();
@@ -166,6 +168,27 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         MyMod.logInfo("Registered LCR recipe: 1000L RP-1 + 1000L Nitrogen + 500L Oxygen -> 750L CN3H7O3 Rocket Fuel.");
+    }
+
+    private static void registerCelluloseFiberBiomassRecipe() {
+        ItemStack celluloseFiber = GregtechItemList.CelluloseFiber.get(1L, new Object[0]);
+        FluidStack water = getFluidOrGas(Materials.Water, 1000L);
+        FluidStack biomass = getFirstAvailableFluid(1000, "ic2biomass", "biomass", "Biomass");
+
+        if (celluloseFiber == null || celluloseFiber.getItem() == null || water == null || biomass == null) {
+            MyMod.logInfo("Skipped Cellulose Fiber -> Biomass brewery recipe: required item or fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(celluloseFiber)
+            .fluidInputs(water)
+            .fluidOutputs(biomass)
+            .duration(170)
+            .eut(4)
+            .addTo(RecipeMaps.brewingRecipes);
+
+        MyMod.logInfo("Registered Brewery recipe: 1x Cellulose Fiber + 1000L Water -> 1000L Biomass.");
     }
 
     private static void registerJetFuelRocketFuelRecipe() {

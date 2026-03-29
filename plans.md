@@ -38,5 +38,10 @@ add alage slurry as a new liquid
 2.1 maybe more options for the combustion engine from the buildcraft (optinal fuel i think)
 2.3 more ways to craft naphthalene
     2.1 in game the way of making it is throw mixing coal tar oil with the sulfric acid and then the player gets sulfuric coal tar which after distilation becomes naphthalene however i want to and think of more ways to make naphthalene like for exmple can the fish oil a good way of making it? well i'd have to reasearch that to make a proper integrateion into the pack
-2.4
-
+2.4 more crafts for the phtalic acid
+2.5 more crafting to get ethylene/proccesing chains maybe
+2.6 A processing chain from making from cellusose fiber from GT++ to biomass
+2.7 maybe more uses for glycelor? what is it even used for tho? i need some studying
+2.8 Adding so the large semifluid burner (the multiblock) can also be build with the Titanium gearbox casing istead of steel gearbox engine, which in this case will increaes it's power output and fuel use 
+2.9 performance mode for the large semilfuid burner in which it'll use more fuel and lubricand and oxygen, be less efficient, and give more power, also let's make so the large semifluid burner will support 16A hatches
+3.0 celulose fiber (from GT++ )to plantbal (throw a brewery that takes water and celusole fiber) and output biomass [needds testing]
