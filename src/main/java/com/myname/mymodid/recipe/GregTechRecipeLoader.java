@@ -256,7 +256,7 @@ public final class GregTechRecipeLoader {
             .fluidInputs(crudeBioTar)
             .fluidOutputs(kerosene, naphthenicAcid, phenol, toluene, benzene)
             .duration(20 * GTRecipeBuilder.SECONDS)
-            .eut(120)
+            .eut(78)
             .addTo(RecipeMaps.distillationTowerRecipes);
 
         MyMod.logInfo(
@@ -288,7 +288,7 @@ public final class GregTechRecipeLoader {
             .fluidInputs(crudeBioTar)
             .fluidOutputs(biogas, water, woodVinegar, lightFuel, acetone, aceticAcid)
             .duration(20 * GTRecipeBuilder.SECONDS)
-            .eut(120)
+            .eut(42)
             .addTo(RecipeMaps.distillationTowerRecipes);
 
         MyMod.logInfo(
