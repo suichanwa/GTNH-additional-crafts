@@ -27,6 +27,14 @@ public final class GregTechRecipeLoader {
 
     private GregTechRecipeLoader() {}
 
+    private static final int CRUDE_BIO_TAR_BASE_DISTILLATION_DURATION = 20 * GTRecipeBuilder.SECONDS;
+    private static final int CRUDE_BIO_TAR_MIDDLE_DISTILLATION_DURATION = scaleDurationByPercent(
+        CRUDE_BIO_TAR_BASE_DISTILLATION_DURATION,
+        65);
+    private static final int CRUDE_BIO_TAR_LIGHT_DISTILLATION_DURATION = scaleDurationForSpeedBoost(
+        scaleDurationByPercent(CRUDE_BIO_TAR_BASE_DISTILLATION_DURATION, 35),
+        70);
+
     public static void registerRecipes() {
         registerNitricOxideLargeChemicalReactorRecipe();
         registerAlgaeBiomassToCompostRecipe();
@@ -222,7 +230,7 @@ public final class GregTechRecipeLoader {
             .itemInputs(GTUtility.getIntegratedCircuit(3))
             .fluidInputs(crudeBioTar)
             .fluidOutputs(anthracene, naphthalene, heavyFuel)
-            .duration(20 * GTRecipeBuilder.SECONDS)
+            .duration(CRUDE_BIO_TAR_BASE_DISTILLATION_DURATION)
             .eut(120)
             .addTo(RecipeMaps.distillationTowerRecipes);
 
@@ -255,8 +263,8 @@ public final class GregTechRecipeLoader {
             .itemInputs(GTUtility.getIntegratedCircuit(2))
             .fluidInputs(crudeBioTar)
             .fluidOutputs(kerosene, naphthenicAcid, phenol, toluene, benzene)
-            .duration(20 * GTRecipeBuilder.SECONDS)
-            .eut(78)
+            .duration(CRUDE_BIO_TAR_MIDDLE_DISTILLATION_DURATION)
+            .eut(120)
             .addTo(RecipeMaps.distillationTowerRecipes);
 
         MyMod.logInfo(
@@ -287,8 +295,8 @@ public final class GregTechRecipeLoader {
             .itemInputs(GTUtility.getIntegratedCircuit(1))
             .fluidInputs(crudeBioTar)
             .fluidOutputs(biogas, water, woodVinegar, lightFuel, acetone, aceticAcid)
-            .duration(20 * GTRecipeBuilder.SECONDS)
-            .eut(42)
+            .duration(CRUDE_BIO_TAR_LIGHT_DISTILLATION_DURATION)
+            .eut(120)
             .addTo(RecipeMaps.distillationTowerRecipes);
 
         MyMod.logInfo(
@@ -296,7 +304,7 @@ public final class GregTechRecipeLoader {
     }
 
     private static void registerCelluloseFiberBiomassRecipe() {
-        ItemStack celluloseFiber = GregtechItemList.CelluloseFiber.get(6L, new Object[0]);
+        ItemStack celluloseFiber = GregtechItemList.CelluloseFiber.get(2L, new Object[0]);
         FluidStack water = getFluidOrGas(Materials.Water, 1000L);
         FluidStack biomass = getFirstAvailableFluid(500, "ic2biomass", "biomass", "Biomass");
 
@@ -313,7 +321,7 @@ public final class GregTechRecipeLoader {
             .eut(4)
             .addTo(RecipeMaps.brewingRecipes);
 
-        MyMod.logInfo("Registered Brewery recipe: 6x Cellulose Fiber + 1000L Water -> 500L Biomass.");
+        MyMod.logInfo("Registered Brewery recipe: 2x Cellulose Fiber + 1000L Water -> 500L Biomass.");
     }
 
     private static void registerJetFuelRocketFuelRecipe() {
@@ -527,6 +535,14 @@ public final class GregTechRecipeLoader {
             return fluid;
         }
         return material.getGas(amount);
+    }
+
+    private static int scaleDurationByPercent(int baseDuration, int durationPercent) {
+        return GTUtility.safeInt((long) baseDuration * Math.max(1, durationPercent) / 100L);
+    }
+
+    private static int scaleDurationForSpeedBoost(int baseDuration, int speedBoostPercent) {
+        return Math.max(1, GTUtility.safeInt((long) baseDuration * 100L / (100L + Math.max(0, speedBoostPercent))));
     }
 
 }
