@@ -40,6 +40,8 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchDynamoMulti;
 
 public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerator {
 
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String STRUCTURE_PIECE_GT_PP = "gtpp.multimachine.semifluidgenerator";
     private static final byte TITANIUM_GEARBOX_META = 4;
     private static final int MINIMUM_CASINGS = 16;
     private static final int REQUIRED_GEARBOXES = 2;
@@ -206,7 +208,7 @@ public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerato
     @Override
     public boolean checkMachine(IGregTechTileEntity baseMetaTileEntity, ItemStack stack) {
         resetStructureState();
-        boolean structureValid = checkPiece(mName, 1, 1, 0);
+        boolean structureValid = checkPiece(STRUCTURE_PIECE_MAIN, 1, 1, 0);
         titaniumGearboxInstalled = titaniumGearboxCount == REQUIRED_GEARBOXES && steelGearboxCount == 0;
         return structureValid && casingCount >= MINIMUM_CASINGS && hasValidGearboxConfiguration() && checkHatch();
     }
@@ -504,7 +506,12 @@ public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerato
     private static IStructureDefinition<MTELargeSemifluidGenerator> createStructureDefinition() {
         return StructureDefinition.<MTELargeSemifluidGenerator>builder()
             .addShape(
-                "main",
+                STRUCTURE_PIECE_MAIN,
+                transpose(
+                    new String[][] { { "III", "CCC", "CCC", "CCC" }, { "I~I", "CGC", "CGC", "CMC" },
+                        { "III", "CCC", "CCC", "CCC" } }))
+            .addShape(
+                STRUCTURE_PIECE_GT_PP,
                 transpose(
                     new String[][] { { "III", "CCC", "CCC", "CCC" }, { "I~I", "CGC", "CGC", "CMC" },
                         { "III", "CCC", "CCC", "CCC" } }))
@@ -512,7 +519,7 @@ public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerato
                 'C',
                 lazy(
                     mte -> buildHatchAdder(MTELargeSemifluidGenerator.class)
-                        .atLeast(HatchElement.InputHatch, HatchElement.InputHatch, HatchElement.Maintenance)
+                        .atLeast(HatchElement.Muffler, HatchElement.InputHatch, HatchElement.Maintenance)
                         .casingIndex(mte.getCasingTextureIndex())
                         .dot(1)
                         .buildAndChain(

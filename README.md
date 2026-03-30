@@ -30,6 +30,12 @@ GTNH Additional Crafts is a addon for GregTech: New Horizons focused adding more
   - `Water + CO2 + Organic Residue -> (Electrolyzer) -> Hydrogen + Oxygen`
 - Adds GT++ cellulose processing support:
   - `6x GT++ Cellulose Fiber + 1000L Water -> 500L Biomass` in the Brewery
+- Adds an Industrial Coke Oven recipe and a new fluid:
+  - `IC-4 + 1000L Biomass + 250L Nitrogen -> 500L Crude Bio-tar + 2x Carbon Dust`
+- Adds a Distillation Tower recipe:
+  - `IC-1 + 1000L Crude Bio-tar -> 400L Biogas + 100L Water + 200L Wood Vinegar + 130L Light Fuel + 70L Acetone + 50L Acetic Acid`
+  - `IC-3 + 1000L Crude Bio-tar -> 300L Anthracene + 150L Naphthalene + 400L Heavy Fuel`
+  - `IC-2 + 1000L Crude Bio-tar -> 320L Kerosene + 220L Naphthenic Acid + 160L Phenol + 110L Toluene + 90L Benzene`
 - Patches the Vacuum Freezer:
   - If Nitrogen is available in input hatches, it consumes `250 L/s` and runs `8%` faster.
 

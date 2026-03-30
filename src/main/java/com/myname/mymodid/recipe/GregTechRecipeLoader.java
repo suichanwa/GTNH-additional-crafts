@@ -9,15 +9,18 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.myname.mymodid.MyMod;
+import com.myname.mymodid.fluid.ModFluids;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.MaterialsKevlar;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.core.fluids.GTPPFluids;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 
 public final class GregTechRecipeLoader {
@@ -29,6 +32,10 @@ public final class GregTechRecipeLoader {
         registerAlgaeBiomassToCompostRecipe();
         registerAlgaeProcessingChainRecipes();
         registerCelluloseFiberBiomassRecipe();
+        registerBiomassCrudeBioTarCokeOvenRecipe();
+        registerCrudeBioTarDistillationRecipe();
+        registerCrudeBioTarMiddleFractionDistillationRecipe();
+        registerCrudeBioTarLightFractionDistillationRecipe();
         registerNitrogenRocketFuelUpgradeRecipe();
         registerJetFuelRocketFuelRecipe();
         registerAcetaldehydeHydrogenationRecipe();
@@ -168,6 +175,124 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         MyMod.logInfo("Registered LCR recipe: 1000L RP-1 + 1000L Nitrogen + 500L Oxygen -> 750L CN3H7O3 Rocket Fuel.");
+    }
+
+    private static void registerBiomassCrudeBioTarCokeOvenRecipe() {
+        FluidStack biomass = getFirstAvailableFluid(1000, "ic2biomass", "biomass", "Biomass");
+        FluidStack nitrogen = getFluidOrGas(Materials.Nitrogen, 250L);
+        FluidStack bioTar = ModFluids.getBioTar(500);
+        ItemStack carbonDust = Materials.Carbon.getDust(2);
+
+        if (biomass == null || nitrogen == null
+            || bioTar == null
+            || carbonDust == null
+            || carbonDust.getItem() == null) {
+            MyMod.logInfo("Skipped Industrial Coke Oven Crude Bio-tar recipe: required item or fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(4))
+            .itemOutputs(carbonDust)
+            .fluidInputs(biomass, nitrogen)
+            .fluidOutputs(bioTar)
+            .duration(250)
+            .eut(120)
+            .addTo(GTPPRecipeMaps.cokeOvenRecipes);
+
+        MyMod.logInfo(
+            "Registered Industrial Coke Oven recipe: IC-4 + 1000L Biomass + 250L Nitrogen -> 500L Crude Bio-tar + 2x Carbon Dust.");
+    }
+
+    private static void registerCrudeBioTarDistillationRecipe() {
+        FluidStack crudeBioTar = ModFluids.getBioTar(1000);
+        FluidStack anthracene = GTPPFluids.Anthracene == null ? getFirstAvailableFluid(300, "anthracene", "Anthracene")
+            : new FluidStack(GTPPFluids.Anthracene, 300);
+        FluidStack naphthalene = GTPPFluids.Naphthalene == null
+            ? getFirstAvailableFluid(150, "naphthalene", "Naphthalene")
+            : new FluidStack(GTPPFluids.Naphthalene, 150);
+        FluidStack heavyFuel = Materials.HeavyFuel.getFluid(400L);
+
+        if (crudeBioTar == null || anthracene == null || naphthalene == null || heavyFuel == null) {
+            MyMod.logInfo("Skipped Distillation Tower Crude Bio-tar recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(3))
+            .fluidInputs(crudeBioTar)
+            .fluidOutputs(anthracene, naphthalene, heavyFuel)
+            .duration(20 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.distillationTowerRecipes);
+
+        MyMod.logInfo(
+            "Registered Distillation Tower recipe: IC-3 + 1000L Crude Bio-tar -> 300L Anthracene + 150L Naphthalene + 400L Heavy Fuel.");
+    }
+
+    private static void registerCrudeBioTarMiddleFractionDistillationRecipe() {
+        FluidStack crudeBioTar = ModFluids.getBioTar(1000);
+        FluidStack kerosene = GTPPFluids.Kerosene == null ? getFirstAvailableFluid(320, "kerosene", "Kerosene")
+            : new FluidStack(GTPPFluids.Kerosene, 320);
+        FluidStack naphthenicAcid = MaterialsKevlar.NaphthenicAcid == null
+            ? getFirstAvailableFluid(220, "naphthenicacid", "naphthenic_acid", "NaphthenicAcid", "Naphthenic Acid")
+            : MaterialsKevlar.NaphthenicAcid.getFluid(220);
+        FluidStack phenol = Materials.Phenol.getFluid(160L);
+        FluidStack toluene = Materials.Toluene.getFluid(110L);
+        FluidStack benzene = Materials.Benzene.getFluid(90L);
+
+        if (crudeBioTar == null || kerosene == null
+            || naphthenicAcid == null
+            || phenol == null
+            || toluene == null
+            || benzene == null) {
+            MyMod.logInfo(
+                "Skipped Distillation Tower middle-fraction Crude Bio-tar recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(2))
+            .fluidInputs(crudeBioTar)
+            .fluidOutputs(kerosene, naphthenicAcid, phenol, toluene, benzene)
+            .duration(20 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.distillationTowerRecipes);
+
+        MyMod.logInfo(
+            "Registered Distillation Tower recipe: IC-2 + 1000L Crude Bio-tar -> 320L Kerosene + 220L Naphthenic Acid + 160L Phenol + 110L Toluene + 90L Benzene.");
+    }
+
+    private static void registerCrudeBioTarLightFractionDistillationRecipe() {
+        FluidStack crudeBioTar = ModFluids.getBioTar(1000);
+        FluidStack biogas = getFirstAvailableFluid(400, "ic2biogas", "biogas", "Biogas", "BioGas");
+        FluidStack water = getFluidOrGas(Materials.Water, 100L);
+        FluidStack woodVinegar = Materials.WoodVinegar.getFluid(200L);
+        FluidStack lightFuel = Materials.LightFuel.getFluid(130L);
+        FluidStack acetone = Materials.Acetone.getFluid(70L);
+        FluidStack aceticAcid = Materials.AceticAcid.getFluid(50L);
+
+        if (crudeBioTar == null || biogas == null
+            || water == null
+            || woodVinegar == null
+            || lightFuel == null
+            || acetone == null
+            || aceticAcid == null) {
+            MyMod.logInfo(
+                "Skipped Distillation Tower light-fraction Crude Bio-tar recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
+            .fluidInputs(crudeBioTar)
+            .fluidOutputs(biogas, water, woodVinegar, lightFuel, acetone, aceticAcid)
+            .duration(20 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.distillationTowerRecipes);
+
+        MyMod.logInfo(
+            "Registered Distillation Tower recipe: IC-1 + 1000L Crude Bio-tar -> 400L Biogas + 100L Water + 200L Wood Vinegar + 130L Light Fuel + 70L Acetone + 50L Acetic Acid.");
     }
 
     private static void registerCelluloseFiberBiomassRecipe() {

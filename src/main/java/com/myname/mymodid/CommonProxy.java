@@ -5,6 +5,7 @@ import com.myname.mymodid.compat.gregtech.LargeSemifluidGeneratorPatch;
 import com.myname.mymodid.compat.gregtech.RocketFuelGeneratorPatch;
 import com.myname.mymodid.compat.gregtech.VacuumFreezerNitrogenPatch;
 import com.myname.mymodid.compat.kekztech.SOFCHeliumPatch;
+import com.myname.mymodid.fluid.ModFluids;
 import com.myname.mymodid.recipe.GregTechRecipeLoader;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -16,6 +17,7 @@ public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
+        ModFluids.registerFluids();
 
         MyMod.logInfo(Config.greeting);
         MyMod.logInfo("I am MyMod at version " + Tags.VERSION);
