@@ -315,13 +315,17 @@ public final class GregTechRecipeLoader {
     private static void registerNaphthaToNaphthaleneRecipe() {
         FluidStack naphtha = Materials.Naphtha.getFluid(1000L);
         ItemStack platinumCatalyst = GTUtility.copyAmount(0, Materials.Platinum.getDust(1));
-        FluidStack naphthalene = GTPPFluids.Naphthalene == null ? getFirstAvailableFluid(400, "naphthalene", "Naphthalene")
+        FluidStack naphthalene = GTPPFluids.Naphthalene == null
+            ? getFirstAvailableFluid(400, "naphthalene", "Naphthalene")
             : new FluidStack(GTPPFluids.Naphthalene, 400);
         FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 300L);
         FluidStack methane = getFluidOrGas(Materials.Methane, 200L);
 
-        if (naphtha == null || platinumCatalyst == null || platinumCatalyst.getItem() == null || naphthalene == null
-            || hydrogen == null || methane == null) {
+        if (naphtha == null || platinumCatalyst == null
+            || platinumCatalyst.getItem() == null
+            || naphthalene == null
+            || hydrogen == null
+            || methane == null) {
             MyMod.logInfo("Skipped LCR Naphtha -> Naphthalene recipe: required catalyst or fluids unavailable.");
             return;
         }
@@ -408,8 +412,7 @@ public final class GregTechRecipeLoader {
             .eut(480)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        MyMod.logInfo(
-            "Registered LCR recipe: IC-2 + 1000L Glycerol + 500L Hydrogen -> 600L Methane + 400L Water.");
+        MyMod.logInfo("Registered LCR recipe: IC-2 + 1000L Glycerol + 500L Hydrogen -> 600L Methane + 400L Water.");
     }
 
     private static void registerGlycerolFermentationRecipe() {
@@ -454,7 +457,8 @@ public final class GregTechRecipeLoader {
             .eut(120)
             .addTo(RecipeMaps.chemicalReactorRecipes);
 
-        MyMod.logInfo("Registered Chemical Reactor recipe: IC-1 + 500L Phenol + 500L Formaldehyde -> 750L Liquid Resin.");
+        MyMod.logInfo(
+            "Registered Chemical Reactor recipe: IC-1 + 500L Phenol + 500L Formaldehyde -> 750L Liquid Resin.");
     }
 
     private static void registerPhenolHydrogenToCyclohexaneRecipe() {
@@ -523,7 +527,8 @@ public final class GregTechRecipeLoader {
             .eut(480)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        MyMod.logInfo("Registered LCR recipe: IC-2 + 1000L Kerosene + 300L Hydrogen -> 700L Light Fuel + 400L Methane.");
+        MyMod
+            .logInfo("Registered LCR recipe: IC-2 + 1000L Kerosene + 300L Hydrogen -> 700L Light Fuel + 400L Methane.");
     }
 
     private static void registerKeroseneSulfuricLightFuelRecipe() {
@@ -533,7 +538,8 @@ public final class GregTechRecipeLoader {
         FluidStack sulfuricLightFuel = getFluidOrGas(Materials.SulfuricLightFuel, 900L);
 
         if (kerosene == null || sulfuricAcid == null || sulfuricLightFuel == null) {
-            MyMod.logInfo("Skipped Kerosene + Sulfuric Acid -> Sulfuric Light Fuel recipe: required fluids unavailable.");
+            MyMod.logInfo(
+                "Skipped Kerosene + Sulfuric Acid -> Sulfuric Light Fuel recipe: required fluids unavailable.");
             return;
         }
 
