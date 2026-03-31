@@ -1,4 +1,4 @@
-3. more uses for both helium and helium-3
+2. more uses for both helium and helium-3
 4. more uses for phenol
 5. more uses for kerosene
 
