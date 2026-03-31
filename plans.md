@@ -1,5 +1,3 @@
-1. removing the fluid dinitrogenpentoxide
-2. more uses for nitrogen sience it does feels pretty useless given that the freezer makes just way too much of it
 3. more uses for both helium and helium-3
 4. more uses for phenol
 5. more uses for kerosene
@@ -14,4 +12,3 @@ pending ideas
 4. more crafts for the phtalic acid
 5. more crafting to get ethylene/proccesing chains maybe
 6. maybe more uses for glycelor? what is it even used for tho? i need some studying
-7. more uses to biomass, currently biomass can be made into biogass, which is not very efficient, then it can be fermented, thorw a machine and distiled, giveing a few byproducts, but what can we come up for uses of biomass for it to be efficeint, or processing chains with it?

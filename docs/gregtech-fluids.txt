@@ -1,0 +1,491 @@
+# GregTech-Related Fluids
+
+Generated from local source dumps in `tmp_gt5check`.
+Some fluids are addon-specific, conditional, or overlap with names used elsewhere.
+Counts by section:
+- GregTech: 185
+- GT++: 75
+- BartWorks Explicit Fluids: 7
+- BartWorks Culture Fluids: 6
+- BartWorks Werkstoff Fluids: 18
+- GoodGenerator: 61
+- GTNH Lanthanides: 84
+- Total unique names across all sections: 435
+
+## GregTech
+
+Source: gregtech/loaders/preload/LoaderGTBlockFluid.java
+Count: 185
+
+Air
+Alcopops
+Apple Juice
+Argon
+Awkward Brew
+Bedrockium Plasma
+Beer
+Bio Ethanol
+Biomass
+Cave Johnsons Grenade Juice
+Cetane-Boosted Diesel
+Charcoal Byproducts
+Chilly Sauce
+Chlorine
+Chocolate Milk
+Cider
+Coffee
+Cosmic Neutronium Plasma
+Creosote Oil
+Crushed Ice
+Dark Beer
+Dark Chocolate Milk
+Deuterium
+Diablo Sauce
+Diabolo Sauce
+Diesel
+Dimensionally Transcendent Residue
+Dragon Blood
+Epichlorohydrin
+Excited Dimensionally Transcendent Crude Catalyst
+Excited Dimensionally Transcendent Exotic Catalyst
+Excited Dimensionally Transcendent Prosaic Catalyst
+Excited Dimensionally Transcendent Resplendent Catalyst
+Excited Dimensionally Transcendent Stellar Catalyst
+Fiery Blood
+Fire Resistant Brew
+Fish Oil
+Fishy Brew
+Fluorine
+Glen McKenner
+Glyceryl Trinitrate
+Golden Apple Juice
+Golden Cider
+Grape Juice
+Harming Brew
+Healing Brew
+Heavy Fuel
+Heavy Oil
+Helium
+Helium-3
+Holy Water
+Honey
+Hops Juice
+Hot Frying Oil
+Hot Sauce
+Hydrogen
+Hydrogen Sulfide
+Ice Tea
+Ichorium Plasma
+Idun's Apple Juice
+Infinity Plasma
+Invisible Brew
+Lame Brew
+Latte
+Lemon Juice
+Lemonade
+Leninade
+Light Fuel
+Light Oil
+Limoncello
+Liquid Air
+Liquid Nitrogen
+Liquid Oxygen
+Liquid Sodium
+LPG
+Lubricant
+Mc Guffium 239
+Mercury
+Methane
+Milk
+Mineral Water
+Molten Bisphenol A
+Molten Black Granite
+Molten Blaze
+Molten Cosmic Neutronium
+Molten Glass
+Molten Ichorium
+Molten Red Granite
+Molten Redstone
+Mundane Brew
+Naphtha
+Natural Gas
+Night Vision Brew
+Nitration Mixture
+Nitrogen
+Nitrogen Dioxide
+Notches Brew
+Oil
+Old Man Snitches glitched Diablo Sauce
+Oxygen
+Pirate Brew
+Poisonous Brew
+Potato Juice
+Purple Drink
+Radon
+Raw Oil
+Reed Water
+Refined Glue
+Refinery Gas
+Regenerating Brew
+Rum
+Salty Water
+Scotch
+Seed Oil
+Sodium Persulfate
+Splash Fire Resistant Brew
+Splash Fishy Brew
+Splash Harming Brew
+Splash Healing Brew
+Splash Invisible Brew
+Splash Lame Brew
+Splash Night Vision Brew
+Splash Poisonous Brew
+Splash Regenerating Brew
+Splash Strength Brew
+Splash Swiftness Brew
+Splash Weakening Brew
+Steam
+Strength Brew
+Stretched Fire Resistant Brew
+Stretched Fishy Brew
+Stretched Invisible Brew
+Stretched Lame Brew
+Stretched Night Vision Brew
+Stretched Poisonous Brew
+Stretched Regenerating Brew
+Stretched Splash Fire Resistant Brew
+Stretched Splash Fishy Brew
+Stretched Splash Invisible Brew
+Stretched Splash Lame Brew
+Stretched Splash Night Vision Brew
+Stretched Splash Poisonous Brew
+Stretched Splash Regenerating Brew
+Stretched Splash Strength Brew
+Stretched Splash Swiftness Brew
+Stretched Splash Weakening Brew
+Stretched Strength Brew
+Stretched Swiftness Brew
+Stretched Weakening Brew
+Strong Harming Brew
+Strong Healing Brew
+Strong Poisonous Brew
+Strong Regenerating Brew
+Strong Splash Harming Brew
+Strong Splash Healing Brew
+Strong Splash Poisonous Brew
+Strong Splash Regenerating Brew
+Strong Splash Strength Brew
+Strong Splash Swiftness Brew
+Strong Strength Brew
+Strong Swiftness Brew
+Sulfuric Acid
+Sulfuric Gas
+Sulfuric Heavy Fuel
+Sulfuric Light Fuel
+Sulfuric Naphtha
+Sweet Coffee
+Sweet Jesus Latte
+Sweet Latte
+Sweet Tea
+Swiftness Brew
+Tea
+Thick Brew
+Titaniumtetrachloride
+Toluene
+Tritium
+UU Amplifier
+Very Heavy Oil
+Vinegar
+Vodka
+Weakening Brew
+Wet Concrete
+Wheaty Hops Juice
+Wheaty Juice
+Wine
+
+## GT++
+
+Source: gtPlusPlus/core/fluids/GTPPFluids.java, gtPlusPlus/core/item/ModItems.java
+Count: 75
+
+2-Ethylanthrahydroquinone
+2-Ethylanthraquinone
+Almandine Froth
+Aniline
+Anthracene
+Blazing Pyrotheum
+Blood
+Boric Acid
+Burnt LiFBeF2ThF4UF4 Salt
+Burnt LiFBeF2ZrF4U235 Salt
+Burnt LiFBeF2ZrF4UF4 Salt
+Butanol
+Cadaverine
+Carbon Disulfide
+Chalcopyrite Froth
+CN3H7O3 Rocket Fuel
+Coal Gas
+Coal Tar
+Coal Tar Oil
+Cyclohexane
+Cyclohexanone
+Dense Hydrazine Fuel Mixture
+Ethylbenzene
+Fermentation Base
+Fertile Manure Slurry
+Fertiliser
+Formaldehyde
+Gelid Cryotheum
+Genetic Mutagen
+Grossular Froth
+H8N4C2O4 Rocket Fuel
+High Quality Sulfur Dioxide
+Hydrated Ammonium Nitrate Slurry
+Hydrazine
+Hydrogen Peroxide
+Impure Molten Salt Base
+Industrial Strength Hydrofluoric Acid
+Industrial Strength Hydrogen Chloride
+Kerosene
+Liquid Hydrogen
+Liquid Resin
+Lithium Hydroxide
+Lithium Peroxide
+Manure Slurry
+Mob Essence
+Monazite Froth
+Monomethylhydrazine
+Naphthalene
+Netherrack Froth
+Nickel Froth
+Nitrobenzene
+Nitrogen Tetroxide
+Pentlandite Froth
+Pine Oil
+Platinum Froth
+Polyurethane
+Propionic Acid
+Putrescine
+Pyrope Froth
+Raisin Juice
+Raw Animal Waste
+Red Mud Slurry
+Redstone Froth
+RP-1
+Rp-1 Rocket Fuel
+Spessartine Froth
+Sphalerite Froth
+Sulfuric Apatite Mix
+Sulfuric Coal Tar Oil
+Sulfuric Lithium Mix
+Sulfurous Acid
+UN-18 Fertiliser
+UN-32 Fertiliser
+Urea Mix
+Zirconium Tetrafluoride
+
+## BartWorks Explicit Fluids
+
+Source: bartworks/common/loaders/FluidLoader.java
+Count: 7
+
+EnzymesSollution
+FluorecentdDNA
+Fulvic Acid
+Heated Fulvic Acid
+Kerogen
+Penicillin
+Polymerase
+
+## BartWorks Culture Fluids
+
+Source: bartworks/common/loaders/BioCultureLoader.java + bartworks/common/loaders/FluidLoader.java
+Count: 6
+
+Common Yeast Fluid
+Whine Yeast Fluid
+Beer Yeast Fluid
+eColi Bacteria Fluid
+Anaerobic Oil Bacteria Fluid
+General Purpose Fermenting Bacteria Fluid
+
+## BartWorks Werkstoff Fluids
+
+Source: bartworks/system/material/WerkstoffLoader.java
+Count: 18
+
+Acidic Iridium Solution
+Acidic Osmium Solution
+Ammonium Chloride
+Aqua Regia
+Formic Acid
+Hexafluorosilicic Acid
+Iridium Dioxide
+Liquid Helium
+Osmium Solution
+Palladium Enriched Ammonia
+Platinum Concentrate
+Rhodium Filter Cake Solution
+Rhodium Salt Solution
+Rhodium Sulfate Solution
+Ruthenium Tetroxide Solution
+Sodium Formate
+Sodium Sulfate
+Unformed Fluorophlogopite
+
+## GoodGenerator
+
+Source: goodgenerator/items/GGMaterial.java
+Count: 61
+
+2-Ethyl-1-Hexanol
+Acid Naquadah Emulsion
+Antimony Pentachloride
+Antimony Pentachloride Solution
+Antimony Pentafluoride
+Antimony Pentafluoride Solution
+Antimony Trichloride Solution
+Cyclopentadiene
+Diethylamine
+Enriched Naquadah Goo
+Enriched-Naquadah-Rich Solution
+Ethanol Gasoline
+Ether
+Ferrocene Solution
+Ferrocene Waste
+Fluorine-Rich Waste Liquid
+Fluoroantimonic Acid
+Heavy Naquadah Fuel
+Impure Ferrocene Mixture
+Iron II Chloride
+Jet Fuel A
+Jet Fuel No.3
+Light Naquadah Fuel
+Low Quality Naquadah Emulsion
+Low Quality Naquadah Solution
+Low Quality Naquadria Sulphate
+Naquadah Asphalt
+Naquadah Based Liquid Fuel MkI
+Naquadah Based Liquid Fuel MkI (Depleted)
+Naquadah Based Liquid Fuel MkII
+Naquadah Based Liquid Fuel MkII (Depleted)
+Naquadah Based Liquid Fuel MkIII
+Naquadah Based Liquid Fuel MkIII (Depleted)
+Naquadah Based Liquid Fuel MkIV
+Naquadah Based Liquid Fuel MkIV (Depleted)
+Naquadah Based Liquid Fuel MkV
+Naquadah Based Liquid Fuel MkV (Depleted)
+Naquadah Based Liquid Fuel MkVI
+Naquadah Based Liquid Fuel MkVI (Depleted)
+Naquadah Emulsion
+Naquadah Goo
+Naquadah Solution
+Naquadah-Adamantium Solution
+Naquadah-Rich Solution
+Naquadria Goo
+Naquadria-Rich Solution
+Oxalic Acid
+P-507
+Plutonium Based Liquid Fuel
+Plutonium Based Liquid Fuel (Depleted)
+Plutonium Based Liquid Fuel (Excited State)
+Thorium Based Liquid Fuel
+Thorium Based Liquid Fuel (Depleted)
+Thorium Based Liquid Fuel (Excited State)
+Thorium Tetrachloride
+Thorium Tetrafluoride
+Thorium-232 Tetrafluoride
+Uranium Based Liquid Fuel
+Uranium Based Liquid Fuel (Depleted)
+Uranium Based Liquid Fuel (Excited State)
+Waste Liquid
+
+## GTNH Lanthanides
+
+Source: gtnhlanth/common/register/WerkstoffMaterialPool.java
+Count: 84
+
+1,4-Butanediol
+Acidicised 1,4-Butanediol
+Ammonium Nitrate Solution
+Boron Trichloride
+Cerium Chloride Concentrate
+Cerium Extracting Nano Resin
+Chlorinated Rare Earth Concentrate
+Chlorinated Rare Earth Diluted Solution
+Chlorinated Rare Earth Enriched Solution
+Conditioned Bastnasite Mud
+Diaminotoluene
+Diluted Acetone
+Diluted Bastnasite Mud
+Diluted Monazite Rare Earth Mud
+Diluted Monazite Sulfate
+Diluted Samarium Rare Earth Solution
+Dinitrotoluene
+Dysprosium Chloride Concentrate
+Dysprosium Extracting Nano Resin
+Erbium Chloride Concentrate
+Erbium Extracting Nano Resin
+Europium Chloride Concentrate
+Europium Extracting Nano Resin
+Filled Cerium Extracting Nano Resin
+Filled Dysprosium Extracting Nano Resin
+Filled Erbium Extracting Nano Resin
+Filled Europium Extracting Nano Resin
+Filled Gadolinium Extracting Nano Resin
+Filled Holmium Extracting Nano Resin
+Filled Lanthanum Extracting Nano Resin
+Filled Lutetium Extracting Nano Resin
+Filled Neodymium Extracting Nano Resin
+Filled Praseodymium Extracting Nano Resin
+Filled Promethium Extracting Nano Resin
+Filled Samarium Extracting Nano Resin
+Filled Terbium Extracting Nano Resin
+Filled Thulium Extracting Nano Resin
+Filled Ytterbium Extracting Nano Resin
+Filtered Bastnasite Mud
+Fluoroform
+Gadolinium Chloride Concentrate
+Gadolinium Extracting Nano Resin
+Hafnium Tetrachloride Solution
+Hexafluorosilicic Acid
+Holmium Chloride Concentrate
+Holmium Extracting Nano Resin
+Hot Super Coolant
+Lanthanum Chloride Concentrate
+Lanthanum Extracting Nano Resin
+Lutetium Chloride Concentrate
+Lutetium Extracting Nano Resin
+Muddy Bastnasite Rare Earth Solution
+Muddy Monazite Rare Earth Solution
+Muddy Samarium Rare Earth Solution
+Neodymium Chloride Concentrate
+Neodymium Extracting Nano Resin
+Nitric Monazite Leached Concentrate
+Nitric-Leached Monazite Mixture
+Nitrogenated Monazite Rare Earth Concentrate
+Potassium Permanganate Solution
+Praseodymium Chloride Concentrate
+Praseodymium Extracting Nano Resin
+Promethium Chloride Concentrate
+Promethium Extracting Nano Resin
+Reactive-Ion Etching Mixture
+Samarium Chloride Concentrate
+Samarium Extracting Nano Resin
+Samarium Rare Earth Mud
+Seaweed Byproducts
+Seaweed Concentrate
+Silane-Nitrogen Plasma Mixture
+Sodiumfluorosilicate
+Steam-Cracked Bastnasite Mud
+Terbium Chloride Concentrate
+Terbium Extracting Nano Resin
+Tetrahydrofuran
+Thulium Chloride Concentrate
+Thulium Extracting Nano Resin
+Toluene Diisocyanate
+Toluene Tetramethyl Diisocyanate
+Tungstophosphoric Acid
+Ytterbium Chloride Concentrate
+Ytterbium Extracting Nano Resin
+Zirconium Tetrachloride Solution

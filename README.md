@@ -14,11 +14,17 @@ GTNH Additional Crafts is a addon for GregTech: New Horizons focused adding more
 - Adds Large Chemical Reactor recipes for:
   - `Oxygen + Nitrogen + IC-9 -> Nitric Oxide`
   - `RP-1 + Nitrogen + Oxygen + IC-22 -> CN3H7O3 Rocket Fuel` (conversion with volume loss)
+  - `1000L Naphtha + Platinum Dust catalyst -> 400L Naphthalene + 300L Hydrogen + 200L Methane`
+  - `IC-1: 500L Glycerol + 500L Nitrogen Dioxide -> 750L Glyceryl Trinitrate`
+  - `IC-2: 1000L Glycerol + 500L Hydrogen -> 600L Methane + 400L Water`
 - Adds Chemical Reactor recipe:
   - `Acetaldehyde + Hydrogen -> Ethanol`
+  - `IC-1: 500L Glycerol + 500L Nitrogen Dioxide -> 750L Glyceryl Trinitrate`
 - Adds Large Chemical Reactor recipe:
   - `IC-1: Methanol + CO + H2 -> Ethanol`
   - `IC-24: 9x Methanol + 9x CO + 9x H2 -> 9x Ethanol` (9x time, 9x output)
+- Adds Fermenter recipe:
+  - `IC-1: 1000L Glycerol -> 700L Vinegar`
 - Adds GT++ Chemical Dehydrator recipe:
   - `2 CH4 -> C2H2 + 3 H2`
 - Adds a Compressor recipe:

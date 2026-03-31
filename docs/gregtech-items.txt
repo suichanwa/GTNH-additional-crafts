@@ -1,0 +1,4361 @@
+# GregTech-Related Item Names
+
+Generated from local `en_US.lang` files in `tmp_gt5check`.
+This is a display-name dump filtered to `.name` entries and excluding tabs, tooltips, recipes, GUI text, fluids, and most non-item strings.
+Counts by section:
+- GregTech: 110
+- GT++: 3319
+- BartWorks: 146
+- GoodGenerator: 144
+- GTNH Lanthanides: 19
+- GTNH Intergalactic: 64
+- TecTech: 380
+- KekzTech: 40
+- KubaTech: 46
+- GGFab: 0
+- GTNEI Ore Plugin: 10
+- Total unique display names across all sections: 4271
+
+## GregTech
+
+Source: tmp_gt5check\assets\gregtech\lang\en_US.lang
+Count: 110
+
+Aequalitas
+Air Filter
+Air Intake Hatch
+Astrum
+Basic Logic
+Black Hole Renderer
+Block
+Brown Algae
+Catalyst Housing
+Comb
+Combination Lock
+Concrete
+Decayables
+Drone Renderer
+Drop
+Dual Fuel Rod (Depleted Excited Plutonium)
+Dual Fuel Rod (Depleted Excited Uranium)
+Dual Fuel Rod (Depleted High Density Plutonium)
+Dual Fuel Rod (Depleted High Density Uranium)
+Dual Fuel Rod (Depleted MOX)
+Dual Fuel Rod (Depleted Naquadah)
+Dual Fuel Rod (Depleted Naquadria)
+Dual Fuel Rod (Depleted Thorium)
+Dual Fuel Rod (Depleted Uranium)
+Dual Fuel Rod (Excited Plutonium)
+Dual Fuel Rod (Excited Uranium)
+Dual Fuel Rod (High Density Plutonium)
+Dual Fuel Rod (High Density Uranium)
+Dual Fuel Rod (MOX)
+Dual Fuel Rod (Naquadah)
+Dual Fuel Rod (Naquadria)
+Dual Fuel Rod (Thorium)
+Dual Fuel Rod (Uranium)
+Equals
+Euglenoids
+Fire Algae
+Frame
+Fuel Rod (Depleted Excited Plutonium)
+Fuel Rod (Depleted Excited Uranium)
+Fuel Rod (Depleted High Density Plutonium)
+Fuel Rod (Depleted High Density Uranium)
+Fuel Rod (Depleted MOX)
+Fuel Rod (Depleted Naquadah)
+Fuel Rod (Depleted Naquadria)
+Fuel Rod (Depleted Thorium)
+Fuel Rod (Depleted Uranium)
+Fuel Rod (Excited Plutonium)
+Fuel Rod (Excited Uranium)
+Fuel Rod (Glowstone)
+Fuel Rod (High Density Plutonium)
+Fuel Rod (High Density Uranium)
+Fuel Rod (Lithium)
+Fuel Rod (MOX)
+Fuel Rod (Naquadah)
+Fuel Rod (Naquadria)
+Fuel Rod (Sunnarium)
+Fuel Rod (Thorium)
+Fuel Rod (Tritium)
+Fuel Rod (Uranium)
+Glass
+Gloria
+Golden-Brown Algae
+Granite
+Green Algae
+GregTech Advanced Sensor Card
+Hardcode Bit-AND
+Long Distance Pipeline Pipe
+Machine
+Machine Casing
+Ore
+Pollen
+Primordium
+Propolis
+Pulser
+Quad Fuel Rod (Depleted Excited Plutonium)
+Quad Fuel Rod (Depleted Excited Uranium)
+Quad Fuel Rod (Depleted High Density Plutonium)
+Quad Fuel Rod (Depleted High Density Uranium)
+Quad Fuel Rod (Depleted MOX)
+Quad Fuel Rod (Depleted Naquadah)
+Quad Fuel Rod (Depleted Naquadria)
+Quad Fuel Rod (Depleted Thorium)
+Quad Fuel Rod (Depleted Uranium)
+Quad Fuel Rod (Excited Plutonium)
+Quad Fuel Rod (Excited Uranium)
+Quad Fuel Rod (High Density Plutonium)
+Quad Fuel Rod (High Density Uranium)
+Quad Fuel Rod (MOX)
+Quad Fuel Rod (Naquadah)
+Quad Fuel Rod (Naquadria)
+Quad Fuel Rod (Thorium)
+Quad Fuel Rod (Uranium)
+Quantum Chest
+Quantum Tank
+Randomizer
+Red Algae
+Redstone Meter
+Reinforced Block
+Repeater
+Solenoid Superconductor Coil
+Stone
+Super Chest
+Super Tank
+The Core
+The Core (Depleted)
+Timer
+Tinted Industrial Glass
+Vesania
+Wormhole Renderer
+Yellow-Green Algae
+
+## GT++
+
+Source: tmp_gt5check\assets\miscutils\lang\en_US.lang
+Count: 3319
+
+[Debug] Shapes
+[Non-existent Item] Report This Recipe On Github, Please.
+§6Alkalus Disk [§cActivated§6]
+§9Personal Cloaking Device§7
+§9Personal Healing NanoBooster§r
+§aControl Circuit
+§eSlow Building Ring§7
+§oThermal Boiler Manual
+%s Fluid Tank
+2-Ethylanthrahydroquinone Cell
+2-Ethylanthraquinone Cell
+4000DC's Big Key
+A Glimpse of the Future
+Abyssal Alloy Bolt
+Abyssal Alloy Cell
+Abyssal Alloy Dust
+Abyssal Alloy Frame Box
+Abyssal Alloy Gear
+Abyssal Alloy Ingot
+Abyssal Alloy Nugget
+Abyssal Alloy Plate
+Abyssal Alloy Ring
+Abyssal Alloy Rod
+Abyssal Alloy Rotor
+Abyssal Alloy Screw
+Accelerated Frame
+Acetic Acid Cell
+Acetic Anhydride Cell
+Acetone Cell
+Actinium Cell
+Actinium Dust
+Actinium Ingot
+Actinium Ion
+Actinium Nugget
+Actinium Plate
+Adhesion Promoter Catalyst
+Advanced Boiler Chassis [Tier %d]
+Advanced Boiler Chassis [Tier 1]
+Advanced Hazmat Boots
+Advanced Hazmat Helmet
+Advanced Hazmat Leggings
+Advanced Hazmat Suit
+Advanced Naquadah Catalyst
+Advanced Nitinol Bolt
+Advanced Nitinol Cell
+Advanced Nitinol Dust
+Advanced Nitinol Foil
+Advanced Nitinol Frame Box
+Advanced Nitinol Gear
+Advanced Nitinol Ingot
+Advanced Nitinol Nugget
+Advanced Nitinol Plasma Cell
+Advanced Nitinol Plate
+Advanced Nitinol Ring
+Advanced Nitinol Rod
+Advanced Nitinol Rotor
+Advanced Nitinol Screw
+Advanced Workbench
+Aer Shard
+Agardite (Cd) Dust
+Agardite (Cd) Ore
+Agardite (La) Dust
+Agardite (La) Ore
+Agardite (Nd) Dust
+Agardite (Nd) Ore
+Agardite (Y) Dust
+Agardite (Y) Ore
+Agrichemical Item
+Agricultural Sewer
+Air Filter
+Alburnite Dust
+Alburnite Ore
+Algae Biomass
+Algagenic Growth Promoter Catalyst
+Alginic Acid
+Alkalus Disk
+Almandine Flotation Froth Cell
+Alumina
+Alumina Milling Ball
+Aluminium Ion
+Aluminium Multipick
+Aluminium Multispade
+Aluminium Pellet
+Aluminum Ion
+Americium 241 Cell
+Americium 241 Dust
+Americium 241 Ingot
+Americium 241 Nugget
+Americium 241 Plate
+Americium Ion
+Ammonium Bifluoride Cell
+Ammonium Bifluoride Dust
+Ammonium Cell
+Ammonium Nitrate Dust
+Ammonium Nitrate Slurry Cell
+Ammonium Tetrafluoroberyllate Cell
+Ammonium Tetrafluoroberyllate Dust
+Ancient Granite Dust
+Ancient Granite Ingot
+Ancient Granite Nugget
+Ancient Granite Ore
+Ancient Granite Plate
+Aniline Cell
+Anthracene Cell
+Antimony Ion
+Aqua Shard
+Arborist Frame
+Arcanite Bolt
+Arcanite Cell
+Arcanite Dust
+Arcanite Frame Box
+Arcanite Gear
+Arcanite Ingot
+Arcanite Nugget
+Arcanite Plate
+Arcanite Ring
+Arcanite Rod
+Arcanite Rotor
+Arcanite Screw
+Arceus Alloy 2B Bolt
+Arceus Alloy 2B Cell
+Arceus Alloy 2B Dust
+Arceus Alloy 2B Foil
+Arceus Alloy 2B Frame Box
+Arceus Alloy 2B Gear
+Arceus Alloy 2B Ingot
+Arceus Alloy 2B Nugget
+Arceus Alloy 2B Plate
+Arceus Alloy 2B Ring
+Arceus Alloy 2B Rod
+Arceus Alloy 2B Rotor
+Arceus Alloy 2B Screw
+Argon Ion
+Arsenic Ion
+Astatine Cell
+Astatine Dust
+Astatine Ingot
+Astatine Ion
+Astatine Nugget
+Astatine Plate
+Astral Titanium Bolt
+Astral Titanium Cell
+Astral Titanium Dust
+Astral Titanium Foil
+Astral Titanium Frame Box
+Astral Titanium Gear
+Astral Titanium Ingot
+Astral Titanium Nugget
+Astral Titanium Plasma Cell
+Astral Titanium Plate
+Astral Titanium Ring
+Astral Titanium Rod
+Astral Titanium Rotor
+Astral Titanium Screw
+Babbit Alloy Cell
+Babbit Alloy Dust
+Babbit Alloy Ingot
+Babbit Alloy Nugget
+Babbit Alloy Plate
+Bakelite Cell
+Bakelite Dust
+Bakelite Ingot
+Bakelite Nugget
+Bakelite Plate
+Barite (Ra) Dust
+Barite (Ra) Ore
+Barium Ion
+Base Chargeable Item
+Basic Bronze Turbine
+Basic Firemaker
+Basic Iron Turbine
+Basic Steel Turbine
+Basic Turbine
+Battlesign
+Bed Locator [NBT Test]
+Bedrock Drill
+Benzene Cell
+Berkelium Cell
+Berkelium Dust
+Berkelium Ingot
+Berkelium Ion
+Berkelium Nugget
+Berkelium Plate
+Beryllium Fluoride Cell
+Beryllium Fluoride Dust
+Beryllium Fluoride Ingot
+Beryllium Fluoride Nugget
+Beryllium Fluoride Plate
+Beryllium Hydroxide Cell
+Beryllium Hydroxide Dust
+Beryllium Ion
+Beryllium Multispade
+Biocomposite Collector
+Biological Intelligence Catalyst
+Bismuth Bronze Multipick
+Bismuth Bronze Multispade
+Bismuth Ion
+Bismuth Multispade
+BitCoin
+Black Backpack
+Black Bronze Multipick
+Black Bronze Multispade
+Black Metal Bolt
+Black Metal Cell
+Black Metal Dust
+Black Metal Frame Box
+Black Metal Gear
+Black Metal Ingot
+Black Metal Nugget
+Black Metal Plate
+Black Metal Ring
+Black Metal Rod
+Black Metal Rotor
+Black Metal Screw
+Black Steel Multipick
+Black Steel Multispade
+Black Titanium Cell
+Black Titanium Dust
+Black Titanium Foil
+Black Titanium Ingot
+Black Titanium Nugget
+Black Titanium Plate
+Blaze Flesh
+Blazing Pyrotheum
+Blazing Pyrotheum Bucket
+Blizz Powder
+Blizz Rod
+Block of Abyssal Alloy
+Block of Actinium
+Block of Advanced Nitinol
+Block of Americium 241
+Block of Ancient Granite
+Block of Arcanite
+Block of Arceus Alloy 2B
+Block of Astatine
+Block of Astral Titanium
+Block of Babbit Alloy
+Block of Bakelite
+Block of Berkelium
+Block of Beryllium Fluoride
+Block of Black Metal
+Block of Black Titanium
+Block of Blood Steel
+Block of Botmium
+Block of Bromine
+Block of Californium
+Block of Celestial Tungsten
+Block of Chromatic Glass
+Block of Cinobite A243
+Block of Curium
+Block of Dragon Metal
+Block of Dragonblood
+Block of Dysprosium
+Block of Eglin Steel
+Block of Einsteinium
+Block of Energy Crystal
+Block of Fermium
+Block of Francium
+Block of Germanium
+Block of Grisium
+Block of Hafnium
+Block of Hastelloy-C276
+Block of Hastelloy-N
+Block of Hastelloy-W
+Block of Hastelloy-X
+Block of HeLiCoPtEr
+Block of HS188-A
+Block of Hypogen
+Block of Incoloy-020
+Block of Incoloy-DS
+Block of Incoloy-MA956
+Block of Inconel-625
+Block of Inconel-690
+Block of Inconel-792
+Block of Indalloy 140
+Block of Iodine
+Block of Koboldite
+Block of Lafium Compound
+Block of Laurenium
+Block of LiFBeF2ThF4UF4
+Block of LiFBeF2ZrF4U235
+Block of LiFBeF2ZrF4UF4
+Block of Lithium 7
+Block of Lithium Fluoride
+Block of Maraging Steel 250
+Block of Maraging Steel 300
+Block of Maraging Steel 350
+Block of Neptunium
+Block of Neptunium Hexafluoride
+Block of Niobium Carbide
+Block of Nitinol 60
+Block of Nylon
+Block of Octiron
+Block of Pikyonium 64B
+Block of Plutonium 238
+Block of Plutonium-238
+Block of Polonium
+Block of Polonium 210
+Block of Potin
+Block of Promethium
+Block of Protactinium
+Block of Quantum
+Block of Radium
+Block of Raw Meat
+Block of Refined Trinium
+Block of Rhenium
+Block of Rhodium
+Block of Rhugnor
+Block of Runite
+Block of Ruthenium
+Block of Selenium
+Block of Selenium Hexafluoride
+Block of Silicon Carbide
+Block of Staballoy
+Block of Stellite
+Block of Strontium
+Block of Strontium 90
+Block of Talonite
+Block of Tantalloy-60
+Block of Tantalloy-61
+Block of Tantalum Carbide
+Block of Technetium
+Block of Technetium Hexafluoride
+Block of Tellurium
+Block of Thallium
+Block of Thorium 232
+Block of Thorium Hexafluoride
+Block of Thorium Tetrafluoride
+Block of Titansteel
+Block of Trinium
+Block of Trinium Naquadah Alloy
+Block of Trinium Naquadah Carbonite
+Block of Trinium Titanium Alloy
+Block of Tumbaga
+Block of Tungsten Titanium Carbide
+Block of Uranium 232
+Block of Uranium 233
+Block of Uranium Hexafluoride
+Block of Uranium Tetrafluoride
+Block of Watertight Steel
+Block of White Metal
+Block of Zeron-100
+Block of Zirconium
+Block of Zirconium Carbide
+Block of Zirconium Tetrafluoride
+Blood Steel Bolt
+Blood Steel Cell
+Blood Steel Dust
+Blood Steel Frame Box
+Blood Steel Gear
+Blood Steel Ingot
+Blood Steel Nugget
+Blood Steel Plate
+Blood Steel Ring
+Blood Steel Rod
+Blood Steel Rotor
+Blood Steel Screw
+Blue Backpack
+Blue Metal Catalyst
+Blue Steel Multipick
+Blue Steel Multispade
+Blueprint [I am useless]
+Blutonium plate
+Bohrium Ion
+Bomb Casing
+Bomb Fuse
+Boric Acid Cell
+Boron Ion
+Botmium Bolt
+Botmium Cell
+Botmium Dust
+Botmium Foil
+Botmium Frame Box
+Botmium Gear
+Botmium Ingot
+Botmium Nugget
+Botmium Plate
+Botmium Ring
+Botmium Rod
+Botmium Rotor
+Botmium Screw
+Bottom Quark
+Brass Multispade
+Breedable Algae
+Broken
+Bromine Cell
+Bromine Dust
+Bromine Ingot
+Bromine Ion
+Bromine Nugget
+Bromine Plasma Cell
+Bromine Plate
+Bronze Multipick
+Bronze Multispade
+Brown Algae Biomass
+Brown Metal Catalyst
+Bucket
+Burnt Li2BeF2UF4 Cell
+Butanol Cell
+Cactus Auto-Door
+Cactus Charcoal
+Cactus Coke
+Cadaverine Cell
+Cadmium Ion
+Caesium Ion
+Calcium Carbonate Dust
+Calcium Ion
+Calcium Sulfate (Gypsum) Dust
+Californium Cell
+Californium Dust
+Californium Ingot
+Californium Ion
+Californium Nugget
+Californium Plasma Cell
+Californium Plate
+Captured Dragon Jar
+Carbon Dioxide Cell
+Carbon Disulfide Cell
+Carbon Ion
+Carbon Monoxide Cell
+Carbon Multispade
+Carbyne Cell
+Catalyst Carrier
+Celestial Tungsten Bolt
+Celestial Tungsten Cell
+Celestial Tungsten Dust
+Celestial Tungsten Foil
+Celestial Tungsten Frame Box
+Celestial Tungsten Gear
+Celestial Tungsten Ingot
+Celestial Tungsten Nugget
+Celestial Tungsten Plasma Cell
+Celestial Tungsten Plate
+Celestial Tungsten Ring
+Celestial Tungsten Rod
+Celestial Tungsten Rotor
+Celestial Tungsten Screw
+Celestial Tungsten Spring
+Cell of Animal Waste
+Cell of Blood
+Cell of Fermentation Base
+Cell of Fertile Slurry
+Cell of Hydrogen Cyanide
+Cell of Liquid Ender
+Cell of Liquid Resin
+Cell of Liquid Xp
+Cell of Manure Slurry
+Cell of Red Mud Slurry
+Cell of Urea Mix
+Cell of Used Reactor Fuel [LiFBeF2ThF4UF4]
+Cell of Used Reactor Fuel [LiFBeF2ZrF4U235]
+Cell of Used Reactor Fuel [LiFBeF2ZrF4UF4]
+Cellulose Fiber
+Cellulose Pulp
+Centrifuged Crushed Agardite (Cd) Ore
+Centrifuged Crushed Agardite (La) Ore
+Centrifuged Crushed Agardite (Nd) Ore
+Centrifuged Crushed Agardite (Y) Ore
+Centrifuged Crushed Alburnite Ore
+Centrifuged Crushed Ancient Granite Ore
+Centrifuged Crushed Barite (Ra) Ore
+Centrifuged Crushed Cerite Ore
+Centrifuged Crushed Comancheite Ore
+Centrifuged Crushed Crocoite Ore
+Centrifuged Crushed Cryolite (F) Ore
+Centrifuged Crushed Demicheleite (Br) Ore
+Centrifuged Crushed Demicheleite Ore
+Centrifuged Crushed Florencite Ore
+Centrifuged Crushed Fluorcaphite Ore
+Centrifuged Crushed Fluorite (F) Ore
+Centrifuged Crushed Gadolinite (Ce) Ore
+Centrifuged Crushed Gadolinite (Y) Ore
+Centrifuged Crushed Geikielite Ore
+Centrifuged Crushed Greenockite Ore
+Centrifuged Crushed Hibonite Ore
+Centrifuged Crushed Honeaite Ore
+Centrifuged Crushed Irarsite Ore
+Centrifuged Crushed Kashinite Ore
+Centrifuged Crushed Koboldite Ore
+Centrifuged Crushed Lafossaite Ore
+Centrifuged Crushed Lanthanite (Ce) Ore
+Centrifuged Crushed Lanthanite (La) Ore
+Centrifuged Crushed Lanthanite (Nd) Ore
+Centrifuged Crushed Lautarite Ore
+Centrifuged Crushed Lepersonnite Ore
+Centrifuged Crushed Miessiite Ore
+Centrifuged Crushed Nichromite Ore
+Centrifuged Crushed Perroudite Ore
+Centrifuged Crushed Polycrase Ore
+Centrifuged Crushed Rare Earth (I) Ore
+Centrifuged Crushed Rare Earth (II) Ore
+Centrifuged Crushed Rare Earth (III) Ore
+Centrifuged Crushed Runite Ore
+Centrifuged Crushed Samarskite (Y) Ore
+Centrifuged Crushed Samarskite (Yb) Ore
+Centrifuged Crushed Strange Ore
+Centrifuged Crushed Titanite Ore
+Centrifuged Crushed Trinium Ore
+Centrifuged Crushed Xenotime Ore
+Centrifuged Crushed Yellorium Ore
+Centrifuged Crushed Yttriaite Ore
+Centrifuged Crushed Yttrialite Ore
+Centrifuged Crushed Yttrocerite Ore
+Centrifuged Crushed Zimbabweite Ore
+Centrifuged Crushed Zircon Ore
+Centrifuged Crushed Zirconolite Ore
+Centrifuged Crushed Zircophyllite Ore
+Centrifuged Crushed Zirkelite Ore
+Cerite Dust
+Cerite Ore
+Cerium Ion
+Chalcopyrite Flotation Froth Cell
+Charge Pack [EV]
+Charge Pack [HV]
+Charge Pack [IV]
+Charge Pack [LuV]
+Charge Pack [LV]
+Charge Pack [MV]
+Charge Pack [UHV]
+Charge Pack [UV]
+Charge Pack [ZPM]
+Charm Quark
+Chilly Potion
+Chlorine Ion
+Chloroacetic Acid Cell
+Chloroacetic Mixture Cell
+Chocolate Frame
+Chromatic Glass Bolt
+Chromatic Glass Cell
+Chromatic Glass Dust
+Chromatic Glass Foil
+Chromatic Glass Frame Box
+Chromatic Glass Gear
+Chromatic Glass Ingot
+Chromatic Glass Nugget
+Chromatic Glass Plasma Cell
+Chromatic Glass Plate
+Chromatic Glass Ring
+Chromatic Glass Rod
+Chromatic Glass Rotor
+Chromatic Glass Screw
+Chrome Multipick
+Chrome Multispade
+Chromium Ion
+Cinobite A243 Bolt
+Cinobite A243 Cell
+Cinobite A243 Dust
+Cinobite A243 Foil
+Cinobite A243 Frame Box
+Cinobite A243 Gear
+Cinobite A243 Ingot
+Cinobite A243 Nugget
+Cinobite A243 Plate
+Cinobite A243 Ring
+Cinobite A243 Rod
+Cinobite A243 Rotor
+Cinobite A243 Screw
+Circuit Programmer
+Clay Plate
+Clean Aluminium Mix
+CN3H7O3 Rocket Fuel Cell
+Coal Gas Cell
+Coal Tar Cell
+Coal Tar Oil Cell
+Cobalt Brass Multipick
+Cobalt Brass Multispade
+Cobalt Ion
+Cobalt Multipick
+Cobalt Multispade
+Cobblestone Breaker
+Coil Wire [%s]
+Coil Wire [EV]
+Coking Coal
+Comancheite Dust
+Comancheite Ore
+Compost
+Compressed Cactus Charcoal
+Compressed Cactus Coke
+Compressed Glowstone (9)
+Compressed Netherrack
+Compressed Obsidian
+Compressed Obsidian (9)
+Compressed Sugar Charcoal
+Compressed Sugar Coke
+Conductive Iron Dust
+Conductive Iron plate
+Containment Frame
+Control Core [%s]
+Cooked Horse Meat
+Cooked Human Meat
+Cooked Ocelot Meat
+Cooked Wolf Meat
+Cooked ZrCl4 Dust
+Copernicium Ion
+Copper Ion
+Copper(II) Sulfate Dust
+Copper(II) Sulfate Pentahydrate Dust
+Creeper Killer
+Crocoite Dust
+Crocoite Ore
+Crushed Agardite (Cd) Ore
+Crushed Agardite (La) Ore
+Crushed Agardite (Nd) Ore
+Crushed Agardite (Y) Ore
+Crushed Alburnite Ore
+Crushed Ancient Granite Ore
+Crushed Barite (Ra) Ore
+Crushed Cerite Ore
+Crushed Comancheite Ore
+Crushed Crocoite Ore
+Crushed Cryolite (F) Ore
+Crushed Demicheleite (Br) Ore
+Crushed Demicheleite Ore
+Crushed Florencite Ore
+Crushed Fluorcaphite Ore
+Crushed Fluorite (F) Ore
+Crushed Gadolinite (Ce) Ore
+Crushed Gadolinite (Y) Ore
+Crushed Geikielite Ore
+Crushed Greenockite Ore
+Crushed Hibonite Ore
+Crushed Honeaite Ore
+Crushed Irarsite Ore
+Crushed Kashinite Ore
+Crushed Koboldite Ore
+Crushed Lafossaite Ore
+Crushed Lanthanite (Ce) Ore
+Crushed Lanthanite (La) Ore
+Crushed Lanthanite (Nd) Ore
+Crushed Lautarite Ore
+Crushed Lepersonnite Ore
+Crushed Miessiite Ore
+Crushed Nichromite Ore
+Crushed Perroudite Ore
+Crushed Pine Materials
+Crushed Polycrase Ore
+Crushed Rare Earth (I) Ore
+Crushed Rare Earth (II) Ore
+Crushed Rare Earth (III) Ore
+Crushed Runite Ore
+Crushed Samarskite (Y) Ore
+Crushed Samarskite (Yb) Ore
+Crushed Strange Ore
+Crushed Titanite Ore
+Crushed Trinium Ore
+Crushed Xenotime Ore
+Crushed Yellorium Ore
+Crushed Yttriaite Ore
+Crushed Yttrialite Ore
+Crushed Yttrocerite Ore
+Crushed Zimbabweite Ore
+Crushed Zircon Ore
+Crushed Zirconolite Ore
+Crushed Zircophyllite Ore
+Crushed Zirkelite Ore
+Cryolite (F) Dust
+Cryolite (F) Ore
+Cryotheum Cell
+Cryotheum Dust
+Crystal Colorization Catalyst
+Cupronickel Multispade
+Curium Cell
+Curium Dust
+Curium Ingot
+Curium Ion
+Curium Nugget
+Curium Plasma Cell
+Curium Plate
+Cyan Backpack
+Cyanite plate
+Cyanoacetic Acid Dust
+Cyanoacrylate Polymer Cell
+Cyclohexane Cell
+Cyclohexanone Cell
+Damascus Steel Multipick
+Damascus Steel Multispade
+Dark Green Backpack
+Dark Purple Backpack
+Dark Steel Multipick
+Dark Steel Multispade
+Darmstadtium Ion
+Debug Square [%d]
+Decayed Radium 226 Dust
+Decaying Frame
+Dehydrator Coil [%s]
+Dehydrator Coil [EV]
+Demicheleite (Br) Dust
+Demicheleite (Br) Ore
+Demicheleite Dust
+Demicheleite Ore
+Dense Abyssal Alloy Plate
+Dense Arcanite Plate
+Dense Arceus Alloy 2B Plate
+Dense Astral Titanium Plate
+Dense Black Metal Plate
+Dense Blood Steel Plate
+Dense Botmium Plate
+Dense Celestial Tungsten Plate
+Dense Chromatic Glass Plate
+Dense Cinobite A243 Plate
+Dense Dragonblood Plate
+Dense Eglin Steel Plate
+Dense Energy Crystal Plate
+Dense Germanium Plate
+Dense Grisium Plate
+Dense Hastelloy-C276 Plate
+Dense Hastelloy-N Plate
+Dense Hastelloy-W Plate
+Dense Hastelloy-X Plate
+Dense HeLiCoPtEr Plate
+Dense HS188-A Plate
+Dense Hydrazine Rocket Fuel Cell
+Dense Hypogen Plate
+Dense Incoloy-020 Plate
+Dense Incoloy-DS Plate
+Dense Incoloy-MA956 Plate
+Dense Inconel-625 Plate
+Dense Inconel-690 Plate
+Dense Inconel-792 Plate
+Dense Iodine Plate
+Dense Lafium Compound Plate
+Dense Laurenium Plate
+Dense Maraging Steel 250 Plate
+Dense Maraging Steel 300 Plate
+Dense Maraging Steel 350 Plate
+Dense Niobium Carbide Plate
+Dense Nitinol 60 Plate
+Dense Octiron Plate
+Dense Pikyonium 64B Plate
+Dense Potin Plate
+Dense Quantum Plate
+Dense Rhenium Plate
+Dense Selenium Plate
+Dense Silicon Carbide Plate
+Dense Staballoy Plate
+Dense Stellite Plate
+Dense Talonite Plate
+Dense Tantalloy-60 Plate
+Dense Tantalloy-61 Plate
+Dense Tantalum Carbide Plate
+Dense Thallium Plate
+Dense Titansteel Plate
+Dense Trinium Naquadah Carbonite Plate
+Dense Trinium Titanium Alloy Plate
+Dense Tumbaga Plate
+Dense Tungsten Titanium Carbide Plate
+Dense Watertight Steel Plate
+Dense White Metal Plate
+Dense Zeron-100 Plate
+Dense Zirconium Carbide Plate
+Diamond Shards
+Dichloroacetic Acid Cell
+Dimensional Shard plate
+Double Abyssal Alloy Plate
+Double Actinium Plate
+Double Advanced Nitinol Plate
+Double Americium 241 Plate
+Double Ancient Granite Plate
+Double Arcanite Plate
+Double Arceus Alloy 2B Plate
+Double Astatine Plate
+Double Astral Titanium Plate
+Double Babbit Alloy Plate
+Double Bakelite Plate
+Double Berkelium Plate
+Double Beryllium Fluoride Plate
+Double Black Metal Plate
+Double Black Titanium Plate
+Double Blood Steel Plate
+Double Botmium Plate
+Double Bromine Plate
+Double Californium Plate
+Double Celestial Tungsten Plate
+Double Chromatic Glass Plate
+Double Cinobite A243 Plate
+Double Clay Plate
+Double Compressed Cactus Charcoal
+Double Compressed Cactus Coke
+Double Compressed Glowstone (81)
+Double Compressed Netherrack
+Double Compressed Obsidian (81)
+Double Compressed Sugar Charcoal
+Double Compressed Sugar Coke
+Double Curium Plate
+Double Dragon Metal Plate
+Double Dysprosium Plate
+Double Eglin Steel Plate
+Double Einsteinium Plate
+Double Energy Crystal Plate
+Double Erbium Plate
+Double Europium Plate
+Double Fermium Plate
+Double Francium Plate
+Double Germanium Plate
+Double Grisium Plate
+Double Hafnium Plate
+Double Hastelloy-C276 Plate
+Double Hastelloy-N Plate
+Double Hastelloy-W Plate
+Double Hastelloy-X Plate
+Double HeLiCoPtEr Plate
+Double HG-1223 Plate
+Double HS-188A Plate
+Double Hypogen Plate
+Double Incoloy-020 Plate
+Double Incoloy-DS Plate
+Double Incoloy-MA956 Plate
+Double Inconel-625 Plate
+Double Inconel-690 Plate
+Double Inconel-792 Plate
+Double Indalloy 140 Plate
+Double Iodine Plate
+Double Koboldite Plate
+Double Lafium Compound Plate
+Double Laurenium Plate
+Double LiFBeF2ThF4UF4 Plate
+Double LiFBeF2ZrF4U235 Plate
+Double LiFBeF2ZrF4UF4 Plate
+Double Lithium 7 Plate
+Double Lithium Fluoride Plate
+Double Maraging Steel 250 Plate
+Double Maraging Steel 300 Plate
+Double Maraging Steel 350 Plate
+Double Neptunium Hexafluoride Plate
+Double Neptunium Plate
+Double Niobium Carbide Plate
+Double Nitinol 60 Plate
+Double Nylon Plate
+Double Octiron Plate
+Double Pikyonium 64B Plate
+Double Plutonium 238 Plate
+Double Polonium 210 Plate
+Double Polonium Plate
+Double Potin Plate
+Double Praseodymium Plate
+Double Protactinium Plate
+Double Quantum Plate
+Double Radium Plate
+Double Refined Trinium Plate
+Double Rhenium Plate
+Double Rhodium Plate
+Double Rhugnor Plate
+Double Runite Plate
+Double Ruthenium Plate
+Double Selenium Hexafluoride Plate
+Double Selenium Plate
+Double Silicon Carbide Plate
+Double Staballoy Plate
+Double Stellite Plate
+Double Strontium 90 Plate
+Double Strontium Plate
+Double Talonite Plate
+Double Tantalloy-60 Plate
+Double Tantalloy-61 Plate
+Double Tantalum Carbide Plate
+Double Technetium Hexafluoride Plate
+Double Technetium Plate
+Double Tellurium Plate
+Double Thallium Plate
+Double Thorium 232 Plate
+Double Thorium Hexafluoride Plate
+Double Thorium Tetrafluoride Plate
+Double Titansteel Plate
+Double Trinium Naquadah Alloy Plate
+Double Trinium Naquadah Carbonite Plate
+Double Trinium Plate
+Double Trinium Titanium Alloy Plate
+Double Tumbaga Plate
+Double Tungsten Titanium Carbide Plate
+Double Uranium Hexafluoride Plate
+Double Uranium Tetrafluoride Plate
+Double Watertight Steel Plate
+Double White Metal Plate
+Double Zeron-100 Plate
+Double Zirconium Carbide Plate
+Double Zirconium Plate
+Double Zirconium Tetrafluoride Plate
+Down Quark
+Dragon Capture Jar
+Dragon Metal Dust
+Dragon Metal Ingot
+Dragon Metal Plate
+Dragonblood Bolt
+Dragonblood Cell
+Dragonblood Frame Box
+Dragonblood Gear
+Dragonblood Plasma Cell
+Dragonblood Ring
+Dragonblood Rod
+Dragonblood Rotor
+Dragonblood Screw
+Drained Shard
+Dried Earth Dust
+Dubnium Ion
+Dull Gemstone
+Dummy Research
+Duranium Multipick
+Duranium Multispade
+Dysprosium Bolt
+Dysprosium Cell
+Dysprosium Dust
+Dysprosium Frame Box
+Dysprosium Gear
+Dysprosium Ingot
+Dysprosium Ion
+Dysprosium Nugget
+Dysprosium Plate
+Dysprosium Ring
+Dysprosium Rod
+Dysprosium Rotor
+Dysprosium Screw
+Eatotronic 9000
+Egg Box
+Eglin Steel Base Compound Cell
+Eglin Steel Base Compound Dust
+Eglin Steel Bolt
+Eglin Steel Cell
+Eglin Steel Dust
+Eglin Steel Frame Box
+Eglin Steel Gear
+Eglin Steel Ingot
+Eglin Steel Nugget
+Eglin Steel Plate
+Eglin Steel Ring
+Eglin Steel Rod
+Eglin Steel Rotor
+Eglin Steel Screw
+Eglin Steel Spring
+Einsteinium Cell
+Einsteinium Dust
+Einsteinium Ion
+Einsteinium Nugget
+Einsteinium Plate
+Electrical Steel Dust
+Electrical Steel plate
+Electron
+Electron Neutrino
+Electrum Multispade
+Emerald Shards
+Empty
+Empty Fuel Rod
+Enderman Killer
+Energetic Alloy Dust
+Energetic Alloy plate
+Energetic Alloy Rotor Blade
+Energetic Alloy Shaft
+Energy Core
+Energy Core [EV]
+Energy Core [HV]
+Energy Core [IV]
+Energy Core [LuV]
+Energy Core [LV]
+Energy Core [MV]
+Energy Core [UHV]
+Energy Core [ULV]
+Energy Core [UV]
+Energy Core [ZPM]
+Energy Crystal Bolt
+Energy Crystal Cell
+Energy Crystal Dust
+Energy Crystal Frame Box
+Energy Crystal Gear
+Energy Crystal Ingot
+Energy Crystal Nugget
+Energy Crystal Plate
+Energy Crystal Ring
+Energy Crystal Rod
+Energy Crystal Rotor
+Energy Crystal Screw
+Enriched Soularium Plate
+Erbium Bolt
+Erbium Cell
+Erbium Dust
+Erbium Gear
+Erbium Ingot
+Erbium Ion
+Erbium Nugget
+Erbium Plate
+Erbium Ring
+Erbium Rod
+Erbium Rotor
+Erbium Screw
+ETA Meson
+Ethyl Cyanoacetate Cell
+Ethyl Cyanoacrylate (Super Glue) Cell
+Ethylbenzene Cell
+Europium Ion
+Experience Converter
+Exquisite Industrial Diamond
+Extruder Shape (Pellet)
+Fermium Cell
+Fermium Dust
+Fermium Ingot
+Fermium Ion
+Fermium Nugget
+Fermium Plasma Cell
+Fermium Plate
+Fertiliser Cell
+Fine Babbit Alloy Wire
+Fine Chromatic Glass Wire
+Fine Grisium Wire
+Fine HG-1223 Wire
+Fine Hypogen Wire
+Fine Koboldite Wire
+Fine Palladium Wire
+Fine Quantum Wire
+Fine White Metal Wire
+Fine Zirconium Wire
+Fire Pit
+Fish Catcher
+Flawless Water Catalyst
+Flerovium Ion
+Fleshy Panel
+Florencite Dust
+Florencite Ore
+Fluorcaphite Dust
+Fluorcaphite Ore
+Fluoride Residue Mix
+Fluorinated Uranium Hexafluoride (F-UF6) Cell
+Fluorine Ion
+Fluorine Sparged LiFBeF2ThF4 Cell
+Fluorine Sparged LiFThF4 Cell
+Fluorine Sparged T Salt Cell
+Fluorine Sparged TB Salt Cell
+Fluorite (F) Dust
+Fluorite (F) Ore
+Force Cell
+Force Plasma Cell
+Forest Mushroom
+Formaldehyde Catalyst
+Formaldehyde Catalyst Dust
+Formaldehyde Cell
+Francium Cell
+Francium Dust
+Francium Ingot
+Francium Ion
+Francium Nugget
+Francium Plate
+Fusion Reactor MK %s
+Gadolinite (Ce) Dust
+Gadolinite (Ce) Ore
+Gadolinite (Y) Dust
+Gadolinite (Y) Ore
+Gadolinium Dust
+Gadolinium Ion
+Gallium Ion
+Geikielite Dust
+Geikielite Ore
+Gelid Cryotheum
+Gelid Cryotheum Bucket
+Germanium Cell
+Germanium Frame Box
+Germanium Ion
+Germanium Plasma Cell
+Glass Auto-Door
+Gluon
+Gold Ion
+Gold Multispade
+Golden-Brown Algae Biomass
+Golden-Brown Cellulose Fiber
+Graviton
+Gray Backpack
+Green Algae Biomass
+Green Backpack
+Green Metal Catalyst
+Greenockite Dust
+Greenockite Ore
+GregTech Tool Constructor
+Grindle
+Grisium Bolt
+Grisium Cell
+Grisium Dust
+Grisium Frame Box
+Grisium Gear
+Grisium Ingot
+Grisium Multipick
+Grisium Multispade
+Grisium Nugget
+Grisium Plate
+Grisium Ring
+Grisium Rod
+Grisium Rotor
+Grisium Screw
+Grossular Flotation Froth Cell
+GT++ Debug Scanner
+Gumlet of Sticky Rubber
+H8N4C2O4 Rocket Fuel Cell
+Hafnium Bolt
+Hafnium Cell
+Hafnium Dust
+Hafnium Frame Box
+Hafnium Gear
+Hafnium Ingot
+Hafnium Ion
+Hafnium Nugget
+Hafnium Plasma Cell
+Hafnium Plate
+Hafnium Ring
+Hafnium Rod
+Hafnium Rotor
+Hafnium Screw
+Half Complete Casing
+Hand Pump
+Hassium Ion
+Hastelloy-C276 Bolt
+Hastelloy-C276 Cell
+Hastelloy-C276 Dust
+Hastelloy-C276 Frame Box
+Hastelloy-C276 Gear
+Hastelloy-C276 Ingot
+Hastelloy-C276 Multipick
+Hastelloy-C276 Multispade
+Hastelloy-C276 Nugget
+Hastelloy-C276 Plate
+Hastelloy-C276 Ring
+Hastelloy-C276 Rod
+Hastelloy-C276 Rotor
+Hastelloy-C276 Screw
+Hastelloy-N Bolt
+Hastelloy-N Cell
+Hastelloy-N Dust
+Hastelloy-N Frame Box
+Hastelloy-N Gear
+Hastelloy-N Ingot
+Hastelloy-N Multipick
+Hastelloy-N Multispade
+Hastelloy-N Nugget
+Hastelloy-N Plate
+Hastelloy-N Ring
+Hastelloy-N Rod
+Hastelloy-N Rotor
+Hastelloy-N Screw
+Hastelloy-W Bolt
+Hastelloy-W Cell
+Hastelloy-W Dust
+Hastelloy-W Frame Box
+Hastelloy-W Gear
+Hastelloy-W Ingot
+Hastelloy-W Multipick
+Hastelloy-W Multispade
+Hastelloy-W Nugget
+Hastelloy-W Plate
+Hastelloy-W Ring
+Hastelloy-W Rod
+Hastelloy-W Rotor
+Hastelloy-W Screw
+Hastelloy-X Bolt
+Hastelloy-X Cell
+Hastelloy-X Dust
+Hastelloy-X Frame Box
+Hastelloy-X Gear
+Hastelloy-X Ingot
+Hastelloy-X Multipick
+Hastelloy-X Multispade
+Hastelloy-X Nugget
+Hastelloy-X Plate
+Hastelloy-X Ring
+Hastelloy-X Rod
+Hastelloy-X Rotor
+Hastelloy-X Screw
+Healing Frame
+Heated Water
+Heavy Advanced Nitinol Plate
+Heavy Ancient Granite Plate
+Heavy Astral Titanium Plate
+Heavy Black Metal Plate
+Heavy Black Steel Plate
+Heavy Bronze Plate
+Heavy Celestial Tungsten Plate
+Heavy Eglin Steel Plate
+Heavy Hypogen Plate
+Heavy Maraging Steel 300 Plate
+Heavy Oil Cell
+Heavy Osmiridium Plate
+Heavy Potin Plate
+Heavy Quantum Plate
+Heavy Rhugnor Plate
+Heavy Stainless Steel Plate
+Heavy Talonite Plate
+Heavy Watertight Steel Plate
+Heavy White Metal Plate
+HeLiCoPtEr Bolt
+HeLiCoPtEr Cell
+HeLiCoPtEr Dust
+HeLiCoPtEr Frame Box
+HeLiCoPtEr Gear
+HeLiCoPtEr Ingot
+HeLiCoPtEr Nugget
+HeLiCoPtEr Plate
+HeLiCoPtEr Ring
+HeLiCoPtEr Rod
+HeLiCoPtEr Rotor
+HeLiCoPtEr Screw
+Helium Generator
+Helium Ion
+Helium Sparged LiFBeF2UF4FP Cell
+Helium Sparged U Salt Cell
+Hellish Fire
+Hellish Force Catalyst
+HG-1223 Cell
+HG-1223 Dust
+HG-1223 Ingot
+HG-1223 Nugget
+HG-1223 Plate
+Hibonite Dust
+Hibonite Ore
+Higgs Boson
+High Quality Sulfur Dioxide Cell
+Highly Polluted Soil
+Holmium Ion
+Honeaite Dust
+Honeaite Ore
+Hot Abyssal Alloy Ingot
+Hot Advanced Nitinol Ingot
+Hot Ancient Granite Ingot
+Hot Arcanite Ingot
+Hot Arceus Alloy 2B Ingot
+Hot Astral Titanium Ingot
+Hot Babbit Alloy Ingot
+Hot Black Metal Ingot
+Hot Botmium Ingot
+Hot Celestial Tungsten Ingot
+Hot Chromatic Glass Ingot
+Hot Cinobite A243 Ingot
+Hot Dragonblood Ingot
+Hot Energy Crystal Ingot
+Hot Erbium Ingot
+Hot Grisium Ingot
+Hot Hastelloy-C276 Ingot
+Hot Hastelloy-N Ingot
+Hot Hastelloy-W Carbide Ingot
+Hot Hastelloy-X Ingot
+Hot HeLiCoPtEr Ingot
+Hot HS-188A Ingot
+Hot Hypogen Ingot
+Hot Incoloy-020 Ingot
+Hot Incoloy-DS Ingot
+Hot Incoloy-MA956 Ingot
+Hot Inconel-625 Ingot
+Hot Inconel-690 Ingot
+Hot Inconel-792 Ingot
+Hot Koboldite Ingot
+Hot Lafium Compound Ingot
+Hot Laurenium Ingot
+Hot Maraging Steel 250 Ingot
+Hot Maraging Steel 300 Ingot
+Hot Maraging Steel 350 Ingot
+Hot Niobium Carbide Ingot
+Hot Nitinol 60 Ingot
+Hot Octiron Ingot
+Hot Pikyonium 64B Ingot
+Hot Praseodymium Ingot
+Hot Quantum Ingot
+Hot Staballoy Ingot
+Hot Stellite Ingot
+Hot Talonite Ingot
+Hot Tantalloy-60 Ingot
+Hot Tantalloy-61 Ingot
+Hot Tantalum Carbide Ingot
+Hot Titanium Ingot
+Hot Titansteel Ingot
+Hot Trinium Naquadah Carbonite Ingot
+Hot Trinium Titanium Alloy Ingot
+Hot Tungsten Titanium Carbide Ingot
+Hot Watertight Steel Ingot
+Hot White Metal Ingot
+Hot Zeron-100 Ingot
+Hot Zirconium Carbide Ingot
+HS-188A Bolt
+HS-188A Cell
+HS-188A Dust
+HS-188A Gear
+HS-188A Ingot
+HS-188A Nugget
+HS-188A Plate
+HS-188A Ring
+HS-188A Rod
+HS-188A Rotor
+HS-188A Screw
+HS188-A Frame Box
+HSS-E Multipick
+HSS-E Multispade
+HSS-G Multipick
+HSS-G Multispade
+HSS-S Multipick
+HSS-S Multispade
+Hydrated Lime Dust
+Hydrazine Cell
+Hydrochloric Acid Cell
+Hydrogen Chloride Mix Cell
+Hydrogen Chlorine Mix
+Hydrogen Ion
+Hydrogen Peroxide Cell
+Hydrogen Sulfide Cell
+Hydroxide Cell
+Hypogen Bolt
+Hypogen Cell
+Hypogen Dust
+Hypogen Foil
+Hypogen Frame Box
+Hypogen Gear
+Hypogen Ingot
+Hypogen Nugget
+Hypogen Plasma Cell
+Hypogen Plate
+Hypogen Ring
+Hypogen Rod
+Hypogen Rotor
+Hypogen Screw
+Ice Auto-Door
+Ignis Shard
+Impure Agardite (Cd) Dust
+Impure Agardite (La) Dust
+Impure Agardite (Nd) Dust
+Impure Agardite (Y) Dust
+Impure Alburnite Dust
+Impure Ancient Granite Dust
+Impure Barite (Ra) Dust
+Impure Cerite Dust
+Impure Comancheite Dust
+Impure Crocoite Dust
+Impure Cryolite (F) Dust
+Impure Demicheleite (Br) Dust
+Impure Demicheleite Dust
+Impure Florencite Dust
+Impure Fluorcaphite Dust
+Impure Fluorite (F) Dust
+Impure Gadolinite (Ce) Dust
+Impure Gadolinite (Y) Dust
+Impure Geikielite Dust
+Impure Greenockite Dust
+Impure Hibonite Dust
+Impure Honeaite Dust
+Impure Irarsite Dust
+Impure Kashinite Dust
+Impure Koboldite Dust
+Impure Lafossaite Dust
+Impure Lanthanite (Ce) Dust
+Impure Lanthanite (La) Dust
+Impure Lanthanite (Nd) Dust
+Impure Lautarite Dust
+Impure Lepersonnite Dust
+Impure LiFBeF2 Cell
+Impure Miessiite Dust
+Impure Nichromite Dust
+Impure Perroudite Dust
+Impure Polycrase Dust
+Impure Rare Earth (I) Dust
+Impure Rare Earth (II) Dust
+Impure Rare Earth (III) Dust
+Impure Runite Dust
+Impure Samarskite (Y) Dust
+Impure Samarskite (Yb) Dust
+Impure Strange Dust
+Impure Titanite Dust
+Impure Trinium Dust
+Impure Xenotime Dust
+Impure Yellorium Dust
+Impure Yttriaite Dust
+Impure Yttrialite Dust
+Impure Yttrocerite Dust
+Impure Zimbabweite Dust
+Impure Zircon Dust
+Impure Zirconolite Dust
+Impure Zircophyllite Dust
+Impure Zirkelite Dust
+Incoloy-020 Bolt
+Incoloy-020 Cell
+Incoloy-020 Dust
+Incoloy-020 Frame Box
+Incoloy-020 Gear
+Incoloy-020 Ingot
+Incoloy-020 Multipick
+Incoloy-020 Multispade
+Incoloy-020 Nugget
+Incoloy-020 Plate
+Incoloy-020 Ring
+Incoloy-020 Rod
+Incoloy-020 Rotor
+Incoloy-020 Screw
+Incoloy-DS Bolt
+Incoloy-DS Cell
+Incoloy-DS Dust
+Incoloy-DS Frame Box
+Incoloy-DS Gear
+Incoloy-DS Ingot
+Incoloy-DS Multipick
+Incoloy-DS Multispade
+Incoloy-DS Nugget
+Incoloy-DS Plate
+Incoloy-DS Ring
+Incoloy-DS Rod
+Incoloy-DS Rotor
+Incoloy-DS Screw
+Incoloy-MA956 Bolt
+Incoloy-MA956 Cell
+Incoloy-MA956 Dust
+Incoloy-MA956 Frame Box
+Incoloy-MA956 Gear
+Incoloy-MA956 Ingot
+Incoloy-MA956 Multipick
+Incoloy-MA956 Multispade
+Incoloy-MA956 Nugget
+Incoloy-MA956 Plate
+Incoloy-MA956 Ring
+Incoloy-MA956 Rod
+Incoloy-MA956 Rotor
+Incoloy-MA956 Screw
+Inconel-625 Bolt
+Inconel-625 Cell
+Inconel-625 Dust
+Inconel-625 Frame Box
+Inconel-625 Gear
+Inconel-625 Ingot
+Inconel-625 Multipick
+Inconel-625 Multispade
+Inconel-625 Nugget
+Inconel-625 Plate
+Inconel-625 Ring
+Inconel-625 Rod
+Inconel-625 Rotor
+Inconel-625 Screw
+Inconel-690 Bolt
+Inconel-690 Cell
+Inconel-690 Dust
+Inconel-690 Frame Box
+Inconel-690 Gear
+Inconel-690 Ingot
+Inconel-690 Multipick
+Inconel-690 Multispade
+Inconel-690 Nugget
+Inconel-690 Plate
+Inconel-690 Ring
+Inconel-690 Rod
+Inconel-690 Rotor
+Inconel-690 Screw
+Inconel-792 Bolt
+Inconel-792 Cell
+Inconel-792 Dust
+Inconel-792 Frame Box
+Inconel-792 Gear
+Inconel-792 Ingot
+Inconel-792 Multipick
+Inconel-792 Multispade
+Inconel-792 Nugget
+Inconel-792 Plate
+Inconel-792 Ring
+Inconel-792 Rod
+Inconel-792 Rotor
+Inconel-792 Screw
+Indalloy 140 Cell
+Indalloy 140 Dust
+Indalloy 140 Ingot
+Indalloy 140 Nugget
+Indalloy 140 Plate
+Indium Dust
+Indium Ion
+Infinite Fluid Tank
+Infinite Mutation Catalyst
+Infused Air Dust
+Infused Earth Dust
+Infused Fire Dust
+Infused Gold Multispade
+Infused Water Dust
+Ingot of Battery Alloy
+Inhibitor Obelisk
+Invar Multipick
+Invar Multispade
+Inverted Obsidian
+Iodine Bolt
+Iodine Cell
+Iodine Dust
+Iodine Frame Box
+Iodine Gear
+Iodine Ingot
+Iodine Ion
+Iodine Nugget
+Iodine Plasma Cell
+Iodine Plate
+Iodine Ring
+Iodine Rod
+Iodine Rotor
+Iodine Screw
+Irarsite Dust
+Irarsite Ore
+Iridium Ion
+Iridium Multipick
+Iridium Multispade
+Iridium Rotor Blade
+Iridium Shaft
+Iron Auto-Door
+Iron Ion
+Iron Multipick
+Iron Multispade
+Kanthal Multispade
+Kashinite Dust
+Kashinite Ore
+Kerosene Cell
+Kinetic Gearbox Rotor (Energetic Alloy)
+Kinetic Gearbox Rotor (Iridium)
+Kinetic Gearbox Rotor (TungstenSteel)
+Kinetic Gearbox Rotor (Vibrant Alloy)
+Koboldite Bolt
+Koboldite Cell
+Koboldite Dust
+Koboldite Frame Box
+Koboldite Gear
+Koboldite Ingot
+Koboldite Nugget
+Koboldite Ore
+Koboldite Plate
+Koboldite Ring
+Koboldite Rod
+Koboldite Rotor
+Koboldite Screw
+Krypton Cell
+Krypton Ion
+Krypton Plasma Cell
+Lafium Compound Bolt
+Lafium Compound Cell
+Lafium Compound Dust
+Lafium Compound Foil
+Lafium Compound Frame Box
+Lafium Compound Gear
+Lafium Compound Ingot
+Lafium Compound Nugget
+Lafium Compound Plate
+Lafium Compound Ring
+Lafium Compound Rod
+Lafium Compound Rotor
+Lafium Compound Screw
+Lafossaite Dust
+Lafossaite Ore
+Lambda
+Lanthanite (Ce) Dust
+Lanthanite (Ce) Ore
+Lanthanite (La) Dust
+Lanthanite (La) Ore
+Lanthanite (Nd) Dust
+Lanthanite (Nd) Ore
+Lanthanum Dust
+Lanthanum Ion
+Laurenium Bolt
+Laurenium Cell
+Laurenium Dust
+Laurenium Foil
+Laurenium Frame Box
+Laurenium Gear
+Laurenium Ingot
+Laurenium Nugget
+Laurenium Plate
+Laurenium Ring
+Laurenium Rod
+Laurenium Rotor
+Laurenium Screw
+Lautarite Dust
+Lautarite Ore
+Lava Filter
+Lawrencium Ion
+Lead Ion
+Lead Lined Box
+Lead Multispade
+Lead Plate
+Lepersonnite Dust
+Lepersonnite Ore
+LFTR Fuel 1 Cell
+LFTR Fuel 1 Dust
+LFTR Fuel 2 Cell
+LFTR Fuel 2 Dust
+LFTR Fuel 3 Cell
+LFTR Fuel 3 Dust
+LFTR Fuel Base Cell
+LFTR Fuel I Cell
+LFTR Fuel II Cell
+LFTR Fuel III Cell
+Li2BeF4 Cell
+Li2BeF4 Fuel Compound Dust
+Li2CO3 + Ca(OH)2 Compound Dust
+LiFBeF2 Cell
+LiFBeF2ThF4 Cell
+LiFBeF2ThF4UF4 Dust
+LiFBeF2ThF4UF4 Ingot
+LiFBeF2ThF4UF4 Nugget
+LiFBeF2ThF4UF4 Plate
+LiFBeF2UF4 Cell
+LiFBeF2UF4FP Cell
+LiFBeF2ZrF4U235 Dust
+LiFBeF2ZrF4U235 Ingot
+LiFBeF2ZrF4U235 Nugget
+LiFBeF2ZrF4U235 Plate
+LiFBeF2ZrF4UF4 Dust
+LiFBeF2ZrF4UF4 Ingot
+LiFBeF2ZrF4UF4 Nugget
+LiFBeF2ZrF4UF4 Plate
+LiFThF4 Cell
+Limpid Water Catalyst
+Liquid Hydrogen Cell [LOH]
+Liquid Oxygen Cell [LOX]
+Lithium 7 Dust
+Lithium 7 Ingot
+Lithium 7 Nugget
+Lithium 7 Plate
+Lithium Carbonate Dust
+Lithium Chloride
+Lithium Fluoride Cell
+Lithium Fluoride Dust
+Lithium Fluoride Ingot
+Lithium Fluoride Nugget
+Lithium Fluoride Plate
+Lithium Hydroperoxide Dust
+Lithium Hydroxide Dust
+Lithium Ion
+Lithium Peroxide Cell
+Lithium Peroxide Dust
+Lithium Plate
+Lithium Tetrafluoroberyllate (LFTB) Cell
+Lithium Tetrafluoroberyllate Cell
+Livermorium Ion
+Long Abyssal Alloy Rod
+Long Advanced Nitinol Rod
+Long Arcanite Rod
+Long Arceus Alloy 2B Rod
+Long Astral Titanium Rod
+Long Black Metal Rod
+Long Blood Steel Rod
+Long Botmium Rod
+Long Celestial Tungsten Rod
+Long Chromatic Glass Rod
+Long Cinobite A243 Rod
+Long Dragonblood Rod
+Long Dysprosium Rod
+Long Eglin Steel Rod
+Long Energy Crystal Rod
+Long Erbium Rod
+Long Germanium Rod
+Long Grisium Rod
+Long Hafnium Rod
+Long Hastelloy-C276 Rod
+Long Hastelloy-N Rod
+Long Hastelloy-W Rod
+Long Hastelloy-X Rod
+Long HeLiCoPtEr Rod
+Long HS-188A Rod
+Long Hypogen Rod
+Long Incoloy-020 Rod
+Long Incoloy-DS Rod
+Long Incoloy-MA956 Rod
+Long Inconel-625 Rod
+Long Inconel-690 Rod
+Long Inconel-792 Rod
+Long Iodine Rod
+Long Koboldite Rod
+Long Lafium Compound Rod
+Long Laurenium Rod
+Long Maraging Steel 250 Rod
+Long Maraging Steel 300 Rod
+Long Maraging Steel 350 Rod
+Long Niobium Carbide Rod
+Long Nitinol 60 Rod
+Long Octiron Rod
+Long Pikyonium 64B Rod
+Long Potin Rod
+Long Praseodymium Rod
+Long Quantum Rod
+Long Rhenium Rod
+Long Rhodium Rod
+Long Ruthenium Rod
+Long Selenium Rod
+Long Silicon Carbide Rod
+Long Staballoy Rod
+Long Stellite Rod
+Long Strontium Rod
+Long Talonite Rod
+Long Tantalloy-60 Rod
+Long Tantalloy-61 Rod
+Long Tantalum Carbide Rod
+Long Tellurium Rod
+Long Thallium Rod
+Long Titansteel Rod
+Long Trinium Naquadah Carbonite Rod
+Long Trinium Titanium Alloy Rod
+Long Tumbaga Rod
+Long Tungsten Titanium Carbide Rod
+Long Uranium 232 Rod
+Long Uranium 233 Rod
+Long Watertight Steel Rod
+Long White Metal Rod
+Long Zeron-100 Rod
+Long Zirconium Carbide Rod
+Long Zirconium Rod
+Ludicrite plate
+Lutetium Ion
+Machine Casing
+Machine Plate Cover
+Magic Box
+Magical Feather
+Magnalium Multipick
+Magnalium Multispade
+Magnalium Rotor Blade
+Magnalium Shaft
+Magnesium Ion
+Mana Pod Stem
+Manganese Ion
+Manganese Multipick
+Manganese Multispade
+Manure Byproduct Dust
+Maraging Steel 250 Bolt
+Maraging Steel 250 Cell
+Maraging Steel 250 Dust
+Maraging Steel 250 Frame Box
+Maraging Steel 250 Gear
+Maraging Steel 250 Ingot
+Maraging Steel 250 Nugget
+Maraging Steel 250 Plate
+Maraging Steel 250 Ring
+Maraging Steel 250 Rod
+Maraging Steel 250 Rotor
+Maraging Steel 250 Screw
+Maraging Steel 300 Bolt
+Maraging Steel 300 Cell
+Maraging Steel 300 Dust
+Maraging Steel 300 Frame Box
+Maraging Steel 300 Gear
+Maraging Steel 300 Ingot
+Maraging Steel 300 Nugget
+Maraging Steel 300 Plate
+Maraging Steel 300 Ring
+Maraging Steel 300 Rod
+Maraging Steel 300 Rotor
+Maraging Steel 300 Screw
+Maraging Steel 350 Bolt
+Maraging Steel 350 Cell
+Maraging Steel 350 Dust
+Maraging Steel 350 Frame Box
+Maraging Steel 350 Gear
+Maraging Steel 350 Ingot
+Maraging Steel 350 Nugget
+Maraging Steel 350 Plate
+Maraging Steel 350 Ring
+Maraging Steel 350 Rod
+Maraging Steel 350 Rotor
+Maraging Steel 350 Screw
+Maroon Backpack
+Material
+Meat
+Meitnerium Ion
+Mendelevium Ion
+Mercury Ion
+Metal Catalyst
+Miessiite Dust
+Miessiite Ore
+Milled Almandine
+Milled Chalcopyrite
+Milled Grossular
+Milled Monazite
+Milled Netherrack
+Milled Nickel
+Milled Pentlandite
+Milled Platinum
+Milled Pyrope
+Milled Redstone
+Milled Spessartine
+Milled Sphalerite
+Mining Explosives
+Mithril Multispade
+Mob Essence Cell
+Modular Bauble
+Modularity Bench
+Molybdenum Ion
+Molybdenum Multipick
+Molybdenum Multispade
+Monazite Flotation Froth Cell
+Monomethylhydrazine Cell
+Monster Spawner
+Moscovium Ion
+MU-metaitem.01.0.name
+Muon
+Muon Neutrino
+Mutagen Cell
+Mutagenic Frame
+Mutated Living Solder Cell
+Mysterious Hydrogen Blob
+Mysterious Hydrogen Substance
+Mystic Pouch
+Naphthalene Cell
+Naquadah Alloy Multipick
+Naquadah Alloy Multispade
+Naquadah Multipick
+Naquadah Multispade
+Naquadria Multipick
+Naquadria Multispade
+Navy Backpack
+Neodymium Ion
+Neodymium Multipick
+Neodymium Multispade
+Neon Cell
+Neon Ion
+Neon Plasma Cell
+Neptunium 238 Dust
+Neptunium 239 Dust
+Neptunium Cell
+Neptunium Dust
+Neptunium Hexafluoride Cell
+Neptunium Hexafluoride Dust
+Neptunium Hexafluoride Ingot
+Neptunium Hexafluoride Nugget
+Neptunium Hexafluoride Plate
+Neptunium Ingot
+Neptunium Ion
+Neptunium Nugget
+Neptunium Plasma Cell
+Neptunium Plate
+Net
+Nether Mob Killer
+Neutron
+Neutronium Multipick
+Neutronium Multispade
+Nichrome Multispade
+Nichromite Dust
+Nichromite Ore
+Nickel Flotation Froth Cell
+Nickel Ion
+Nickel Multispade
+Nickel-Zinc Ferrite Multispade
+Nihonium Ion
+Niobium Carbide Bolt
+Niobium Carbide Cell
+Niobium Carbide Dust
+Niobium Carbide Frame Box
+Niobium Carbide Gear
+Niobium Carbide Ingot
+Niobium Carbide Nugget
+Niobium Carbide Plate
+Niobium Carbide Ring
+Niobium Carbide Rod
+Niobium Carbide Rotor
+Niobium Carbide Screw
+Niobium Ion
+Nitinol 60 Bolt
+Nitinol 60 Cell
+Nitinol 60 Dust
+Nitinol 60 Foil
+Nitinol 60 Frame Box
+Nitinol 60 Gear
+Nitinol 60 Ingot
+Nitinol 60 Nugget
+Nitinol 60 Plate
+Nitinol 60 Ring
+Nitinol 60 Rod
+Nitinol 60 Rotor
+Nitinol 60 Screw
+Nitinol 60 Spring
+Nitrobenzene Cell
+Nitrogen Ion
+Nitrogen Tetroxide Cell
+Nitrous Oxide Cell
+Nobelium Ion
+Noble Residue Mix
+Nova Frame
+Nuclear Waste Cell
+Null Item report it on github
+Nylon Cell
+Nylon Dust
+Nylon Ingot
+Nylon Nugget
+Nylon Plate
+Oak Leaves
+Octiron Bolt
+Octiron Cell
+Octiron Dust
+Octiron Frame Box
+Octiron Gear
+Octiron Ingot
+Octiron Nugget
+Octiron Plate
+Octiron Ring
+Octiron Rod
+Octiron Rotor
+Octiron Screw
+Oganesson Ion
+Olive Backpack
+Omega
+Orange Metal Catalyst
+Organic Fertilizer Dust
+Osmiridium Multipick
+Osmiridium Multispade
+Osmium Ion
+Osmium Multipick
+Osmium Multispade
+ounce Chicken Egg
+Oxygen Ion
+Palladium Ion
+Palladium Multipick
+Palladium Multispade
+Particle Acceleration Catalyst
+Pentlandite Flotation Froth Cell
+Perroudite Dust
+Perroudite Ore
+Pest Killer
+Phased Iron plate
+Phenol Cell
+Phosphorous Uranium Hexafluoride (P-UF6) Cell
+Phosphorus Ion
+Photon
+Phthalic Anhydride Dust
+Pig Iron Multipick
+Pig Iron Multispade
+Pikyonium 64B Bolt
+Pikyonium 64B Cell
+Pikyonium 64B Dust
+Pikyonium 64B Foil
+Pikyonium 64B Frame Box
+Pikyonium 64B Gear
+Pikyonium 64B Ingot
+Pikyonium 64B Nugget
+Pikyonium 64B Plate
+Pikyonium 64B Ring
+Pikyonium 64B Rod
+Pikyonium 64B Rotor
+Pikyonium 64B Screw
+Pine Leaves
+Pine Log
+Pine Oil Cell
+Pine Sapling
+Pinecone
+Pink Metal Catalyst
+Pion
+Pipe
+Plant Fiber
+Plastic Polymer Catalyst
+Plate of Battery Alloy
+Platinum Flotation Froth Cell
+Platinum Group Catalyst
+Platinum Ion
+Platinum Multispade
+Plutonium 238 Cell
+Plutonium 238 Dust
+Plutonium 238 Ingot
+Plutonium 238 Nugget
+Plutonium 238 Plate
+Plutonium 241 Multipick
+Plutonium 241 Multispade
+Plutonium Fuel Rod
+Plutonium Ion
+Plutonium Residue Mix
+Plutonium-238 Plasma Cell
+Polluted Soil
+Polonium 210 Cell
+Polonium 210 Dust
+Polonium 210 Ingot
+Polonium 210 Nugget
+Polonium 210 Plate
+Polonium Cell
+Polonium Dust
+Polonium Ingot
+Polonium Ion
+Polonium Nugget
+Polonium Plasma Cell
+Polonium Plate
+Polycaprolactam Multispade
+Polycrase Dust
+Polycrase Ore
+Polyphenylene Sulfide Multispade
+Polytetrafluoroethylene Multispade
+Polyurethane Cell
+Potassium Ethyl Xanthate Dust
+Potassium Hydroxide Dust
+Potassium Ion
+Potassium Nitrate Dust
+Potin Bolt
+Potin Cell
+Potin Dust
+Potin Frame Box
+Potin Gear
+Potin Ingot
+Potin Multipick
+Potin Multispade
+Potin Nugget
+Potin Plate
+Potin Ring
+Potin Rod
+Potin Rotor
+Potin Screw
+Praseodymium Bolt
+Praseodymium Cell
+Praseodymium Dust
+Praseodymium Gear
+Praseodymium Ingot
+Praseodymium Ion
+Praseodymium Nugget
+Praseodymium Plate
+Praseodymium Ring
+Praseodymium Rod
+Praseodymium Rotor
+Praseodymium Screw
+Programmed Bio Circuit
+Programmed Breakthrough Circuit
+Project Table
+Promethium Dust
+Promethium Ingot
+Promethium Ion
+Promethium Nugget
+Propionic Acid Cell
+Protactinium Cell
+Protactinium Dust
+Protactinium Ingot
+Protactinium Ion
+Protactinium Nugget
+Protactinium Plasma Cell
+Protactinium Plate
+Protactinium-233 Dust
+Proton
+Pulsating Iron Dust
+Purified Agardite (Cd) Dust
+Purified Agardite (La) Dust
+Purified Agardite (Nd) Dust
+Purified Agardite (Y) Dust
+Purified Alburnite Dust
+Purified Ancient Granite Dust
+Purified Barite (Ra) Dust
+Purified Cerite Dust
+Purified Comancheite Dust
+Purified Crocoite Dust
+Purified Crushed Agardite (Cd) Ore
+Purified Crushed Agardite (La) Ore
+Purified Crushed Agardite (Nd) Ore
+Purified Crushed Agardite (Y) Ore
+Purified Crushed Alburnite Ore
+Purified Crushed Ancient Granite Ore
+Purified Crushed Barite (Ra) Ore
+Purified Crushed Cerite Ore
+Purified Crushed Comancheite Ore
+Purified Crushed Crocoite Ore
+Purified Crushed Cryolite (F) Ore
+Purified Crushed Demicheleite (Br) Ore
+Purified Crushed Demicheleite Ore
+Purified Crushed Florencite Ore
+Purified Crushed Fluorcaphite Ore
+Purified Crushed Fluorite (F) Ore
+Purified Crushed Gadolinite (Ce) Ore
+Purified Crushed Gadolinite (Y) Ore
+Purified Crushed Geikielite Ore
+Purified Crushed Greenockite Ore
+Purified Crushed Hibonite Ore
+Purified Crushed Honeaite Ore
+Purified Crushed Irarsite Ore
+Purified Crushed Kashinite Ore
+Purified Crushed Koboldite Ore
+Purified Crushed Lafossaite Ore
+Purified Crushed Lanthanite (Ce) Ore
+Purified Crushed Lanthanite (La) Ore
+Purified Crushed Lanthanite (Nd) Ore
+Purified Crushed Lautarite Ore
+Purified Crushed Lepersonnite Ore
+Purified Crushed Miessiite Ore
+Purified Crushed Nichromite Ore
+Purified Crushed Perroudite Ore
+Purified Crushed Polycrase Ore
+Purified Crushed Rare Earth (I) Ore
+Purified Crushed Rare Earth (II) Ore
+Purified Crushed Rare Earth (III) Ore
+Purified Crushed Runite Ore
+Purified Crushed Samarskite (Y) Ore
+Purified Crushed Samarskite (Yb) Ore
+Purified Crushed Strange Ore
+Purified Crushed Titanite Ore
+Purified Crushed Trinium Ore
+Purified Crushed Xenotime Ore
+Purified Crushed Yellorium Ore
+Purified Crushed Yttriaite Ore
+Purified Crushed Yttrialite Ore
+Purified Crushed Yttrocerite Ore
+Purified Crushed Zimbabweite Ore
+Purified Crushed Zircon Ore
+Purified Crushed Zirconolite Ore
+Purified Crushed Zircophyllite Ore
+Purified Crushed Zirkelite Ore
+Purified Cryolite (F) Dust
+Purified Demicheleite (Br) Dust
+Purified Demicheleite Dust
+Purified Florencite Dust
+Purified Fluorcaphite Dust
+Purified Fluorite (F) Dust
+Purified Gadolinite (Ce) Dust
+Purified Gadolinite (Y) Dust
+Purified Geikielite Dust
+Purified Greenockite Dust
+Purified Hibonite Dust
+Purified Honeaite Dust
+Purified Irarsite Dust
+Purified Kashinite Dust
+Purified Koboldite Dust
+Purified Lafossaite Dust
+Purified Lanthanite (Ce) Dust
+Purified Lanthanite (La) Dust
+Purified Lanthanite (Nd) Dust
+Purified Lautarite Dust
+Purified Lepersonnite Dust
+Purified Miessiite Dust
+Purified Nichromite Dust
+Purified Perroudite Dust
+Purified Polycrase Dust
+Purified Rare Earth (I) Dust
+Purified Rare Earth (II) Dust
+Purified Rare Earth (III) Dust
+Purified Runite Dust
+Purified Samarskite (Y) Dust
+Purified Samarskite (Yb) Dust
+Purified Strange Dust
+Purified Titanite Dust
+Purified Trinium Dust
+Purified Xenotime Dust
+Purified Yellorium Dust
+Purified Yttriaite Dust
+Purified Yttrialite Dust
+Purified Yttrocerite Dust
+Purified Zimbabweite Dust
+Purified Zircon Dust
+Purified Zirconolite Dust
+Purified Zircophyllite Dust
+Purified Zirkelite Dust
+Purple Backpack
+Purple Metal Catalyst
+Putrescine Cell
+Pyrope Flotation Froth Cell
+Pyrotheum Cell
+Pyrotheum Dust
+Quadruple Compressed Cactus Charcoal
+Quadruple Compressed Cactus Coke
+Quadruple Compressed Glowstone (6561)
+Quadruple Compressed Obsidian (6561)
+Quadruple Compressed Sugar Charcoal
+Quadruple Compressed Sugar Coke
+Quantum Bolt
+Quantum Cell
+Quantum Dust
+Quantum Foil
+Quantum Frame Box
+Quantum Gear
+Quantum Ingot
+Quantum Multipick
+Quantum Multispade
+Quantum Nugget
+Quantum Plate
+Quantum Ring
+Quantum Rod
+Quantum Rotor
+Quantum Screw
+Quark Manipulator (UV)
+Quintuple Compressed Cactus Charcoal
+Quintuple Compressed Cactus Coke
+Quintuple Compressed Glowstone (59049)
+Quintuple Compressed Obsidian (59049)
+Quintuple Compressed Sugar Charcoal
+Quintuple Compressed Sugar Coke
+Radioactivity Catalyst
+Radium 226 Dust
+Radium Cell
+Radium Dust
+Radium Ingot
+Radium Ion
+Radium Nugget
+Radium Plasma Cell
+Radium Plate
+Radon Ion
+Rainforest Oak
+Rainforest Oak Sapling
+Raisin Juice Cell
+Rare Earth (I) Dust
+Rare Earth (I) Ore
+Rare Earth (II) Dust
+Rare Earth (II) Ore
+Rare Earth (III) Dust
+Rare Earth (III) Ore
+Rare-Earth Group Catalyst
+Raw Agardite (Cd) Ore
+Raw Agardite (La) Ore
+Raw Agardite (Nd) Ore
+Raw Agardite (Y) Ore
+Raw Alburnite Ore
+Raw Ancient Granite Ore
+Raw Barite (Ra) Ore
+Raw Bio Resin
+Raw Cerite Ore
+Raw Comancheite Ore
+Raw Crocoite Ore
+Raw Cryolite (F) Ore
+Raw Demicheleite (Br) Ore
+Raw Demicheleite Ore
+Raw Florencite Ore
+Raw Fluorcaphite Ore
+Raw Fluorite (F) Ore
+Raw Gadolinite (Ce) Ore
+Raw Gadolinite (Y) Ore
+Raw Geikielite Ore
+Raw Greenockite Ore
+Raw Hibonite Ore
+Raw Honeaite Ore
+Raw Horse Meat
+Raw Human Meat
+Raw Intelligence Catalyst
+Raw Irarsite Ore
+Raw Kashinite Ore
+Raw Koboldite Ore
+Raw Lafossaite Ore
+Raw Lanthanite (Ce) Ore
+Raw Lanthanite (La) Ore
+Raw Lanthanite (Nd) Ore
+Raw Lautarite Ore
+Raw Lepersonnite Ore
+Raw Miessiite Ore
+Raw Nichromite Ore
+Raw Ocelot Meat
+Raw Perroudite Ore
+Raw Polycrase Ore
+Raw Rare Earth (I) Ore
+Raw Rare Earth (II) Ore
+Raw Rare Earth (III) Ore
+Raw Runite Ore
+Raw Samarskite (Y) Ore
+Raw Samarskite (Yb) Ore
+Raw Strange Ore
+Raw Titanite Ore
+Raw Wolf Meat
+Raw Xenotime Ore
+Raw Yellorium Ore
+Raw Yttriaite Ore
+Raw Yttrialite Ore
+Raw Yttrocerite Ore
+Raw Zimbabweite Ore
+Raw Zircon Ore
+Raw Zirconolite Ore
+Raw Zircophyllite Ore
+Raw Zirkelite Ore
+Red Algae Biomass
+Red Backpack
+Red Cellulose Fiber
+Red Metal Catalyst
+Red Plasma Block
+Red Steel Multipick
+Red Steel Multispade
+Redstone Alloy Dust
+Redstone Alloy plate
+Redstone Flotation Froth Cell
+Refined Trinium Cell
+Refined Trinium Dust
+Refined Trinium Ingot
+Refined Trinium Nugget
+Refined Trinium Plate
+Reinforced Door
+Resonant Ender
+Resonant Ender Bucket
+Restraining Frame
+Rhenium Bolt
+Rhenium Cell
+Rhenium Dust
+Rhenium Frame Box
+Rhenium Gear
+Rhenium Ingot
+Rhenium Ion
+Rhenium Nugget
+Rhenium Plasma Cell
+Rhenium Plate
+Rhenium Ring
+Rhenium Rod
+Rhenium Rotor
+Rhenium Screw
+Rhodium Bolt
+Rhodium Cell
+Rhodium Dust
+Rhodium Frame Box
+Rhodium Gear
+Rhodium Ingot
+Rhodium Ion
+Rhodium Nugget
+Rhodium Plasma Cell
+Rhodium Plate
+Rhodium Ring
+Rhodium Rod
+Rhodium Rotor
+Rhodium Screw
+Rhugnor Cell
+Rhugnor Dust
+Rhugnor Foil
+Rhugnor Gear
+Rhugnor Ingot
+Rhugnor Nugget
+Rhugnor Plasma Cell
+Rhugnor Plate
+Roentgenium Ion
+Rope
+Rose Gold Multipick
+Rose Gold Multispade
+RP-1 Fuel Cell
+RP-1 Rocket Fuel Cell
+Rubber Polymer Catalyst
+Rubidium Ion
+Ruby Shards
+Runite Cell
+Runite Dust
+Runite Ingot
+Runite Nugget
+Runite Ore
+Runite Plasma Cell
+Runite Plate
+Ruthenium Bolt
+Ruthenium Cell
+Ruthenium Dust
+Ruthenium Frame Box
+Ruthenium Gear
+Ruthenium Ingot
+Ruthenium Ion
+Ruthenium Nugget
+Ruthenium Plasma Cell
+Ruthenium Plate
+Ruthenium Ring
+Ruthenium Rod
+Ruthenium Rotor
+Ruthenium Screw
+Rutherfordium Ion
+Salt Water Cell
+Samarium Dust
+Samarium Ion
+Samarskite (Y) Dust
+Samarskite (Y) Ore
+Samarskite (Yb) Dust
+Samarskite (Yb) Ore
+Sapphire Shards
+Scandium Ion
+Seaborgium Ion
+Selenious Acid Cell
+Selenium Bolt
+Selenium Cell
+Selenium Dioxide Cell
+Selenium Dust
+Selenium Frame Box
+Selenium Gear
+Selenium Hexafluoride Cell
+Selenium Hexafluoride Dust
+Selenium Hexafluoride Ingot
+Selenium Hexafluoride Nugget
+Selenium Hexafluoride Plate
+Selenium Ingot
+Selenium Ion
+Selenium Nugget
+Selenium Plasma Cell
+Selenium Plate
+Selenium Ring
+Selenium Rod
+Selenium Rotor
+Selenium Screw
+Shard of Dragonblood
+Shining Star
+Silicon Carbide Bolt
+Silicon Carbide Cell
+Silicon Carbide Dust
+Silicon Carbide Frame Box
+Silicon Carbide Gear
+Silicon Carbide Ingot
+Silicon Carbide Nugget
+Silicon Carbide Plate
+Silicon Carbide Ring
+Silicon Carbide Rod
+Silicon Carbide Rotor
+Silicon Carbide Screw
+Silicon Ion
+Silver Backpack
+Silver Ion
+Silver Multispade
+Simple Naquadah Catalyst
+Sir Mixalot [Jukebox]
+Skeleton Killer
+Slowing Frame
+Small Ammonium Bifluoride Dust
+Small Ammonium Tetrafluoroberyllate Dust
+Small Beryllium Hydroxide Dust
+Small Black Steel Spring
+Small Black Titanium Spring
+Small Decayed Radium 226 Dust
+Small Indium Dust
+Small Maraging Steel 250 Spring
+Small Nichrome Spring
+Small Pile of Abyssal Alloy Dust
+Small Pile of Actinium Dust
+Small Pile of Advanced Nitinol Dust
+Small Pile of Agardite (Cd) Dust
+Small Pile of Agardite (La) Dust
+Small Pile of Agardite (Nd) Dust
+Small Pile of Agardite (Y) Dust
+Small Pile of Alburnite Dust
+Small Pile of Americium 241 Dust
+Small Pile of Ammonium Nitrate Dust
+Small Pile of Ancient Granite Dust
+Small Pile of Arcanite Dust
+Small Pile of Arceus Alloy 2B Dust
+Small Pile of Astatine Dust
+Small Pile of Astral Titanium Dust
+Small Pile of Babbit Alloy Dust
+Small Pile of Bakelite Dust
+Small Pile of Barite (Ra) Dust
+Small Pile of Berkelium Dust
+Small Pile of Beryllium Fluoride Dust
+Small Pile of Black Metal Dust
+Small Pile of Black Titanium Dust
+Small Pile of Blood Steel Dust
+Small Pile of Botmium Dust
+Small Pile of Bromine Dust
+Small Pile of Calcium Carbonate Dust
+Small Pile of Calcium Sulfate (Gypsum) Dust
+Small Pile of Californium Dust
+Small Pile of Celestial Tungsten Dust
+Small Pile of Cerite Dust
+Small Pile of Chromatic Glass Dust
+Small Pile of Cinobite A243 Dust
+Small Pile of Comancheite Dust
+Small Pile of Conductive Iron Dust
+Small Pile of Cooked ZrCl4 Dust
+Small Pile of Copper(II) Sulfate Dust
+Small Pile of Copper(II) Sulfate Pentahydrate Dust
+Small Pile of Crocoite Dust
+Small Pile of Cryolite (F) Dust
+Small Pile of Curium Dust
+Small Pile of Cyanoacetic Acid Dust
+Small Pile of Demicheleite (Br)
+Small Pile of Demicheleite Dust
+Small Pile of Dragon Metal Dust
+Small Pile of Dried Earth Dust
+Small Pile of Dysprosium Dust
+Small Pile of Eglin Steel Base Compound Dust
+Small Pile of Eglin Steel Dust
+Small Pile of Einsteinium Dust
+Small Pile of Electrical Steel Dust
+Small Pile of Energetic Alloy Dust
+Small Pile of Energy Crystal Dust
+Small Pile of Erbium Dust
+Small Pile of Fermium Dust
+Small Pile of Florencite Dust
+Small Pile of Fluorcaphite Dust
+Small Pile of Fluorite (F) Dust
+Small Pile of Formaldehyde Catalyst Dust
+Small Pile of Francium Dust
+Small Pile of Gadolinite (Ce) Dust
+Small Pile of Gadolinite (Y) Dust
+Small Pile of Gadolinium Dust
+Small Pile of Geikielite Dust
+Small Pile of Greenockite Dust
+Small Pile of Grisium Dust
+Small Pile of Hafnium Dust
+Small Pile of Hastelloy-C276 Dust
+Small Pile of Hastelloy-N Dust
+Small Pile of Hastelloy-W Dust
+Small Pile of Hastelloy-X Dust
+Small Pile of HeLiCoPtEr Dust
+Small Pile of HG-1223 Dust
+Small Pile of Hibonite Dust
+Small Pile of Honeaite Dust
+Small Pile of HS-188A Dust
+Small Pile of Hydrated Lime Dust
+Small Pile of Hypogen Dust
+Small Pile of Incoloy-020 Dust
+Small Pile of Incoloy-DS Dust
+Small Pile of Incoloy-MA956 Dust
+Small Pile of Inconel-625 Dust
+Small Pile of Inconel-690 Dust
+Small Pile of Inconel-792 Dust
+Small Pile of Indalloy 140 Dust
+Small Pile of Iodine Dust
+Small Pile of Irarsite Dust
+Small Pile of Kashinite Dust
+Small Pile of Koboldite Dust
+Small Pile of Lafium Compound Dust
+Small Pile of Lafossaite Dust
+Small Pile of Lanthanite (Ce) Dust
+Small Pile of Lanthanite (La) Dust
+Small Pile of Lanthanite (Nd) Dust
+Small Pile of Lanthanum Dust
+Small Pile of Laurenium Dust
+Small Pile of Lautarite Dust
+Small Pile of Lepersonnite Dust
+Small Pile of LFTR Fuel 1 Dust
+Small Pile of LFTR Fuel 2 Dust
+Small Pile of LFTR Fuel 3 Dust
+Small Pile of Li2BeF4 Fuel Compound Dust
+Small Pile of Li2CO3 + Ca(OH)2 Compound Dust
+Small Pile of LiFBeF2ThF4UF4 Dust
+Small Pile of LiFBeF2ZrF4U235 Dust
+Small Pile of LiFBeF2ZrF4UF4 Dust
+Small Pile of Lithium 7 Dust
+Small Pile of Lithium Carbonate Dust
+Small Pile of Lithium Fluoride Dust
+Small Pile of Lithium Hydroperoxide Dust
+Small Pile of Lithium Hydroxide Dust
+Small Pile of Lithium Peroxide Dust
+Small Pile of Manure Byproduct Dust
+Small Pile of Maraging Steel 250 Dust
+Small Pile of Maraging Steel 300 Dust
+Small Pile of Maraging Steel 350 Dust
+Small Pile of Miessiite Dust
+Small Pile of Neptunium Dust
+Small Pile of Neptunium Hexafluoride Dust
+Small Pile of Nichromite Dust
+Small Pile of Niobium Carbide Dust
+Small Pile of Nitinol 60 Dust
+Small Pile of Nylon Dust
+Small Pile of Octiron Dust
+Small Pile of Organic Fertilizer Dust
+Small Pile of Perroudite Dust
+Small Pile of Phthalic Anhydride Dust
+Small Pile of Pikyonium 64B Dust
+Small Pile of Plutonium 238 Dust
+Small Pile of Polonium 210 Dust
+Small Pile of Polonium Dust
+Small Pile of Polycrase Dust
+Small Pile of Potassium Nitrate Dust
+Small Pile of Potin Dust
+Small Pile of Praseodymium Dust
+Small Pile of Promethium
+Small Pile of Protactinium Dust
+Small Pile of Pulsating Iron Dust
+Small Pile of Quantum Dust
+Small Pile of Radium Dust
+Small Pile of Rare Earth (I) Dust
+Small Pile of Rare Earth (II) Dust
+Small Pile of Rare Earth (III) Dust
+Small Pile of Redstone Alloy Dust
+Small Pile of Refined Trinium Dust
+Small Pile of Rhenium Dust
+Small Pile of Rhodium Dust
+Small Pile of Rhugnor Dust
+Small Pile of Runite Dust
+Small Pile of Ruthenium Dust
+Small Pile of Samarium Dust
+Small Pile of Samarskite (Y) Dust
+Small Pile of Samarskite (Yb) Dust
+Small Pile of Selenium Dust
+Small Pile of Selenium Hexafluoride Dust
+Small Pile of Silicon Carbide Dust
+Small Pile of Sodium Cyanide Dust
+Small Pile of Sodium Fluoride Dust
+Small Pile of Sodium Nitrate Dust
+Small Pile of Soularium Dust
+Small Pile of Staballoy Dust
+Small Pile of Stellite Dust
+Small Pile of Strange Dust
+Small Pile of Strontium 90 Dust
+Small Pile of Strontium Dust
+Small Pile of Strontium Hydroxide Dust
+Small Pile of Strontium Oxide Dust
+Small Pile of Talonite Dust
+Small Pile of Tantalloy-60 Dust
+Small Pile of Tantalloy-61 Dust
+Small Pile of Tantalum Carbide Dust
+Small Pile of Technetium Dust
+Small Pile of Technetium Hexafluoride Dust
+Small Pile of Tellurium Dust
+Small Pile of Thallium Dust
+Small Pile of Thorium 232 Dust
+Small Pile of Thorium Hexafluoride Dust
+Small Pile of Thorium Tetrafluoride Dust
+Small Pile of Titanite Dust
+Small Pile of Titansteel Dust
+Small Pile of Trinium Dust
+Small Pile of Trinium Naquadah Alloy Dust
+Small Pile of Trinium Naquadah Carbonite Dust
+Small Pile of Trinium Titanium Alloy Dust
+Small Pile of Tumbaga Dust
+Small Pile of Tumbaga Mix Dust
+Small Pile of Tungsten Titanium Carbide Dust
+Small Pile of UN-18 Fertiliser Dust
+Small Pile of UN-32 Fertiliser Dust
+Small Pile of Uranium 232 Dust
+Small Pile of Uranium 233 Dust
+Small Pile of Uranium Hexafluoride Dust
+Small Pile of Uranium Tetrafluoride Dust
+Small Pile of Vibrant Alloy Dust
+Small Pile of Watertight Steel Dust
+Small Pile of White Metal Dust
+Small Pile of Wood's Glass Dust
+Small Pile of Xenotime Dust
+Small Pile of Yellorium Dust
+Small Pile of Ytterbium Dust
+Small Pile of Yttriaite Dust
+Small Pile of Yttrialite Dust
+Small Pile of Yttrocerite Dust
+Small Pile of Zeron-100 Dust
+Small Pile of Zimbabweite Dust
+Small Pile of Zircon Dust
+Small Pile of Zirconium Carbide Dust
+Small Pile of Zirconium Dust
+Small Pile of Zirconium Tetrafluoride Dust
+Small Pile of Zirconolite Dust
+Small Pile of Zircophyllite Dust
+Small Pile of Zirkelite Dust
+Small Pile of ZrCl4 Dust
+Small Staballoy Spring
+Small Wrought Iron Gear
+Soapstone Milling Ball
+Sodium Aluminate
+Sodium Carbonate
+Sodium Cyanide Dust
+Sodium Ethoxide Dust
+Sodium Ethyl Xanthate Dust
+Sodium Fluoride Cell
+Sodium Fluoride Dust
+Sodium Hydroxide
+Sodium Ion
+Sodium Nitrate Dust
+Sodium Plate
+Solar Salt (Cold) Cell
+Solar Salt (Hot) Cell
+Solid Acid Catalyst Mixture Cell
+Solid-Acid Catalyst
+Soul Frame
+Soularium Dust
+Soularium plate
+Spawn %s
+Spawn Staballoy Construct
+Special
+Spent LFTR Fuel I Cell
+Spent LFTR Fuel II Cell
+Spessartine Flotation Froth Cell
+Sphalerite Flotation Froth Cell
+Spider Killer
+Staballoy Bolt
+Staballoy Cell
+Staballoy Dust
+Staballoy Frame Box
+Staballoy Gear
+Staballoy Ingot
+Staballoy Multipick
+Staballoy Multispade
+Staballoy Nugget
+Staballoy Plate
+Staballoy Ring
+Staballoy Rod
+Staballoy Rotor
+Staballoy Screw
+Stabilizing Frame
+Stable Molten Salt Base Cell
+Stainless Steel Multipick
+Stainless Steel Multispade
+Steel Multipick
+Steel Multispade
+Stellite Bolt
+Stellite Cell
+Stellite Dust
+Stellite Frame Box
+Stellite Gear
+Stellite Ingot
+Stellite Multipick
+Stellite Multispade
+Stellite Nugget
+Stellite Plate
+Stellite Ring
+Stellite Rod
+Stellite Rotor
+Stellite Screw
+Sterling Silver Multipick
+Sterling Silver Multispade
+Strange Dust
+Strange Ore
+Strange Quark
+Strengthened Mining Pipe
+Strontium 90 Cell
+Strontium 90 Dust
+Strontium 90 Ingot
+Strontium 90 Nugget
+Strontium 90 Plate
+Strontium Bolt
+Strontium Dust
+Strontium Frame Box
+Strontium Gear
+Strontium Hydroxide Dust
+Strontium Ingot
+Strontium Ion
+Strontium Nugget
+Strontium Oxide Dust
+Strontium Plate
+Strontium Ring
+Strontium Rod
+Strontium Rotor
+Strontium Screw
+Sugar Charcoal
+Sugar Coke
+Sulfur Ion
+Sulfuric Coal Tar Oil Cell
+Sunnarium Bit
+Super Storage Chest
+Supreme Pizza Gloves
+Synchrotron-Capable Catalyst
+Talonite Bolt
+Talonite Cell
+Talonite Dust
+Talonite Frame Box
+Talonite Gear
+Talonite Ingot
+Talonite Multipick
+Talonite Multispade
+Talonite Nugget
+Talonite Plate
+Talonite Ring
+Talonite Rod
+Talonite Rotor
+Talonite Screw
+Tantalloy-60 Bolt
+Tantalloy-60 Cell
+Tantalloy-60 Dust
+Tantalloy-60 Frame Box
+Tantalloy-60 Gear
+Tantalloy-60 Ingot
+Tantalloy-60 Multipick
+Tantalloy-60 Multispade
+Tantalloy-60 Nugget
+Tantalloy-60 Plate
+Tantalloy-60 Ring
+Tantalloy-60 Rod
+Tantalloy-60 Rotor
+Tantalloy-60 Screw
+Tantalloy-61 Bolt
+Tantalloy-61 Cell
+Tantalloy-61 Dust
+Tantalloy-61 Frame Box
+Tantalloy-61 Gear
+Tantalloy-61 Ingot
+Tantalloy-61 Multipick
+Tantalloy-61 Multispade
+Tantalloy-61 Nugget
+Tantalloy-61 Plate
+Tantalloy-61 Ring
+Tantalloy-61 Rod
+Tantalloy-61 Rotor
+Tantalloy-61 Screw
+Tantalum Carbide Bolt
+Tantalum Carbide Cell
+Tantalum Carbide Dust
+Tantalum Carbide Frame Box
+Tantalum Carbide Gear
+Tantalum Carbide Ingot
+Tantalum Carbide Multipick
+Tantalum Carbide Multispade
+Tantalum Carbide Nugget
+Tantalum Carbide Plate
+Tantalum Carbide Ring
+Tantalum Carbide Rod
+Tantalum Carbide Rotor
+Tantalum Carbide Screw
+Tantalum Ion
+Tau
+Tau Neutrino
+Teal Backpack
+Technetium Cell
+Technetium Dust
+Technetium Hexafluoride Cell
+Technetium Hexafluoride Dust
+Technetium Hexafluoride Ingot
+Technetium Hexafluoride Nugget
+Technetium Hexafluoride Plate
+Technetium Ingot
+Technetium Ion
+Technetium Nugget
+Technetium Plasma Cell
+Technetium Plate
+Tellurium Bolt
+Tellurium Cell
+Tellurium Dust
+Tellurium Frame Box
+Tellurium Gear
+Tellurium Ingot
+Tellurium Ion
+Tellurium Nugget
+Tellurium Plate
+Tellurium Ring
+Tellurium Rod
+Tellurium Rotor
+Tellurium Screw
+Temporal Harmonizer Catalyst
+Tennessine Ion
+Terbium Ion
+Terra Shard
+Tesseract Generator
+Thallium Bolt
+Thallium Cell
+Thallium Dust
+Thallium Frame Box
+Thallium Gear
+Thallium Ingot
+Thallium Ion
+Thallium Nugget
+Thallium Plasma Cell
+Thallium Plate
+Thallium Ring
+Thallium Rod
+Thallium Rotor
+Thallium Screw
+Thaumium Multipick
+Thaumium Multispade
+The Key to the City
+Thorium 232 Dust
+Thorium 232 Ingot
+Thorium 232 Nugget
+Thorium 232 Plasma Cell
+Thorium 232 Plate
+Thorium Cell
+Thorium Depleted Molten Salt (T Salt) Cell
+Thorium Fuel Rod
+Thorium Hexafluoride Cell
+Thorium Hexafluoride Dust
+Thorium Hexafluoride Ingot
+Thorium Hexafluoride Nugget
+Thorium Hexafluoride Plate
+Thorium Ion
+Thorium Multipick
+Thorium Multispade
+Thorium Tetrafluoride Cell
+Thorium Tetrafluoride Dust
+Thorium Tetrafluoride Ingot
+Thorium Tetrafluoride Nugget
+Thorium Tetrafluoride Plate
+Thorium-232 Cell
+Thorium-Beryllium Depleted Molten Salt (TB Salt) Cell
+Throwable Bomb
+Throwable Bomb (unf)
+Throwable Vial of Hydrofluoric Acid
+Throwable Vial of Sulfuric Acid
+Thulium Ion
+Tin Alloy Multispade
+Tin Foil Hat
+Tin Ion
+Tiny Ammonium Bifluoride Dust
+Tiny Ammonium Tetrafluoroberyllate Dust
+Tiny Beryllium Hydroxide Dust
+Tiny Decayed Radium 226 Dust
+Tiny Indium Dust
+Tiny Pile of Abyssal Alloy Dust
+Tiny Pile of Actinium Dust
+Tiny Pile of Advanced Nitinol Dust
+Tiny Pile of Agardite (Cd) Dust
+Tiny Pile of Agardite (La) Dust
+Tiny Pile of Agardite (Nd) Dust
+Tiny Pile of Agardite (Y) Dust
+Tiny Pile of Alburnite Dust
+Tiny Pile of Americium 241 Dust
+Tiny Pile of Ammonium Nitrate Dust
+Tiny Pile of Ancient Granite Dust
+Tiny Pile of Arcanite Dust
+Tiny Pile of Arceus Alloy 2B Dust
+Tiny Pile of Astatine Dust
+Tiny Pile of Astral Titanium Dust
+Tiny Pile of Babbit Alloy Dust
+Tiny Pile of Bakelite Dust
+Tiny Pile of Barite (Ra) Dust
+Tiny Pile of Berkelium Dust
+Tiny Pile of Beryllium Fluoride Dust
+Tiny Pile of Black Metal Dust
+Tiny Pile of Black Titanium Dust
+Tiny Pile of Blood Steel Dust
+Tiny Pile of Botmium Dust
+Tiny Pile of Bromine Dust
+Tiny Pile of Calcium Carbonate Dust
+Tiny Pile of Calcium Sulfate (Gypsum) Dust
+Tiny Pile of Californium Dust
+Tiny Pile of Celestial Tungsten Dust
+Tiny Pile of Cerite Dust
+Tiny Pile of Chromatic Glass Dust
+Tiny Pile of Cinobite A243 Dust
+Tiny Pile of Comancheite Dust
+Tiny Pile of Conductive Iron Dust
+Tiny Pile of Cooked ZrCl4 Dust
+Tiny Pile of Copper(II) Sulfate Dust
+Tiny Pile of Copper(II) Sulfate Pentahydrate Dust
+Tiny Pile of Crocoite Dust
+Tiny Pile of Cryolite (F) Dust
+Tiny Pile of Curium Dust
+Tiny Pile of Cyanoacetic Acid Dust
+Tiny Pile of Demicheleite (Br)
+Tiny Pile of Demicheleite Dust
+Tiny Pile of Dragon Metal Dust
+Tiny Pile of Dried Earth Dust
+Tiny Pile of Dysprosium Dust
+Tiny Pile of Eglin Steel Base Compound Dust
+Tiny Pile of Eglin Steel Dust
+Tiny Pile of Einsteinium Dust
+Tiny Pile of Electrical Steel Dust
+Tiny Pile of Energetic Alloy Dust
+Tiny Pile of Energy Crystal Dust
+Tiny Pile of Erbium Dust
+Tiny Pile of Fermium Dust
+Tiny Pile of Florencite Dust
+Tiny Pile of Fluorcaphite Dust
+Tiny Pile of Fluorite (F) Dust
+Tiny Pile of Formaldehyde Catalyst Dust
+Tiny Pile of Francium Dust
+Tiny Pile of Gadolinite (Ce) Dust
+Tiny Pile of Gadolinite (Y) Dust
+Tiny Pile of Gadolinium Dust
+Tiny Pile of Geikielite Dust
+Tiny Pile of Greenockite Dust
+Tiny Pile of Grisium Dust
+Tiny Pile of Hafnium Dust
+Tiny Pile of Hastelloy-C276 Dust
+Tiny Pile of Hastelloy-N Dust
+Tiny Pile of Hastelloy-W Dust
+Tiny Pile of Hastelloy-X Dust
+Tiny Pile of HeLiCoPtEr Dust
+Tiny Pile of HG-1223 Dust
+Tiny Pile of Hibonite Dust
+Tiny Pile of Honeaite Dust
+Tiny Pile of HS-188A Dust
+Tiny Pile of Hydrated Lime Dust
+Tiny Pile of Hypogen Dust
+Tiny Pile of Incoloy-020 Dust
+Tiny Pile of Incoloy-DS Dust
+Tiny Pile of Incoloy-MA956 Dust
+Tiny Pile of Inconel-625 Dust
+Tiny Pile of Inconel-690 Dust
+Tiny Pile of Inconel-792 Dust
+Tiny Pile of Indalloy 140 Dust
+Tiny Pile of Iodine Dust
+Tiny Pile of Irarsite Dust
+Tiny Pile of Kashinite Dust
+Tiny Pile of Koboldite Dust
+Tiny Pile of Lafium Compound Dust
+Tiny Pile of Lafossaite Dust
+Tiny Pile of Lanthanite (Ce) Dust
+Tiny Pile of Lanthanite (La) Dust
+Tiny Pile of Lanthanite (Nd) Dust
+Tiny Pile of Lanthanum Dust
+Tiny Pile of Laurenium Dust
+Tiny Pile of Lautarite Dust
+Tiny Pile of Lepersonnite Dust
+Tiny Pile of LFTR Fuel 1 Dust
+Tiny Pile of LFTR Fuel 2 Dust
+Tiny Pile of LFTR Fuel 3 Dust
+Tiny Pile of Li2BeF4 Fuel Compound Dust
+Tiny Pile of Li2CO3 + Ca(OH)2 Compound Dust
+Tiny Pile of LiFBeF2ThF4UF4 Dust
+Tiny Pile of LiFBeF2ZrF4U235 Dust
+Tiny Pile of LiFBeF2ZrF4UF4 Dust
+Tiny Pile of Lithium 7 Dust
+Tiny Pile of Lithium Carbonate Dust
+Tiny Pile of Lithium Fluoride Dust
+Tiny Pile of Lithium Hydroperoxide Dust
+Tiny Pile of Lithium Hydroxide Dust
+Tiny Pile of Lithium Peroxide Dust
+Tiny Pile of Manure Byproduct Dust
+Tiny Pile of Maraging Steel 250 Dust
+Tiny Pile of Maraging Steel 300 Dust
+Tiny Pile of Maraging Steel 350 Dust
+Tiny Pile of Miessiite Dust
+Tiny Pile of Neptunium Dust
+Tiny Pile of Neptunium Hexafluoride Dust
+Tiny Pile of Nichromite Dust
+Tiny Pile of Niobium Carbide Dust
+Tiny Pile of Nitinol 60 Dust
+Tiny Pile of Nylon Dust
+Tiny Pile of Octiron Dust
+Tiny Pile of Organic Fertilizer Dust
+Tiny Pile of Perroudite Dust
+Tiny Pile of Phthalic Anhydride Dust
+Tiny Pile of Pikyonium 64B Dust
+Tiny Pile of Plutonium 238 Dust
+Tiny Pile of Polonium 210 Dust
+Tiny Pile of Polonium Dust
+Tiny Pile of Polycrase Dust
+Tiny Pile of Potassium Nitrate Dust
+Tiny Pile of Potin Dust
+Tiny Pile of Praseodymium Dust
+Tiny Pile of Promethium
+Tiny Pile of Protactinium Dust
+Tiny Pile of Pulsating Iron Dust
+Tiny Pile of Quantum Dust
+Tiny Pile of Radium Dust
+Tiny Pile of Rare Earth (I) Dust
+Tiny Pile of Rare Earth (II) Dust
+Tiny Pile of Rare Earth (III) Dust
+Tiny Pile of Redstone Alloy Dust
+Tiny Pile of Refined Trinium Dust
+Tiny Pile of Rhenium Dust
+Tiny Pile of Rhodium Dust
+Tiny Pile of Rhugnor Dust
+Tiny Pile of Runite Dust
+Tiny Pile of Ruthenium Dust
+Tiny Pile of Samarium Dust
+Tiny Pile of Samarskite (Y) Dust
+Tiny Pile of Samarskite (Yb) Dust
+Tiny Pile of Selenium Dust
+Tiny Pile of Selenium Hexafluoride Dust
+Tiny Pile of Silicon Carbide Dust
+Tiny Pile of Sodium Cyanide Dust
+Tiny Pile of Sodium Fluoride Dust
+Tiny Pile of Sodium Nitrate Dust
+Tiny Pile of Soularium Dust
+Tiny Pile of Staballoy Dust
+Tiny Pile of Stellite Dust
+Tiny Pile of Strange Dust
+Tiny Pile of Strontium 90 Dust
+Tiny Pile of Strontium Dust
+Tiny Pile of Strontium Hydroxide Dust
+Tiny Pile of Strontium Oxide Dust
+Tiny Pile of Talonite Dust
+Tiny Pile of Tantalloy-60 Dust
+Tiny Pile of Tantalloy-61 Dust
+Tiny Pile of Tantalum Carbide Dust
+Tiny Pile of Technetium Dust
+Tiny Pile of Technetium Hexafluoride Dust
+Tiny Pile of Tellurium Dust
+Tiny Pile of Thallium Dust
+Tiny Pile of Thorium 232 Dust
+Tiny Pile of Thorium Hexafluoride Dust
+Tiny Pile of Thorium Tetrafluoride Dust
+Tiny Pile of Titanite Dust
+Tiny Pile of Titansteel Dust
+Tiny Pile of Trinium Dust
+Tiny Pile of Trinium Naquadah Alloy Dust
+Tiny Pile of Trinium Naquadah Carbonite Dust
+Tiny Pile of Trinium Titanium Alloy Dust
+Tiny Pile of Tumbaga Dust
+Tiny Pile of Tumbaga Mix Dust
+Tiny Pile of Tungsten Titanium Carbide Dust
+Tiny Pile of UN-18 Fertiliser Dust
+Tiny Pile of UN-32 Fertiliser Dust
+Tiny Pile of Uranium 232 Dust
+Tiny Pile of Uranium 233 Dust
+Tiny Pile of Uranium Hexafluoride Dust
+Tiny Pile of Uranium Tetrafluoride Dust
+Tiny Pile of Vibrant Alloy Dust
+Tiny Pile of Watertight Steel Dust
+Tiny Pile of White Metal Dust
+Tiny Pile of Wood's Glass Dust
+Tiny Pile of Xenotime Dust
+Tiny Pile of Yellorium Dust
+Tiny Pile of Ytterbium Dust
+Tiny Pile of Yttriaite Dust
+Tiny Pile of Yttrialite Dust
+Tiny Pile of Yttrocerite Dust
+Tiny Pile of Zeron-100 Dust
+Tiny Pile of Zimbabweite Dust
+Tiny Pile of Zircon Dust
+Tiny Pile of Zirconium Carbide Dust
+Tiny Pile of Zirconium Dust
+Tiny Pile of Zirconium Tetrafluoride Dust
+Tiny Pile of Zirconolite Dust
+Tiny Pile of Zircophyllite Dust
+Tiny Pile of Zirkelite Dust
+Tiny Pile of ZrCl4 Dust
+Tita-Tungsten Indium Catalyst
+Titanite Dust
+Titanite Ore
+Titanium Ion
+Titanium Multipick
+Titanium Multispade
+Titansteel Bolt
+Titansteel Cell
+Titansteel Dust
+Titansteel Foil
+Titansteel Frame Box
+Titansteel Gear
+Titansteel Ingot
+Titansteel Nugget
+Titansteel Plate
+Titansteel Ring
+Titansteel Rod
+Titansteel Rotor
+Titansteel Screw
+Toluene Cell
+Tool Block
+Top Quark
+Trade Bench
+Tree Feller
+Trichloroacetic Acid Cell
+Trinium Dust
+Trinium Ingot
+Trinium Naquadah Alloy Cell
+Trinium Naquadah Alloy Dust
+Trinium Naquadah Alloy Ingot
+Trinium Naquadah Alloy Nugget
+Trinium Naquadah Alloy Plate
+Trinium Naquadah Carbonite Bolt
+Trinium Naquadah Carbonite Cell
+Trinium Naquadah Carbonite Dust
+Trinium Naquadah Carbonite Frame Box
+Trinium Naquadah Carbonite Gear
+Trinium Naquadah Carbonite Ingot
+Trinium Naquadah Carbonite Nugget
+Trinium Naquadah Carbonite Plate
+Trinium Naquadah Carbonite Ring
+Trinium Naquadah Carbonite Rod
+Trinium Naquadah Carbonite Rotor
+Trinium Naquadah Carbonite Screw
+Trinium Nugget
+Trinium Ore
+Trinium Plate
+Trinium Titanium Alloy Bolt
+Trinium Titanium Alloy Cell
+Trinium Titanium Alloy Dust
+Trinium Titanium Alloy Frame Box
+Trinium Titanium Alloy Gear
+Trinium Titanium Alloy Ingot
+Trinium Titanium Alloy Nugget
+Trinium Titanium Alloy Plate
+Trinium Titanium Alloy Ring
+Trinium Titanium Alloy Rod
+Trinium Titanium Alloy Rotor
+Trinium Titanium Alloy Screw
+Triple Compressed Cactus Charcoal
+Triple Compressed Cactus Coke
+Triple Compressed Glowstone (729)
+Triple Compressed Netherrack
+Triple Compressed Obsidian (729)
+Triple Compressed Sugar Charcoal
+Triple Compressed Sugar Coke
+Tritanium Multipick
+Tritanium Multispade
+Tumbaga Bolt
+Tumbaga Cell
+Tumbaga Dust
+Tumbaga Frame Box
+Tumbaga Gear
+Tumbaga Ingot
+Tumbaga Mix Dust
+Tumbaga Multipick
+Tumbaga Multispade
+Tumbaga Nugget
+Tumbaga Plate
+Tumbaga Ring
+Tumbaga Rod
+Tumbaga Rotor
+Tumbaga Screw
+Tungsten Carbide Cell
+Tungsten Carbide Multipick
+Tungsten Carbide Multispade
+Tungsten Ion
+Tungsten Multipick
+Tungsten Multispade
+Tungsten Titanium Carbide Bolt
+Tungsten Titanium Carbide Cell
+Tungsten Titanium Carbide Dust
+Tungsten Titanium Carbide Frame Box
+Tungsten Titanium Carbide Gear
+Tungsten Titanium Carbide Ingot
+Tungsten Titanium Carbide Nugget
+Tungsten Titanium Carbide Plate
+Tungsten Titanium Carbide Ring
+Tungsten Titanium Carbide Rod
+Tungsten Titanium Carbide Rotor
+Tungsten Titanium Carbide Screw
+TungstenSteel Rotor Blade
+TungstenSteel Shaft
+Tunnel Digger
+UF6F2 Cell
+UF6F2FP Cell
+Ultimate Plasticizer Catalyst
+Ultimet Blade
+Ultimet Multipick
+Ultimet Multispade
+Ultimet Shaft
+UN-18 Fertiliser Cell
+UN-18 Fertiliser Dust
+UN-32 Fertiliser Cell
+UN-32 Fertiliser Dust
+Universally Chargeable Battery
+Unknown Particle
+Unstable Earth
+Unsymmetrical Dimethylhydrazine Cell
+Up Quark
+Uranium 232 Cell
+Uranium 232 Dust
+Uranium 232 Ingot
+Uranium 232 Nugget
+Uranium 232 Plasma Cell
+Uranium 232 Plate
+Uranium 232 Rod
+Uranium 233 Cell
+Uranium 233 Dust
+Uranium 233 Ingot
+Uranium 233 Nugget
+Uranium 233 Plasma Cell
+Uranium 233 Plate
+Uranium 233 Rod
+Uranium 235 Foil
+Uranium 235 Multipick
+Uranium 235 Multispade
+Uranium Depleted Molten Salt (U Salt) Cell
+Uranium Fuel Rod
+Uranium Hexafluoride Cell
+Uranium Hexafluoride Dust
+Uranium Hexafluoride Ingot
+Uranium Hexafluoride Nugget
+Uranium Hexafluoride Plate
+Uranium Ion
+Uranium Residue Mix
+Uranium Tetrafluoride Cell
+Uranium Tetrafluoride Dust
+Uranium Tetrafluoride Ingot
+Uranium Tetrafluoride Nugget
+Uranium Tetrafluoride Plate
+Useless Frame
+Vanadium Ion
+Vanadium Plate
+Vibrant Alloy Dust
+Vibrant Alloy plate
+Vibrant Alloy Rotor Blade
+Vibrant Alloy Shaft
+Void Frame
+Void plate
+Volumetric Flask Configurator
+W Boson
+Watertight Steel Bolt
+Watertight Steel Cell
+Watertight Steel Dust
+Watertight Steel Frame Box
+Watertight Steel Gear
+Watertight Steel Ingot
+Watertight Steel Nugget
+Watertight Steel Plate
+Watertight Steel Ring
+Watertight Steel Rod
+Watertight Steel Rotor
+Watertight Steel Screw
+Watertight Steel Spring
+White Backpack
+White Metal Bolt
+White Metal Cell
+White Metal Dust
+White Metal Foil
+White Metal Frame Box
+White Metal Gear
+White Metal Ingot
+White Metal Nugget
+White Metal Plate
+White Metal Ring
+White Metal Rod
+White Metal Rotor
+White Metal Screw
+White Metal Spring
+Wither Cage
+Wood Brick
+Wood Pellet
+Wood's Glass Dust
+Wooden Auto-Door
+Workbench
+Workers Toolbox
+Working Frame
+Wrought Iron Multipick
+Wrought Iron Multispade
+Xenon Cell
+Xenon Ion
+Xenon Plasma Cell
+Xenotime Dust
+Xenotime Ore
+Yellow Backpack
+Yellow Metal Catalyst
+Ytterbium Dust
+Ytterbium Ion
+Yttriaite Dust
+Yttriaite Ore
+Yttrialite Dust
+Yttrialite Ore
+Yttrium Ion
+Yttrocerite Dust
+Yttrocerite Ore
+Z Boson
+Zeron-100 Bolt
+Zeron-100 Cell
+Zeron-100 Dust
+Zeron-100 Frame Box
+Zeron-100 Gear
+Zeron-100 Ingot
+Zeron-100 Nugget
+Zeron-100 Plate
+Zeron-100 Ring
+Zeron-100 Rod
+Zeron-100 Rotor
+Zeron-100 Screw
+Zimbabweite Dust
+Zimbabweite Ore
+Zinc Ion
+Zircon Dust
+Zircon Ore
+Zirconium Bolt
+Zirconium Carbide Bolt
+Zirconium Carbide Cell
+Zirconium Carbide Dust
+Zirconium Carbide Frame Box
+Zirconium Carbide Gear
+Zirconium Carbide Ingot
+Zirconium Carbide Nugget
+Zirconium Carbide Plate
+Zirconium Carbide Ring
+Zirconium Carbide Rod
+Zirconium Carbide Rotor
+Zirconium Carbide Screw
+Zirconium Cell
+Zirconium Dust
+Zirconium Frame Box
+Zirconium Gear
+Zirconium Ingot
+Zirconium Ion
+Zirconium Nugget
+Zirconium Pellet [ZrCl₄]
+Zirconium Plasma Cell
+Zirconium Plate
+Zirconium Ring
+Zirconium Rod
+Zirconium Rotor
+Zirconium Screw
+Zirconium Tetrafluoride Cell
+Zirconium Tetrafluoride Dust
+Zirconium Tetrafluoride Ingot
+Zirconium Tetrafluoride Nugget
+Zirconium Tetrafluoride Plate
+Zirconolite Dust
+Zirconolite Ore
+Zircophyllite Dust
+Zircophyllite Ore
+Zirkelite Dust
+Zirkelite Ore
+Zombie Killer
+ZrCl4 Dust
+
+## BartWorks
+
+Source: tmp_gt5check\assets\bartworks\lang\en_US.lang
+Count: 146
+
+%s§7 via §2BartWorks
+A DNA Flask containing:
+A Module used to change the BioLab's working Mode
+A Petri Dish containing:
+A Plasmid Cell containing:
+A powder for the separation of DNA by electrophoresis.
+A primitive Grinder powered by Kinetic energy.;Size(WxHxD): 7x12x7;Layer 1: 7x7 Bricks, corners are air, controller at front centered.;Layer 2-5: 5x5 Hardened Clay, corners are air, can contain one door,;hollow, Wall must contain at least one Dispenser;Layer 6: 5x5 Wood Planks. Corners are filled, hollow.;Layer 7: 7x7 Wood Planks. Corners are air, hollow.;Layer 8: 7x7 Wood Planks. Corners are air, hollow,;front centered must be a Primitive Kinetic Shaftbox;Layer 9: 7x7 Wood Planks. Corners are air, hollow.;Layer 10: 5x5 Wood Planks. Corners are filled, hollow.;Layer 11: 3x3 Wood Planks. Corners are filled, hollow.;Layer 12: 1x1 Wood Plank.;Needs a Wind Mill Rotor in the Shaftbox to operate;Input items in Controller;Output items will appear in the dispensers;It is faster in regions with more wind (like IC2 Windmills)
+A Simple diode that will allow Energy Flow in only one direction.
+A simple Windmeter to choose a place for the Windmill.
+A special washing powder for Bio Engineering.
+Acid Generator
+Added by
+Added by bartimaeusnek via
+Agarose
+Amperage IN:
+Amperage OUT:
+An Acid Generator
+An empty DNA Flask.
+An empty Plasmid Cell.
+An empty Sterilized Petri Dish.
+Bacterial Cells
+Bacterial Vat
+Bio Fluid Block
+Bio Lab
+BISO pebble ball
+BISO pebble compound
+Block
+Bolted Casing
+Borosilicate Glass Block
+Burned Out TRISO pebble
+Burned Out TRISO pebble ball
+Cable Diode
+Capacity:
+Clonal Cellular Synthesis Module
+Colored Borosilicate Glass Block (Brown)
+Colored Borosilicate Glass Block (Green)
+Colored Borosilicate Glass Block (Light Green)
+Colored Borosilicate Glass Block (Purple)
+Colored Borosilicate Glass Block (Red)
+Colored Borosilicate Glass Block (Yellow)
+Combined Primitive Rotor (Wind only)
+common
+Controller Block for the GT2-Styled L.E.S.U.;Size: ANY
+Cosmic Neutronium Reinforced Borosilicate Glass Block
+Creates Power from Chemical Energy Potentials.
+Detergent Powder
+Diameter:
+DNA Extraction Module
+DNA Sample Flask
+Durability:
+Efficiency:
+Elongated Glass Tube
+Empty
+Energy Distributor
+Etched Lapis Cell
+Glass-Tier:
+Grindstone
+Grindstone Bottom Piece
+Grindstone Top Piece
+h
+Has Circuit inside?
+Incubation Module
+Infinity Reinforced Borosilicate Glass Block
+Iridium Reinforced Borosilicate Glass Block
+L/s Water when fueled. Causes %d Pollution per second.
+Leather Covered Wood Frame
+LESU Casing
+m
+Machine Casing
+Manual Transformer
+Mass:
+Material:
+Maximum Capacity!
+Mega Electric Blast Furnace
+Mega Vacuum Freezer
+Multiple Controllers!
+Multiple Material Covered Wood Frame
+Must be placed on the Ground.
+Neutronium Reinforced Borosilicate Glass Block
+Nickel-Zinc Ferrite Block
+No
+No warranty!
+nonexistent
+Only one Controller allowed, no Wallsharing!
+Ore
+Osmium Reinforced Borosilicate Glass Block
+Output EU: LESU Casings amount;Input EU: Next Voltage Tier to Output EU;Input/Output Amps can be configured via 4 Circuits in GUI;Output Side has a dot on it.
+Output:
+Paper Covered Wood Frame
+PCR Thermocycle Module
+Petri Dish with a Culture
+Plasma Membrane
+Plasmid Sample Flask
+Plasmid Synthesis Module
+Plated Lapis Cell
+Pollution per second
+pretty low
+Primitive Kinetic Shaftbox
+Primitive Leather Rotor (Wind only)
+Primitive Paper Rotor (Wind only)
+Primitive Wool Rotor (Wind only)
+Produces
+Radio Hatch
+Radioactive Item Chamber for Multiblocks
+rather strong
+Rebolted Casing
+Remaining: %s s / %s s
+Rhodium-Plated Palladium Reinforced Borosilicate Glass Block
+Rockcutter HV
+Rockcutter LV
+Rockcutter MV
+s
+Sievert:
+Simple Heated Stove
+Simple Stirling Motor
+Simple Stirling Water Pump
+Simple Wind Meter
+Small Ore
+Speed:
+Splits Amperage into several sides.
+Sterilized Petri Dish
+Storage per LESU Casing:
+t
+Teslastaff
+The BioLab, a Multi-Use Bioengineering Station
+The wind here seems to be
+This is a weak culture, it can not be bred in the Bacterial Vat!
+Thorium Yttrium Glass Block
+Tier:
+Time (in t/s/m/h) to decay (1kg):
+Titanium Reinforced Borosilicate Glass Block
+too strong
+Transcendentally Reinforced Borosilicate Glass Block
+Transformation Module
+Transformer-Winding Block
+TRISO pebble
+TRISO pebble ball
+TRISO pebble compound
+Tungstensteel Reinforced Borosilicate Glass Block
+Use a screwdriver to set the containment level
+Uses left:
+very strong
+Voltage:
+Windmill
+Wool Covered Wood Frame
+Yes
+
+## GoodGenerator
+
+Source: tmp_gt5check\assets\goodgenerator\lang\en_US.lang
+Count: 144
+
+Adept Essentia Diffusion Cell
+Advanced Compact Fusion Coil
+Advanced Field Restriction Coil
+Advanced Fuel Rod (Empty)
+Advanced Radiation Proof Plate
+Aluminium Nitride Dust
+Ameliorated Superconduct Coil
+Antimatter Annihilation Matrix
+Antimatter Containment Casing
+Antimatter Render
+Chromatic Gem
+Coal Tar
+Combustion Promoter
+Compact Fusion Coil
+Compact Fusion Coil MK-II Finaltype
+Compact Fusion Coil MK-II Prototype
+Component Assembly Line Casing
+Component Assembly Line Casing (EV)
+Component Assembly Line Casing (HV)
+Component Assembly Line Casing (IV)
+Component Assembly Line Casing (LuV)
+Component Assembly Line Casing (LV)
+Component Assembly Line Casing (MAX)
+Component Assembly Line Casing (MV)
+Component Assembly Line Casing (UEV)
+Component Assembly Line Casing (UHV)
+Component Assembly Line Casing (UIV)
+Component Assembly Line Casing (UMV)
+Component Assembly Line Casing (UV)
+Component Assembly Line Casing (UXV)
+Component Assembly Line Casing (ZPM)
+Enriched Naquadah Mass
+Essentia Diffusion Cell
+Essentia Filter Casing
+Essentia Output Hatch
+Essentia Output Hatch (ME)
+Field Restriction Casing
+Field Restriction Coil
+Field Restriction Glass
+Fluid Cell Block
+Fluid Cell Block T1
+Fluid Cell Block T10
+Fluid Cell Block T2
+Fluid Cell Block T3
+Fluid Cell Block T4
+Fluid Cell Block T5
+Fluid Cell Block T6
+Fluid Cell Block T7
+Fluid Cell Block T8
+Fluid Cell Block T9
+Fluid Storage Core
+Fluid Storage Core T1
+Fluid Storage Core T10
+Fluid Storage Core T2
+Fluid Storage Core T3
+Fluid Storage Core T4
+Fluid Storage Core T5
+Fluid Storage Core T6
+Fluid Storage Core T7
+Fluid Storage Core T8
+Fluid Storage Core T9
+Grandmaster Essentia Diffusion Cell
+Gravity Stabilization Casing
+Hi-Computation Station
+Hi-Computation Station MK-I
+Hi-Computation Station MK-II
+Hi-Computation Station MK-III
+Hi-Computation Station MK-IV Prototype
+Hi-Computation Station MK-V Finaltype
+High Density Plutonium
+High Density Plutonium Nugget
+High Density Thorium
+High Density Thorium Nugget
+High Density Uranium
+High Density Uranium Nugget
+High Energy Mixture
+Imprecise Electronic Unit Casing
+Inverter
+Lightly Cracked Heavy Naquadah Fuel
+Lightly Cracked Light Naquadah Fuel
+Lightly Cracked Naquadah Asphalt
+Lightly Cracked Naquadah Gas
+Magic Casing
+Magnetic Flux Casing
+Master Essentia Diffusion Cell
+Micro-Heater
+Moderately Cracked Heavy Naquadah Fuel
+Moderately Cracked Light Naquadah Fuel
+Moderately Cracked Naquadah Asphalt
+Moderately Cracked Naquadah Gas
+Naquadah Fuel Refinery Casing
+Naquadah Mass
+Naquadria Mass
+Neutron Source
+Novice Essentia Diffusion Cell
+Nuclear Star
+Plastic Case
+Precise Electronic Unit Casing
+Precise Electronic Unit Casing MK-I
+Precise Electronic Unit Casing MK-II
+Precise Electronic Unit Casing MK-III
+Precise Electronic Unit Casing MK-IV
+Pressure Resistant Wall
+Protomatter Activation Coil
+Quartz Crystal Resonator
+Quartz Wafer
+Radiation Proof Plate
+Radiation Proof Steel Frame Box
+Radioactive Waste
+Raw Atomic Separation Catalyst
+Raw Cylinder
+Salty Root
+SC Turbine Casing
+Severely Cracked Heavy Naquadah Fuel
+Severely Cracked Light Naquadah Fuel
+Severely Cracked Naquadah Asphalt
+Severely Cracked Naquadah Gas
+Special Ceramics Dust
+Special Ceramics Plate
+Speeding Pipe Casing
+Supercritical Steam
+Temporal Field Restriction Coil
+Titanium Plated Cylinder
+Ultimate Field Restriction Coil
+Wrap of Circuits
+Wrap of EV Circuits
+Wrap of HV Circuits
+Wrap of IV Circuits
+Wrap of LuV Circuits
+Wrap of LV Circuits
+Wrap of MAX Circuits
+Wrap of MV Circuits
+Wrap of UEV Circuits
+Wrap of UHV Circuits
+Wrap of UIV Circuits
+Wrap of ULV Circuits
+Wrap of UMV Circuits
+Wrap of UV Circuits
+Wrap of UXV Circuits
+Wrap of ZPM Circuits
+Wrapped Plutonium Ingot
+Wrapped Thorium Ingot
+Wrapped Uranium Ingot
+YOTTank Casing
+
+## GTNH Lanthanides
+
+Source: tmp_gt5check\assets\gtnhlanth\lang\en_US.lang
+Count: 19
+
+Antenna Casing (T1)
+Antenna Casing (T2)
+Capillary Exchange
+Coolant Delivery Casing
+Electrode Casing
+Etched Mask
+Focus Holder
+Focus Manipulator
+Iron Quartz Plate
+Mask Substrate
+Mu-Metal Lattice
+Niobium Cavity Machine Casing
+Particle
+Processed Mask Substrate
+Shielded Accelerator Casing
+Shielded Accelerator Glass
+Substrate Precursor
+Target Holder
+Target Receptacle
+
+## GTNH Intergalactic
+
+Source: tmp_gt5check\assets\gtnhintergalactic\lang\en_US.lang
+Count: 64
+
+Dyson Swarm Component
+Dyson Swarm Control Center Base Casing
+Dyson Swarm Control Center Primary Windings
+Dyson Swarm Control Center Secondary Windings
+Dyson Swarm Control Center Toroid Casing
+Dyson Swarm Energy Receiver Base Casing
+Dyson Swarm Energy Receiver Dish Block
+Dyson Swarm Ground Unit
+Dyson Swarm Module
+Dyson Swarm Module Deployment Unit Base Casing
+Dyson Swarm Module Deployment Unit Core
+Dyson Swarm Module Deployment Unit Superconducting Magnet
+Dyson Swarm Part
+Mining Drone
+Mining Drone MK-I
+Mining Drone MK-II
+Mining Drone MK-III
+Mining Drone MK-IV
+Mining Drone MK-IX
+Mining Drone MK-V
+Mining Drone MK-VI
+Mining Drone MK-VII
+Mining Drone MK-VIII
+Mining Drone MK-X
+Mining Drone MK-XI
+Mining Drone MK-XII
+Mining Drone MK-XIII
+Mining Drone MK-XIV
+Nanotube Spool
+Neutronium Nanofibers
+Neutronium Nanoparticles
+Planetary Gas Siphon
+Planetary Siphon Casing
+Space Assembler Module MK-I
+Space Assembler Module MK-II
+Space Assembler Module MK-III
+Space Elevator
+Space Elevator Base Casing
+Space Elevator Cable
+Space Elevator Component
+Space Elevator Internal Structure
+Space Elevator Module
+Space Elevator Motor
+Space Elevator Motor MK-I
+Space Elevator Motor MK-II
+Space Elevator Motor MK-III
+Space Elevator Motor MK-IV
+Space Elevator Motor MK-V
+Space Elevator Part
+Space Elevator Support Structure
+Space Mining Module MK-I
+Space Mining Module MK-II
+Space Mining Module MK-III
+Space Project Manager
+Space Projects
+Space Pumping Module
+Space Pumping Module MK-I
+Space Pumping Module MK-II
+Space Pumping Module MK-III
+Space Research Module
+Tantalum Hafnium Carbide Nanofibers
+Tantalum Hafnium Carbide Nanoparticles
+Ultra High Strength Concrete Floor
+Ultra High Temperature Resistant Mesh
+
+## TecTech
+
+Source: tmp_gt5check\assets\tectech\lang\en_US.lang
+Count: 380
+
+Active Transformer
+Advanced Computer Casing
+Advanced Molecular Casing
+Advanced Tesla Transceiver
+Annihilation Generator
+Assembly line Reception Connector
+Astral Array Fabricator
+Auto-Taping Maintenance Hatch
+AVR programmer
+Basic Tesla Transceiver
+Black Hole Generator
+Capacitor Hatch
+Computer Casing
+Computer Heat Vent
+Computer Rack
+Containment Field Generator
+Data Bank
+Data Bank Transmission Connector
+Data Reader
+Debug Data Hatch
+Debug EM Container
+Debug Pollution Generator
+Debug Power Generator
+Debug Sides
+Debug Structure Writer
+Decay Generator
+Dimensional Bridge Generator
+Electrum Tesla Windings
+Elemental Matter Turret
+Elemental Scanner
+Elemental Stabilizer
+Elemental Turret Base
+EM Recipe Hint
+EM Scan Storage
+Ender Fluid Link Cover
+Energy Infuser
+Epyc Tesla Transceiver
+Essentia Dequantizer
+Essentia Quantizer
+EV Superconductor Primary Tesla Windings
+EV Tesla Capacitor
+Extended Mega Ultimate Buck Converter
+Extended Mega Ultimate Hi-Amp Transformer
+Extended Mega Ultimate Power Transformer
+Extended Mega Ultimate Transformer
+Extreme Power Transformer
+Extremely Ultimate Buck Converter
+Extremely Ultimate Hi-Amp Transformer
+Extremely Ultimate Power Transformer
+Extremely Ultimate Transformer
+Eye of Harmony Renderer
+Fake Item
+Forge of the Gods Renderer
+Front Rotation Scrench
+GT EU meter
+High Power Casing
+High Voltage Power Transformer
+Highly Ultimate Buck Converter
+Highly Ultimate Hi-Amp Transformer
+Highly Ultimate Power Transformer
+Highly Ultimate Transformer
+Hint 1 dot
+Hint 10 dot
+Hint 11 dot
+Hint 12 dot
+Hint 2 dot
+Hint 3 dot
+Hint 4 dot
+Hint 5 dot
+Hint 6 dot
+Hint 7 dot
+Hint 8 dot
+Hint 9 dot
+Hint air
+Hint error
+Hint general
+Hint no air
+Hollow Casing
+HV Superconductor Primary Tesla Windings
+HV Tesla Capacitor
+Insane Buck Converter
+Insane Power Transformer
+Insane Tesla Transceiver
+Insanely Ultimate Buck Converter
+Insanely Ultimate Hi-Amp Transformer
+Insanely Ultimate Power Transformer
+Insanely Ultimate Transformer
+IV 1,024A Laser Source Hatch
+IV 1,024A Laser Target Hatch
+IV 1,048,576A Laser Source Hatch
+IV 1,048,576A Laser Target Hatch
+IV 16,384A Laser Source Hatch
+IV 16,384A Laser Target Hatch
+IV 16A Dynamo Hatch
+IV 16A Energy Hatch
+IV 256A Laser Source Hatch
+IV 256A Laser Target Hatch
+IV 262,144A Laser Source Hatch
+IV 262,144A Laser Target Hatch
+IV 4,096A Laser Source Hatch
+IV 4,096A Laser Target Hatch
+IV 4A Dynamo Hatch
+IV 4A Energy Hatch
+IV 64A Dynamo Hatch
+IV 64A Energy Hatch
+IV 65,536A Laser Source Hatch
+IV 65,536A Laser Target Hatch
+IV Superconductor Primary Tesla Windings
+IV Tesla Capacitor
+Laser Vacuum Mirror
+Laser Vacuum Pipe
+Legendary Laser Source Hatch
+Legendary Laser Target Hatch
+Low Voltage Power Transformer
+Ludicrous Buck Converter
+Ludicrous Power Transformer
+LuV 1,024A Laser Source Hatch
+LuV 1,024A Laser Target Hatch
+LuV 1,048,576A Laser Source Hatch
+LuV 1,048,576A Laser Target Hatch
+LuV 16,384A Laser Source Hatch
+LuV 16,384A Laser Target Hatch
+LuV 16A Dynamo Hatch
+LuV 16A Energy Hatch
+LuV 256A Laser Source Hatch
+LuV 256A Laser Target Hatch
+LuV 262,144A Laser Source Hatch
+LuV 262,144A Laser Target Hatch
+LuV 4,096A Laser Source Hatch
+LuV 4,096A Laser Target Hatch
+LuV 4A Dynamo Hatch
+LuV 4A Energy Hatch
+LuV 64A Dynamo Hatch
+LuV 64A Energy Hatch
+LuV 65,536A Laser Source Hatch
+LuV 65,536A Laser Target Hatch
+LuV Superconductor Primary Tesla Windings
+LuV Tesla Capacitor
+LV Tesla Capacitor
+Machine Casing
+Matter Assembler
+Matter Collider
+Matter Dequantizer
+Matter Junction
+Matter Quantizer
+MAX Machine Casing
+MAX Machine Hull
+Medium Voltage Power Transformer
+Mega Ultimate Buck Converter
+Mega Ultimate Hi-Amp Transformer
+Mega Ultimate Power Transformer
+Mega Ultimate Transformer
+Microwave Grinder
+Molecular Casing
+Molecular Coil
+Multiblock Machine Blueprint
+MV Superconductor Primary Tesla Windings
+MV Tesla Capacitor
+Name
+Object Holder
+Optical Fiber Cable
+Optical Reception Connector
+Optical Transmission Connector
+Owner detector
+Parametrizer Memory Card
+Power Pass Upgrade Cover
+Primary Tesla Windings
+Quantum "Tunnel"
+Quantum Computer
+Quantum Glass
+Quantum Processing Machine
+Quantum Stuff
+Reactor Simulator
+Redstone Alloy Primary Tesla Windings
+Semi-Stable Antimatter Stabilization Sequencer
+Shielded Lagrangian Annihilation Matrix
+Spacetime Altering Casing
+Spacetime Compression Field Generator
+Spatially Transcendent Gravitational Lens Block
+Static Network Switch With QoS
+Superconductive Tesla Windings
+Teleportation Casing
+Tesla Base Casing
+Tesla Capacitor
+Tesla Coil Cover
+Tesla Coil Cover Rich Edition
+Tesla Secondary Windings
+Tesla Staff
+Tesla Toroid Casing
+Tesla Tower
+Tesla Windings
+Time Dilation Field Generator
+UEV 1,024A Laser Source Hatch
+UEV 1,024A Laser Target Hatch
+UEV 1,048,576A Laser Source Hatch
+UEV 1,048,576A Laser Target Hatch
+UEV 16,384A Laser Source Hatch
+UEV 16,384A Laser Target Hatch
+UEV 16A Dynamo Hatch
+UEV 16A Energy Hatch
+UEV 256A Laser Source Hatch
+UEV 256A Laser Target Hatch
+UEV 262,144A Laser Source Hatch
+UEV 262,144A Laser Target Hatch
+UEV 4,096A Laser Source Hatch
+UEV 4,096A Laser Target Hatch
+UEV 4A Dynamo Hatch
+UEV 4A Energy Hatch
+UEV 64A Dynamo Hatch
+UEV 64A Energy Hatch
+UEV 65,536A Laser Source Hatch
+UEV 65,536A Laser Target Hatch
+UEV Elemental Input Hatch
+UEV Elemental Output Hatch
+UEV Machine Casing
+UEV Machine Hull
+UEV Overflow Output Hatch
+UHV 1,024A Laser Source Hatch
+UHV 1,024A Laser Target Hatch
+UHV 1,048,576A Laser Source Hatch
+UHV 1,048,576A Laser Target Hatch
+UHV 16,384A Laser Source Hatch
+UHV 16,384A Laser Target Hatch
+UHV 16A Dynamo Hatch
+UHV 16A Energy Hatch
+UHV 256A Laser Source Hatch
+UHV 256A Laser Target Hatch
+UHV 262,144A Laser Source Hatch
+UHV 262,144A Laser Target Hatch
+UHV 4,096A Laser Source Hatch
+UHV 4,096A Laser Target Hatch
+UHV 4A Dynamo Hatch
+UHV 4A Energy Hatch
+UHV 64A Dynamo Hatch
+UHV 64A Energy Hatch
+UHV 65,536A Laser Source Hatch
+UHV 65,536A Laser Target Hatch
+UHV Elemental Input Hatch
+UHV Elemental Output Hatch
+UHV Overflow Output Hatch
+UIV 1,024A Laser Source Hatch
+UIV 1,024A Laser Target Hatch
+UIV 1,048,576A Laser Source Hatch
+UIV 1,048,576A Laser Target Hatch
+UIV 16,384A Laser Source Hatch
+UIV 16,384A Laser Target Hatch
+UIV 16A Dynamo Hatch
+UIV 16A Energy Hatch
+UIV 256A Laser Source Hatch
+UIV 256A Laser Target Hatch
+UIV 262,144A Laser Source Hatch
+UIV 262,144A Laser Target Hatch
+UIV 4,096A Laser Source Hatch
+UIV 4,096A Laser Target Hatch
+UIV 4A Dynamo Hatch
+UIV 4A Energy Hatch
+UIV 64A Dynamo Hatch
+UIV 64A Energy Hatch
+UIV 65,536A Laser Source Hatch
+UIV 65,536A Laser Target Hatch
+UIV Elemental Input Hatch
+UIV Elemental Output Hatch
+UIV Machine Casing
+UIV Machine Hull
+UIV Overflow Output Hatch
+Ultimate Advanced Molecular Casing
+Ultimate Containment Field Generator
+Ultimate Molecular Casing
+Ultimate Power Buck Converter
+Ultimate Power Tesla Transceiver
+Ultimate Power Transformer
+Ultra Low Voltage Power Transformer
+UMV 1,024A Laser Source Hatch
+UMV 1,024A Laser Target Hatch
+UMV 1,048,576A Laser Source Hatch
+UMV 1,048,576A Laser Target Hatch
+UMV 16,384A Laser Source Hatch
+UMV 16,384A Laser Target Hatch
+UMV 16A Dynamo Hatch
+UMV 16A Energy Hatch
+UMV 256A Laser Source Hatch
+UMV 256A Laser Target Hatch
+UMV 262,144A Laser Source Hatch
+UMV 262,144A Laser Target Hatch
+UMV 4,096A Laser Source Hatch
+UMV 4,096A Laser Target Hatch
+UMV 4A Dynamo Hatch
+UMV 4A Energy Hatch
+UMV 64A Dynamo Hatch
+UMV 64A Energy Hatch
+UMV 65,536A Laser Source Hatch
+UMV 65,536A Laser Target Hatch
+UMV Elemental Input Hatch
+UMV Elemental Output Hatch
+UMV Machine Casing
+UMV Machine Hull
+UMV Overflow Output Hatch
+Uncertainty Resolver
+Uncertainty Resolver X
+UV 1,024A Laser Source Hatch
+UV 1,024A Laser Target Hatch
+UV 1,048,576A Laser Source Hatch
+UV 1,048,576A Laser Target Hatch
+UV 16,384A Laser Source Hatch
+UV 16,384A Laser Target Hatch
+UV 16A Dynamo Hatch
+UV 16A Energy Hatch
+UV 256A Laser Source Hatch
+UV 256A Laser Target Hatch
+UV 262,144A Laser Source Hatch
+UV 262,144A Laser Target Hatch
+UV 4,096A Laser Source Hatch
+UV 4,096A Laser Target Hatch
+UV 4A Dynamo Hatch
+UV 4A Energy Hatch
+UV 64A Dynamo Hatch
+UV 64A Energy Hatch
+UV 65,536A Laser Source Hatch
+UV 65,536A Laser Target Hatch
+UV Elemental Input Hatch
+UV Elemental Output Hatch
+UV Overflow Output Hatch
+UXV 1,024A Laser Source Hatch
+UXV 1,024A Laser Target Hatch
+UXV 1,024A Wireless Energy Hatch
+UXV 1,048,576A Laser Source Hatch
+UXV 1,048,576A Laser Target Hatch
+UXV 1,048,576A Wireless Energy Hatch
+UXV 16,384A Laser Source Hatch
+UXV 16,384A Laser Target Hatch
+UXV 16,384A Wireless Energy Hatch
+UXV 16A Dynamo Hatch
+UXV 16A Energy Hatch
+UXV 256A Laser Source Hatch
+UXV 256A Laser Target Hatch
+UXV 256A Wireless Energy Hatch
+UXV 262,144A Laser Source Hatch
+UXV 262,144A Laser Target Hatch
+UXV 262,144A Wireless Energy Hatch
+UXV 4,096A Laser Source Hatch
+UXV 4,096A Laser Target Hatch
+UXV 4,096A Wireless Energy Hatch
+UXV 4A Dynamo Hatch
+UXV 4A Energy Hatch
+UXV 64A Dynamo Hatch
+UXV 64A Energy Hatch
+UXV 65,536A Laser Source Hatch
+UXV 65,536A Laser Target Hatch
+UXV 65,536A Wireless Energy Hatch
+UXV Elemental Input Hatch
+UXV Elemental Output Hatch
+UXV Machine Casing
+UXV Machine Hull
+UXV Overflow Output Hatch
+Weighted Network Switch With QoS
+Wormhole
+ZPM 1,024A Laser Source Hatch
+ZPM 1,024A Laser Target Hatch
+ZPM 1,048,576A Laser Source Hatch
+ZPM 1,048,576A Laser Target Hatch
+ZPM 16,384A Laser Source Hatch
+ZPM 16,384A Laser Target Hatch
+ZPM 16A Dynamo Hatch
+ZPM 16A Energy Hatch
+ZPM 256A Laser Source Hatch
+ZPM 256A Laser Target Hatch
+ZPM 262,144A Laser Source Hatch
+ZPM 262,144A Laser Target Hatch
+ZPM 4,096A Laser Source Hatch
+ZPM 4,096A Laser Target Hatch
+ZPM 4A Dynamo Hatch
+ZPM 4A Energy Hatch
+ZPM 64A Dynamo Hatch
+ZPM 64A Energy Hatch
+ZPM 65,536A Laser Source Hatch
+ZPM 65,536A Laser Target Hatch
+ZPM Superconductor Primary Tesla Windings
+ZPM Tesla Capacitor
+ZPM Voltage Buck Converter
+ZPM Voltage Power Transformer
+
+## KekzTech
+
+Source: tmp_gt5check\assets\kekztech\lang\en_US.lang
+Count: 40
+
+Ceria Dust
+Crafting Component
+Empty Capacitor (-)
+Extremely Ultimate Capacitor (UEV)
+GDC Ceramic Dust
+GDC Ceramic Electrolyte Unit
+GDC Ceramic Plate
+Ichor Jar
+Ichor Void Jar
+Insanely Ultimate Capacitor (UIV)
+KekzTech Error Coin
+Lapotron Capacitor (EV)
+Lapotronic Capacitor (IV)
+Lapotronic Capacitor (LuV)
+Lapotronic Capacitor (UV)
+Lapotronic Capacitor (ZPM)
+Lapotronic Casing/Capacitor
+Lapotronic Super Capacitor Casing
+Large Hex Tile
+Mega Ultimate Capacitor (UMV)
+T.F.F.T Casing
+T.F.F.T Casing/Storage Field Block
+T.F.F.T Storage Field Block (Tier I)
+T.F.F.T Storage Field Block (Tier II)
+T.F.F.T Storage Field Block (Tier III)
+T.F.F.T Storage Field Block (Tier IV)
+T.F.F.T Storage Field Block (Tier IX)
+T.F.F.T Storage Field Block (Tier V)
+T.F.F.T Storage Field Block (Tier VI)
+T.F.F.T Storage Field Block (Tier VII)
+T.F.F.T Storage Field Block (Tier VIII)
+T.F.F.T Storage Field Block (Tier X)
+Thaumium Reinforced Jar
+Thaumium Reinforced Void Jar
+Ultimate Capacitor (UHV)
+YSZ Ceramic Dust
+YSZ Ceramic Electrolyte Unit
+YSZ Ceramic Plate
+Yttria Dust
+Zirconia Dust
+
+## KubaTech
+
+Source: tmp_gt5check\assets\kubatech\lang\en_US.lang
+Count: 46
+
+§1§lKuba's Butterfly Pea Tea
+§2§lKuba's Green Tea
+§4§lKuba's Pu-erh Tea
+§4§lTea Acceptor
+§4§lTea Storage Extender
+§6§lKuba's %s §6§lTea
+§6§lKuba's Black Tea
+§6§lKuba's Earl Gray Tea
+§6§lKuba's Yellow Tea
+§a§lKuba's Peppermint Tea
+§c§lKuba's Hibiscus Tea
+§e§lKuba's Lemon Tea
+§e§lKuba's Oolong Tea
+§e§lKuba's White Tea
+§f§lKuba's Milk Tea
+Awakened Core Schematic
+Black Tea
+Black Tea Leaf
+Bruised Tea Leaf
+Chaotic Core Schematic
+Dehydrated Tea Leaf
+Draconic Core Schematic
+Earl Gray Tea
+Fermented Tea Leaf
+Fusion Casing
+Green Tea
+Green Tea Leaf
+Lemon Tea
+Milk Tea
+Oolong Tea
+Oolong Tea Leaf
+Oxidized Tea Leaf
+Partially Oxidized Tea Leaf
+Peppermint Tea
+Pu-erh Tea
+Pu-erh Tea Leaf
+Rolled Tea Leaf
+Steamed Tea Leaf
+Tea / Tea Leaf
+Tea Acceptor
+Tea Acceptor Research Note
+White Tea
+White Tea Leaf
+Wyvern Core Schematic
+Yellow Tea
+Yellow Tea Leaf
+
+## GGFab
+
+Source: tmp_gt5check\assets\ggfab\lang\en_US.lang
+Count: 0
+
+
+## GTNEI Ore Plugin
+
+Source: tmp_gt5check\assets\gtneioreplugin\lang\en_US.lang
+Count: 10
+
+Asteroid
+Asteroid Stats
+Bedrock Ore Stats
+Custom
+IE Vein Stats
+None
+Small Ore Stats
+Underground Fluid Stats
+Vein
+Vein Stats

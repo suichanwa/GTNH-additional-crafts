@@ -40,10 +40,19 @@ public final class GregTechRecipeLoader {
         registerAlgaeBiomassToCompostRecipe();
         registerAlgaeProcessingChainRecipes();
         registerCelluloseFiberBiomassRecipe();
+        registerGlycerolNitrationRecipe();
+        registerGlycerolHydrogenCrackingRecipe();
+        registerGlycerolFermentationRecipe();
+        registerPhenolFormaldehydeResinRecipe();
+        registerPhenolHydrogenToCyclohexaneRecipe();
+        registerPhenolNitrationRecipe();
+        registerKeroseneHydrocrackingRecipe();
+        registerKeroseneSulfuricLightFuelRecipe();
         registerBiomassCrudeBioTarCokeOvenRecipe();
         registerCrudeBioTarDistillationRecipe();
         registerCrudeBioTarMiddleFractionDistillationRecipe();
         registerCrudeBioTarLightFractionDistillationRecipe();
+        registerNaphthaToNaphthaleneRecipe();
         registerNitrogenRocketFuelUpgradeRecipe();
         registerJetFuelRocketFuelRecipe();
         registerAcetaldehydeHydrogenationRecipe();
@@ -303,6 +312,32 @@ public final class GregTechRecipeLoader {
             "Registered Distillation Tower recipe: IC-1 + 1000L Crude Bio-tar -> 400L Biogas + 100L Water + 200L Wood Vinegar + 130L Light Fuel + 70L Acetone + 50L Acetic Acid.");
     }
 
+    private static void registerNaphthaToNaphthaleneRecipe() {
+        FluidStack naphtha = Materials.Naphtha.getFluid(1000L);
+        ItemStack platinumCatalyst = GTUtility.copyAmount(0, Materials.Platinum.getDust(1));
+        FluidStack naphthalene = GTPPFluids.Naphthalene == null ? getFirstAvailableFluid(400, "naphthalene", "Naphthalene")
+            : new FluidStack(GTPPFluids.Naphthalene, 400);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 300L);
+        FluidStack methane = getFluidOrGas(Materials.Methane, 200L);
+
+        if (naphtha == null || platinumCatalyst == null || platinumCatalyst.getItem() == null || naphthalene == null
+            || hydrogen == null || methane == null) {
+            MyMod.logInfo("Skipped LCR Naphtha -> Naphthalene recipe: required catalyst or fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(platinumCatalyst)
+            .fluidInputs(naphtha)
+            .fluidOutputs(naphthalene, hydrogen, methane)
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(2048)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: 1000L Naphtha + Platinum Dust catalyst -> 400L Naphthalene + 300L Hydrogen + 200L Methane.");
+    }
+
     private static void registerCelluloseFiberBiomassRecipe() {
         ItemStack celluloseFiber = GregtechItemList.CelluloseFiber.get(2L, new Object[0]);
         FluidStack water = getFluidOrGas(Materials.Water, 1000L);
@@ -322,6 +357,196 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.brewingRecipes);
 
         MyMod.logInfo("Registered Brewery recipe: 2x Cellulose Fiber + 1000L Water -> 500L Biomass.");
+    }
+
+    private static void registerGlycerolNitrationRecipe() {
+        FluidStack glycerol = getFluidOrGas(Materials.Glycerol, 500L);
+        FluidStack nitrogenDioxide = getFluidOrGas(Materials.NitrogenDioxide, 500L);
+        FluidStack glycerylTrinitrate = getFluidOrGas(Materials.Glyceryl, 750L);
+
+        if (glycerol == null || nitrogenDioxide == null || glycerylTrinitrate == null) {
+            MyMod.logInfo("Skipped Glycerol nitration recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
+            .fluidInputs(glycerol, nitrogenDioxide)
+            .fluidOutputs(glycerylTrinitrate)
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
+            .fluidInputs(getFluidOrGas(Materials.Glycerol, 500L), getFluidOrGas(Materials.NitrogenDioxide, 500L))
+            .fluidOutputs(getFluidOrGas(Materials.Glyceryl, 750L))
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered Chemical Reactor and LCR recipe: IC-1 + 500L Glycerol + 500L Nitrogen Dioxide -> 750L Glyceryl Trinitrate.");
+    }
+
+    private static void registerGlycerolHydrogenCrackingRecipe() {
+        FluidStack glycerol = getFluidOrGas(Materials.Glycerol, 1000L);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 500L);
+        FluidStack methane = getFluidOrGas(Materials.Methane, 600L);
+        FluidStack water = getFluidOrGas(Materials.Water, 400L);
+
+        if (glycerol == null || hydrogen == null || methane == null || water == null) {
+            MyMod.logInfo("Skipped Glycerol cracking recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(2))
+            .fluidInputs(glycerol, hydrogen)
+            .fluidOutputs(methane, water)
+            .duration(16 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: IC-2 + 1000L Glycerol + 500L Hydrogen -> 600L Methane + 400L Water.");
+    }
+
+    private static void registerGlycerolFermentationRecipe() {
+        FluidStack glycerol = getFluidOrGas(Materials.Glycerol, 1000L);
+        FluidStack vinegar = getFluidOrGas(Materials.Vinegar, 700L);
+
+        if (glycerol == null || vinegar == null) {
+            MyMod.logInfo("Skipped Glycerol fermentation recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
+            .fluidInputs(glycerol)
+            .fluidOutputs(vinegar)
+            .duration(30 * GTRecipeBuilder.SECONDS)
+            .eut(30)
+            .addTo(RecipeMaps.fermentingRecipes);
+
+        MyMod.logInfo("Registered Fermenter recipe: IC-1 + 1000L Glycerol -> 700L Vinegar.");
+    }
+
+    private static void registerPhenolFormaldehydeResinRecipe() {
+        FluidStack phenol = getFluidOrGas(Materials.Phenol, 500L);
+        FluidStack formaldehyde = GTPPFluids.Formaldehyde == null
+            ? getFirstAvailableFluid(500, "formaldehyde", "Formaldehyde")
+            : new FluidStack(GTPPFluids.Formaldehyde, 500);
+        FluidStack liquidResin = GTPPFluids.LiquidResin == null
+            ? getFirstAvailableFluid(750, "liquidresin", "Liquid Resin")
+            : new FluidStack(GTPPFluids.LiquidResin, 750);
+
+        if (phenol == null || formaldehyde == null || liquidResin == null) {
+            MyMod.logInfo("Skipped Phenol + Formaldehyde -> Liquid Resin recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
+            .fluidInputs(phenol, formaldehyde)
+            .fluidOutputs(liquidResin)
+            .duration(10 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        MyMod.logInfo("Registered Chemical Reactor recipe: IC-1 + 500L Phenol + 500L Formaldehyde -> 750L Liquid Resin.");
+    }
+
+    private static void registerPhenolHydrogenToCyclohexaneRecipe() {
+        FluidStack phenol = getFluidOrGas(Materials.Phenol, 1000L);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 500L);
+        FluidStack cyclohexane = GTPPFluids.Cyclohexane == null
+            ? getFirstAvailableFluid(850, "cyclohexane", "Cyclohexane")
+            : new FluidStack(GTPPFluids.Cyclohexane, 850);
+
+        if (phenol == null || hydrogen == null || cyclohexane == null) {
+            MyMod.logInfo("Skipped Phenol + Hydrogen -> Cyclohexane recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(2))
+            .fluidInputs(phenol, hydrogen)
+            .fluidOutputs(cyclohexane)
+            .duration(15 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        MyMod.logInfo("Registered Chemical Reactor recipe: IC-2 + 1000L Phenol + 500L Hydrogen -> 850L Cyclohexane.");
+    }
+
+    private static void registerPhenolNitrationRecipe() {
+        FluidStack phenol = getFluidOrGas(Materials.Phenol, 500L);
+        FluidStack nitrationMixture = getFluidOrGas(Materials.NitrationMixture, 500L);
+        FluidStack nitrobenzene = GTPPFluids.Nitrobenzene == null
+            ? getFirstAvailableFluid(750, "nitrobenzene", "Nitrobenzene")
+            : new FluidStack(GTPPFluids.Nitrobenzene, 750);
+
+        if (phenol == null || nitrationMixture == null || nitrobenzene == null) {
+            MyMod.logInfo("Skipped Phenol + Nitration Mixture -> Nitrobenzene recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
+            .fluidInputs(phenol, nitrationMixture)
+            .fluidOutputs(nitrobenzene)
+            .duration(20 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo("Registered LCR recipe: IC-1 + 500L Phenol + 500L Nitration Mixture -> 750L Nitrobenzene.");
+    }
+
+    private static void registerKeroseneHydrocrackingRecipe() {
+        FluidStack kerosene = GTPPFluids.Kerosene == null ? getFirstAvailableFluid(1000, "kerosene", "Kerosene")
+            : new FluidStack(GTPPFluids.Kerosene, 1000);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 300L);
+        FluidStack lightFuel = getFluidOrGas(Materials.LightFuel, 700L);
+        FluidStack methane = getFluidOrGas(Materials.Methane, 400L);
+
+        if (kerosene == null || hydrogen == null || lightFuel == null || methane == null) {
+            MyMod.logInfo("Skipped Kerosene hydrocracking recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(2))
+            .fluidInputs(kerosene, hydrogen)
+            .fluidOutputs(lightFuel, methane)
+            .duration(20 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo("Registered LCR recipe: IC-2 + 1000L Kerosene + 300L Hydrogen -> 700L Light Fuel + 400L Methane.");
+    }
+
+    private static void registerKeroseneSulfuricLightFuelRecipe() {
+        FluidStack kerosene = GTPPFluids.Kerosene == null ? getFirstAvailableFluid(1000, "kerosene", "Kerosene")
+            : new FluidStack(GTPPFluids.Kerosene, 1000);
+        FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, 100L);
+        FluidStack sulfuricLightFuel = getFluidOrGas(Materials.SulfuricLightFuel, 900L);
+
+        if (kerosene == null || sulfuricAcid == null || sulfuricLightFuel == null) {
+            MyMod.logInfo("Skipped Kerosene + Sulfuric Acid -> Sulfuric Light Fuel recipe: required fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(3))
+            .fluidInputs(kerosene, sulfuricAcid)
+            .fluidOutputs(sulfuricLightFuel)
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered Chemical Reactor recipe: IC-3 + 1000L Kerosene + 100L Sulfuric Acid -> 900L Sulfuric Light Fuel.");
     }
 
     private static void registerJetFuelRocketFuelRecipe() {
