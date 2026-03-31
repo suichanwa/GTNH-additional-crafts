@@ -20,10 +20,7 @@ public final class ModFluids {
             return;
         }
 
-        bioTar = new Fluid("bio_tar").setUnlocalizedName("bio_tar")
-            .setDensity(1250)
-            .setTemperature(330)
-            .setViscosity(2400);
+        bioTar = new BioTarFluid();
         FluidRegistry.registerFluid(bioTar);
 
         bioTarBlock = new BlockBioTarFluid(bioTar);
