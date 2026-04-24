@@ -37,3 +37,12 @@ addon.late.local.gradle.kts
 layout.json
 tmp_gt5check/
 tmp_gt5src/
+.agent
+.claude
+.omx
+.cursor
+.cline
+.agents
+.continue
+.trae
+.windsurf
