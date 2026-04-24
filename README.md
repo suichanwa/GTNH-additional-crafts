@@ -57,6 +57,27 @@ Config values are exported under the `large_combustion_engine` category (generat
 - `overclockEfficiencyDenominator`
 - `dinitrogenTetroxideConsumptionPerTick`
 
+## Thaumic Boots Integration
+
+This mod now integrates with the GTNH Thaumic Boots fork and adds an in-game control panel for the currently equipped Thaumic Boots pair.
+
+### Open the in-game controls
+
+- Press `B` (rebindable in Controls).
+- Or run client command: `/tbui` (aliases: `/tbconfig`, `/bootsconfig`, `/thaumicbootsconfig`).
+
+### Live controls for equipped boots
+
+- `Speed Boost` (0-100%)
+- `Jump Boost` (0-100%)
+- `Forward Axis` multiplier (0-100%)
+- `Strafe Axis` multiplier (0-100%)
+- `Omni Move` toggle
+- `Step Assist` toggle
+- `Inertia Cancel` toggle
+
+Changes are applied live to the pair you are wearing and synchronized to server.
+
 ## License
 
 MIT. See `LICENSE`
