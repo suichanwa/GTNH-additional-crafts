@@ -26,7 +26,7 @@ public class ModConfigGui extends GuiConfig {
             MyMod.MODID,
             false,
             false,
-            "GTNH Additional Crafts + Thaumic Boots Configuration");
+            "GTNH Additional Crafts + Thaumic Boots Config (typed controls)");
     }
 
     private static List<IConfigElement> buildConfigElements() {
