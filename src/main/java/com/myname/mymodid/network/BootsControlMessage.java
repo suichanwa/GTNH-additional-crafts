@@ -4,6 +4,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.myname.mymodid.compat.thaumicboots.ThaumicBootsTuning;
+
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -17,16 +19,23 @@ public class BootsControlMessage implements IMessage {
     private boolean omniEnabled;
     private boolean stepEnabled;
     private boolean inertiaCancelEnabled;
+    private double forwardAxisMultiplier;
+    private double strafeAxisMultiplier;
+    private double verticalAxisMultiplier;
 
     public BootsControlMessage() {}
 
     public BootsControlMessage(double speedMultiplier, double jumpMultiplier, boolean omniEnabled, boolean stepEnabled,
-        boolean inertiaCancelEnabled) {
+        boolean inertiaCancelEnabled, double forwardAxisMultiplier, double strafeAxisMultiplier,
+        double verticalAxisMultiplier) {
         this.speedMultiplier = speedMultiplier;
         this.jumpMultiplier = jumpMultiplier;
         this.omniEnabled = omniEnabled;
         this.stepEnabled = stepEnabled;
         this.inertiaCancelEnabled = inertiaCancelEnabled;
+        this.forwardAxisMultiplier = forwardAxisMultiplier;
+        this.strafeAxisMultiplier = strafeAxisMultiplier;
+        this.verticalAxisMultiplier = verticalAxisMultiplier;
     }
 
     @Override
@@ -36,6 +45,9 @@ public class BootsControlMessage implements IMessage {
         omniEnabled = buffer.readBoolean();
         stepEnabled = buffer.readBoolean();
         inertiaCancelEnabled = buffer.readBoolean();
+        forwardAxisMultiplier = buffer.readDouble();
+        strafeAxisMultiplier = buffer.readDouble();
+        verticalAxisMultiplier = buffer.readDouble();
     }
 
     @Override
@@ -45,6 +57,9 @@ public class BootsControlMessage implements IMessage {
         buffer.writeBoolean(omniEnabled);
         buffer.writeBoolean(stepEnabled);
         buffer.writeBoolean(inertiaCancelEnabled);
+        buffer.writeDouble(forwardAxisMultiplier);
+        buffer.writeDouble(strafeAxisMultiplier);
+        buffer.writeDouble(verticalAxisMultiplier);
     }
 
     public static class Handler implements IMessageHandler<BootsControlMessage, IMessage> {
@@ -66,6 +81,9 @@ public class BootsControlMessage implements IMessage {
             bootsItem.setModeOmni(bootsStack, message.omniEnabled);
             bootsItem.setModeStep(bootsStack, message.stepEnabled);
             bootsItem.setIsInertiaCanceling(bootsStack, message.inertiaCancelEnabled);
+            ThaumicBootsTuning.setForwardMultiplier(bootsStack, message.forwardAxisMultiplier);
+            ThaumicBootsTuning.setStrafeMultiplier(bootsStack, message.strafeAxisMultiplier);
+            ThaumicBootsTuning.setVerticalMultiplier(bootsStack, message.verticalAxisMultiplier);
             player.inventory.markDirty();
             return null;
         }

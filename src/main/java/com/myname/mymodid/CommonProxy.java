@@ -5,9 +5,11 @@ import com.myname.mymodid.compat.gregtech.LargeSemifluidGeneratorPatch;
 import com.myname.mymodid.compat.gregtech.RocketFuelGeneratorPatch;
 import com.myname.mymodid.compat.gregtech.VacuumFreezerNitrogenPatch;
 import com.myname.mymodid.compat.kekztech.SOFCHeliumPatch;
+import com.myname.mymodid.compat.thaumicboots.ThaumicBootsRuntimeEventHandler;
 import com.myname.mymodid.fluid.ModFluids;
 import com.myname.mymodid.recipe.GregTechRecipeLoader;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -27,6 +29,9 @@ public class CommonProxy {
         RocketFuelGeneratorPatch.schedule();
         VacuumFreezerNitrogenPatch.schedule();
         SOFCHeliumPatch.schedule();
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new ThaumicBootsRuntimeEventHandler());
     }
 
     public void init(FMLInitializationEvent event) {
