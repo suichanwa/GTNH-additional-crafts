@@ -8,7 +8,12 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = MyMod.MODID, version = Tags.VERSION, name = "MyMod", acceptedMinecraftVersions = "[1.7.10]")
+@Mod(
+    modid = MyMod.MODID,
+    version = Tags.VERSION,
+    name = "MyMod",
+    acceptedMinecraftVersions = "[1.7.10]",
+    guiFactory = "com.myname.mymodid.client.config.ModGuiFactory")
 public class MyMod {
 
     public static final String MODID = "mymodid";

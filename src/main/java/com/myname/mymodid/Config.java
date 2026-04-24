@@ -36,10 +36,33 @@ public class Config {
     public static int lsbPerformanceLubricantDenominator = 1;
     public static int lsbPerformanceOxygenNumerator = 2;
     public static int lsbPerformanceOxygenDenominator = 1;
+    private static Configuration configuration;
+    private static File configurationFile;
 
-    public static void synchronizeConfiguration(File configFile) {
-        Configuration configuration = new Configuration(configFile);
+    public static synchronized void synchronizeConfiguration(File configFile) {
+        File previousFile = configurationFile;
+        configurationFile = configFile;
+        if (configuration == null || previousFile == null || !previousFile.equals(configFile)) {
+            configuration = new Configuration(configFile);
+        }
+        configuration.load();
+        loadValues();
+        saveIfChanged();
+    }
 
+    public static synchronized Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public static synchronized void onConfigGuiChanged() {
+        if (configuration == null) {
+            return;
+        }
+        loadValues();
+        saveIfChanged();
+    }
+
+    private static void loadValues() {
         greeting = configuration.getString("greeting", Configuration.CATEGORY_GENERAL, greeting, "How shall I greet?");
         lceDefaultMaxEfficiency = configuration.getInt(
             "defaultMaxEfficiency",
@@ -209,7 +232,9 @@ public class Config {
             1,
             Integer.MAX_VALUE,
             "Performance mode oxygen multiplier denominator.");
+    }
 
+    private static void saveIfChanged() {
         if (configuration.hasChanged()) {
             configuration.save();
         }
