@@ -17,14 +17,15 @@ public final class ModFluids {
         Fluid existingBioTar = FluidRegistry.getFluid("bio_tar");
         if (existingBioTar != null) {
             bioTar = existingBioTar;
-            return;
+        } else {
+            bioTar = new BioTarFluid();
+            FluidRegistry.registerFluid(bioTar);
         }
 
-        bioTar = new BioTarFluid();
-        FluidRegistry.registerFluid(bioTar);
-
-        bioTarBlock = new BlockBioTarFluid(bioTar);
-        GameRegistry.registerBlock(bioTarBlock, "bio_tar");
+        if (bioTarBlock == null) {
+            bioTarBlock = new BlockBioTarFluid(bioTar);
+            GameRegistry.registerBlock(bioTarBlock, "bio_tar");
+        }
     }
 
     public static FluidStack getBioTar(int amount) {

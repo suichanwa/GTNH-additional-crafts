@@ -12,12 +12,14 @@ import gtnh_additional_crafts.compat.gregtech.VacuumFreezerNitrogenPatch;
 import gtnh_additional_crafts.compat.kekztech.SOFCHeliumPatch;
 import gtnh_additional_crafts.compat.thaumicboots.ThaumicBootsRuntimeEventHandler;
 import gtnh_additional_crafts.fluid.ModFluids;
+import gtnh_additional_crafts.item.ModItems;
 import gtnh_additional_crafts.recipe.GregTechRecipeLoader;
 
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
+        ModItems.registerItems();
         ModFluids.registerFluids();
 
         MyMod.logInfo(Config.greeting);

@@ -12,3 +12,5 @@ pending ideas
 4. more crafts for the phtalic acid
 5. more crafting to get ethylene/proccesing chains maybe
 6. maybe more uses for glycelor? what is it even used for tho? i need some studying
+7. Thorium reacto LFTR, new recepies for it based on the thorium fuel, not only ueranium, but also to be able to use plutonium and thorium, for making fuels
+8. New crafts in the Reactor fuel processing plant, that will let the user make new types of fuel based on the Thorium and Plutonium, maybe even a new type of fuel that can be used in the LFTR reactor, but not in the normal one, and maybe a new type of fuel that can be used in both reactors, but with different efficiency

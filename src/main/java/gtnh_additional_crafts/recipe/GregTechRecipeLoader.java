@@ -13,6 +13,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsKevlar;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
@@ -21,6 +22,7 @@ import gtPlusPlus.core.fluids.GTPPFluids;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.fluid.ModFluids;
+import gtnh_additional_crafts.item.ModItems;
 
 public final class GregTechRecipeLoader {
 
@@ -35,6 +37,7 @@ public final class GregTechRecipeLoader {
         70);
 
     public static void registerRecipes() {
+        registerSodiumBatteryX16Recipe();
         registerNitricOxideLargeChemicalReactorRecipe();
         registerAlgaeBiomassToCompostRecipe();
         registerAlgaeProcessingChainRecipes();
@@ -58,6 +61,19 @@ public final class GregTechRecipeLoader {
         registerMethanolCarbonMonoxideHydrogenToEthanolRecipe();
         registerMethaneToAcetyleneDehydratorRecipe();
         removeNitricOxideRegularChemicalReactorRecipe();
+    }
+
+    private static void registerSodiumBatteryX16Recipe() {
+        ItemStack quadSodiumBattery = GregtechItemList.Battery_RE_EV_Sodium.get(1L);
+        if (quadSodiumBattery == null) {
+            MyMod.logInfo("Skipped 16x Sodium Battery recipe: Quad Cell Sodium Battery is missing.");
+            return;
+        }
+
+        GTModHandler.addCraftingRecipe(
+            ModItems.sodiumBatteryX16IV(),
+            GTModHandler.RecipeBits.BUFFERED,
+            new Object[] { "BB", "BB", 'B', quadSodiumBattery });
     }
 
     private static void registerNitricOxideLargeChemicalReactorRecipe() {
