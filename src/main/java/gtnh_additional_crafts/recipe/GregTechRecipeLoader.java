@@ -10,10 +10,13 @@ import net.minecraftforge.fluids.FluidStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsKevlar;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
@@ -73,7 +76,9 @@ public final class GregTechRecipeLoader {
         GTModHandler.addCraftingRecipe(
             ModItems.sodiumBatteryX16IV(),
             GTModHandler.RecipeBits.BUFFERED,
-            new Object[] { "BB", "BB", 'B', quadSodiumBattery });
+            new Object[] { "BWB", "CTC", "BWB", 'B', quadSodiumBattery, 'W',
+                GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.Aluminium, 1L), 'C', "circuitData", 'T',
+                ItemList.Transformer_EV_HV.get(1L) });
     }
 
     private static void registerNitricOxideLargeChemicalReactorRecipe() {

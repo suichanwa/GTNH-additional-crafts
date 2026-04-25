@@ -32,7 +32,7 @@ public class SodiumBatteryX16Item extends Item implements ISpecialElectricItem, 
         setUnlocalizedName(MyMod.MODID + "." + NAME);
         setTextureName(MyMod.MODID + ":" + NAME);
         setCreativeTab(GregTechAPI.TAB_GREGTECH);
-        setMaxStackSize(1);
+        setMaxStackSize(64);
         setNoRepair();
     }
 
