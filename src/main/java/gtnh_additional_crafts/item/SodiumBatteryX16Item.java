@@ -144,26 +144,29 @@ public class SodiumBatteryX16Item extends Item implements ISpecialElectricItem, 
     public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced) {
         tooltip.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("item.gtnh_additional_crafts.reusable"));
         tooltip.add(
-            EnumChatFormatting.AQUA
-                + StatCollector.translateToLocalFormatted(
-                    "gt.item.desc.eu_info",
-                    GTUtility.formatNumbers(getStoredCharge(stack)),
-                    GTUtility.formatNumbers(MAX_CHARGE),
-                    GTUtility.formatNumbers(TRANSFER_LIMIT))
-                + EnumChatFormatting.GRAY);
+            EnumChatFormatting.AQUA + StatCollector.translateToLocalFormatted(
+                "gt.item.desc.eu_info",
+                GTUtility.formatNumbers(getStoredCharge(stack)),
+                GTUtility.formatNumbers(MAX_CHARGE),
+                GTUtility.formatNumbers(TRANSFER_LIMIT)) + EnumChatFormatting.GRAY);
         tooltip.add(EnumChatFormatting.GREEN + "IV-Tier" + EnumChatFormatting.GRAY);
     }
 
     private static long transferAmount(double amount, boolean ignoreTransferLimit) {
-        return Math.max(0, (long) Math.min(ignoreTransferLimit ? amount : Math.min(amount, TRANSFER_LIMIT), Long.MAX_VALUE));
+        return Math
+            .max(0, (long) Math.min(ignoreTransferLimit ? amount : Math.min(amount, TRANSFER_LIMIT), Long.MAX_VALUE));
     }
 
     private static long getStoredCharge(ItemStack stack) {
         if (stack == null || !stack.hasTagCompound()) {
             return 0;
         }
-        return Math.max(0, Math.min(MAX_CHARGE, stack.getTagCompound()
-            .getLong(CHARGE_NBT_KEY)));
+        return Math.max(
+            0,
+            Math.min(
+                MAX_CHARGE,
+                stack.getTagCompound()
+                    .getLong(CHARGE_NBT_KEY)));
     }
 
     private static void setStoredCharge(ItemStack stack, long charge) {
