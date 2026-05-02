@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GTValues;
@@ -19,9 +20,12 @@ import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
+import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.fluids.GTPPFluids;
+import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
+import gtPlusPlus.core.material.nuclear.MaterialsNuclides;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.fluid.ModFluids;
@@ -58,11 +62,15 @@ public final class GregTechRecipeLoader {
         registerCrudeBioTarMiddleFractionDistillationRecipe();
         registerCrudeBioTarLightFractionDistillationRecipe();
         registerNaphthaToNaphthaleneRecipe();
+        registerCryonitroxOxidizerRecipe();
         registerNitrogenRocketFuelUpgradeRecipe();
         registerJetFuelRocketFuelRecipe();
         registerAcetaldehydeHydrogenationRecipe();
         registerMethanolCarbonMonoxideHydrogenToEthanolRecipe();
         registerMethaneToAcetyleneDehydratorRecipe();
+        registerLftrThoriumPlutoniumFuelRecipes();
+        registerNaquadahDustFuelRodRecipes();
+        registerCrimsonCultArmorSalvageRecipes();
         removeNitricOxideRegularChemicalReactorRecipe();
     }
 
@@ -212,6 +220,45 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         MyMod.logInfo("Registered LCR recipe: 1000L RP-1 + 1000L Nitrogen + 500L Oxygen -> 750L CN3H7O3 Rocket Fuel.");
+    }
+
+    private static void registerCryonitroxOxidizerRecipe() {
+        FluidStack liquidOxygen = getMaterialFluidOrFallback(
+            Materials.LiquidOxygen,
+            500L,
+            "liquidoxygen",
+            "liquid_oxygen",
+            "liquid.oxygen");
+        FluidStack liquidNitrogen = getMaterialFluidOrFallback(
+            Materials.LiquidNitrogen,
+            500L,
+            "liquidnitrogen",
+            "liquid_nitrogen",
+            "liquid.nitrogen");
+        if (liquidOxygen == null) {
+            liquidOxygen = getFluidOrGas(Materials.Oxygen, 500L);
+        }
+        if (liquidNitrogen == null) {
+            liquidNitrogen = getFluidOrGas(Materials.Nitrogen, 500L);
+        }
+        FluidStack cryonitroxOxidizer = ModFluids.getCryonitroxOxidizer(1000);
+
+        if (liquidOxygen == null || liquidNitrogen == null || cryonitroxOxidizer == null) {
+            MyMod.logInfo(
+                "Skipped Cryonitrox Oxidizer recipe: liquid oxygen, liquid nitrogen, or Cryonitrox fluid is unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(21))
+            .fluidInputs(liquidOxygen, liquidNitrogen)
+            .fluidOutputs(cryonitroxOxidizer)
+            .duration(8 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.mixerRecipes);
+
+        MyMod.logInfo(
+            "Registered Mixer recipe: 500L Liquid Oxygen + 500L Liquid Nitrogen -> 1000L Cryonitrox Oxidizer.");
     }
 
     private static void registerBiomassCrudeBioTarCokeOvenRecipe() {
@@ -683,6 +730,462 @@ public final class GregTechRecipeLoader {
         MyMod.logInfo("Registered Dehydrator recipe: 2000L Methane -> 1000L Acetylene + 3000L Hydrogen.");
     }
 
+    private static void registerLftrThoriumPlutoniumFuelRecipes() {
+        FluidStack lftrFuelBase = MaterialsNuclides.LiFBeF2UF4.getFluidStack(1000);
+        FluidStack lftrThoriumFuel = MaterialsNuclides.LiFBeF2ThF4UF4.getFluidStack(1000);
+        FluidStack lftrHybridFuel = MaterialsNuclides.LiFBeF2ZrF4UF4.getFluidStack(1000);
+        FluidStack moltenSaltBlanket = MaterialsNuclides.Li2BeF4.getFluidStack(200);
+        FluidStack thoriumFluoride = MaterialsFluorides.THORIUM_TETRAFLUORIDE.getFluidStack(120);
+        FluidStack zirconiumFluoride = MaterialsFluorides.ZIRCONIUM_TETRAFLUORIDE.getFluidStack(120);
+        FluidStack uraniumTetrafluoride = MaterialsFluorides.URANIUM_TETRAFLUORIDE.getFluidStack(80);
+        FluidStack uraniumHexafluoride = MaterialsFluorides.URANIUM_HEXAFLUORIDE.getFluidStack(1);
+        FluidStack plutonium = getMaterialFluidOrFallback(
+            Materials.Plutonium,
+            100L,
+            "molten.plutonium",
+            "plutonium",
+            "moltenplutonium");
+
+        if (lftrFuelBase == null || lftrThoriumFuel == null
+            || lftrHybridFuel == null
+            || moltenSaltBlanket == null
+            || thoriumFluoride == null
+            || zirconiumFluoride == null
+            || uraniumTetrafluoride == null
+            || uraniumHexafluoride == null
+            || plutonium == null) {
+            MyMod.logInfo(
+                "Skipped LFTR thorium/plutonium expansion: one or more required LFTR/plutonium fluids are unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(31))
+            .fluidInputs(
+                MaterialsNuclides.LiFBeF2UF4.getFluidStack(800),
+                MaterialsFluorides.THORIUM_TETRAFLUORIDE.getFluidStack(120),
+                MaterialsFluorides.URANIUM_TETRAFLUORIDE.getFluidStack(80))
+            .fluidOutputs(MaterialsNuclides.LiFBeF2ThF4UF4.getFluidStack(1000))
+            .duration(16 * GTRecipeBuilder.MINUTES)
+            .eut(2048)
+            .addTo(GTPPRecipeMaps.fissionFuelProcessingRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(32))
+            .fluidInputs(
+                MaterialsNuclides.LiFBeF2UF4.getFluidStack(780),
+                MaterialsFluorides.ZIRCONIUM_TETRAFLUORIDE.getFluidStack(120),
+                MaterialsFluorides.THORIUM_TETRAFLUORIDE.getFluidStack(40),
+                getMaterialFluidOrFallback(
+                    Materials.Plutonium,
+                    60L,
+                    "molten.plutonium",
+                    "plutonium",
+                    "moltenplutonium"))
+            .fluidOutputs(MaterialsNuclides.LiFBeF2ZrF4UF4.getFluidStack(1000))
+            .duration(20 * GTRecipeBuilder.MINUTES)
+            .eut(4096)
+            .addTo(GTPPRecipeMaps.fissionFuelProcessingRecipes);
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(
+                MaterialsNuclides.LiFBeF2ThF4UF4.getFluidStack(100),
+                MaterialsNuclides.Li2BeF4.getFluidStack(200))
+            .fluidOutputs(
+                MaterialsNuclides.LiFBeF2UF4FP.getFluidStack(120),
+                MaterialsNuclides.LiFBeF2ThF4.getFluidStack(160),
+                MaterialsFluorides.URANIUM_HEXAFLUORIDE.getFluidStack(24))
+            .duration(1 * GTRecipeBuilder.MINUTES + 40 * GTRecipeBuilder.SECONDS)
+            .eut(0)
+            .metadata(GTRecipeConstants.LFTR_OUTPUT_POWER, 40960)
+            .addTo(GTPPRecipeMaps.liquidFluorineThoriumReactorRecipes);
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(
+                MaterialsNuclides.LiFBeF2ZrF4UF4.getFluidStack(100),
+                MaterialsNuclides.Li2BeF4.getFluidStack(200),
+                getMaterialFluidOrFallback(
+                    Materials.Plutonium,
+                    10L,
+                    "molten.plutonium",
+                    "plutonium",
+                    "moltenplutonium"))
+            .fluidOutputs(
+                MaterialsNuclides.LiFBeF2UF4FP.getFluidStack(80),
+                MaterialsNuclides.LiFBeF2ThF4.getFluidStack(120),
+                MaterialsFluorides.URANIUM_HEXAFLUORIDE.getFluidStack(12))
+            .duration(1 * GTRecipeBuilder.MINUTES + 40 * GTRecipeBuilder.SECONDS)
+            .eut(0)
+            .metadata(GTRecipeConstants.LFTR_OUTPUT_POWER, 24576)
+            .addTo(GTPPRecipeMaps.liquidFluorineThoriumReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LFTR thorium/plutonium expansion: Reactor Fuel Processing Plant crafts (IC-31/IC-32) plus LFTR thorium-only and hybrid burn profiles.");
+    }
+
+    private static void registerNaquadahDustFuelRodRecipes() {
+        ItemStack naquadahRod = ItemList.RodNaquadah.get(1L);
+        ItemStack naquadahRodDual = ItemList.RodNaquadah2.get(1L);
+        ItemStack naquadahRodQuad = ItemList.RodNaquadah4.get(1L);
+
+        ItemStack depletedNaquadahRod = ItemList.DepletedRodNaquadah.get(1L);
+        ItemStack depletedNaquadahRodDual = ItemList.DepletedRodNaquadah2.get(1L);
+        ItemStack depletedNaquadahRodQuad = ItemList.DepletedRodNaquadah4.get(1L);
+
+        ItemStack naquadahDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Naquadah, 4L);
+        ItemStack largeTungstensteelFluidCell = resolveLargeTungstensteelFluidCell();
+
+        if (naquadahRod == null || naquadahRodDual == null
+            || naquadahRodQuad == null
+            || depletedNaquadahRod == null
+            || depletedNaquadahRodDual == null
+            || depletedNaquadahRodQuad == null
+            || naquadahDust == null
+            || largeTungstensteelFluidCell == null) {
+            MyMod.logInfo(
+                "Skipped Naquadah dust fuel rod integration: one or more rod, depleted-rod, dust, or large cell items are unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(naquadahDust, largeTungstensteelFluidCell.copy(), GTUtility.getIntegratedCircuit(1))
+            .itemOutputs(naquadahRod.copy())
+            .duration(20 * GTRecipeBuilder.SECONDS)
+            .eut(1920)
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.copyAmount(2, naquadahRod),
+                largeTungstensteelFluidCell.copy(),
+                GTUtility.getIntegratedCircuit(2))
+            .itemOutputs(naquadahRodDual.copy())
+            .duration(30 * GTRecipeBuilder.SECONDS)
+            .eut(1920)
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.copyAmount(2, naquadahRodDual),
+                largeTungstensteelFluidCell.copy(),
+                GTUtility.getIntegratedCircuit(4))
+            .itemOutputs(naquadahRodQuad.copy())
+            .duration(40 * GTRecipeBuilder.SECONDS)
+            .eut(1920)
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        replaceDepletedNaquadahFuelRodRecycleRecipes(
+            depletedNaquadahRod,
+            depletedNaquadahRodDual,
+            depletedNaquadahRodQuad);
+
+        MyMod.logInfo(
+            "Registered Naquadah fuel rod chain from Naquadah Dust + Large Tungstensteel Fluid Cell (single/double/quad) and low-yield depleted recycling.");
+    }
+
+    private static void replaceDepletedNaquadahFuelRodRecycleRecipes(ItemStack depletedSingle, ItemStack depletedDual,
+        ItemStack depletedQuad) {
+        List<GTRecipe> recipesToRemove = new ArrayList<>();
+        collectThermalCentrifugeRecipesByInput(recipesToRemove, depletedSingle);
+        collectThermalCentrifugeRecipesByInput(recipesToRemove, depletedDual);
+        collectThermalCentrifugeRecipesByInput(recipesToRemove, depletedQuad);
+
+        if (!recipesToRemove.isEmpty()) {
+            RecipeMaps.thermalCentrifugeRecipes.getBackend()
+                .removeRecipes(recipesToRemove);
+            MyMod.logInfo(
+                "Removed " + recipesToRemove.size() + " default depleted Naquadah rod Thermal Centrifuge recipe(s).");
+        }
+
+        ItemStack ironDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L);
+        ItemStack naquadahTinyDust = GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.Naquadah, 1L);
+        if (ironDust == null || naquadahTinyDust == null) {
+            MyMod.logInfo("Skipped custom depleted Naquadah rod recycling: iron or naquadah dust outputs unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(depletedSingle.copy())
+            .itemOutputs(ironDust.copy(), naquadahTinyDust.copy())
+            .outputChances(10000, 500)
+            .duration(25 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.thermalCentrifugeRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(depletedDual.copy())
+            .itemOutputs(GTUtility.copyAmount(2, ironDust), naquadahTinyDust.copy())
+            .outputChances(10000, 900)
+            .duration(30 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.thermalCentrifugeRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(depletedQuad.copy())
+            .itemOutputs(GTUtility.copyAmount(4, ironDust), naquadahTinyDust.copy())
+            .outputChances(10000, 1600)
+            .duration(35 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.thermalCentrifugeRecipes);
+    }
+
+    private static void collectThermalCentrifugeRecipesByInput(List<GTRecipe> out, ItemStack input) {
+        if (input == null || input.getItem() == null) {
+            return;
+        }
+        for (GTRecipe recipe : RecipeMaps.thermalCentrifugeRecipes.getAllRecipes()) {
+            if (recipe == null || recipe.mInputs == null || recipe.mInputs.length == 0) {
+                continue;
+            }
+            for (ItemStack stack : recipe.mInputs) {
+                if (stack != null && stack.isItemEqual(input)) {
+                    out.add(recipe);
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void registerCrimsonCultArmorSalvageRecipes() {
+        registerCrimsonCultMaceratorRecipe(
+            "Crimson Cult Hood",
+            resolveCrimsonCultArmor("ItemHelmetCultistRobe"),
+            2,
+            3000,
+            1,
+            150,
+            800);
+
+        registerCrimsonCultMaceratorRecipe(
+            "Crimson Cult Robe",
+            resolveCrimsonCultArmor("ItemChestplateCultistRobe"),
+            5,
+            4000,
+            2,
+            300,
+            1200);
+
+        registerCrimsonCultMaceratorRecipe(
+            "Crimson Cult Leggings",
+            resolveCrimsonCultArmor("ItemLeggingsCultistRobe"),
+            4,
+            3500,
+            2,
+            200,
+            1000);
+
+        registerCrimsonCultMaceratorRecipe(
+            "Crimson Cult Helm",
+            resolveCrimsonCultArmor("ItemHelmetCultistPlate"),
+            3,
+            3000,
+            1,
+            150,
+            800);
+
+        registerCrimsonCultMaceratorRecipe(
+            "Crimson Cult Chestplate",
+            resolveCrimsonCultArmor("ItemChestplateCultistPlate"),
+            6,
+            4000,
+            2,
+            300,
+            1200);
+
+        registerCrimsonCultMaceratorRecipe(
+            "Crimson Cult Greaves",
+            resolveCrimsonCultArmor("ItemLeggingsCultistPlate"),
+            5,
+            3500,
+            2,
+            200,
+            1000);
+
+        registerCrimsonCultMaceratorRecipe(
+            "Crimson Cult Boots",
+            resolveCrimsonCultArmor("ItemBootsCultist"),
+            2,
+            3000,
+            1,
+            150,
+            800);
+    }
+
+    private static void registerCrimsonCultMaceratorRecipe(String armorName, ItemStack armorStack, int shadowNuggets,
+        int thaumiumIngotChance, int thaumiumIngots, int voidMetalNuggetChance, int enchantedFabricChance) {
+        if (armorStack == null) {
+            MyMod.logInfo("Skipped " + armorName + " salvage recipe: source armor item is unavailable.");
+            return;
+        }
+
+        ItemStack shadowNuggetStack = resolveShadowMetalNuggets(shadowNuggets);
+        ItemStack thaumiumIngotStack = GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Thaumium, thaumiumIngots);
+        ItemStack voidMetalNuggetStack = resolveVoidMetalNuggets(1);
+        ItemStack enchantedFabricStack = resolveEnchantedFabric();
+
+        if (shadowNuggetStack == null || thaumiumIngotStack == null
+            || voidMetalNuggetStack == null
+            || enchantedFabricStack == null) {
+            MyMod.logInfo("Skipped " + armorName + " salvage recipe: required GT/Thaumcraft outputs are unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(armorStack.copy())
+            .itemOutputs(shadowNuggetStack, thaumiumIngotStack, voidMetalNuggetStack, enchantedFabricStack)
+            .outputChances(
+                10000,
+                clampChance(thaumiumIngotChance),
+                clampChance(voidMetalNuggetChance),
+                clampChance(enchantedFabricChance))
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(24)
+            .addTo(RecipeMaps.maceratorRecipes);
+
+        MyMod.logInfo(
+            "Registered Macerator salvage recipe for " + armorName
+                + ": "
+                + shadowNuggets
+                + "x Shadow Nugget, "
+                + thaumiumIngots
+                + "x Thaumium Ingot @ "
+                + (thaumiumIngotChance / 100)
+                + "%, "
+                + (voidMetalNuggetChance / 100)
+                + "% Void Metal Nugget, "
+                + (enchantedFabricChance / 100)
+                + "% Enchanted Fabric.");
+    }
+
+    private static int clampChance(int chance) {
+        return Math.max(1, Math.min(10000, chance));
+    }
+
+    private static ItemStack resolveCrimsonCultArmor(String registryName) {
+        Item item = findItem("Thaumcraft", registryName);
+        if (item == null) {
+            item = findItem("thaumcraft", registryName);
+        }
+        return item == null ? null : new ItemStack(item, 1, 0);
+    }
+
+    private static ItemStack getThaumcraftItem(String registryName, int meta, int amount) {
+        Item item = findItem("Thaumcraft", registryName);
+        if (item == null) {
+            item = findItem("thaumcraft", registryName);
+        }
+        return item == null ? null : new ItemStack(item, amount, meta);
+    }
+
+    private static ItemStack resolveShadowMetalNuggets(int amount) {
+        ItemStack stack = resolveFirstOreDictStack(
+            amount,
+            "nuggetShadow",
+            "nuggetShadowmetal",
+            "nuggetShadowMetal",
+            "nuggetShadowium");
+        if (stack != null) {
+            return stack;
+        }
+        return resolveFirstOreDictMatchByTokens(amount, "nugget", "shadow");
+    }
+
+    private static ItemStack resolveVoidMetalNuggets(int amount) {
+        ItemStack stack = resolveFirstOreDictStack(
+            amount,
+            "nuggetVoid",
+            "nuggetVoidmetal",
+            "nuggetVoidMetal",
+            "nuggetVoidMetalThaumcraft");
+        if (stack != null) {
+            return stack;
+        }
+        return resolveFirstOreDictMatchByTokens(amount, "nugget", "void");
+    }
+
+    private static ItemStack resolveEnchantedFabric() {
+        ItemStack stack = resolveFirstOreDictStack(1, "clothEnchanted", "fabricEnchanted", "itemEnchantedFabric");
+        if (stack != null) {
+            return stack;
+        }
+
+        Item resource = findItem("Thaumcraft", "ItemResource");
+        if (resource == null) {
+            resource = findItem("thaumcraft", "ItemResource");
+        }
+        if (resource == null) {
+            return null;
+        }
+
+        for (int meta = 0; meta <= 31; meta++) {
+            ItemStack probe = new ItemStack(resource, 1, meta);
+            String unlocalized = resource.getUnlocalizedName(probe);
+            if (unlocalized != null && unlocalized.toLowerCase()
+                .contains("fabric")) {
+                return probe;
+            }
+        }
+
+        return new ItemStack(resource, 1, 7);
+    }
+
+    private static ItemStack resolveFirstOreDictStack(int amount, String... oreNames) {
+        for (String oreName : oreNames) {
+            List<ItemStack> stacks = OreDictionary.getOres(oreName);
+            if (stacks == null || stacks.isEmpty()) {
+                continue;
+            }
+            ItemStack first = stacks.get(0);
+            if (first != null && first.getItem() != null) {
+                return GTUtility.copyAmount(amount, first);
+            }
+        }
+        return null;
+    }
+
+    private static ItemStack resolveFirstOreDictMatchByTokens(int amount, String... requiredTokens) {
+        for (String oreName : OreDictionary.getOreNames()) {
+            String normalized = oreName == null ? "" : oreName.toLowerCase();
+            boolean matches = true;
+            for (String token : requiredTokens) {
+                if (!normalized.contains(token.toLowerCase())) {
+                    matches = false;
+                    break;
+                }
+            }
+            if (!matches) {
+                continue;
+            }
+
+            List<ItemStack> stacks = OreDictionary.getOres(oreName);
+            if (stacks == null || stacks.isEmpty()) {
+                continue;
+            }
+            ItemStack first = stacks.get(0);
+            if (first != null && first.getItem() != null) {
+                return GTUtility.copyAmount(amount, first);
+            }
+        }
+        return null;
+    }
+
+    private static ItemStack resolveLargeTungstensteelFluidCell() {
+        ItemStack stack = resolveFirstOreDictStack(
+            1,
+            "cellLargeTungstenSteel",
+            "cellLargeTungstensteel",
+            "largeFluidCellTungstenSteel",
+            "largeFluidCellTungstensteel");
+        if (stack != null) {
+            return stack;
+        }
+        return resolveFirstOreDictMatchByTokens(1, "cell", "large", "tungstensteel");
+    }
+
+    private static Item findItem(String modId, String itemName) {
+        return GameRegistry.findItem(modId, itemName);
+    }
+
     private static void removeNitricOxideRegularChemicalReactorRecipe() {
         List<GTRecipe> recipesToRemove = new ArrayList<>();
         for (GTRecipe recipe : RecipeMaps.chemicalReactorRecipes.getAllRecipes()) {
@@ -786,6 +1289,14 @@ public final class GregTechRecipeLoader {
             return fluid;
         }
         return material.getGas(amount);
+    }
+
+    private static FluidStack getMaterialFluidOrFallback(Materials material, long amount, String... fallbackNames) {
+        FluidStack primary = getFluidOrGas(material, amount);
+        if (primary != null) {
+            return primary;
+        }
+        return getFirstAvailableFluid((int) amount, fallbackNames);
     }
 
     private static int scaleDurationByPercent(int baseDuration, int durationPercent) {

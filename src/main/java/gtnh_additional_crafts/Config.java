@@ -14,10 +14,12 @@ public class Config {
     public static int lceDefaultMaxEfficiency = 10000;
     public static int lceOxygenBoostedMaxEfficiency = 30000;
     public static int lceDinitrogenTetroxideBoostedMaxEfficiency = 40000;
+    public static int lceCryonitroxBoostedMaxEfficiency = 45000;
     public static int lceOverclockNominalOutput = 5120;
     public static int lceOverclockEfficiencyNumerator = 4;
     public static int lceOverclockEfficiencyDenominator = 5;
     public static int lceDinitrogenTetroxideConsumptionPerTick = 1;
+    public static int lceCryonitroxConsumptionPerTick = 2;
 
     public static int lsbDefaultMaxEfficiency = 10000;
     public static int lsbOxygenBoostedMaxEfficiency = 15000;
@@ -85,6 +87,13 @@ public class Config {
             1,
             Integer.MAX_VALUE,
             "LCE max efficiency with Dinitrogen Tetroxide boost. 40000 = 400%.");
+        lceCryonitroxBoostedMaxEfficiency = configuration.getInt(
+            "cryonitroxBoostedMaxEfficiency",
+            CATEGORY_LCE,
+            lceCryonitroxBoostedMaxEfficiency,
+            1,
+            Integer.MAX_VALUE,
+            "LCE max efficiency with Cryonitrox boost. 45000 = 450%.");
         lceOverclockNominalOutput = configuration.getInt(
             "overclockNominalOutput",
             CATEGORY_LCE,
@@ -113,6 +122,13 @@ public class Config {
             1,
             Integer.MAX_VALUE,
             "Dinitrogen Tetroxide consumption in mB/t. 1 mB/t = 20 L/s.");
+        lceCryonitroxConsumptionPerTick = configuration.getInt(
+            "cryonitroxConsumptionPerTick",
+            CATEGORY_LCE,
+            lceCryonitroxConsumptionPerTick,
+            1,
+            Integer.MAX_VALUE,
+            "Cryonitrox consumption in mB/t. 2 mB/t = 40 L/s.");
         lsbDefaultMaxEfficiency = configuration.getInt(
             "defaultMaxEfficiency",
             CATEGORY_LSB,

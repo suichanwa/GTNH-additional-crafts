@@ -28,6 +28,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.common.tileentities.machines.multi.MTEDieselEngine;
 import gtnh_additional_crafts.Config;
+import gtnh_additional_crafts.fluid.ModFluids;
 import tectech.thing.metaTileEntity.hatch.MTEHatchDynamoMulti;
 
 public class PatchedMTEDieselEngine extends MTEDieselEngine {
@@ -46,7 +47,8 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
     private enum BoostMode {
         NONE,
         OXYGEN,
-        DINITROGEN_TETROXIDE
+        DINITROGEN_TETROXIDE,
+        CRYONITROX
     }
 
     private static final class DynamoSink {
@@ -88,9 +90,14 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         long normalOutput = calculateOutput(normalNominalOutput, Config.lceDefaultMaxEfficiency);
         long oxygenBoostedOutput = calculateOutput(normalNominalOutput, Config.lceOxygenBoostedMaxEfficiency);
         long dinitrogenOutput = calculateOutput(normalNominalOutput, Config.lceDinitrogenTetroxideBoostedMaxEfficiency);
+        long cryonitroxOutput = calculateOutput(normalNominalOutput, Config.lceCryonitroxBoostedMaxEfficiency);
         long overclockDinitrogenOutput = calculateOutput(
             overclockNominalOutput,
             Config.lceDinitrogenTetroxideBoostedMaxEfficiency);
+        long overclockCryonitroxOutput = calculateOutput(
+            overclockNominalOutput,
+            Config.lceCryonitroxBoostedMaxEfficiency);
+        long cryonitroxConsumptionPerSecond = (long) Config.lceCryonitroxConsumptionPerTick * 20L;
 
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Combustion Generator, LCE")
@@ -113,10 +120,19 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
                     + "% max efficiency (up to "
                     + GTUtility.formatNumbers(dinitrogenOutput)
                     + "EU/t)")
+            .addInfo(
+                "Cryonitrox boost uses " + GTUtility.formatNumbers(cryonitroxConsumptionPerSecond)
+                    + "L/s and reaches "
+                    + (Config.lceCryonitroxBoostedMaxEfficiency / 100)
+                    + "% max efficiency (up to "
+                    + GTUtility.formatNumbers(cryonitroxOutput)
+                    + "EU/t)")
             .addInfo("Screwdriver right-click toggles overclock mode (2x output, lower fuel efficiency)")
             .addInfo(
                 "Overclock nominal output: " + GTUtility.formatNumbers(overclockNominalOutput)
                     + "EU/t (up to "
+                    + GTUtility.formatNumbers(overclockCryonitroxOutput)
+                    + "EU/t with Cryonitrox, "
                     + GTUtility.formatNumbers(overclockDinitrogenOutput)
                     + "EU/t with N2O4)")
             .addInfo("Supports standard and 16A dynamo hatches")
@@ -132,15 +148,20 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
             .addMufflerHatch("Top middle back, above the rear Gear Box", 1)
             .addInputHatch("Diesel Fuel, next to a Gear Box", 1)
             .addInputHatch("Lubricant, next to a Gear Box", 1)
-            .addInputHatch("Oxygen or Dinitrogen Tetroxide, optional, next to a Gear Box", 1)
+            .addInputHatch("Oxygen, Cryonitrox, or Dinitrogen Tetroxide, optional, next to a Gear Box", 1)
             .toolTipFinisher();
         return tt;
     }
 
     @Override
     public boolean depleteInput(FluidStack fluidStack) {
-        if (!isOxygenRequest(fluidStack)) {
+        if (!isBoosterRequest(fluidStack)) {
             return super.depleteInput(fluidStack);
+        }
+
+        if (depleteCryonitroxForBoost(fluidStack.amount)) {
+            boostMode = BoostMode.CRYONITROX;
+            return true;
         }
 
         if (super.depleteInput(fluidStack)) {
@@ -166,6 +187,8 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         int maxEfficiency;
         if (!super.boostEu) {
             maxEfficiency = Config.lceDefaultMaxEfficiency;
+        } else if (boostMode == BoostMode.CRYONITROX) {
+            maxEfficiency = Config.lceCryonitroxBoostedMaxEfficiency;
         } else if (boostMode == BoostMode.DINITROGEN_TETROXIDE) {
             maxEfficiency = Config.lceDinitrogenTetroxideBoostedMaxEfficiency;
         } else {
@@ -255,12 +278,29 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         overclockMode = nbt.getBoolean(NBT_KEY_OVERCLOCK_MODE);
     }
 
-    private boolean isOxygenRequest(FluidStack fluidStack) {
+    private boolean isBoosterRequest(FluidStack fluidStack) {
         if (fluidStack == null) {
             return false;
         }
+        Materials booster = getBooster();
+        if (booster != null) {
+            FluidStack boosterGas = booster.getGas(Math.max(1, fluidStack.amount));
+            if (boosterGas != null && fluidStack.isFluidEqual(boosterGas)) {
+                return true;
+            }
+            FluidStack boosterFluid = booster.getFluid(Math.max(1, fluidStack.amount));
+            if (boosterFluid != null && fluidStack.isFluidEqual(boosterFluid)) {
+                return true;
+            }
+        }
+
         FluidStack oxygenGas = Materials.Oxygen.getGas(1L);
-        return oxygenGas != null && fluidStack.isFluidEqual(oxygenGas);
+        if (oxygenGas != null && fluidStack.isFluidEqual(oxygenGas)) {
+            return true;
+        }
+
+        FluidStack oxygenFluid = Materials.Oxygen.getFluid(1L);
+        return oxygenFluid != null && fluidStack.isFluidEqual(oxygenFluid);
     }
 
     private boolean depleteDinitrogenTetroxideForBoost() {
@@ -273,6 +313,12 @@ public class PatchedMTEDieselEngine extends MTEDieselEngine {
         FluidStack dinitrogenTetroxideFluid = Materials.DinitrogenTetroxide
             .getFluid(Config.lceDinitrogenTetroxideConsumptionPerTick);
         return dinitrogenTetroxideFluid != null && super.depleteInput(dinitrogenTetroxideFluid);
+    }
+
+    private boolean depleteCryonitroxForBoost(int oxygenRequestedPerTick) {
+        int consumption = Math.max(oxygenRequestedPerTick, Math.max(1, Config.lceCryonitroxConsumptionPerTick));
+        FluidStack cryonitrox = ModFluids.getCryonitroxOxidizer(consumption);
+        return cryonitrox != null && super.depleteInput(cryonitrox);
     }
 
     private int applyOverclockEfficiencyPenalty(int maxEfficiency) {
