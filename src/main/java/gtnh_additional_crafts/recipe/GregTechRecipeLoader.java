@@ -68,6 +68,7 @@ public final class GregTechRecipeLoader {
         registerAcetaldehydeHydrogenationRecipe();
         registerMethanolCarbonMonoxideHydrogenToEthanolRecipe();
         registerMethaneToAcetyleneDehydratorRecipe();
+        registerSolderingAlloyIronAntimonyRecipe();
         registerLftrThoriumPlutoniumFuelRecipes();
         registerNaquadahDustFuelRodRecipes();
         registerCrimsonCultArmorSalvageRecipes();
@@ -728,6 +729,28 @@ public final class GregTechRecipeLoader {
             .addTo(GTPPRecipeMaps.chemicalDehydratorRecipes);
 
         MyMod.logInfo("Registered Dehydrator recipe: 2000L Methane -> 1000L Acetylene + 3000L Hydrogen.");
+    }
+
+    private static void registerSolderingAlloyIronAntimonyRecipe() {
+        ItemStack ironIngots = GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Iron, 7L);
+        ItemStack antimonyIngots = GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Antimony, 3L);
+        ItemStack solderingAlloyIngots = GTOreDictUnificator.get(OrePrefixes.ingot, Materials.SolderingAlloy, 9L);
+
+        if (ironIngots == null || antimonyIngots == null || solderingAlloyIngots == null) {
+            MyMod.logInfo(
+                "Skipped Alloy Smelter soldering alloy recipe: iron, antimony, or soldering alloy ingot stack is unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ironIngots, antimonyIngots)
+            .itemOutputs(solderingAlloyIngots)
+            .duration(16 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.alloySmelterRecipes);
+
+        MyMod
+            .logInfo("Registered Alloy Smelter recipe: 7x Iron Ingot + 3x Antimony Ingot -> 9x Soldering Alloy Ingot.");
     }
 
     private static void registerLftrThoriumPlutoniumFuelRecipes() {
