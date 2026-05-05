@@ -7,6 +7,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import gtnh_additional_crafts.compat.gregtech.DieselEngineOxidizerPatch;
 import gtnh_additional_crafts.compat.gregtech.LargeSemifluidGeneratorPatch;
+import gtnh_additional_crafts.compat.gregtech.MolecularTransformerEnergyHatchPatch;
 import gtnh_additional_crafts.compat.gregtech.RocketFuelGeneratorPatch;
 import gtnh_additional_crafts.compat.gregtech.VacuumFreezerNitrogenPatch;
 import gtnh_additional_crafts.compat.kekztech.SOFCHeliumPatch;
@@ -27,6 +28,7 @@ public class CommonProxy {
 
         DieselEngineOxidizerPatch.schedule();
         LargeSemifluidGeneratorPatch.schedule();
+        MolecularTransformerEnergyHatchPatch.schedule();
         RocketFuelGeneratorPatch.schedule();
         VacuumFreezerNitrogenPatch.schedule();
         SOFCHeliumPatch.schedule();
