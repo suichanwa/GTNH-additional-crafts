@@ -41,7 +41,7 @@ public final class MolecularTransformerEnergyHatchPatch {
             if (existing instanceof PatchedMTEIndustrialMolecularTransformer) {
                 continue;
             }
-            if (existing.getClass() != MTEIndustrialMolecularTransformer.class) {
+            if (!(existing instanceof MTEIndustrialMolecularTransformer)) {
                 continue;
             }
 
@@ -59,14 +59,21 @@ public final class MolecularTransformerEnergyHatchPatch {
             }
         }
 
-        patchApplied = true;
         if (patchedCount == 0) {
-            MyMod.logInfo("Skipped Molecular Transformer patch: MTEIndustrialMolecularTransformer not found.");
+            MyMod.logInfo("Skipped Molecular Transformer patch: target MetaTileEntity not found yet.");
             return;
         }
 
+        patchApplied = true;
         MyMod.logInfo(
             "Applied Molecular Transformer multi-energy hatch patch to " + patchedCount
                 + " MetaTileEntity instance(s).");
+    }
+
+    public static void applyIfNeeded() {
+        if (patchApplied) {
+            return;
+        }
+        apply();
     }
 }

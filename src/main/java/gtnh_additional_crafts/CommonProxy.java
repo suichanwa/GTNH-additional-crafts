@@ -28,7 +28,11 @@ public class CommonProxy {
 
         DieselEngineOxidizerPatch.schedule();
         LargeSemifluidGeneratorPatch.schedule();
-        MolecularTransformerEnergyHatchPatch.schedule();
+        if (Config.mtAllowMultipleEnergyHatches) {
+            MolecularTransformerEnergyHatchPatch.schedule();
+        } else {
+            MyMod.logInfo("Molecular Transformer multi-energy-hatch patch is disabled in config.");
+        }
         RocketFuelGeneratorPatch.schedule();
         VacuumFreezerNitrogenPatch.schedule();
         SOFCHeliumPatch.schedule();
@@ -44,6 +48,7 @@ public class CommonProxy {
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {
         LargeSemifluidGeneratorPatch.applyIfNeeded();
+        MolecularTransformerEnergyHatchPatch.applyIfNeeded();
         RocketFuelGeneratorPatch.applyIfNeeded();
     }
 

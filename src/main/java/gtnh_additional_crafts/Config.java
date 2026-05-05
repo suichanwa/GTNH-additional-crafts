@@ -10,6 +10,7 @@ public class Config {
 
     private static final String CATEGORY_LCE = "large_combustion_engine";
     private static final String CATEGORY_LSB = "large_semifluid_burner";
+    private static final String CATEGORY_MT = "molecular_transformer";
 
     public static int lceDefaultMaxEfficiency = 10000;
     public static int lceOxygenBoostedMaxEfficiency = 30000;
@@ -38,6 +39,7 @@ public class Config {
     public static int lsbPerformanceLubricantDenominator = 1;
     public static int lsbPerformanceOxygenNumerator = 2;
     public static int lsbPerformanceOxygenDenominator = 1;
+    public static boolean mtAllowMultipleEnergyHatches = true;
     private static Configuration configuration;
     private static File configurationFile;
 
@@ -248,6 +250,12 @@ public class Config {
             1,
             Integer.MAX_VALUE,
             "Performance mode oxygen multiplier denominator.");
+        mtAllowMultipleEnergyHatches = configuration.getBoolean(
+            "allowMultipleEnergyHatches",
+            CATEGORY_MT,
+            mtAllowMultipleEnergyHatches,
+            "Allows the Industrial Molecular Transformer to accept/work with multiple energy hatches. "
+                + "Set to false to keep vanilla single-energy-hatch behavior. Requires game restart.");
     }
 
     private static void saveIfChanged() {
