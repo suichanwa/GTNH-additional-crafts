@@ -3,6 +3,7 @@ package gtnh_additional_crafts.compat.gregtech;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.onElementPass;
 import static gregtech.api.enums.HatchElement.Energy;
+import static gregtech.api.enums.HatchElement.ExoticEnergy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.Maintenance;
 import static gregtech.api.enums.HatchElement.Muffler;
@@ -65,7 +66,7 @@ public class PatchedMTEIndustrialMolecularTransformer extends MTEIndustrialMolec
                 .addElement(
                     'h',
                     buildHatchAdder(MTEIndustrialMolecularTransformer.class)
-                        .atLeast(InputBus, OutputBus, Maintenance, Energy, Muffler)
+                        .atLeast(InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy), Muffler)
                         .casingIndex(getCasingTextureIndex())
                         .dot(1)
                         .buildAndChain(onElementPass(machine -> {
