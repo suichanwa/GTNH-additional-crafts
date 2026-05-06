@@ -9,6 +9,7 @@ import net.minecraft.util.EnumChatFormatting;
 import cpw.mods.fml.client.config.GuiSlider;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.compat.thaumicboots.ThaumicBootsTuning;
+import gtnh_additional_crafts.compat.thaumicboots.VoidwalkerSashTuning;
 import gtnh_additional_crafts.network.BootsControlMessage;
 import thaumicboots.api.IBoots;
 import thaumicboots.api.ITBootJumpable;
@@ -23,6 +24,8 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
     private static final int ID_TOGGLE_INERTIA = 12;
     private static final int ID_DEFAULTS = 13;
     private static final int ID_DONE = 14;
+    private static final int ID_TOGGLE_SASH_SPEED = 15;
+    private static final int ID_TOGGLE_VOIDWALKER_TRAVELER = 16;
     private static final int ID_AXIS_FORWARD = 20;
     private static final int ID_AXIS_STRAFE = 21;
     private static final long SEND_COOLDOWN_MS = 75L;
@@ -34,16 +37,23 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
     private GuiButton omniButton;
     private GuiButton stepButton;
     private GuiButton inertiaButton;
+    private GuiButton sashSpeedButton;
+    private GuiButton voidwalkerTravelerButton;
     private GuiButton defaultsButton;
     private boolean omniEnabled;
     private boolean stepEnabled;
     private boolean inertiaEnabled;
     private boolean hasBootsEquipped;
+    private boolean hasQuantumVoidwalkerBootsEquipped;
+    private boolean hasVoidwalkerSashEquipped;
     private String equippedBootsName = "";
+    private String equippedSashName = "";
     private double baseBootSpeedModifier;
     private double baseBootJumpModifier;
     private double speedModeMultiplier = 1.0D;
     private double jumpModeMultiplier = 1.0D;
+    private boolean voidwalkerSashSpeedEnabled = true;
+    private boolean voidwalkerTravelerMovementEnabled;
     private long lastSentAtMs;
 
     @Override
@@ -119,11 +129,15 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
         omniButton = new GuiButton(ID_TOGGLE_OMNI, left, y + 128, 106, 20, "");
         stepButton = new GuiButton(ID_TOGGLE_STEP, left + 114, y + 128, 106, 20, "");
         inertiaButton = new GuiButton(ID_TOGGLE_INERTIA, left, y + 152, 220, 20, "");
-        defaultsButton = new GuiButton(ID_DEFAULTS, left, y + 182, 106, 20, "Defaults");
-        GuiButton doneButton = new GuiButton(ID_DONE, left + 114, y + 182, 106, 20, "Done");
+        sashSpeedButton = new GuiButton(ID_TOGGLE_SASH_SPEED, left, y + 176, 220, 20, "");
+        voidwalkerTravelerButton = new GuiButton(ID_TOGGLE_VOIDWALKER_TRAVELER, left, y + 200, 220, 20, "");
+        defaultsButton = new GuiButton(ID_DEFAULTS, left, y + 230, 106, 20, "Defaults");
+        GuiButton doneButton = new GuiButton(ID_DONE, left + 114, y + 230, 106, 20, "Done");
         buttonList.add(omniButton);
         buttonList.add(stepButton);
         buttonList.add(inertiaButton);
+        buttonList.add(sashSpeedButton);
+        buttonList.add(voidwalkerTravelerButton);
         buttonList.add(defaultsButton);
         buttonList.add(doneButton);
 
@@ -157,6 +171,18 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
                 omniEnabled = true;
                 stepEnabled = true;
                 inertiaEnabled = false;
+                voidwalkerSashSpeedEnabled = true;
+                voidwalkerTravelerMovementEnabled = false;
+                updateToggleButtonLabels();
+                pushStateToServer(true);
+                break;
+            case ID_TOGGLE_SASH_SPEED:
+                voidwalkerSashSpeedEnabled = !voidwalkerSashSpeedEnabled;
+                updateToggleButtonLabels();
+                pushStateToServer(true);
+                break;
+            case ID_TOGGLE_VOIDWALKER_TRAVELER:
+                voidwalkerTravelerMovementEnabled = !voidwalkerTravelerMovementEnabled;
                 updateToggleButtonLabels();
                 pushStateToServer(true);
                 break;
@@ -193,8 +219,22 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
             : "Current modes: n/a";
         drawCenteredString(fontRendererObj, modeStats, width / 2, 52, 0xA0A0A0);
 
-        String hint = "Controls affect only the currently equipped Thaumic Boots";
-        drawCenteredString(fontRendererObj, hint, width / 2, 62, 0x909090);
+        String sashStats = hasVoidwalkerSashEquipped
+            ? EnumChatFormatting.LIGHT_PURPLE + "Sash: "
+                + EnumChatFormatting.RESET
+                + equippedSashName
+                + " | Speed Boost "
+                + (voidwalkerSashSpeedEnabled ? "ON" : "OFF")
+            : "Sash: not equipped";
+        drawCenteredString(fontRendererObj, sashStats, width / 2, 62, 0xA0A0A0);
+
+        String hint = "Controls affect only currently equipped Thaumic Boots and Voidwalker Sash";
+        drawCenteredString(fontRendererObj, hint, width / 2, 72, 0x909090);
+
+        String voidwalkerModeStats = hasQuantumVoidwalkerBootsEquipped
+            ? "Voidwalker movement: " + (voidwalkerTravelerMovementEnabled ? "EMT Traveler" : "Voidwalker")
+            : "Voidwalker movement: requires Quantum Boots of the Voidwalker";
+        drawCenteredString(fontRendererObj, voidwalkerModeStats, width / 2, 82, 0x909090);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -204,6 +244,7 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
         hasBootsEquipped = bootsStack != null;
         if (!hasBootsEquipped) {
             equippedBootsName = "";
+            equippedSashName = "";
             omniEnabled = false;
             stepEnabled = false;
             inertiaEnabled = false;
@@ -211,28 +252,48 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
             baseBootJumpModifier = 0.0D;
             speedModeMultiplier = 1.0D;
             jumpModeMultiplier = 1.0D;
-            return;
+            hasQuantumVoidwalkerBootsEquipped = false;
+            voidwalkerTravelerMovementEnabled = false;
+        } else {
+
+            equippedBootsName = bootsStack.getDisplayName();
+            hasQuantumVoidwalkerBootsEquipped = ThaumicBootsTuning.isQuantumVoidwalkerBoots(bootsStack);
+            Item bootsItemRaw = bootsStack.getItem();
+            IBoots bootsItem = (IBoots) bootsItemRaw;
+            baseBootSpeedModifier = bootsItemRaw instanceof ITBootSpeed
+                ? ((ITBootSpeed) bootsItemRaw).getSpeedModifier()
+                : 0.0D;
+            baseBootJumpModifier = bootsItemRaw instanceof ITBootJumpable
+                ? ((ITBootJumpable) bootsItemRaw).getJumpModifier()
+                : 0.0D;
+            speedModeMultiplier = bootsItem.isSpeedEnabled(bootsStack);
+            jumpModeMultiplier = IBoots.isJumpEnabled(bootsStack);
+            omniEnabled = bootsItem.isOmniEnabled(bootsStack);
+            stepEnabled = bootsItem.isStepEnabled(bootsStack);
+            inertiaEnabled = bootsItem.isInertiaCanceled(bootsStack);
+            voidwalkerTravelerMovementEnabled = ThaumicBootsTuning.isVoidwalkerTravelerMovementEnabled(bootsStack);
         }
 
-        equippedBootsName = bootsStack.getDisplayName();
-        Item bootsItemRaw = bootsStack.getItem();
-        IBoots bootsItem = (IBoots) bootsItemRaw;
-        baseBootSpeedModifier = bootsItemRaw instanceof ITBootSpeed ? ((ITBootSpeed) bootsItemRaw).getSpeedModifier()
-            : 0.0D;
-        baseBootJumpModifier = bootsItemRaw instanceof ITBootJumpable
-            ? ((ITBootJumpable) bootsItemRaw).getJumpModifier()
-            : 0.0D;
-        speedModeMultiplier = bootsItem.isSpeedEnabled(bootsStack);
-        jumpModeMultiplier = IBoots.isJumpEnabled(bootsStack);
-        omniEnabled = bootsItem.isOmniEnabled(bootsStack);
-        stepEnabled = bootsItem.isStepEnabled(bootsStack);
-        inertiaEnabled = bootsItem.isInertiaCanceled(bootsStack);
+        ItemStack sashStack = mc != null && mc.thePlayer != null
+            ? VoidwalkerSashTuning.getEquippedVoidwalkerSash(mc.thePlayer)
+            : null;
+        hasVoidwalkerSashEquipped = sashStack != null;
+        if (hasVoidwalkerSashEquipped) {
+            equippedSashName = sashStack.getDisplayName();
+            voidwalkerSashSpeedEnabled = VoidwalkerSashTuning.hasSpeedBoostEnabled(sashStack);
+        } else {
+            equippedSashName = "";
+            voidwalkerSashSpeedEnabled = true;
+        }
     }
 
     private void updateToggleButtonLabels() {
         omniButton.displayString = labelForToggle("Omni Move", omniEnabled);
         stepButton.displayString = labelForToggle("Step Assist", stepEnabled);
         inertiaButton.displayString = labelForToggle("Inertia Cancel", inertiaEnabled);
+        sashSpeedButton.displayString = labelForToggle("Sash Speed Boost", voidwalkerSashSpeedEnabled);
+        voidwalkerTravelerButton.displayString = voidwalkerTravelerMovementEnabled ? "Voidwalker Movement: EMT TRAVELER"
+            : "Voidwalker Movement: VOIDWALKER";
     }
 
     private void updateControlState() {
@@ -243,6 +304,8 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
         omniButton.enabled = hasBootsEquipped;
         stepButton.enabled = hasBootsEquipped;
         inertiaButton.enabled = hasBootsEquipped;
+        sashSpeedButton.enabled = hasVoidwalkerSashEquipped;
+        voidwalkerTravelerButton.enabled = hasQuantumVoidwalkerBootsEquipped;
         defaultsButton.enabled = hasBootsEquipped;
     }
 
@@ -291,7 +354,7 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
     }
 
     private void pushStateToServer(boolean force) {
-        if (!hasBootsEquipped) {
+        if (!hasBootsEquipped && !hasVoidwalkerSashEquipped) {
             return;
         }
         long now = System.currentTimeMillis();
@@ -308,26 +371,44 @@ public class GuiThaumicBootsControls extends GuiScreen implements GuiSlider.ISli
         speedModeMultiplier = speed;
         jumpModeMultiplier = jump;
         MyMod.NETWORK.sendToServer(
-            new BootsControlMessage(speed, jump, omniEnabled, stepEnabled, inertiaEnabled, forwardAxis, strafeAxis));
+            new BootsControlMessage(
+                speed,
+                jump,
+                omniEnabled,
+                stepEnabled,
+                inertiaEnabled,
+                forwardAxis,
+                strafeAxis,
+                hasVoidwalkerSashEquipped,
+                voidwalkerSashSpeedEnabled,
+                hasQuantumVoidwalkerBootsEquipped,
+                voidwalkerTravelerMovementEnabled));
     }
 
     private void applyStateToLocalBoots(double speed, double jump, double forwardAxis, double strafeAxis) {
         ItemStack bootsStack = getEquippedBoots();
-        if (bootsStack == null) {
+        if (bootsStack != null) {
+            Item bootsItemRaw = bootsStack.getItem();
+            if (bootsItemRaw instanceof IBoots) {
+                IBoots bootsItem = (IBoots) bootsItemRaw;
+                bootsItem.setModeSpeed(bootsStack, speed);
+                bootsItem.setModeJump(bootsStack, jump);
+                bootsItem.setModeOmni(bootsStack, omniEnabled);
+                bootsItem.setModeStep(bootsStack, stepEnabled);
+                bootsItem.setIsInertiaCanceling(bootsStack, inertiaEnabled);
+                ThaumicBootsTuning.setForwardMultiplier(bootsStack, forwardAxis);
+                ThaumicBootsTuning.setStrafeMultiplier(bootsStack, strafeAxis);
+                ThaumicBootsTuning.setVoidwalkerTravelerMovementEnabled(bootsStack, voidwalkerTravelerMovementEnabled);
+            }
+        }
+
+        if (mc == null || mc.thePlayer == null) {
             return;
         }
-        Item bootsItemRaw = bootsStack.getItem();
-        if (!(bootsItemRaw instanceof IBoots)) {
-            return;
+        ItemStack sashStack = VoidwalkerSashTuning.getEquippedVoidwalkerSash(mc.thePlayer);
+        if (sashStack != null) {
+            VoidwalkerSashTuning.setSpeedBoostEnabled(sashStack, voidwalkerSashSpeedEnabled);
         }
-        IBoots bootsItem = (IBoots) bootsItemRaw;
-        bootsItem.setModeSpeed(bootsStack, speed);
-        bootsItem.setModeJump(bootsStack, jump);
-        bootsItem.setModeOmni(bootsStack, omniEnabled);
-        bootsItem.setModeStep(bootsStack, stepEnabled);
-        bootsItem.setIsInertiaCanceling(bootsStack, inertiaEnabled);
-        ThaumicBootsTuning.setForwardMultiplier(bootsStack, forwardAxis);
-        ThaumicBootsTuning.setStrafeMultiplier(bootsStack, strafeAxis);
     }
 
     private static double clamp01(double value) {

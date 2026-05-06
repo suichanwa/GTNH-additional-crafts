@@ -22,6 +22,7 @@ public class ThaumicBootsRuntimeEventHandler {
         if (bootsStack == null) {
             return;
         }
+        ThaumicBootsTuning.applyVoidwalkerEmtTravelerMovement(player, bootsStack);
         ThaumicBootsTuning.applyAxisMultipliers(player, bootsStack);
     }
 }
