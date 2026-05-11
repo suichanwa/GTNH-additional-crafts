@@ -69,6 +69,8 @@ public final class GregTechRecipeLoader {
         registerMethanolCarbonMonoxideHydrogenToEthanolRecipe();
         registerMethaneToAcetyleneDehydratorRecipe();
         registerSolderingAlloyIronAntimonyRecipe();
+        registerSuperFuelBinderBeeswaxRecipes();
+        registerMagicSuperFuelBinderVoidMetalRecipes();
         registerLftrThoriumPlutoniumFuelRecipes();
         registerNaquadahDustFuelRodRecipes();
         registerCrimsonCultArmorSalvageRecipes();
@@ -753,6 +755,86 @@ public final class GregTechRecipeLoader {
             .logInfo("Registered Alloy Smelter recipe: 7x Iron Ingot + 3x Antimony Ingot -> 9x Soldering Alloy Ingot.");
     }
 
+    private static void registerSuperFuelBinderBeeswaxRecipes() {
+        ItemStack beeswax = resolveForestryBeeswax(2);
+        FluidStack advancedGlue = Materials.AdvancedGlue.getFluid(100L);
+
+        if (beeswax == null || advancedGlue == null) {
+            MyMod.logInfo(
+                "Skipped beeswax Super Fuel Binder recipes: Forestry beeswax or Advanced Glue is unavailable.");
+            return;
+        }
+
+        registerSuperFuelBinderBeeswaxRecipe(beeswax, Materials.Sodium, 4);
+        registerSuperFuelBinderBeeswaxRecipe(beeswax, Materials.Lithium, 8);
+        registerSuperFuelBinderBeeswaxRecipe(beeswax, Materials.Caesium, 12);
+
+        MyMod.logInfo(
+            "Registered Mixer recipes: 2x Forestry Beeswax + 100L Advanced Glue alternate Super Fuel Binder route.");
+    }
+
+    private static void registerSuperFuelBinderBeeswaxRecipe(ItemStack beeswax, Materials metal, int outputAmount) {
+        ItemStack sulfurDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1L);
+        ItemStack metalDust = GTOreDictUnificator.get(OrePrefixes.dust, metal, 1L);
+        ItemStack woodDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wood, 4L);
+        ItemStack output = ItemList.SFMixture.get(outputAmount);
+        FluidStack advancedGlue = Materials.AdvancedGlue.getFluid(100L);
+
+        if (sulfurDust == null || metalDust == null || woodDust == null || output == null || advancedGlue == null) {
+            MyMod.logInfo(
+                "Skipped beeswax Super Fuel Binder recipe for " + metal + ": required input or output is unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(sulfurDust, metalDust, woodDust, beeswax.copy(), GTUtility.getIntegratedCircuit(2))
+            .itemOutputs(output)
+            .fluidInputs(advancedGlue)
+            .duration(40 * GTRecipeBuilder.SECONDS)
+            .eut(16)
+            .addTo(RecipeMaps.mixerRecipes);
+    }
+
+    private static void registerMagicSuperFuelBinderVoidMetalRecipes() {
+        FluidStack moltenVoidMetal = Materials.Void.getMolten(36L);
+        if (moltenVoidMetal == null) {
+            MyMod.logInfo("Skipped Void Metal Magic Super Fuel Binder recipes: molten Void Metal is unavailable.");
+            return;
+        }
+
+        registerMagicSuperFuelBinderVoidMetalRecipe(Materials.InfusedAir);
+        registerMagicSuperFuelBinderVoidMetalRecipe(Materials.InfusedEarth);
+        registerMagicSuperFuelBinderVoidMetalRecipe(Materials.InfusedEntropy);
+        registerMagicSuperFuelBinderVoidMetalRecipe(Materials.InfusedFire);
+        registerMagicSuperFuelBinderVoidMetalRecipe(Materials.InfusedOrder);
+        registerMagicSuperFuelBinderVoidMetalRecipe(Materials.InfusedWater);
+
+        MyMod.logInfo(
+            "Registered Mixer recipes: 24x Super Fuel Binder + infused Thaumcraft material + 36 mB Void Metal -> 24x Magic Super Fuel Binder.");
+    }
+
+    private static void registerMagicSuperFuelBinderVoidMetalRecipe(Materials infusedMaterial) {
+        ItemStack superFuelBinder = ItemList.SFMixture.get(24);
+        ItemStack infusedDust = GTOreDictUnificator.get(OrePrefixes.dust, infusedMaterial, 1L);
+        ItemStack magicSuperFuelBinder = ItemList.MSFMixture.get(24);
+        FluidStack moltenVoidMetal = Materials.Void.getMolten(36L);
+
+        if (superFuelBinder == null || infusedDust == null || magicSuperFuelBinder == null || moltenVoidMetal == null) {
+            MyMod.logInfo(
+                "Skipped Void Metal Magic Super Fuel Binder recipe for " + infusedMaterial
+                    + ": required input or output is unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(superFuelBinder, infusedDust, GTUtility.getIntegratedCircuit(1))
+            .itemOutputs(magicSuperFuelBinder)
+            .fluidInputs(moltenVoidMetal)
+            .duration(10 * GTRecipeBuilder.SECONDS)
+            .eut(64)
+            .addTo(RecipeMaps.mixerRecipes);
+    }
+
     private static void registerLftrThoriumPlutoniumFuelRecipes() {
         FluidStack lftrFuelBase = MaterialsNuclides.LiFBeF2UF4.getFluidStack(1000);
         FluidStack lftrThoriumFuel = MaterialsNuclides.LiFBeF2ThF4UF4.getFluidStack(1000);
@@ -1098,6 +1180,17 @@ public final class GregTechRecipeLoader {
             item = findItem("thaumcraft", registryName);
         }
         return item == null ? null : new ItemStack(item, amount, meta);
+    }
+
+    private static ItemStack resolveForestryBeeswax(int amount) {
+        Item beeswax = findItem("Forestry", "beeswax");
+        if (beeswax == null) {
+            beeswax = findItem("forestry", "beeswax");
+        }
+        if (beeswax != null) {
+            return new ItemStack(beeswax, amount, 0);
+        }
+        return resolveFirstOreDictStack(amount, "itemBeeswax");
     }
 
     private static ItemStack resolveShadowMetalNuggets(int amount) {
