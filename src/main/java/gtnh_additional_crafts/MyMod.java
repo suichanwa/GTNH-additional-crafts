@@ -16,6 +16,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import gtnh_additional_crafts.fluid.ModFluids;
 import gtnh_additional_crafts.network.BootsControlMessage;
+import gtnh_additional_crafts.network.OpenBottomlessPouchMessage;
 
 @Mod(
     modid = MyMod.MODID,
@@ -29,6 +30,9 @@ public class MyMod {
     private static final String LEGACY_MODID = "mymodid";
     public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
+    @Mod.Instance(MODID)
+    public static MyMod instance;
+
     @SidedProxy(clientSide = "gtnh_additional_crafts.ClientProxy", serverSide = "gtnh_additional_crafts.CommonProxy")
     public static CommonProxy proxy;
 
@@ -41,6 +45,11 @@ public class MyMod {
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
         NETWORK.registerMessage(BootsControlMessage.Handler.class, BootsControlMessage.class, 0, Side.SERVER);
+        NETWORK.registerMessage(
+            OpenBottomlessPouchMessage.Handler.class,
+            OpenBottomlessPouchMessage.class,
+            1,
+            Side.SERVER);
         proxy.preInit(event);
     }
 

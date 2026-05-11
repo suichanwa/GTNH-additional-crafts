@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import gtnh_additional_crafts.compat.gregtech.DieselEngineOxidizerPatch;
 import gtnh_additional_crafts.compat.gregtech.LargeSemifluidGeneratorPatch;
 import gtnh_additional_crafts.compat.gregtech.MolecularTransformerEnergyHatchPatch;
@@ -12,6 +13,7 @@ import gtnh_additional_crafts.compat.gregtech.RocketFuelGeneratorPatch;
 import gtnh_additional_crafts.compat.gregtech.VacuumFreezerNitrogenPatch;
 import gtnh_additional_crafts.compat.kekztech.SOFCHeliumPatch;
 import gtnh_additional_crafts.compat.thaumicboots.ThaumicBootsRuntimeEventHandler;
+import gtnh_additional_crafts.compat.thaumictinkerer.BottomlessPouchGuiHandler;
 import gtnh_additional_crafts.fluid.ModFluids;
 import gtnh_additional_crafts.item.ModItems;
 import gtnh_additional_crafts.recipe.GregTechRecipeLoader;
@@ -42,6 +44,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(MyMod.instance, new BottomlessPouchGuiHandler());
         GregTechRecipeLoader.registerRecipes();
     }
 
