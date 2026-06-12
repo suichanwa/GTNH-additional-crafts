@@ -62,6 +62,8 @@ public final class GregTechRecipeLoader {
         registerCrudeBioTarMiddleFractionDistillationRecipe();
         registerCrudeBioTarLightFractionDistillationRecipe();
         registerNaphthaToNaphthaleneRecipe();
+        registerXyleneHydrodealkylationRecipes();
+        registerCarbonDisulfideAlternativeRecipes();
         registerCryonitroxOxidizerRecipe();
         registerNitrogenRocketFuelUpgradeRecipe();
         registerJetFuelRocketFuelRecipe();
@@ -70,6 +72,7 @@ public final class GregTechRecipeLoader {
         registerMethaneToAcetyleneDehydratorRecipe();
         registerSolderingAlloyIronAntimonyRecipe();
         registerSuperFuelBinderBeeswaxRecipes();
+        registerSuperFuelBinderCreosoteBeeswaxRecipe();
         registerMagicSuperFuelBinderVoidMetalRecipes();
         registerLftrThoriumPlutoniumFuelRecipes();
         registerNaquadahDustFuelRodRecipes();
@@ -410,6 +413,197 @@ public final class GregTechRecipeLoader {
 
         MyMod.logInfo(
             "Registered LCR recipe: 1000L Naphtha + Platinum Dust catalyst -> 400L Naphthalene + 300L Hydrogen + 200L Methane.");
+    }
+
+    private static void registerXyleneHydrodealkylationRecipes() {
+        registerXyleneHydrodealkylationRecipe(
+            getFluidOrGas(Materials.Dimethylbenzene, 1000L),
+            "1,2-Dimethylbenzene",
+            11);
+        registerXyleneHydrodealkylationRecipe(
+            getFluidOrGas(MaterialsKevlar.IIIDimethylbenzene, 1000L),
+            "1,3-Dimethylbenzene",
+            13);
+    }
+
+    private static void registerXyleneHydrodealkylationRecipe(FluidStack xylene, String xyleneName, int circuit) {
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 4000L);
+        FluidStack benzene = getFluidOrGas(Materials.Benzene, 1000L);
+        FluidStack methane = getFluidOrGas(Materials.Methane, 2000L);
+        ItemStack chromeCatalyst = GTUtility.copyAmount(0, Materials.Chrome.getDust(1));
+
+        if (xylene == null || hydrogen == null
+            || benzene == null
+            || methane == null
+            || chromeCatalyst == null
+            || chromeCatalyst.getItem() == null) {
+            MyMod.logInfo(
+                "Skipped " + xyleneName + " hydrodealkylation recipe: required catalyst or fluids unavailable.");
+            return;
+        }
+
+        // Hydrodealkylation: C8H10 + 2 H2 -> C6H6 + 2 CH4 (Cr2O3 catalyst, not consumed)
+        GTValues.RA.stdBuilder()
+            .itemInputs(chromeCatalyst, GTUtility.getIntegratedCircuit(circuit))
+            .fluidInputs(xylene, hydrogen)
+            .fluidOutputs(benzene, methane)
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: 1000L " + xyleneName
+                + " + 4000L Hydrogen + Chrome Dust catalyst -> 1000L Benzene + 2000L Methane.");
+    }
+
+    private static void registerCarbonDisulfideAlternativeRecipes() {
+        registerCarbonDisulfideMethaneSulfurRecipe();
+        registerCarbonDisulfideHydrogenSulfideCarbonRecipe();
+        registerCarbonylSulfideChainRecipes();
+        registerCarbonDisulfideCharcoalBlastFurnaceRecipe();
+    }
+
+    private static void registerCarbonDisulfideMethaneSulfurRecipe() {
+        FluidStack methane = getFluidOrGas(Materials.Methane, 1000L);
+        FluidStack carbonDisulfide = getCarbonDisulfide(1000);
+        FluidStack hydrogenSulfide = getFluidOrGas(Materials.HydricSulfide, 2000L);
+        ItemStack sulfurDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 4L);
+        ItemStack silicaCatalyst = GTUtility.copyAmount(0, Materials.SiliconDioxide.getDust(1));
+
+        if (methane == null || carbonDisulfide == null
+            || hydrogenSulfide == null
+            || sulfurDust == null
+            || silicaCatalyst == null
+            || silicaCatalyst.getItem() == null) {
+            MyMod.logInfo(
+                "Skipped Methane + Sulfur -> Carbon Disulfide recipe: required catalyst, items, or fluids unavailable.");
+            return;
+        }
+
+        // Modern industrial route: CH4 + 4 S -> CS2 + 2 H2S (~600 C, silica catalyst, not consumed)
+        GTValues.RA.stdBuilder()
+            .itemInputs(sulfurDust, silicaCatalyst, GTUtility.getIntegratedCircuit(4))
+            .fluidInputs(methane)
+            .fluidOutputs(carbonDisulfide, hydrogenSulfide)
+            .duration(15 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: IC-4 + 1000L Methane + 4x Sulfur Dust + Silicon Dioxide catalyst -> 1000L Carbon Disulfide + 2000L Hydrogen Sulfide.");
+    }
+
+    private static void registerCarbonDisulfideHydrogenSulfideCarbonRecipe() {
+        FluidStack hydrogenSulfide = getFluidOrGas(Materials.HydricSulfide, 2000L);
+        FluidStack carbonDisulfide = getCarbonDisulfide(1000);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 2000L);
+        ItemStack carbonDust = Materials.Carbon.getDust(1);
+
+        if (hydrogenSulfide == null || carbonDisulfide == null
+            || hydrogen == null
+            || carbonDust == null
+            || carbonDust.getItem() == null) {
+            MyMod.logInfo(
+                "Skipped Hydrogen Sulfide + Carbon -> Carbon Disulfide recipe: required items or fluids unavailable.");
+            return;
+        }
+
+        // H2S sink: 2 H2S + C -> CS2 + 2 H2 (high temperature, endothermic)
+        GTValues.RA.stdBuilder()
+            .itemInputs(carbonDust, GTUtility.getIntegratedCircuit(5))
+            .fluidInputs(hydrogenSulfide)
+            .fluidOutputs(carbonDisulfide, hydrogen)
+            .duration(20 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: IC-5 + 2000L Hydrogen Sulfide + 1x Carbon Dust -> 1000L Carbon Disulfide + 2000L Hydrogen.");
+    }
+
+    private static void registerCarbonylSulfideChainRecipes() {
+        FluidStack carbonMonoxide = getFluidOrGas(Materials.CarbonMonoxide, 1000L);
+        FluidStack carbonylSulfide = ModFluids.getCarbonylSulfide(1000);
+        FluidStack carbonylSulfideInput = ModFluids.getCarbonylSulfide(2000);
+        FluidStack carbonDisulfide = getCarbonDisulfide(1000);
+        FluidStack carbonDioxide = getFluidOrGas(Materials.CarbonDioxide, 1000L);
+        ItemStack sulfurDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1L);
+        ItemStack aluminaCatalyst = GTUtility.copyAmount(0, Materials.Aluminiumoxide.getDust(1));
+
+        if (carbonMonoxide == null || carbonylSulfide == null
+            || carbonylSulfideInput == null
+            || carbonDisulfide == null
+            || carbonDioxide == null
+            || sulfurDust == null
+            || aluminaCatalyst == null
+            || aluminaCatalyst.getItem() == null) {
+            MyMod.logInfo("Skipped Carbonyl Sulfide chain: required catalyst, items, or fluids unavailable.");
+            return;
+        }
+
+        // Step 1: CO + S -> COS
+        GTValues.RA.stdBuilder()
+            .itemInputs(sulfurDust, GTUtility.getIntegratedCircuit(6))
+            .fluidInputs(carbonMonoxide)
+            .fluidOutputs(carbonylSulfide)
+            .duration(10 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1L),
+                GTUtility.getIntegratedCircuit(6))
+            .fluidInputs(getFluidOrGas(Materials.CarbonMonoxide, 1000L))
+            .fluidOutputs(ModFluids.getCarbonylSulfide(1000))
+            .duration(10 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        // Step 2: 2 COS -> CS2 + CO2 (disproportionation over alumina, not consumed)
+        GTValues.RA.stdBuilder()
+            .itemInputs(aluminaCatalyst, GTUtility.getIntegratedCircuit(7))
+            .fluidInputs(carbonylSulfideInput)
+            .fluidOutputs(carbonDisulfide, carbonDioxide)
+            .duration(16 * GTRecipeBuilder.SECONDS)
+            .eut(240)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered Carbonyl Sulfide chain: IC-6 CO + Sulfur -> COS (CR/LCR); IC-7 2000L COS + Alumina catalyst -> 1000L Carbon Disulfide + 1000L Carbon Dioxide (LCR).");
+    }
+
+    private static void registerCarbonDisulfideCharcoalBlastFurnaceRecipe() {
+        ItemStack charcoal = GTOreDictUnificator.get(OrePrefixes.gem, Materials.Charcoal, 8L);
+        ItemStack sulfurDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 16L);
+        ItemStack darkAsh = GTOreDictUnificator.get(OrePrefixes.dust, Materials.DarkAsh, 2L);
+        FluidStack carbonDisulfide = getCarbonDisulfide(3000);
+
+        if (charcoal == null || sulfurDust == null || darkAsh == null || carbonDisulfide == null) {
+            MyMod.logInfo(
+                "Skipped Charcoal + Sulfur -> Carbon Disulfide blast furnace recipe: required items or fluid unavailable.");
+            return;
+        }
+
+        // Historic retort route: C + 2 S -> CS2, lower yield than the coal coke recipe
+        GTValues.RA.stdBuilder()
+            .itemInputs(charcoal, sulfurDust, GTUtility.getIntegratedCircuit(11))
+            .itemOutputs(darkAsh)
+            .fluidOutputs(carbonDisulfide)
+            .duration(10 * GTRecipeBuilder.MINUTES)
+            .eut(120)
+            .metadata(GTRecipeConstants.COIL_HEAT, 1500)
+            .addTo(RecipeMaps.blastFurnaceRecipes);
+
+        MyMod.logInfo(
+            "Registered EBF recipe: IC-11 + 8x Charcoal + 16x Sulfur Dust -> 3000L Carbon Disulfide + 2x Dark Ash.");
+    }
+
+    private static FluidStack getCarbonDisulfide(int amount) {
+        if (GTPPFluids.CarbonDisulfide != null) {
+            return new FluidStack(GTPPFluids.CarbonDisulfide, amount);
+        }
+        return getFirstAvailableFluid(amount, "carbondisulfide", "CarbonDisulfide", "carbon_disulfide");
     }
 
     private static void registerCelluloseFiberBiomassRecipe() {
@@ -756,7 +950,7 @@ public final class GregTechRecipeLoader {
     }
 
     private static void registerSuperFuelBinderBeeswaxRecipes() {
-        ItemStack beeswax = resolveForestryBeeswax(2);
+        ItemStack beeswax = resolveForestryBeeswax(8);
         FluidStack advancedGlue = Materials.AdvancedGlue.getFluid(100L);
 
         if (beeswax == null || advancedGlue == null) {
@@ -770,7 +964,7 @@ public final class GregTechRecipeLoader {
         registerSuperFuelBinderBeeswaxRecipe(beeswax, Materials.Caesium, 12);
 
         MyMod.logInfo(
-            "Registered Mixer recipes: 2x Forestry Beeswax + 100L Advanced Glue alternate Super Fuel Binder route.");
+            "Registered Mixer recipes: 8x Forestry Beeswax + 100L Advanced Glue alternate Super Fuel Binder route.");
     }
 
     private static void registerSuperFuelBinderBeeswaxRecipe(ItemStack beeswax, Materials metal, int outputAmount) {
@@ -793,6 +987,30 @@ public final class GregTechRecipeLoader {
             .duration(40 * GTRecipeBuilder.SECONDS)
             .eut(16)
             .addTo(RecipeMaps.mixerRecipes);
+    }
+
+    private static void registerSuperFuelBinderCreosoteBeeswaxRecipe() {
+        ItemStack sulfurDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1L);
+        ItemStack woodDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wood, 4L);
+        ItemStack beeswax = resolveForestryBeeswax(16);
+        ItemStack output = ItemList.SFMixture.get(6);
+        FluidStack creosote = getFirstAvailableFluid(2000, "creosote", "creosoteoil", "Creosote", "Creosote Oil");
+
+        if (sulfurDust == null || woodDust == null || beeswax == null || output == null || creosote == null) {
+            MyMod.logInfo(
+                "Skipped creosote beeswax Super Fuel Binder recipe: sulfur, wood dust, Forestry beeswax, creosote, or output is unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(sulfurDust, woodDust, beeswax, GTUtility.getIntegratedCircuit(3))
+            .itemOutputs(output)
+            .fluidInputs(creosote)
+            .duration(40 * GTRecipeBuilder.SECONDS)
+            .eut(16)
+            .addTo(RecipeMaps.mixerRecipes);
+
+        MyMod.logInfo("Registered Mixer recipe: 16x Forestry Beeswax + 2000L Creosote -> 6x Super Fuel Binder.");
     }
 
     private static void registerMagicSuperFuelBinderVoidMetalRecipes() {

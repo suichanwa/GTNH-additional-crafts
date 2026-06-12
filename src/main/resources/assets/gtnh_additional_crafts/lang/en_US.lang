@@ -1,9 +1,11 @@
 fluid.bio_tar=Crude Bio-tar
 fluid.cryonitrox_oxidizer=Cryonitrox Oxidizer
+fluid.carbonyl_sulfide=Carbonyl Sulfide
 item.gtnh_additional_crafts.sodium_battery_x16_iv.name=16x Quad Cell Sodium Battery
 item.gtnh_additional_crafts.reusable=Reusable
 tile.bio_tar.name=Crude Bio-tar
 tile.cryonitrox_oxidizer.name=Cryonitrox Oxidizer
+tile.carbonyl_sulfide.name=Carbonyl Sulfide
 key.categories.gtnh_additional_crafts=GTNH Additional Crafts
 key.gtnh_additional_crafts.open_tb_config=Open Thaumic Boots Controls
 key.gtnh_additional_crafts.open_bottomless_pouch=Open Bottomless Pouch
