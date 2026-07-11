@@ -54,6 +54,7 @@ public final class GregTechRecipeLoader {
         registerGlycerolFermentationRecipe();
         registerPhenolFormaldehydeResinRecipe();
         registerPhenolHydrogenToCyclohexaneRecipe();
+        registerPhenolHydrogenToBenzeneRecipe();
         registerPhenolNitrationRecipe();
         registerKeroseneHydrocrackingRecipe();
         registerKeroseneSulfuricLightFuelRecipe();
@@ -746,6 +747,35 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.chemicalReactorRecipes);
 
         MyMod.logInfo("Registered Chemical Reactor recipe: IC-2 + 1000L Phenol + 500L Hydrogen -> 850L Cyclohexane.");
+    }
+
+    private static void registerPhenolHydrogenToBenzeneRecipe() {
+        // Catalytic hydrodeoxygenation: C6H5OH + H2 -> C6H6 + H2O (Pd catalyst, not consumed)
+        FluidStack phenol = getFluidOrGas(Materials.Phenol, 1000L);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 500L);
+        FluidStack water = getFluidOrGas(Materials.Water, 200L);
+        FluidStack benzene = getFluidOrGas(Materials.Benzene, 800L);
+        ItemStack palladiumCatalyst = GTUtility.copyAmount(0, Materials.Palladium.getDust(1));
+
+        if (phenol == null || hydrogen == null
+            || water == null
+            || benzene == null
+            || palladiumCatalyst == null
+            || palladiumCatalyst.getItem() == null) {
+            MyMod.logInfo("Skipped Phenol + Hydrogen -> Benzene recipe: required catalyst or fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(palladiumCatalyst, GTUtility.getIntegratedCircuit(2))
+            .fluidInputs(phenol, hydrogen)
+            .fluidOutputs(benzene, water)
+            .duration(15 * GTRecipeBuilder.SECONDS)
+            .eut(480)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: IC-2 + Palladium Dust catalyst + 1000L Phenol + 500L Hydrogen -> 800L Benzene + 200L Water.");
     }
 
     private static void registerPhenolNitrationRecipe() {
