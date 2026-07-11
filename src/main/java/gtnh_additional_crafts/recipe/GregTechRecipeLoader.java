@@ -195,15 +195,16 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.chemicalReactorRecipes);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(organicResidue, GTUtility.getIntegratedCircuit(8))
+            .itemInputs(organicResidue, GTUtility.getIntegratedCircuit(8), ItemList.Cell_Empty.get(2))
+            .itemOutputs(Materials.Hydrogen.getCells(1), Materials.Oxygen.getCells(1))
             .fluidInputs(water, carbonDioxide)
-            .fluidOutputs(hydrogen, oxygen)
             .duration(10 * GTRecipeBuilder.SECONDS)
             .eut(60)
             .addTo(RecipeMaps.electrolyzerRecipes);
 
         MyMod.logInfo(
-            "Registered algae processing chain recipes (macerator -> mixer -> chemical reactor -> electrolyzer).");
+            "Registered algae processing chain recipes (macerator -> mixer -> chemical reactor -> electrolyzer). "
+                + "Electrolyzer step outputs Hydrogen/Oxygen as cells (single-block electrolyzer can't handle two fluid outputs).");
     }
 
     private static void registerNitrogenRocketFuelUpgradeRecipe() {
