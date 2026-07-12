@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -42,6 +43,7 @@ public final class GregTechRecipeLoader {
     private static final int CRUDE_BIO_TAR_LIGHT_DISTILLATION_DURATION = scaleDurationForSpeedBoost(
         scaleDurationByPercent(CRUDE_BIO_TAR_BASE_DISTILLATION_DURATION, 35),
         70);
+    private static final int BEESWAX_FURNACE_BURN_TICKS = 500;
 
     public static void registerRecipes() {
         registerSodiumBatteryX16Recipe();
@@ -77,6 +79,7 @@ public final class GregTechRecipeLoader {
         registerSolderingAlloyIronAntimonyRecipe();
         registerSuperFuelBinderBeeswaxRecipes();
         registerSuperFuelBinderCreosoteBeeswaxRecipe();
+        registerBeeswaxFurnaceFuel();
         registerMagicSuperFuelBinderVoidMetalRecipes();
         registerLftrThoriumPlutoniumFuelRecipes();
         registerNaquadahDustFuelRodRecipes();
@@ -1139,6 +1142,35 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.mixerRecipes);
 
         MyMod.logInfo("Registered Mixer recipe: 16x Forestry Beeswax + 2000L Creosote -> 6x Super Fuel Binder.");
+    }
+
+    private static void registerBeeswaxFurnaceFuel() {
+        if (OreDictionary.getOres("itemBeeswax").isEmpty()) {
+            MyMod.logInfo("Skipped Beeswax furnace fuel: no itemBeeswax ore dictionary entries found.");
+            return;
+        }
+
+        GameRegistry.registerFuelHandler(new IFuelHandler() {
+
+            @Override
+            public int getBurnTime(ItemStack fuel) {
+                if (fuel == null) {
+                    return 0;
+                }
+                for (ItemStack ore : OreDictionary.getOres("itemBeeswax")) {
+                    if (OreDictionary.itemMatches(ore, fuel, false)) {
+                        return BEESWAX_FURNACE_BURN_TICKS;
+                    }
+                }
+                return 0;
+            }
+        });
+
+        MyMod.logInfo(
+            "Registered Beeswax as a furnace fuel: burns for " + BEESWAX_FURNACE_BURN_TICKS
+                + " ticks ("
+                + (BEESWAX_FURNACE_BURN_TICKS / 20)
+                + "s), any itemBeeswax ore-dict entry.");
     }
 
     private static void registerMagicSuperFuelBinderVoidMetalRecipes() {
