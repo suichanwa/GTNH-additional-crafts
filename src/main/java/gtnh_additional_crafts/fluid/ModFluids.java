@@ -14,6 +14,10 @@ public final class ModFluids {
     public static BlockCryonitroxFluid cryonitroxOxidizerBlock;
     public static Fluid carbonylSulfide;
     public static BlockCarbonylSulfideFluid carbonylSulfideBlock;
+    public static Fluid calciumCyanamide;
+    public static BlockCalciumCyanamideFluid calciumCyanamideBlock;
+    public static Fluid calciumHypochlorite;
+    public static BlockCalciumHypochloriteFluid calciumHypochloriteBlock;
 
     private ModFluids() {}
 
@@ -56,6 +60,32 @@ public final class ModFluids {
             carbonylSulfideBlock = new BlockCarbonylSulfideFluid(carbonylSulfide);
             GameRegistry.registerBlock(carbonylSulfideBlock, "carbonyl_sulfide");
         }
+
+        Fluid existingCalciumCyanamide = FluidRegistry.getFluid("calcium_cyanamide");
+        if (existingCalciumCyanamide != null) {
+            calciumCyanamide = existingCalciumCyanamide;
+        } else {
+            calciumCyanamide = new CalciumCyanamideFluid();
+            FluidRegistry.registerFluid(calciumCyanamide);
+        }
+
+        if (calciumCyanamideBlock == null) {
+            calciumCyanamideBlock = new BlockCalciumCyanamideFluid(calciumCyanamide);
+            GameRegistry.registerBlock(calciumCyanamideBlock, "calcium_cyanamide");
+        }
+
+        Fluid existingCalciumHypochlorite = FluidRegistry.getFluid("calcium_hypochlorite");
+        if (existingCalciumHypochlorite != null) {
+            calciumHypochlorite = existingCalciumHypochlorite;
+        } else {
+            calciumHypochlorite = new CalciumHypochloriteFluid();
+            FluidRegistry.registerFluid(calciumHypochlorite);
+        }
+
+        if (calciumHypochloriteBlock == null) {
+            calciumHypochloriteBlock = new BlockCalciumHypochloriteFluid(calciumHypochlorite);
+            GameRegistry.registerBlock(calciumHypochloriteBlock, "calcium_hypochlorite");
+        }
     }
 
     public static FluidStack getBioTar(int amount) {
@@ -70,6 +100,16 @@ public final class ModFluids {
 
     public static FluidStack getCarbonylSulfide(int amount) {
         Fluid fluid = FluidRegistry.getFluid("carbonyl_sulfide");
+        return fluid == null ? null : new FluidStack(fluid, amount);
+    }
+
+    public static FluidStack getCalciumCyanamide(int amount) {
+        Fluid fluid = FluidRegistry.getFluid("calcium_cyanamide");
+        return fluid == null ? null : new FluidStack(fluid, amount);
+    }
+
+    public static FluidStack getCalciumHypochlorite(int amount) {
+        Fluid fluid = FluidRegistry.getFluid("calcium_hypochlorite");
         return fluid == null ? null : new FluidStack(fluid, amount);
     }
 }

@@ -62,12 +62,17 @@ public final class GregTechRecipeLoader {
         registerKeroseneHydrocrackingRecipe();
         registerKeroseneSulfuricLightFuelRecipe();
         registerBiomassCrudeBioTarCokeOvenRecipe();
+        registerLogCokeOvenWoodVinegarRecipe();
         registerCrudeBioTarDistillationRecipe();
         registerCrudeBioTarMiddleFractionDistillationRecipe();
         registerCrudeBioTarLightFractionDistillationRecipe();
+        registerWoodVinegarCalciumAcetateRecipe();
         registerNaphthaToNaphthaleneRecipe();
         registerXyleneHydrodealkylationRecipes();
         registerCarbonDisulfideAlternativeRecipes();
+        registerCalciumCyanamideRecipes();
+        registerCalciumHypochloriteRecipe();
+        registerCoalGasWaterGasShiftRecipe();
         registerCryonitroxOxidizerRecipe();
         registerNitrogenRocketFuelUpgradeRecipe();
         registerJetFuelRocketFuelRecipe();
@@ -323,6 +328,38 @@ public final class GregTechRecipeLoader {
             "Registered Industrial Coke Oven recipe: IC-4 + 1000L Biomass + 250L Nitrogen -> 500L Crude Bio-tar + 2x Carbon Dust.");
     }
 
+    private static void registerLogCokeOvenWoodVinegarRecipe() {
+        // Real destructive distillation of wood (same reaction vanilla's Pyrolyse Oven already runs on
+        // logs), just carbonized in the Industrial Coke Oven multiblock instead: wood -> charcoal +
+        // pyroligneous acid vapor (Wood Vinegar), under an inert Nitrogen atmosphere to keep it from
+        // just burning to ash.
+        ItemStack logs = resolveFirstOreDictStack(16, "logWood");
+        FluidStack nitrogen = getFluidOrGas(Materials.Nitrogen, 1000L);
+        ItemStack charcoal = Materials.Charcoal.getGems(20);
+        FluidStack woodVinegar = Materials.WoodVinegar.getFluid(3000L);
+
+        if (logs == null || logs.getItem() == null
+            || nitrogen == null
+            || charcoal == null
+            || charcoal.getItem() == null
+            || woodVinegar == null) {
+            MyMod.logInfo("Skipped Industrial Coke Oven Wood Vinegar recipe: required item or fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(logs)
+            .itemOutputs(charcoal)
+            .fluidInputs(nitrogen)
+            .fluidOutputs(woodVinegar)
+            .duration(240)
+            .eut(120)
+            .addTo(GTPPRecipeMaps.cokeOvenRecipes);
+
+        MyMod.logInfo(
+            "Registered Industrial Coke Oven recipe: 16x Log + 1000L Nitrogen -> 20x Charcoal + 3000L Wood Vinegar.");
+    }
+
     private static void registerCrudeBioTarDistillationRecipe() {
         FluidStack crudeBioTar = ModFluids.getBioTar(1000);
         FluidStack anthracene = GTPPFluids.Anthracene == null ? getFirstAvailableFluid(300, "anthracene", "Anthracene")
@@ -412,6 +449,31 @@ public final class GregTechRecipeLoader {
 
         MyMod.logInfo(
             "Registered Distillation Tower recipe: IC-1 + 1000L Crude Bio-tar -> 400L Biogas + 100L Water + 200L Wood Vinegar + 130L Light Fuel + 70L Acetone + 50L Acetic Acid.");
+    }
+
+    private static void registerWoodVinegarCalciumAcetateRecipe() {
+        // Real "gray acetate of lime" process: crude pyroligneous acid (wood vinegar) neutralized with
+        // quicklime, CaO + 2 CH3COOH -> Ca(CH3COO)2 + H2O. Same reaction vanilla already registers from
+        // pure Acetic Acid; wood vinegar is dilute, so it needs more volume for the same acid content.
+        ItemStack quicklime = Materials.Quicklime.getDust(2);
+        FluidStack woodVinegar = Materials.WoodVinegar.getFluid(3000L);
+        FluidStack calciumAcetateSolution = Materials.CalciumAcetateSolution.getFluid(1000L);
+
+        if (quicklime == null || quicklime.getItem() == null || woodVinegar == null || calciumAcetateSolution == null) {
+            MyMod.logInfo("Skipped Wood Vinegar Calcium Acetate recipe: required item or fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(quicklime)
+            .fluidInputs(woodVinegar)
+            .fluidOutputs(calciumAcetateSolution)
+            .duration(4 * GTRecipeBuilder.SECONDS)
+            .eut(16)
+            .addTo(RecipeMaps.mixerRecipes);
+
+        MyMod.logInfo(
+            "Registered Mixer recipe: 2x Quicklime dust + 3000L Wood Vinegar -> 1000L Calcium Acetate Solution.");
     }
 
     private static void registerNaphthaToNaphthaleneRecipe() {
@@ -602,6 +664,95 @@ public final class GregTechRecipeLoader {
             "Registered Carbonyl Sulfide chain: IC-6 CO + Sulfur -> COS (CR/LCR); IC-7 2000L COS + Alumina catalyst -> 1000L Carbon Disulfide + 1000L Carbon Dioxide (LCR).");
     }
 
+    private static void registerCalciumCyanamideRecipes() {
+        // Frank-Caro nitrogen-fixation process, step 1: CaC2 + N2 -> CaCN2 + C, needs the same
+        // ~1000-1100C furnace tier that forms Calcium Carbide itself.
+        ItemStack calciumCarbide = MaterialsKevlar.CalciumCarbide.getDust(3);
+        FluidStack nitrogenForCyanamide = getFluidOrGas(Materials.Nitrogen, 1000L);
+        FluidStack calciumCyanamideOutput = ModFluids.getCalciumCyanamide(1000);
+        ItemStack carbonByproduct = Materials.Carbon.getDust(1);
+
+        if (calciumCarbide == null || calciumCarbide.getItem() == null
+            || nitrogenForCyanamide == null
+            || calciumCyanamideOutput == null
+            || carbonByproduct == null
+            || carbonByproduct.getItem() == null) {
+            MyMod.logInfo("Skipped Calcium Cyanamide EBF recipe: required item or fluids unavailable.");
+        } else {
+            GTValues.RA.stdBuilder()
+                .itemInputs(calciumCarbide)
+                .itemOutputs(carbonByproduct)
+                .fluidInputs(nitrogenForCyanamide)
+                .fluidOutputs(calciumCyanamideOutput)
+                .duration(15 * GTRecipeBuilder.SECONDS)
+                .eut(120)
+                .metadata(GTRecipeConstants.COIL_HEAT, 1200)
+                .addTo(RecipeMaps.blastFurnaceRecipes);
+
+            MyMod.logInfo(
+                "Registered EBF recipe: 3x Calcium Carbide Dust + 1000L Nitrogen -> 1000L Calcium Cyanamide + 1x Carbon Dust.");
+        }
+
+        // Step 2: hydrolysis, CaCN2 + 3 H2O -> CaCO3 + 2 NH3 -- regenerates Calcite and releases Ammonia.
+        FluidStack calciumCyanamideInput = ModFluids.getCalciumCyanamide(1000);
+        FluidStack waterForHydrolysis = getFluidOrGas(Materials.Water, 1500L);
+        ItemStack calcite = Materials.Calcite.getDust(5);
+        FluidStack ammonia = Materials.Ammonia.getGas(2000L);
+
+        if (calciumCyanamideInput == null || waterForHydrolysis == null
+            || calcite == null
+            || calcite.getItem() == null
+            || ammonia == null) {
+            MyMod.logInfo("Skipped Calcium Cyanamide hydrolysis recipe: required item or fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemOutputs(calcite)
+            .fluidInputs(calciumCyanamideInput, waterForHydrolysis)
+            .fluidOutputs(ammonia)
+            .duration(10 * GTRecipeBuilder.SECONDS)
+            .eut(30)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: 1000L Calcium Cyanamide + 1500L Water -> 2000L Ammonia + 5x Calcite Dust.");
+    }
+
+    private static void registerCalciumHypochloriteRecipe() {
+        // Bleaching powder: 2 Ca(OH)2 + 2 Cl2 -> Ca(ClO)2 + CaCl2 + 2 H2O.
+        Item hydratedLimeItem = gtPlusPlus.core.item.ModItems.dustCalciumHydroxide;
+        if (hydratedLimeItem == null) {
+            MyMod.logInfo("Skipped Calcium Hypochlorite recipe: Hydrated Lime Dust is missing.");
+            return;
+        }
+        ItemStack hydratedLime = new ItemStack(hydratedLimeItem, 2);
+        FluidStack chlorine = getFluidOrGas(Materials.Chlorine, 2000L);
+        FluidStack calciumHypochlorite = ModFluids.getCalciumHypochlorite(1000);
+        ItemStack calciumChloride = bartworks.system.material.WerkstoffLoader.CalciumChloride.get(OrePrefixes.dust, 3);
+        FluidStack water = getFluidOrGas(Materials.Water, 1000L);
+
+        if (chlorine == null || calciumHypochlorite == null
+            || calciumChloride == null
+            || calciumChloride.getItem() == null
+            || water == null) {
+            MyMod.logInfo("Skipped Calcium Hypochlorite recipe: required item or fluids unavailable.");
+            return;
+        }
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(hydratedLime)
+            .itemOutputs(calciumChloride)
+            .fluidInputs(chlorine)
+            .fluidOutputs(calciumHypochlorite, water)
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(30)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: 2x Hydrated Lime Dust + 2000L Chlorine -> 1000L Calcium Hypochlorite + 1000L Water + 3x Calcium Chloride Dust.");
+    }
+
     private static void registerCarbonDisulfideCharcoalBlastFurnaceRecipe() {
         ItemStack charcoal = GTOreDictUnificator.get(OrePrefixes.gem, Materials.Charcoal, 8L);
         ItemStack sulfurDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 16L);
@@ -633,6 +784,43 @@ public final class GregTechRecipeLoader {
             return new FluidStack(GTPPFluids.CarbonDisulfide, amount);
         }
         return getFirstAvailableFluid(amount, "carbondisulfide", "CarbonDisulfide", "carbon_disulfide");
+    }
+
+    private static FluidStack getCoalGas(int amount) {
+        if (GTPPFluids.CoalGas != null) {
+            return new FluidStack(GTPPFluids.CoalGas, amount);
+        }
+        return getFirstAvailableFluid(amount, "coalgas", "CoalGas", "coal_gas");
+    }
+
+    private static void registerCoalGasWaterGasShiftRecipe() {
+        FluidStack coalGas = getCoalGas(1000);
+        FluidStack steam = getFluidOrGas(Materials.Steam, 1000L);
+        FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 2000L);
+        FluidStack carbonDioxide = getFluidOrGas(Materials.CarbonDioxide, 1000L);
+        ItemStack hematiteCatalyst = GTUtility.copyAmount(0, Materials.Hematite.getDust(1));
+
+        if (coalGas == null || steam == null
+            || hydrogen == null
+            || carbonDioxide == null
+            || hematiteCatalyst == null
+            || hematiteCatalyst.getItem() == null) {
+            MyMod.logInfo("Skipped Coal Gas water-gas shift recipe: required catalyst or fluids unavailable.");
+            return;
+        }
+
+        // Water-gas shift: CO (from Coal Gas) + H2O -> CO2 + H2, over Fe2O3 high-temperature shift
+        // catalyst (not consumed) - real industrial route to enrich Hydrogen from Coal Gas.
+        GTValues.RA.stdBuilder()
+            .itemInputs(hematiteCatalyst, GTUtility.getIntegratedCircuit(9))
+            .fluidInputs(coalGas, steam)
+            .fluidOutputs(hydrogen, carbonDioxide)
+            .duration(12 * GTRecipeBuilder.SECONDS)
+            .eut(120)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: IC-9 + 1000L Coal Gas + 1000L Steam + Hematite catalyst -> 2000L Hydrogen + 1000L Carbon Dioxide.");
     }
 
     private static void registerCelluloseFiberBiomassRecipe() {
@@ -1145,7 +1333,8 @@ public final class GregTechRecipeLoader {
     }
 
     private static void registerBeeswaxFurnaceFuel() {
-        if (OreDictionary.getOres("itemBeeswax").isEmpty()) {
+        if (OreDictionary.getOres("itemBeeswax")
+            .isEmpty()) {
             MyMod.logInfo("Skipped Beeswax furnace fuel: no itemBeeswax ore dictionary entries found.");
             return;
         }
