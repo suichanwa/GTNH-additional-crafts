@@ -2,6 +2,7 @@ package gtnh_additional_crafts.fluid;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
@@ -23,6 +24,18 @@ public class BlockCryonitroxFluid extends BlockFluidClassic {
         definedFluid.setIcons(
             iconRegister.registerIcon(MyMod.MODID + ":fluids/cryonitrox_oxidizer_still"),
             iconRegister.registerIcon(MyMod.MODID + ":fluids/cryonitrox_oxidizer_flow"));
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta) {
+        return side == 0 || side == 1 ? definedFluid.getStillIcon() : definedFluid.getFlowingIcon();
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+        return getIcon(side, world.getBlockMetadata(x, y, z));
     }
 
     @Override
