@@ -100,6 +100,14 @@ public final class GregTechRecipeLoader {
         registerRadioactiveWasteNoveltyRecipes();
         registerFiberglassBoardAlternateFoilRecipes();
         registerFiberglassBoardCopperPcbFactoryRecipe();
+        registerFiberglassAdvancedVibrantAlloyPcbFactoryRecipe();
+        registerFiberglassAdvancedEnergeticSilverIronChlorideRecipe();
+        registerFiberglassAdvancedEnergeticSilverSodiumPersulfateRecipe();
+        registerEliteBoardPlatinumIridiumIronChlorideRecipe();
+        registerEliteBoardPlatinumIridiumSodiumPersulfateRecipe();
+        registerEliteBoardMelodicAlloyIronChlorideRecipe();
+        registerEliteBoardMelodicAlloySodiumPersulfateRecipe();
+        registerEpoxyAdvancedElectrumPcbFactoryRecipe();
         removeNitricOxideRegularChemicalReactorRecipe();
     }
 
@@ -2178,6 +2186,409 @@ public final class GregTechRecipeLoader {
 
         MyMod.logInfo(
             "Registered PCB Factory budget recipe line: Copper+AnnealedCopper foils -> plain Fiberglass Circuit Board (tier 3+).");
+    }
+
+    private static void registerFiberglassAdvancedVibrantAlloyPcbFactoryRecipe() {
+        // Sibling of GT's "More Advanced Circuit Board" PCB Factory loop (tier 3+, IC1 ->
+        // Fiberglass_Advanced via Aluminium+EnergeticAlloy foils). Same Aluminium foil, same fluids, same
+        // duration formula - only the coating foil changes: a flat 6x Vibrant Alloy instead of the
+        // tier-scaled EnergeticAlloy amount. No circuit gate - the Vibrant Alloy foil already disambiguates
+        // this recipe from GT's own.
+        for (int tier = 3; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack aluminiumFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.Aluminium, (long) (16 * (Math.sqrt(tier - 2))));
+            ItemStack vibrantAlloyFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.VibrantAlloy, 6L);
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 2))));
+            FluidStack ironIIIChloride = getFluidOrGas(
+                Materials.IronIIIChloride,
+                (long) (1000 * (Math.sqrt(tier - 2))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || aluminiumFoil == null
+                || aluminiumFoil.getItem() == null
+                || vibrantAlloyFoil == null
+                || vibrantAlloyFoil.getItem() == null
+                || sulfuricAcid == null
+                || ironIIIChloride == null) {
+                MyMod.logInfo(
+                    "Skipped Vibrant Alloy Fiberglass Advanced Board PCB Factory recipe at tier " + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 3))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Fiberglass_Advanced.get(64));
+            }
+            boards.add(
+                ItemList.Circuit_Board_Fiberglass_Advanced.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(resinPlate, aluminiumFoil, vibrantAlloyFoil)
+                .fluidInputs(sulfuricAcid, ironIIIChloride)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 3.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory recipe line: Aluminium + 6x Vibrant Alloy foils -> Fiberglass Advanced Circuit Board (tier 3+).");
+    }
+
+    private static void registerFiberglassAdvancedEnergeticSilverIronChlorideRecipe() {
+        // Sibling of GT's "More Advanced Circuit Board" PCB Factory loop (tier 3+, IC1 -> Fiberglass_Advanced
+        // via Aluminium+EnergeticAlloy foils). Same Aluminium foil, same duration/fluids formula - only the
+        // coating foil changes: a flat 16x Energetic Silver instead of the tier-scaled EnergeticAlloy amount.
+        // No circuit gate - the Energetic Silver foil already disambiguates this recipe from GT's own.
+        for (int tier = 3; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack aluminiumFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.Aluminium, (long) (16 * (Math.sqrt(tier - 2))));
+            ItemStack energeticSilverFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.EnergeticSilver, 16L);
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 2))));
+            FluidStack ironIIIChloride = getFluidOrGas(
+                Materials.IronIIIChloride,
+                (long) (1000 * (Math.sqrt(tier - 2))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || aluminiumFoil == null
+                || aluminiumFoil.getItem() == null
+                || energeticSilverFoil == null
+                || energeticSilverFoil.getItem() == null
+                || sulfuricAcid == null
+                || ironIIIChloride == null) {
+                MyMod.logInfo(
+                    "Skipped Energetic Silver (IronIIIChloride) Fiberglass Advanced Board PCB Factory recipe at tier "
+                        + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 3))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Fiberglass_Advanced.get(64));
+            }
+            boards.add(
+                ItemList.Circuit_Board_Fiberglass_Advanced.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(resinPlate, aluminiumFoil, energeticSilverFoil)
+                .fluidInputs(sulfuricAcid, ironIIIChloride)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 3.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory recipe line: Aluminium + 16x Energetic Silver foils + Sulfuric Acid + IronIIIChloride -> Fiberglass Advanced Circuit Board (tier 3+).");
+    }
+
+    private static void registerFiberglassAdvancedEnergeticSilverSodiumPersulfateRecipe() {
+        // Same as the IronIIIChloride Energetic Silver line above, but the etchant is swapped for Sodium
+        // Persulfate - a real-world alternative PCB copper etchant used in industry (cleaner, regenerable,
+        // no iron sludge byproduct unlike ferric/iron-III-chloride etching). Fluid alone disambiguates it
+        // from the IronIIIChloride sibling.
+        for (int tier = 3; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack aluminiumFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.Aluminium, (long) (16 * (Math.sqrt(tier - 2))));
+            ItemStack energeticSilverFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.EnergeticSilver, 16L);
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 2))));
+            FluidStack sodiumPersulfate = getFluidOrGas(
+                Materials.SodiumPersulfate,
+                (long) (1000 * (Math.sqrt(tier - 2))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || aluminiumFoil == null
+                || aluminiumFoil.getItem() == null
+                || energeticSilverFoil == null
+                || energeticSilverFoil.getItem() == null
+                || sulfuricAcid == null
+                || sodiumPersulfate == null) {
+                MyMod.logInfo(
+                    "Skipped Energetic Silver (SodiumPersulfate) Fiberglass Advanced Board PCB Factory recipe at tier "
+                        + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 3))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Fiberglass_Advanced.get(64));
+            }
+            boards.add(
+                ItemList.Circuit_Board_Fiberglass_Advanced.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(resinPlate, aluminiumFoil, energeticSilverFoil)
+                .fluidInputs(sulfuricAcid, sodiumPersulfate)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 3.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory recipe line: Aluminium + 16x Energetic Silver foils + Sulfuric Acid + Sodium Persulfate -> Fiberglass Advanced Circuit Board (tier 3+).");
+    }
+
+    private static void registerEliteBoardPlatinumIridiumIronChlorideRecipe() {
+        // Sibling of the Elite Circuit Board line (tier 4+, Multilayered Fiber-Reinforced plate + Palladium
+        // foil + Platinum foil + Sulfuric Acid + IronIIIChloride -> Multifiberglass_Elite board). Same plate,
+        // same Palladium foil, same fluids/duration formula - only the Platinum foil slot is split into a
+        // real Platinum-Iridium alloy pair (4+4), the genuine electrode-grade alloy used for spark-plug and
+        // pacemaker contacts.
+        for (int tier = 4; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack palladiumFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.Palladium, (long) (16 * (Math.sqrt(tier - 3))));
+            ItemStack platinumFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.Platinum, 4L);
+            ItemStack iridiumFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.Iridium, 4L);
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 3))));
+            FluidStack ironIIIChloride = getFluidOrGas(
+                Materials.IronIIIChloride,
+                (long) (2000 * (Math.sqrt(tier - 3))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || palladiumFoil == null
+                || palladiumFoil.getItem() == null
+                || platinumFoil == null
+                || platinumFoil.getItem() == null
+                || iridiumFoil == null
+                || iridiumFoil.getItem() == null
+                || sulfuricAcid == null
+                || ironIIIChloride == null) {
+                MyMod.logInfo(
+                    "Skipped Platinum-Iridium (IronIIIChloride) Elite Board PCB Factory recipe at tier " + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 4))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Multifiberglass_Elite.get(64));
+            }
+            boards.add(
+                ItemList.Circuit_Board_Multifiberglass_Elite.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(resinPlate, palladiumFoil, platinumFoil, iridiumFoil)
+                .fluidInputs(sulfuricAcid, ironIIIChloride)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 4.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory recipe line: Palladium + 4x Platinum + 4x Iridium foils + Sulfuric Acid + IronIIIChloride -> Elite Circuit Board (tier 4+).");
+    }
+
+    private static void registerEliteBoardPlatinumIridiumSodiumPersulfateRecipe() {
+        // Same as the IronIIIChloride Platinum-Iridium line above, etchant swapped for Sodium Persulfate.
+        for (int tier = 4; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack palladiumFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.Palladium, (long) (16 * (Math.sqrt(tier - 3))));
+            ItemStack platinumFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.Platinum, 4L);
+            ItemStack iridiumFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.Iridium, 4L);
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 3))));
+            FluidStack sodiumPersulfate = getFluidOrGas(
+                Materials.SodiumPersulfate,
+                (long) (4000 * (Math.sqrt(tier - 3))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || palladiumFoil == null
+                || palladiumFoil.getItem() == null
+                || platinumFoil == null
+                || platinumFoil.getItem() == null
+                || iridiumFoil == null
+                || iridiumFoil.getItem() == null
+                || sulfuricAcid == null
+                || sodiumPersulfate == null) {
+                MyMod.logInfo(
+                    "Skipped Platinum-Iridium (SodiumPersulfate) Elite Board PCB Factory recipe at tier " + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 4))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Multifiberglass_Elite.get(64));
+            }
+            boards.add(
+                ItemList.Circuit_Board_Multifiberglass_Elite.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(resinPlate, palladiumFoil, platinumFoil, iridiumFoil)
+                .fluidInputs(sulfuricAcid, sodiumPersulfate)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 4.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory recipe line: Palladium + 4x Platinum + 4x Iridium foils + Sulfuric Acid + Sodium Persulfate -> Elite Circuit Board (tier 4+).");
+    }
+
+    private static void registerEliteBoardMelodicAlloyIronChlorideRecipe() {
+        // Sibling of the Elite Circuit Board line (tier 4+). Same plate, same Palladium foil, same
+        // fluids/duration formula - the Platinum foil slot becomes a flat 8x Melodic Alloy foil instead.
+        for (int tier = 4; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack palladiumFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.Palladium, (long) (16 * (Math.sqrt(tier - 3))));
+            ItemStack melodicAlloyFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.MelodicAlloy, 8L);
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 3))));
+            FluidStack ironIIIChloride = getFluidOrGas(
+                Materials.IronIIIChloride,
+                (long) (2000 * (Math.sqrt(tier - 3))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || palladiumFoil == null
+                || palladiumFoil.getItem() == null
+                || melodicAlloyFoil == null
+                || melodicAlloyFoil.getItem() == null
+                || sulfuricAcid == null
+                || ironIIIChloride == null) {
+                MyMod.logInfo(
+                    "Skipped Melodic Alloy (IronIIIChloride) Elite Board PCB Factory recipe at tier " + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 4))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Multifiberglass_Elite.get(64));
+            }
+            boards.add(
+                ItemList.Circuit_Board_Multifiberglass_Elite.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(resinPlate, palladiumFoil, melodicAlloyFoil)
+                .fluidInputs(sulfuricAcid, ironIIIChloride)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 4.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory recipe line: Palladium + 8x Melodic Alloy foils + Sulfuric Acid + IronIIIChloride -> Elite Circuit Board (tier 4+).");
+    }
+
+    private static void registerEliteBoardMelodicAlloySodiumPersulfateRecipe() {
+        // Same as the IronIIIChloride Melodic Alloy line above, etchant swapped for Sodium Persulfate.
+        for (int tier = 4; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack palladiumFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.Palladium, (long) (16 * (Math.sqrt(tier - 3))));
+            ItemStack melodicAlloyFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.MelodicAlloy, 8L);
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 3))));
+            FluidStack sodiumPersulfate = getFluidOrGas(
+                Materials.SodiumPersulfate,
+                (long) (4000 * (Math.sqrt(tier - 3))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || palladiumFoil == null
+                || palladiumFoil.getItem() == null
+                || melodicAlloyFoil == null
+                || melodicAlloyFoil.getItem() == null
+                || sulfuricAcid == null
+                || sodiumPersulfate == null) {
+                MyMod.logInfo(
+                    "Skipped Melodic Alloy (SodiumPersulfate) Elite Board PCB Factory recipe at tier " + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 4))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Multifiberglass_Elite.get(64));
+            }
+            boards.add(
+                ItemList.Circuit_Board_Multifiberglass_Elite.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(resinPlate, palladiumFoil, melodicAlloyFoil)
+                .fluidInputs(sulfuricAcid, sodiumPersulfate)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 4.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory recipe line: Palladium + 8x Melodic Alloy foils + Sulfuric Acid + Sodium Persulfate -> Elite Circuit Board (tier 4+).");
+    }
+
+    private static void registerEpoxyAdvancedElectrumPcbFactoryRecipe() {
+        // Sibling of the Advanced Circuit Board line (tier 2+, plate + Gold foil + Sulfuric Acid +
+        // IronIIIChloride -> Epoxy_Advanced board). Same plate, same fluids/duration formula - the Gold foil
+        // slot becomes a flat 6x Electrum foil instead. No circuit gate - the single Electrum foil already
+        // disambiguates this recipe from GT's own paired-foil recipe.
+        for (int tier = 2; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack electrumFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.Electrum, 6L);
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 1))));
+            FluidStack ironIIIChloride = getFluidOrGas(Materials.IronIIIChloride, (long) (500 * (Math.sqrt(tier - 1))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || electrumFoil == null
+                || electrumFoil.getItem() == null
+                || sulfuricAcid == null
+                || ironIIIChloride == null) {
+                MyMod.logInfo(
+                    "Skipped Electrum Epoxy Advanced Board PCB Factory recipe at tier " + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 2))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Epoxy_Advanced.get(64));
+            }
+            boards.add(ItemList.Circuit_Board_Epoxy_Advanced.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(resinPlate, electrumFoil)
+                .fluidInputs(sulfuricAcid, ironIIIChloride)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 2.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory recipe line: 6x Electrum foil + Sulfuric Acid + IronIIIChloride -> Epoxy Advanced Circuit Board (tier 2+).");
     }
 
     private static void removeNitricOxideRegularChemicalReactorRecipe() {
