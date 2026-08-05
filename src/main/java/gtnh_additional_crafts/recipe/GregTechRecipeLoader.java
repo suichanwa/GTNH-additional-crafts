@@ -854,7 +854,7 @@ public final class GregTechRecipeLoader {
         // the CO fraction of Coal Gas to deposit solid carbon - real industrial "coking out" side
         // reaction, run here on-purpose to reclaim Coal out of Coal Gas.
         GTValues.RA.stdBuilder()
-            .itemInputs(ironCatalyst, GTUtility.getIntegratedCircuit(7))
+            .itemInputs(ironCatalyst)
             .itemOutputs(coalLump)
             .fluidInputs(coalGas)
             .fluidOutputs(carbonDioxide)
@@ -863,7 +863,7 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         MyMod
-            .logInfo("Registered LCR recipe: IC-7 + 2000L Coal Gas + Iron catalyst -> 1x Coal + 1000L Carbon Dioxide.");
+            .logInfo("Registered LCR recipe: 2000L Coal Gas + Iron catalyst -> 1x Coal + 1000L Carbon Dioxide.");
     }
 
     private static void registerPropeneHydrogenationPropaneRecipe() {
@@ -2056,7 +2056,7 @@ public final class GregTechRecipeLoader {
         // Cheaper/more abundant than Aluminium by LuV, but copper oxidizes faster than aluminium's native
         // oxide layer, so it needs a longer passivation step before it bonds cleanly to the resin.
         GTValues.RA.stdBuilder()
-            .itemInputs(resinPlate, copperFoil, GTUtility.getIntegratedCircuit(6))
+            .itemInputs(resinPlate, copperFoil)
             .itemOutputs(fiberglassBoard)
             .fluidInputs(sulfuricAcid)
             .duration(50)
@@ -2064,7 +2064,7 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.chemicalReactorRecipes);
 
         MyMod.logInfo(
-            "Registered Chemical Reactor recipe: Resin Plate + 20x Copper Foil + 1000L Sulfuric Acid (IC6) -> 1x Fiberglass Circuit Board.");
+            "Registered Chemical Reactor recipe: Resin Plate + 20x Copper Foil + 1000L Sulfuric Acid -> 1x Fiberglass Circuit Board.");
     }
 
     private static void registerFiberglassBoardSilverFoilZpmRecipe() {
@@ -2087,7 +2087,7 @@ public final class GregTechRecipeLoader {
         // performance - real-world grounding for premium RF/hybrid-circuit silver traces. Net cheaper than
         // the Copper path despite silver's higher unit cost, once ZPM-tier materials are flowing.
         GTValues.RA.stdBuilder()
-            .itemInputs(resinPlate, silverFoil, GTUtility.getIntegratedCircuit(7))
+            .itemInputs(resinPlate, silverFoil)
             .itemOutputs(fiberglassBoard)
             .fluidInputs(sulfuricAcid)
             .duration(16)
@@ -2095,7 +2095,7 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         MyMod.logInfo(
-            "Registered LCR recipe: Resin Plate + 16x Silver Foil + 500L Sulfuric Acid (IC7) -> 1x Fiberglass Circuit Board.");
+            "Registered LCR recipe: Resin Plate + 16x Silver Foil + 500L Sulfuric Acid -> 1x Fiberglass Circuit Board.");
     }
 
     private static void registerFiberglassBoardGoldFoilUvRecipe() {
@@ -2118,7 +2118,7 @@ public final class GregTechRecipeLoader {
         // corrosion immunity for ultra-reliability electronics). UV-tier batch scale doubles board output
         // per craft.
         GTValues.RA.stdBuilder()
-            .itemInputs(resinPlate, goldFoil, GTUtility.getIntegratedCircuit(8))
+            .itemInputs(resinPlate, goldFoil)
             .itemOutputs(fiberglassBoards)
             .fluidInputs(sulfuricAcid)
             .duration(8)
@@ -2126,13 +2126,14 @@ public final class GregTechRecipeLoader {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         MyMod.logInfo(
-            "Registered LCR recipe: Resin Plate + 8x Gold Foil + 1000L Sulfuric Acid (IC8) -> 2x Fiberglass Circuit Board.");
+            "Registered LCR recipe: Resin Plate + 8x Gold Foil + 1000L Sulfuric Acid -> 2x Fiberglass Circuit Board.");
     }
 
     private static void registerFiberglassBoardCopperPcbFactoryRecipe() {
         // Budget sibling of GT's "More Advanced Circuit Board" PCB Factory loop (tier 3+, IC1/2/3 ->
-        // Fiberglass_Advanced via Aluminium+EnergeticAlloy foils). IC4 branch, Copper+AnnealedCopper foils
-        // (the same cheap conductor pair GT already uses for base Plastic boards) -> plain Fiberglass board.
+        // Fiberglass_Advanced via Aluminium+EnergeticAlloy foils). No circuit gate here - Copper+AnnealedCopper
+        // foils (the same cheap conductor pair GT already uses for base Plastic boards) already disambiguate
+        // this recipe from GT's own -> plain Fiberglass board.
         // Shares the tier-3 EpoxidFiberReinforced/etc plastic slot, no new plastic tier registered.
         for (int tier = 3; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
             Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
@@ -2167,7 +2168,7 @@ public final class GregTechRecipeLoader {
             boards.add(ItemList.Circuit_Board_Fiberglass.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
 
             GTValues.RA.stdBuilder()
-                .itemInputs(GTUtility.getIntegratedCircuit(4), resinPlate, annealedCopperFoil, copperFoil)
+                .itemInputs(resinPlate, annealedCopperFoil, copperFoil)
                 .fluidInputs(sulfuricAcid, ironIIIChloride)
                 .itemOutputs(boards.toArray(new ItemStack[0]))
                 .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 3.5))))
@@ -2177,7 +2178,7 @@ public final class GregTechRecipeLoader {
         }
 
         MyMod.logInfo(
-            "Registered PCB Factory budget recipe line: IC4, Copper+AnnealedCopper foils -> plain Fiberglass Circuit Board (tier 3+).");
+            "Registered PCB Factory budget recipe line: Copper+AnnealedCopper foils -> plain Fiberglass Circuit Board (tier 3+).");
     }
 
     private static void removeNitricOxideRegularChemicalReactorRecipe() {
