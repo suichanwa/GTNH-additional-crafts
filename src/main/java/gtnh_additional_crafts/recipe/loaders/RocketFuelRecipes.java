@@ -12,6 +12,7 @@ import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.fluid.ModFluids;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class RocketFuelRecipes {
 
@@ -65,21 +66,15 @@ public final class RocketFuelRecipes {
         FluidStack oxygen = Materials.Oxygen.getGas(500L);
         FluidStack upgradedRocketFuel = FluidLookup.getFirstAvailableFluid(750, "rocketfuelmixc", "RocketFuelMixC");
 
-        if (rp1Fuel == null || nitrogen == null || oxygen == null || upgradedRocketFuel == null) {
-            MyMod.logInfo(
-                "Skipped nitrogen RP-1 upgrade recipe: RP-1, Nitrogen, Oxygen, or upgraded rocket fuel fluid is unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(GTUtility.getIntegratedCircuit(22))
             .fluidInputs(rp1Fuel, nitrogen, oxygen)
             .fluidOutputs(upgradedRocketFuel)
             .duration(12 * GTRecipeBuilder.SECONDS)
             .eut(480)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo("Registered LCR recipe: 1000L RP-1 + 1000L Nitrogen + 500L Oxygen -> 750L CN3H7O3 Rocket Fuel.");
+            .register(
+                "Skipped nitrogen RP-1 upgrade recipe: RP-1, Nitrogen, Oxygen, or upgraded rocket fuel fluid is unavailable.",
+                "Registered LCR recipe: 1000L RP-1 + 1000L Nitrogen + 500L Oxygen -> 750L CN3H7O3 Rocket Fuel.");
     }
 
     public static void registerJetFuelRocketFuelRecipe() {

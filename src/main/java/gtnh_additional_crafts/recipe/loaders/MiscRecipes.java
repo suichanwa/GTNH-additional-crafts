@@ -3,17 +3,16 @@ package gtnh_additional_crafts.recipe.loaders;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeBuilder;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.item.ModItems;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class MiscRecipes {
 
@@ -44,20 +43,15 @@ public final class MiscRecipes {
         FluidStack oxygen = Materials.Oxygen.getGas(1000L);
         ItemStack potashDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Potash, 1L);
 
-        if (potassiumDust == null || oxygen == null || potashDust == null) {
-            MyMod.logInfo("Skipped Potassium + Oxygen -> Potash recipe: required items/fluids unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.chemicalReactor()
             .itemInputs(potassiumDust)
             .itemOutputs(potashDust)
             .fluidInputs(oxygen)
             .duration(5 * GTRecipeBuilder.SECONDS)
             .eut(30)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
-
-        MyMod.logInfo("Registered Chemical Reactor recipe: 2x Potassium Dust + 1000L Oxygen -> 1x Potash Dust.");
+            .register(
+                "Skipped Potassium + Oxygen -> Potash recipe: required items/fluids unavailable.",
+                "Registered Chemical Reactor recipe: 2x Potassium Dust + 1000L Oxygen -> 1x Potash Dust.");
     }
 
 }

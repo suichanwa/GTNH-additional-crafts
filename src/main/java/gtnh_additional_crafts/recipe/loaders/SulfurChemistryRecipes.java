@@ -17,6 +17,7 @@ import gtPlusPlus.core.fluids.GTPPFluids;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.fluid.ModFluids;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class SulfurChemistryRecipes {
 
@@ -78,16 +79,15 @@ public final class SulfurChemistryRecipes {
             return;
         }
 
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemOutputs(calcite)
             .fluidInputs(calciumCyanamideInput, waterForHydrolysis)
             .fluidOutputs(ammonia)
             .duration(10 * GTRecipeBuilder.SECONDS)
             .eut(30)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: 1000L Calcium Cyanamide + 1500L Water -> 2000L Ammonia + 5x Calcite Dust.");
+            .register(
+                "Skipped Calcium Cyanamide hydrolysis recipe: required item or fluids unavailable.",
+                "Registered LCR recipe: 1000L Calcium Cyanamide + 1500L Water -> 2000L Ammonia + 5x Calcite Dust.");
     }
 
     public static void registerCalciumHypochloriteRecipe() {
@@ -111,17 +111,16 @@ public final class SulfurChemistryRecipes {
             return;
         }
 
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(hydratedLime)
             .itemOutputs(calciumChloride)
             .fluidInputs(chlorine)
             .fluidOutputs(calciumHypochlorite, water)
             .duration(12 * GTRecipeBuilder.SECONDS)
             .eut(30)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: 2x Hydrated Lime Dust + 2000L Chlorine -> 1000L Calcium Hypochlorite + 1000L Water + 3x Calcium Chloride Dust.");
+            .register(
+                "Skipped Calcium Hypochlorite recipe: required item or fluids unavailable.",
+                "Registered LCR recipe: 2x Hydrated Lime Dust + 2000L Chlorine -> 1000L Calcium Hypochlorite + 1000L Water + 3x Calcium Chloride Dust.");
     }
 
     private static void registerCarbonDisulfideMethaneSulfurRecipe() {
@@ -142,16 +141,15 @@ public final class SulfurChemistryRecipes {
         }
 
         // Modern industrial route: CH4 + 4 S -> CS2 + 2 H2S (~600 C, silica catalyst, not consumed)
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(sulfurDust, silicaCatalyst, GTUtility.getIntegratedCircuit(4))
             .fluidInputs(methane)
             .fluidOutputs(carbonDisulfide, hydrogenSulfide)
             .duration(15 * GTRecipeBuilder.SECONDS)
             .eut(480)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: IC-4 + 1000L Methane + 4x Sulfur Dust + Silicon Dioxide catalyst -> 1000L Carbon Disulfide + 2000L Hydrogen Sulfide.");
+            .register(
+                "Skipped Methane + Sulfur -> Carbon Disulfide recipe: required catalyst, items, or fluids unavailable.",
+                "Registered LCR recipe: IC-4 + 1000L Methane + 4x Sulfur Dust + Silicon Dioxide catalyst -> 1000L Carbon Disulfide + 2000L Hydrogen Sulfide.");
     }
 
     private static void registerCarbonDisulfideHydrogenSulfideCarbonRecipe() {
@@ -170,16 +168,15 @@ public final class SulfurChemistryRecipes {
         }
 
         // H2S sink: 2 H2S + C -> CS2 + 2 H2 (high temperature, endothermic)
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(carbonDust, GTUtility.getIntegratedCircuit(5))
             .fluidInputs(hydrogenSulfide)
             .fluidOutputs(carbonDisulfide, hydrogen)
             .duration(20 * GTRecipeBuilder.SECONDS)
             .eut(480)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: IC-5 + 2000L Hydrogen Sulfide + 1x Carbon Dust -> 1000L Carbon Disulfide + 2000L Hydrogen.");
+            .register(
+                "Skipped Hydrogen Sulfide + Carbon -> Carbon Disulfide recipe: required items or fluids unavailable.",
+                "Registered LCR recipe: IC-5 + 2000L Hydrogen Sulfide + 1x Carbon Dust -> 1000L Carbon Disulfide + 2000L Hydrogen.");
     }
 
     private static void registerCarbonylSulfideChainRecipes() {
@@ -203,35 +200,32 @@ public final class SulfurChemistryRecipes {
         }
 
         // Step 1: CO + S -> COS
-        GTValues.RA.stdBuilder()
+        MachineRecipes.chemicalReactor()
             .itemInputs(sulfurDust, GTUtility.getIntegratedCircuit(6))
             .fluidInputs(carbonMonoxide)
             .fluidOutputs(carbonylSulfide)
             .duration(10 * GTRecipeBuilder.SECONDS)
             .eut(120)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .register("", "");
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1L),
-                GTUtility.getIntegratedCircuit(6))
-            .fluidInputs(FluidLookup.getFluidOrGas(Materials.CarbonMonoxide, 1000L))
-            .fluidOutputs(ModFluids.getCarbonylSulfide(1000))
+        MachineRecipes.largeChemicalReactor()
+            .itemInputs(sulfurDust, GTUtility.getIntegratedCircuit(6))
+            .fluidInputs(carbonMonoxide)
+            .fluidOutputs(carbonylSulfide)
             .duration(10 * GTRecipeBuilder.SECONDS)
             .eut(120)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .register("", "");
 
         // Step 2: 2 COS -> CS2 + CO2 (disproportionation over alumina, not consumed)
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(aluminaCatalyst, GTUtility.getIntegratedCircuit(7))
             .fluidInputs(carbonylSulfideInput)
             .fluidOutputs(carbonDisulfide, carbonDioxide)
             .duration(16 * GTRecipeBuilder.SECONDS)
             .eut(240)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered Carbonyl Sulfide chain: IC-6 CO + Sulfur -> COS (CR/LCR); IC-7 2000L COS + Alumina catalyst -> 1000L Carbon Disulfide + 1000L Carbon Dioxide (LCR).");
+            .register(
+                "",
+                "Registered Carbonyl Sulfide chain: IC-6 CO + Sulfur -> COS (CR/LCR); IC-7 2000L COS + Alumina catalyst -> 1000L Carbon Disulfide + 1000L Carbon Dioxide (LCR).");
     }
 
     private static void registerCarbonDisulfideCharcoalBlastFurnaceRecipe() {

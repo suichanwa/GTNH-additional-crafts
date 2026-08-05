@@ -3,14 +3,12 @@ package gtnh_additional_crafts.recipe.loaders;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.fluids.GTPPFluids;
-import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class PhenolRecipes {
 
@@ -32,21 +30,15 @@ public final class PhenolRecipes {
             ? FluidLookup.getFirstAvailableFluid(750, "liquidresin", "Liquid Resin")
             : new FluidStack(GTPPFluids.LiquidResin, 750);
 
-        if (phenol == null || formaldehyde == null || liquidResin == null) {
-            MyMod.logInfo("Skipped Phenol + Formaldehyde -> Liquid Resin recipe: required fluids unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.chemicalReactor()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
             .fluidInputs(phenol, formaldehyde)
             .fluidOutputs(liquidResin)
             .duration(10 * GTRecipeBuilder.SECONDS)
             .eut(120)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered Chemical Reactor recipe: IC-1 + 500L Phenol + 500L Formaldehyde -> 750L Liquid Resin.");
+            .register(
+                "Skipped Phenol + Formaldehyde -> Liquid Resin recipe: required fluids unavailable.",
+                "Registered Chemical Reactor recipe: IC-1 + 500L Phenol + 500L Formaldehyde -> 750L Liquid Resin.");
     }
 
     public static void registerPhenolHydrogenToCyclohexaneRecipe() {
@@ -56,20 +48,15 @@ public final class PhenolRecipes {
             ? FluidLookup.getFirstAvailableFluid(850, "cyclohexane", "Cyclohexane")
             : new FluidStack(GTPPFluids.Cyclohexane, 850);
 
-        if (phenol == null || hydrogen == null || cyclohexane == null) {
-            MyMod.logInfo("Skipped Phenol + Hydrogen -> Cyclohexane recipe: required fluids unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.chemicalReactor()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
             .fluidInputs(phenol, hydrogen)
             .fluidOutputs(cyclohexane)
             .duration(15 * GTRecipeBuilder.SECONDS)
             .eut(480)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
-
-        MyMod.logInfo("Registered Chemical Reactor recipe: IC-2 + 1000L Phenol + 500L Hydrogen -> 850L Cyclohexane.");
+            .register(
+                "Skipped Phenol + Hydrogen -> Cyclohexane recipe: required fluids unavailable.",
+                "Registered Chemical Reactor recipe: IC-2 + 1000L Phenol + 500L Hydrogen -> 850L Cyclohexane.");
     }
 
     public static void registerPhenolHydrogenToBenzeneRecipe() {
@@ -80,25 +67,15 @@ public final class PhenolRecipes {
         FluidStack benzene = FluidLookup.getFluidOrGas(Materials.Benzene, 800L);
         ItemStack palladiumCatalyst = GTUtility.copyAmount(0, Materials.Palladium.getDust(1));
 
-        if (phenol == null || hydrogen == null
-            || water == null
-            || benzene == null
-            || palladiumCatalyst == null
-            || palladiumCatalyst.getItem() == null) {
-            MyMod.logInfo("Skipped Phenol + Hydrogen -> Benzene recipe: required catalyst or fluids unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(palladiumCatalyst, GTUtility.getIntegratedCircuit(2))
             .fluidInputs(phenol, hydrogen)
             .fluidOutputs(benzene, water)
             .duration(15 * GTRecipeBuilder.SECONDS)
             .eut(480)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: IC-2 + Palladium Dust catalyst + 1000L Phenol + 500L Hydrogen -> 800L Benzene + 200L Water.");
+            .register(
+                "Skipped Phenol + Hydrogen -> Benzene recipe: required catalyst or fluids unavailable.",
+                "Registered LCR recipe: IC-2 + Palladium Dust catalyst + 1000L Phenol + 500L Hydrogen -> 800L Benzene + 200L Water.");
     }
 
     public static void registerPhenolNitrationRecipe() {
@@ -108,20 +85,15 @@ public final class PhenolRecipes {
             ? FluidLookup.getFirstAvailableFluid(750, "nitrobenzene", "Nitrobenzene")
             : new FluidStack(GTPPFluids.Nitrobenzene, 750);
 
-        if (phenol == null || nitrationMixture == null || nitrobenzene == null) {
-            MyMod.logInfo("Skipped Phenol + Nitration Mixture -> Nitrobenzene recipe: required fluids unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
             .fluidInputs(phenol, nitrationMixture)
             .fluidOutputs(nitrobenzene)
             .duration(20 * GTRecipeBuilder.SECONDS)
             .eut(480)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo("Registered LCR recipe: IC-1 + 500L Phenol + 500L Nitration Mixture -> 750L Nitrobenzene.");
+            .register(
+                "Skipped Phenol + Nitration Mixture -> Nitrobenzene recipe: required fluids unavailable.",
+                "Registered LCR recipe: IC-1 + 500L Phenol + 500L Nitration Mixture -> 750L Nitrobenzene.");
     }
 
 }

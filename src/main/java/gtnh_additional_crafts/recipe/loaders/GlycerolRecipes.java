@@ -9,6 +9,7 @@ import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class GlycerolRecipes {
 
@@ -30,26 +31,23 @@ public final class GlycerolRecipes {
             return;
         }
 
-        GTValues.RA.stdBuilder()
+        MachineRecipes.chemicalReactor()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
             .fluidInputs(glycerol, nitrogenDioxide)
             .fluidOutputs(glycerylTrinitrate)
             .duration(12 * GTRecipeBuilder.SECONDS)
             .eut(120)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .register("", "");
 
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
-            .fluidInputs(
-                FluidLookup.getFluidOrGas(Materials.Glycerol, 500L),
-                FluidLookup.getFluidOrGas(Materials.NitrogenDioxide, 500L))
-            .fluidOutputs(FluidLookup.getFluidOrGas(Materials.Glyceryl, 750L))
+            .fluidInputs(glycerol, nitrogenDioxide)
+            .fluidOutputs(glycerylTrinitrate)
             .duration(12 * GTRecipeBuilder.SECONDS)
             .eut(120)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered Chemical Reactor and LCR recipe: IC-1 + 500L Glycerol + 500L Nitrogen Dioxide -> 750L Glyceryl Trinitrate.");
+            .register(
+                "",
+                "Registered Chemical Reactor and LCR recipe: IC-1 + 500L Glycerol + 500L Nitrogen Dioxide -> 750L Glyceryl Trinitrate.");
     }
 
     public static void registerGlycerolHydrogenCrackingRecipe() {
@@ -58,20 +56,15 @@ public final class GlycerolRecipes {
         FluidStack methane = FluidLookup.getFluidOrGas(Materials.Methane, 600L);
         FluidStack water = FluidLookup.getFluidOrGas(Materials.Water, 400L);
 
-        if (glycerol == null || hydrogen == null || methane == null || water == null) {
-            MyMod.logInfo("Skipped Glycerol cracking recipe: required fluids unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
             .fluidInputs(glycerol, hydrogen)
             .fluidOutputs(methane, water)
             .duration(16 * GTRecipeBuilder.SECONDS)
             .eut(480)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo("Registered LCR recipe: IC-2 + 1000L Glycerol + 500L Hydrogen -> 600L Methane + 400L Water.");
+            .register(
+                "Skipped Glycerol cracking recipe: required fluids unavailable.",
+                "Registered LCR recipe: IC-2 + 1000L Glycerol + 500L Hydrogen -> 600L Methane + 400L Water.");
     }
 
     public static void registerGlycerolFermentationRecipe() {

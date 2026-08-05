@@ -16,6 +16,7 @@ import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.PCBFactoryManager;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class CircuitBoardFiberglassRecipes {
 
@@ -90,29 +91,18 @@ public final class CircuitBoardFiberglassRecipes {
         FluidStack sulfuricAcid = FluidLookup.getFluidOrGas(Materials.SulfuricAcid, 1000L);
         ItemStack fiberglassBoard = ItemList.Circuit_Board_Fiberglass.get(1);
 
-        if (resinPlate == null || resinPlate.getItem() == null
-            || copperFoil == null
-            || copperFoil.getItem() == null
-            || sulfuricAcid == null
-            || fiberglassBoard == null
-            || fiberglassBoard.getItem() == null) {
-            MyMod.logInfo("Skipped Copper Foil Fiberglass Board (LuV) recipe: required items or fluid unavailable.");
-            return;
-        }
-
         // Copper is the real industry-standard PCB conductor (Aluminium-clad boards are a niche exception).
         // Cheaper/more abundant than Aluminium by LuV, but copper oxidizes faster than aluminium's native
         // oxide layer, so it needs a longer passivation step before it bonds cleanly to the resin.
-        GTValues.RA.stdBuilder()
+        MachineRecipes.chemicalReactor()
             .itemInputs(resinPlate, copperFoil)
             .itemOutputs(fiberglassBoard)
             .fluidInputs(sulfuricAcid)
             .duration(50)
             .eut(1920)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered Chemical Reactor recipe: Resin Plate + 20x Copper Foil + 1000L Sulfuric Acid -> 1x Fiberglass Circuit Board.");
+            .register(
+                "Skipped Copper Foil Fiberglass Board (LuV) recipe: required items or fluid unavailable.",
+                "Registered Chemical Reactor recipe: Resin Plate + 20x Copper Foil + 1000L Sulfuric Acid -> 1x Fiberglass Circuit Board.");
     }
 
     private static void registerFiberglassBoardSilverFoilZpmRecipe() {
@@ -121,29 +111,18 @@ public final class CircuitBoardFiberglassRecipes {
         FluidStack sulfuricAcid = FluidLookup.getFluidOrGas(Materials.SulfuricAcid, 500L);
         ItemStack fiberglassBoard = ItemList.Circuit_Board_Fiberglass.get(1);
 
-        if (resinPlate == null || resinPlate.getItem() == null
-            || silverFoil == null
-            || silverFoil.getItem() == null
-            || sulfuricAcid == null
-            || fiberglassBoard == null
-            || fiberglassBoard.getItem() == null) {
-            MyMod.logInfo("Skipped Silver Foil Fiberglass Board (ZPM) recipe: required items or fluid unavailable.");
-            return;
-        }
-
         // Silver's higher conductivity than Copper/Aluminium means fewer foil sheets give equivalent trace
         // performance - real-world grounding for premium RF/hybrid-circuit silver traces. Net cheaper than
         // the Copper path despite silver's higher unit cost, once ZPM-tier materials are flowing.
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(resinPlate, silverFoil)
             .itemOutputs(fiberglassBoard)
             .fluidInputs(sulfuricAcid)
             .duration(16)
             .eut(7680)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: Resin Plate + 16x Silver Foil + 500L Sulfuric Acid -> 1x Fiberglass Circuit Board.");
+            .register(
+                "Skipped Silver Foil Fiberglass Board (ZPM) recipe: required items or fluid unavailable.",
+                "Registered LCR recipe: Resin Plate + 16x Silver Foil + 500L Sulfuric Acid -> 1x Fiberglass Circuit Board.");
     }
 
     private static void registerFiberglassBoardGoldFoilUvRecipe() {
@@ -152,29 +131,18 @@ public final class CircuitBoardFiberglassRecipes {
         FluidStack sulfuricAcid = FluidLookup.getFluidOrGas(Materials.SulfuricAcid, 1000L);
         ItemStack fiberglassBoards = ItemList.Circuit_Board_Fiberglass.get(2);
 
-        if (resinPlate == null || resinPlate.getItem() == null
-            || goldFoil == null
-            || goldFoil.getItem() == null
-            || sulfuricAcid == null
-            || fiberglassBoards == null
-            || fiberglassBoards.getItem() == null) {
-            MyMod.logInfo("Skipped Gold Foil Fiberglass Board (UV) recipe: required items or fluid unavailable.");
-            return;
-        }
-
         // Gold-plated/gold-traced boards are real aerospace and satellite-grade PCB practice (ENIG-style
         // corrosion immunity for ultra-reliability electronics). UV-tier batch scale doubles board output
         // per craft.
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(resinPlate, goldFoil)
             .itemOutputs(fiberglassBoards)
             .fluidInputs(sulfuricAcid)
             .duration(8)
             .eut(30720)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: Resin Plate + 8x Gold Foil + 1000L Sulfuric Acid -> 2x Fiberglass Circuit Board.");
+            .register(
+                "Skipped Gold Foil Fiberglass Board (UV) recipe: required items or fluid unavailable.",
+                "Registered LCR recipe: Resin Plate + 8x Gold Foil + 1000L Sulfuric Acid -> 2x Fiberglass Circuit Board.");
     }
 
 }

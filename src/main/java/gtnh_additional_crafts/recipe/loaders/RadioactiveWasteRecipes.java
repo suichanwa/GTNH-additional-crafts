@@ -9,6 +9,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeBuilder;
 import gtnh_additional_crafts.MyMod;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class RadioactiveWasteRecipes {
 
@@ -27,11 +28,6 @@ public final class RadioactiveWasteRecipes {
         ItemStack radioactiveWaste = new ItemStack(Loaders.radioactiveWaste, 1);
         ItemStack gunpowder = new ItemStack(Items.gunpowder, 2);
 
-        if (radioactiveWaste.getItem() == null || gunpowder.getItem() == null) {
-            MyMod.logInfo("Skipped Radioactive Waste -> Firework Star recipe: required items unavailable.");
-            return;
-        }
-
         // Novelty item, not real chemistry: a glowing, twinkling green firework star. No stat value,
         // just a "Chernobyl fireworks" meme sink for the Neutron Activator's accidental byproduct.
         NBTTagCompound explosion = new NBTTagCompound();
@@ -44,15 +40,14 @@ public final class RadioactiveWasteRecipes {
         ItemStack radioactiveFireworkStar = new ItemStack(Items.firework_charge, 1);
         radioactiveFireworkStar.setTagCompound(fireworkTag);
 
-        GTValues.RA.stdBuilder()
+        MachineRecipes.assembler()
             .itemInputs(radioactiveWaste, gunpowder)
             .itemOutputs(radioactiveFireworkStar)
             .duration(5 * GTRecipeBuilder.SECONDS)
             .eut(16)
-            .addTo(RecipeMaps.assemblerRecipes);
-
-        MyMod.logInfo(
-            "Registered Assembler recipe: 1x Radioactive Waste + 2x Gunpowder -> 1x glowing green Firework Star (novelty, no stats).");
+            .register(
+                "Skipped Radioactive Waste -> Firework Star recipe: required items unavailable.",
+                "Registered Assembler recipe: 1x Radioactive Waste + 2x Gunpowder -> 1x glowing green Firework Star (novelty, no stats).");
     }
 
     private static void registerRadioactiveWasteLimeDyeRecipe() {

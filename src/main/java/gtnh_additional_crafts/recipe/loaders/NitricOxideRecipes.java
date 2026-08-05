@@ -5,13 +5,13 @@ import java.util.List;
 
 import net.minecraftforge.fluids.FluidStack;
 
-import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gtnh_additional_crafts.MyMod;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class NitricOxideRecipes {
 
@@ -22,21 +22,15 @@ public final class NitricOxideRecipes {
         FluidStack nitrogen = Materials.Nitrogen.getGas(1000L);
         FluidStack nitricOxide = Materials.NitricOxide.getGas(1000L);
 
-        if (oxygen == null || nitrogen == null || nitricOxide == null) {
-            MyMod.logInfo("Skipped Nitric Oxide recipe: one or more required fluids are unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(GTUtility.getIntegratedCircuit(9))
             .fluidInputs(oxygen, nitrogen)
             .fluidOutputs(nitricOxide)
             .duration(6 * GTRecipeBuilder.SECONDS)
             .eut(2048)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered Large Chemical Reactor recipe (EV): IC-9 + 1000L Oxygen + 1000L Nitrogen -> 1000L Nitric Oxide.");
+            .register(
+                "Skipped Nitric Oxide recipe: one or more required fluids are unavailable.",
+                "Registered Large Chemical Reactor recipe (EV): IC-9 + 1000L Oxygen + 1000L Nitrogen -> 1000L Nitric Oxide.");
     }
 
     public static void removeLegacy() {

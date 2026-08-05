@@ -22,6 +22,7 @@ import gtPlusPlus.core.material.nuclear.MaterialsNuclides;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
 import gtnh_additional_crafts.recipe.util.ItemLookup;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class NuclearFuelRecipes {
 
@@ -145,14 +146,14 @@ public final class NuclearFuelRecipes {
             return;
         }
 
-        GTValues.RA.stdBuilder()
+        MachineRecipes.assembler()
             .itemInputs(naquadahDust, largeTungstensteelFluidCell.copy(), GTUtility.getIntegratedCircuit(1))
             .itemOutputs(naquadahRod.copy())
             .duration(20 * GTRecipeBuilder.SECONDS)
             .eut(1920)
-            .addTo(RecipeMaps.assemblerRecipes);
+            .register("", "");
 
-        GTValues.RA.stdBuilder()
+        MachineRecipes.assembler()
             .itemInputs(
                 GTUtility.copyAmount(2, naquadahRod),
                 largeTungstensteelFluidCell.copy(),
@@ -160,9 +161,9 @@ public final class NuclearFuelRecipes {
             .itemOutputs(naquadahRodDual.copy())
             .duration(30 * GTRecipeBuilder.SECONDS)
             .eut(1920)
-            .addTo(RecipeMaps.assemblerRecipes);
+            .register("", "");
 
-        GTValues.RA.stdBuilder()
+        MachineRecipes.assembler()
             .itemInputs(
                 GTUtility.copyAmount(2, naquadahRodDual),
                 largeTungstensteelFluidCell.copy(),
@@ -170,7 +171,7 @@ public final class NuclearFuelRecipes {
             .itemOutputs(naquadahRodQuad.copy())
             .duration(40 * GTRecipeBuilder.SECONDS)
             .eut(1920)
-            .addTo(RecipeMaps.assemblerRecipes);
+            .register("", "");
 
         replaceDepletedNaquadahFuelRodRecycleRecipes(
             depletedNaquadahRod,

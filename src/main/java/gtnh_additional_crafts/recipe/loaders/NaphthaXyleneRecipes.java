@@ -3,15 +3,13 @@ package gtnh_additional_crafts.recipe.loaders;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsKevlar;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.fluids.GTPPFluids;
-import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
+import gtnh_additional_crafts.recipe.util.MachineRecipes;
 
 public final class NaphthaXyleneRecipes {
 
@@ -31,25 +29,15 @@ public final class NaphthaXyleneRecipes {
         FluidStack hydrogen = FluidLookup.getFluidOrGas(Materials.Hydrogen, 300L);
         FluidStack methane = FluidLookup.getFluidOrGas(Materials.Methane, 200L);
 
-        if (naphtha == null || platinumCatalyst == null
-            || platinumCatalyst.getItem() == null
-            || naphthalene == null
-            || hydrogen == null
-            || methane == null) {
-            MyMod.logInfo("Skipped LCR Naphtha -> Naphthalene recipe: required catalyst or fluids unavailable.");
-            return;
-        }
-
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(platinumCatalyst)
             .fluidInputs(naphtha)
             .fluidOutputs(naphthalene, hydrogen, methane)
             .duration(12 * GTRecipeBuilder.SECONDS)
             .eut(2048)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: 1000L Naphtha + Platinum Dust catalyst -> 400L Naphthalene + 300L Hydrogen + 200L Methane.");
+            .register(
+                "Skipped LCR Naphtha -> Naphthalene recipe: required catalyst or fluids unavailable.",
+                "Registered LCR recipe: 1000L Naphtha + Platinum Dust catalyst -> 400L Naphthalene + 300L Hydrogen + 200L Methane.");
     }
 
     public static void registerXyleneHydrodealkylationRecipes() {
@@ -69,28 +57,17 @@ public final class NaphthaXyleneRecipes {
         FluidStack methane = FluidLookup.getFluidOrGas(Materials.Methane, 2000L);
         ItemStack chromeCatalyst = GTUtility.copyAmount(0, Materials.Chrome.getDust(1));
 
-        if (xylene == null || hydrogen == null
-            || benzene == null
-            || methane == null
-            || chromeCatalyst == null
-            || chromeCatalyst.getItem() == null) {
-            MyMod.logInfo(
-                "Skipped " + xyleneName + " hydrodealkylation recipe: required catalyst or fluids unavailable.");
-            return;
-        }
-
         // Hydrodealkylation: C8H10 + 2 H2 -> C6H6 + 2 CH4 (Cr2O3 catalyst, not consumed)
-        GTValues.RA.stdBuilder()
+        MachineRecipes.largeChemicalReactor()
             .itemInputs(chromeCatalyst, GTUtility.getIntegratedCircuit(circuit))
             .fluidInputs(xylene, hydrogen)
             .fluidOutputs(benzene, methane)
             .duration(12 * GTRecipeBuilder.SECONDS)
             .eut(480)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
-        MyMod.logInfo(
-            "Registered LCR recipe: 1000L " + xyleneName
-                + " + 4000L Hydrogen + Chrome Dust catalyst -> 1000L Benzene + 2000L Methane.");
+            .register(
+                "Skipped " + xyleneName + " hydrodealkylation recipe: required catalyst or fluids unavailable.",
+                "Registered LCR recipe: 1000L " + xyleneName
+                    + " + 4000L Hydrogen + Chrome Dust catalyst -> 1000L Benzene + 2000L Methane.");
     }
 
 }
