@@ -20,12 +20,14 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsKevlar;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.recipe.metadata.PCBFactoryTierKey;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.PCBFactoryManager;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.fluids.GTPPFluids;
 import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
@@ -76,6 +78,7 @@ public final class GregTechRecipeLoader {
         registerCalciumCyanamideRecipes();
         registerCalciumHypochloriteRecipe();
         registerCoalGasWaterGasShiftRecipe();
+        registerCoalGasBoudouardCarbonDepositionRecipe();
         registerPropeneHydrogenationPropaneRecipe();
         registerPropaneDehydrogenationPropeneRecipe();
         registerCryonitroxOxidizerRecipe();
@@ -95,6 +98,8 @@ public final class GregTechRecipeLoader {
         registerNaquadahDustFuelRodRecipes();
         registerCrimsonCultArmorSalvageRecipes();
         registerRadioactiveWasteNoveltyRecipes();
+        registerFiberglassBoardAlternateFoilRecipes();
+        registerFiberglassBoardCopperPcbFactoryRecipe();
         removeNitricOxideRegularChemicalReactorRecipe();
     }
 
@@ -829,6 +834,38 @@ public final class GregTechRecipeLoader {
             "Registered LCR recipe: IC-9 + 1000L Coal Gas + 1000L Steam + Hematite catalyst -> 2000L Hydrogen + 1000L Carbon Dioxide.");
     }
 
+    private static void registerCoalGasBoudouardCarbonDepositionRecipe() {
+        FluidStack coalGas = getCoalGas(2000);
+        FluidStack carbonDioxide = getFluidOrGas(Materials.CarbonDioxide, 1000L);
+        ItemStack coalLump = Materials.Coal.getGems(1);
+        ItemStack ironCatalyst = GTUtility.copyAmount(0, Materials.Iron.getDust(1));
+
+        if (coalGas == null || carbonDioxide == null
+            || coalLump == null
+            || coalLump.getItem() == null
+            || ironCatalyst == null
+            || ironCatalyst.getItem() == null) {
+            MyMod.logInfo(
+                "Skipped Coal Gas Boudouard carbon deposition recipe: required catalyst or fluids unavailable.");
+            return;
+        }
+
+        // Boudouard reaction: 2 CO -> C(s) + CO2, over an Iron catalyst (not consumed). Exploits
+        // the CO fraction of Coal Gas to deposit solid carbon - real industrial "coking out" side
+        // reaction, run here on-purpose to reclaim Coal out of Coal Gas.
+        GTValues.RA.stdBuilder()
+            .itemInputs(ironCatalyst, GTUtility.getIntegratedCircuit(7))
+            .itemOutputs(coalLump)
+            .fluidInputs(coalGas)
+            .fluidOutputs(carbonDioxide)
+            .duration(16 * GTRecipeBuilder.SECONDS)
+            .eut(60)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod
+            .logInfo("Registered LCR recipe: IC-7 + 2000L Coal Gas + Iron catalyst -> 1x Coal + 1000L Carbon Dioxide.");
+    }
+
     private static void registerPropeneHydrogenationPropaneRecipe() {
         FluidStack propene = getFluidOrGas(Materials.Propene, 1000L);
         FluidStack hydrogen = getFluidOrGas(Materials.Hydrogen, 1000L);
@@ -867,7 +904,8 @@ public final class GregTechRecipeLoader {
             || hydrogen == null
             || platinumCatalyst == null
             || platinumCatalyst.getItem() == null) {
-            MyMod.logInfo("Skipped Propane dehydrogenation -> Propene recipe: required catalyst or fluids unavailable.");
+            MyMod
+                .logInfo("Skipped Propane dehydrogenation -> Propene recipe: required catalyst or fluids unavailable.");
             return;
         }
 
@@ -1990,6 +2028,156 @@ public final class GregTechRecipeLoader {
 
     private static Item findItem(String modId, String itemName) {
         return GameRegistry.findItem(modId, itemName);
+    }
+
+    private static void registerFiberglassBoardAlternateFoilRecipes() {
+        registerFiberglassBoardCopperFoilLuVRecipe();
+        registerFiberglassBoardSilverFoilZpmRecipe();
+        registerFiberglassBoardGoldFoilUvRecipe();
+    }
+
+    private static void registerFiberglassBoardCopperFoilLuVRecipe() {
+        ItemStack resinPlate = Materials.EpoxidFiberReinforced.getPlates(1);
+        ItemStack copperFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.Copper, 20L);
+        FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, 1000L);
+        ItemStack fiberglassBoard = ItemList.Circuit_Board_Fiberglass.get(1);
+
+        if (resinPlate == null || resinPlate.getItem() == null
+            || copperFoil == null
+            || copperFoil.getItem() == null
+            || sulfuricAcid == null
+            || fiberglassBoard == null
+            || fiberglassBoard.getItem() == null) {
+            MyMod.logInfo("Skipped Copper Foil Fiberglass Board (LuV) recipe: required items or fluid unavailable.");
+            return;
+        }
+
+        // Copper is the real industry-standard PCB conductor (Aluminium-clad boards are a niche exception).
+        // Cheaper/more abundant than Aluminium by LuV, but copper oxidizes faster than aluminium's native
+        // oxide layer, so it needs a longer passivation step before it bonds cleanly to the resin.
+        GTValues.RA.stdBuilder()
+            .itemInputs(resinPlate, copperFoil, GTUtility.getIntegratedCircuit(6))
+            .itemOutputs(fiberglassBoard)
+            .fluidInputs(sulfuricAcid)
+            .duration(50)
+            .eut(1920)
+            .addTo(RecipeMaps.chemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered Chemical Reactor recipe: Resin Plate + 20x Copper Foil + 1000L Sulfuric Acid (IC6) -> 1x Fiberglass Circuit Board.");
+    }
+
+    private static void registerFiberglassBoardSilverFoilZpmRecipe() {
+        ItemStack resinPlate = Materials.EpoxidFiberReinforced.getPlates(1);
+        ItemStack silverFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.Silver, 16L);
+        FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, 500L);
+        ItemStack fiberglassBoard = ItemList.Circuit_Board_Fiberglass.get(1);
+
+        if (resinPlate == null || resinPlate.getItem() == null
+            || silverFoil == null
+            || silverFoil.getItem() == null
+            || sulfuricAcid == null
+            || fiberglassBoard == null
+            || fiberglassBoard.getItem() == null) {
+            MyMod.logInfo("Skipped Silver Foil Fiberglass Board (ZPM) recipe: required items or fluid unavailable.");
+            return;
+        }
+
+        // Silver's higher conductivity than Copper/Aluminium means fewer foil sheets give equivalent trace
+        // performance - real-world grounding for premium RF/hybrid-circuit silver traces. Net cheaper than
+        // the Copper path despite silver's higher unit cost, once ZPM-tier materials are flowing.
+        GTValues.RA.stdBuilder()
+            .itemInputs(resinPlate, silverFoil, GTUtility.getIntegratedCircuit(7))
+            .itemOutputs(fiberglassBoard)
+            .fluidInputs(sulfuricAcid)
+            .duration(16)
+            .eut(7680)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: Resin Plate + 16x Silver Foil + 500L Sulfuric Acid (IC7) -> 1x Fiberglass Circuit Board.");
+    }
+
+    private static void registerFiberglassBoardGoldFoilUvRecipe() {
+        ItemStack resinPlate = Materials.EpoxidFiberReinforced.getPlates(1);
+        ItemStack goldFoil = GTOreDictUnificator.get(OrePrefixes.foil, Materials.Gold, 8L);
+        FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, 1000L);
+        ItemStack fiberglassBoards = ItemList.Circuit_Board_Fiberglass.get(2);
+
+        if (resinPlate == null || resinPlate.getItem() == null
+            || goldFoil == null
+            || goldFoil.getItem() == null
+            || sulfuricAcid == null
+            || fiberglassBoards == null
+            || fiberglassBoards.getItem() == null) {
+            MyMod.logInfo("Skipped Gold Foil Fiberglass Board (UV) recipe: required items or fluid unavailable.");
+            return;
+        }
+
+        // Gold-plated/gold-traced boards are real aerospace and satellite-grade PCB practice (ENIG-style
+        // corrosion immunity for ultra-reliability electronics). UV-tier batch scale doubles board output
+        // per craft.
+        GTValues.RA.stdBuilder()
+            .itemInputs(resinPlate, goldFoil, GTUtility.getIntegratedCircuit(8))
+            .itemOutputs(fiberglassBoards)
+            .fluidInputs(sulfuricAcid)
+            .duration(8)
+            .eut(30720)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        MyMod.logInfo(
+            "Registered LCR recipe: Resin Plate + 8x Gold Foil + 1000L Sulfuric Acid (IC8) -> 2x Fiberglass Circuit Board.");
+    }
+
+    private static void registerFiberglassBoardCopperPcbFactoryRecipe() {
+        // Budget sibling of GT's "More Advanced Circuit Board" PCB Factory loop (tier 3+, IC1/2/3 ->
+        // Fiberglass_Advanced via Aluminium+EnergeticAlloy foils). IC4 branch, Copper+AnnealedCopper foils
+        // (the same cheap conductor pair GT already uses for base Plastic boards) -> plain Fiberglass board.
+        // Shares the tier-3 EpoxidFiberReinforced/etc plastic slot, no new plastic tier registered.
+        for (int tier = 3; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            Materials plasticMaterial = PCBFactoryManager.getPlasticMaterialFromTier(tier);
+            ItemStack resinPlate = plasticMaterial == null ? null : plasticMaterial.getPlates(1);
+            ItemStack annealedCopperFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.AnnealedCopper, (long) (16 * (Math.sqrt(tier - 2))));
+            ItemStack copperFoil = GTOreDictUnificator
+                .get(OrePrefixes.foil, Materials.Copper, (long) (16 * (Math.sqrt(tier - 2))));
+            FluidStack sulfuricAcid = getFluidOrGas(Materials.SulfuricAcid, (long) (500 * (Math.sqrt(tier - 2))));
+            FluidStack ironIIIChloride = getFluidOrGas(
+                Materials.IronIIIChloride,
+                (long) (1000 * (Math.sqrt(tier - 2))));
+
+            if (resinPlate == null || resinPlate.getItem() == null
+                || annealedCopperFoil == null
+                || annealedCopperFoil.getItem() == null
+                || copperFoil == null
+                || copperFoil.getItem() == null
+                || sulfuricAcid == null
+                || ironIIIChloride == null) {
+                MyMod.logInfo(
+                    "Skipped Copper Fiberglass Board PCB Factory recipe at tier " + tier
+                        + ": required inputs unavailable.");
+                continue;
+            }
+
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 3))));
+            List<ItemStack> boards = new ArrayList<>();
+            for (int remaining = amountOfBoards; remaining > 64; remaining -= 64) {
+                boards.add(ItemList.Circuit_Board_Fiberglass.get(64));
+            }
+            boards.add(ItemList.Circuit_Board_Fiberglass.get(amountOfBoards % 64 == 0 ? 64 : amountOfBoards % 64));
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(GTUtility.getIntegratedCircuit(4), resinPlate, annealedCopperFoil, copperFoil)
+                .fluidInputs(sulfuricAcid, ironIIIChloride)
+                .itemOutputs(boards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 3.5))))
+                .eut((int) GTValues.VP[tier] * 3 / 4)
+                .metadata(PCBFactoryTierKey.INSTANCE, 1)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        MyMod.logInfo(
+            "Registered PCB Factory budget recipe line: IC4, Copper+AnnealedCopper foils -> plain Fiberglass Circuit Board (tier 3+).");
     }
 
     private static void removeNitricOxideRegularChemicalReactorRecipe() {
