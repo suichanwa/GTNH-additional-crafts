@@ -862,8 +862,7 @@ public final class GregTechRecipeLoader {
             .eut(60)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        MyMod
-            .logInfo("Registered LCR recipe: 2000L Coal Gas + Iron catalyst -> 1x Coal + 1000L Carbon Dioxide.");
+        MyMod.logInfo("Registered LCR recipe: 2000L Coal Gas + Iron catalyst -> 1x Coal + 1000L Carbon Dioxide.");
     }
 
     private static void registerPropeneHydrogenationPropaneRecipe() {
