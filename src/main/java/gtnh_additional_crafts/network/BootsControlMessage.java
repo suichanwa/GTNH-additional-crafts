@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import gtnh_additional_crafts.compat.thaumicboots.ThaumicBootsTuning;
-import gtnh_additional_crafts.compat.thaumicboots.VoidwalkerSashTuning;
+import gtnh_additional_crafts.patches.thaumicboots.ThaumicBootsTuningPatch;
+import gtnh_additional_crafts.patches.thaumicboots.VoidwalkerSashTuningPatch;
 import io.netty.buffer.ByteBuf;
 import thaumicboots.api.IBoots;
 
@@ -83,9 +83,9 @@ public class BootsControlMessage implements IMessage {
             boolean changed = false;
 
             if (message.hasSashState) {
-                ItemStack sashStack = VoidwalkerSashTuning.getEquippedVoidwalkerSash(player);
+                ItemStack sashStack = VoidwalkerSashTuningPatch.getEquippedVoidwalkerSash(player);
                 if (sashStack != null) {
-                    VoidwalkerSashTuning.setSpeedBoostEnabled(sashStack, message.sashSpeedBoostEnabled);
+                    VoidwalkerSashTuningPatch.setSpeedBoostEnabled(sashStack, message.sashSpeedBoostEnabled);
                     changed = true;
                 }
             }
@@ -100,10 +100,10 @@ public class BootsControlMessage implements IMessage {
                     bootsItem.setModeOmni(bootsStack, message.omniEnabled);
                     bootsItem.setModeStep(bootsStack, message.stepEnabled);
                     bootsItem.setIsInertiaCanceling(bootsStack, message.inertiaCancelEnabled);
-                    ThaumicBootsTuning.setForwardMultiplier(bootsStack, message.forwardAxisMultiplier);
-                    ThaumicBootsTuning.setStrafeMultiplier(bootsStack, message.strafeAxisMultiplier);
+                    ThaumicBootsTuningPatch.setForwardMultiplier(bootsStack, message.forwardAxisMultiplier);
+                    ThaumicBootsTuningPatch.setStrafeMultiplier(bootsStack, message.strafeAxisMultiplier);
                     if (message.hasVoidwalkerTravelerMovementState) {
-                        ThaumicBootsTuning.setVoidwalkerTravelerMovementEnabled(
+                        ThaumicBootsTuningPatch.setVoidwalkerTravelerMovementEnabled(
                             bootsStack,
                             message.voidwalkerTravelerMovementEnabled);
                     }

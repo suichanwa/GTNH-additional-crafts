@@ -6,9 +6,9 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import gtnh_additional_crafts.MyMod;
-import gtnh_additional_crafts.compat.thaumictinkerer.BottomlessPouchAccess;
-import gtnh_additional_crafts.compat.thaumictinkerer.BottomlessPouchAccess.PouchSource;
-import gtnh_additional_crafts.compat.thaumictinkerer.BottomlessPouchGuiHandler;
+import gtnh_additional_crafts.patches.thaumictinkerer.BottomlessPouchAccessPatch;
+import gtnh_additional_crafts.patches.thaumictinkerer.BottomlessPouchAccessPatch.PouchSource;
+import gtnh_additional_crafts.patches.thaumictinkerer.BottomlessPouchGuiHandlerPatch;
 import io.netty.buffer.ByteBuf;
 
 public class OpenBottomlessPouchMessage implements IMessage {
@@ -24,15 +24,15 @@ public class OpenBottomlessPouchMessage implements IMessage {
         @Override
         public IMessage onMessage(OpenBottomlessPouchMessage message, MessageContext context) {
             EntityPlayerMP player = context.getServerHandler().playerEntity;
-            PouchSource source = BottomlessPouchAccess.findPouch(player);
+            PouchSource source = BottomlessPouchAccessPatch.findPouch(player);
             if (source == null) {
                 return null;
             }
 
-            BottomlessPouchAccess.markSourceDirty(player, source);
+            BottomlessPouchAccessPatch.markSourceDirty(player, source);
             player.openGui(
                 MyMod.instance,
-                BottomlessPouchGuiHandler.GUI_ID_BOTTOMLESS_POUCH,
+                BottomlessPouchGuiHandlerPatch.GUI_ID_BOTTOMLESS_POUCH,
                 player.worldObj,
                 source.sourceType,
                 source.slot,
