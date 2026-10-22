@@ -18,10 +18,7 @@ import org.lwjgl.opengl.GL11;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
-import codechicken.nei.recipe.GuiCraftingRecipe;
-import codechicken.nei.recipe.GuiUsageRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.enums.ItemList;
@@ -146,13 +143,6 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
         if (large != null) {
             API.addRecipeCatalyst(large, this);
         }
-        FMLInterModComms.sendRuntimeMessage(
-            MyMod.instance,
-            "NEIPlugins",
-            "register-crafting-handler",
-            "gtnh_additional_crafts@" + getRecipeName() + "@" + getOverlayIdentifier());
-        GuiCraftingRecipe.craftinghandlers.add(this);
-        GuiUsageRecipe.usagehandlers.add(this);
     }
 
     @Override
@@ -303,20 +293,16 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
             false);
         y += 10;
         GuiDraw.drawString(
-            "Steam: " + EnumChatFormatting.DARK_GREEN + "160 L/s"
-                + EnumChatFormatting.DARK_GRAY + " (Sm) | "
-                + EnumChatFormatting.DARK_GREEN + "320 L/s"
-                + EnumChatFormatting.DARK_GRAY + " (St)",
+            "Steam: " + EnumChatFormatting.GOLD + "160" + EnumChatFormatting.DARK_GRAY + " | "
+                + EnumChatFormatting.BLUE + "320" + EnumChatFormatting.DARK_GRAY + " L/s",
             11,
             y,
             0x202020,
             false);
         y += 10;
         GuiDraw.drawString(
-            "Pollution: " + EnumChatFormatting.RED + "20/s"
-                + EnumChatFormatting.DARK_GRAY + " (Sm) | "
-                + EnumChatFormatting.RED + "30/s"
-                + EnumChatFormatting.DARK_GRAY + " (St)",
+            "Pollution: " + EnumChatFormatting.GOLD + "20" + EnumChatFormatting.DARK_GRAY + " | "
+                + EnumChatFormatting.BLUE + "30" + EnumChatFormatting.DARK_GRAY + " /s",
             11,
             y,
             0x202020,
