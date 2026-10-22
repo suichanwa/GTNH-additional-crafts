@@ -23,6 +23,7 @@ import gtnh_additional_crafts.network.OpenBottomlessPouchMessage;
     version = Tags.VERSION,
     name = "gtnh_additional_crafts",
     acceptedMinecraftVersions = "[1.7.10]",
+    dependencies = "required-after:gregtech;after:bartworks;after:miscutils;after:kekztech;after:Thaumcraft;after:ThaumicTinkerer;after:thaumicboots",
     guiFactory = "gtnh_additional_crafts.client.config.ModGuiFactory")
 public class MyMod {
 

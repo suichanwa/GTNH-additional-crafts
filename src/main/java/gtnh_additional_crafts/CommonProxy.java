@@ -45,11 +45,11 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(MyMod.instance, new BottomlessPouchGuiHandlerPatch());
-        RecipeLoader.registerRecipes();
     }
 
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {
+        RecipeLoader.registerRecipes();
         LargeSemifluidGeneratorPatch.applyIfNeeded();
         MolecularTransformerEnergyHatchPatch.applyIfNeeded();
         RocketFuelGeneratorPatch.applyIfNeeded();
