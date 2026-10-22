@@ -24,6 +24,7 @@ public class CommonProxy {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
         ModItems.registerItems();
         ModFluids.registerFluids();
+        gtnh_additional_crafts.machine.ModMachines.registerMachines();
 
         MyMod.logInfo(Config.greeting);
         MyMod.logInfo("I am MyMod at version " + Tags.VERSION);

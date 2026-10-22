@@ -11,6 +11,10 @@ public class Config {
     private static final String CATEGORY_LCE = "large_combustion_engine";
     private static final String CATEGORY_LSB = "large_semifluid_burner";
     private static final String CATEGORY_MT = "molecular_transformer";
+    private static final String CATEGORY_BOILERS = "boilers";
+
+    public static int smallLiquidBoilerId = 31810;
+    public static int largeLiquidBoilerId = 31811;
 
     public static int lceDefaultMaxEfficiency = 10000;
     public static int lceOxygenBoostedMaxEfficiency = 30000;
@@ -256,6 +260,20 @@ public class Config {
             mtAllowMultipleEnergyHatches,
             "Allows the Industrial Molecular Transformer to accept/work with multiple energy hatches. "
                 + "Set to false to keep vanilla single-energy-hatch behavior. Requires game restart.");
+        smallLiquidBoilerId = configuration.getInt(
+            "smallLiquidBoilerId",
+            CATEGORY_BOILERS,
+            smallLiquidBoilerId,
+            1,
+            32767,
+            "MetaTileEntity ID for Small Liquid Boiler (Bronze).");
+        largeLiquidBoilerId = configuration.getInt(
+            "largeLiquidBoilerId",
+            CATEGORY_BOILERS,
+            largeLiquidBoilerId,
+            1,
+            32767,
+            "MetaTileEntity ID for High Pressure Liquid Boiler (Steel).");
     }
 
     private static void saveIfChanged() {

@@ -9,3 +9,5 @@ tile.carbonyl_sulfide.name=Carbonyl Sulfide
 key.categories.gtnh_additional_crafts=GTNH Additional Crafts
 key.gtnh_additional_crafts.open_tb_config=Open Thaumic Boots Controls
 key.gtnh_additional_crafts.open_bottomless_pouch=Open Bottomless Pouch
+gtnh_additional_crafts.small_liquid_boiler=Small Liquid Boiler
+gtnh_additional_crafts.large_liquid_boiler=High Pressure Liquid Boiler

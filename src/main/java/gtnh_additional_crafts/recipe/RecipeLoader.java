@@ -28,6 +28,7 @@ public final class RecipeLoader {
 
     public static void registerRecipes() {
         MiscRecipes.register();
+        gtnh_additional_crafts.recipe.loaders.BoilerRecipes.register();
         NitricOxideRecipes.registerAddition();
         BiomassRecipes.register();
         GlycerolRecipes.register();
