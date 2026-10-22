@@ -5,11 +5,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.MaterialsKevlar;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.fluids.GTPPFluids;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.fluid.ModFluids;
@@ -58,7 +56,7 @@ public final class BioTarRecipes {
             .fluidOutputs(bioTar)
             .duration(250)
             .eut(120)
-            .addTo(GTPPRecipeMaps.cokeOvenRecipes);
+            .addTo(RecipeMaps.industrialCokeOvenRecipes);
 
         MyMod.logInfo(
             "Registered Industrial Coke Oven recipe: IC-4 + 1000L Biomass + 250L Nitrogen -> 500L Crude Bio-tar + 2x Carbon Dust.");
@@ -90,7 +88,7 @@ public final class BioTarRecipes {
             .fluidOutputs(woodVinegar)
             .duration(240)
             .eut(120)
-            .addTo(GTPPRecipeMaps.cokeOvenRecipes);
+            .addTo(RecipeMaps.industrialCokeOvenRecipes);
 
         MyMod.logInfo(
             "Registered Industrial Coke Oven recipe: 16x Log + 1000L Nitrogen -> 20x Charcoal + 3000L Wood Vinegar.");
@@ -128,10 +126,10 @@ public final class BioTarRecipes {
         FluidStack kerosene = GTPPFluids.Kerosene == null
             ? FluidLookup.getFirstAvailableFluid(320, "kerosene", "Kerosene")
             : new FluidStack(GTPPFluids.Kerosene, 320);
-        FluidStack naphthenicAcid = MaterialsKevlar.NaphthenicAcid == null
+        FluidStack naphthenicAcid = Materials.NaphthenicAcid == null
             ? FluidLookup
                 .getFirstAvailableFluid(220, "naphthenicacid", "naphthenic_acid", "NaphthenicAcid", "Naphthenic Acid")
-            : MaterialsKevlar.NaphthenicAcid.getFluid(220);
+            : Materials.NaphthenicAcid.getFluid(220);
         FluidStack phenol = Materials.Phenol.getFluid(160L);
         FluidStack toluene = Materials.Toluene.getFluid(110L);
         FluidStack benzene = Materials.Benzene.getFluid(90L);

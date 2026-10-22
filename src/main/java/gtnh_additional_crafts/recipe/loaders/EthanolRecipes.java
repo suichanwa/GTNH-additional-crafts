@@ -5,9 +5,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
 import gtnh_additional_crafts.recipe.util.MachineRecipes;
@@ -140,7 +140,7 @@ public final class EthanolRecipes {
             .fluidOutputs(acetylene, hydrogen)
             .duration(12 * GTRecipeBuilder.SECONDS)
             .eut(120)
-            .addTo(GTPPRecipeMaps.chemicalDehydratorRecipes);
+            .addTo(RecipeMaps.chemicalDehydratorRecipes);
 
         MyMod.logInfo("Registered Dehydrator recipe: 2000L Methane -> 1000L Acetylene + 3000L Hydrogen.");
     }

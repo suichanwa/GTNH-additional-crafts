@@ -21,9 +21,10 @@ public class BlockCarbonylSulfideFluid extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        definedFluid.setIcons(
-            iconRegister.registerIcon(MyMod.MODID + ":fluids/carbonyl_sulfide_still"),
-            iconRegister.registerIcon(MyMod.MODID + ":fluids/carbonyl_sulfide_flow"));
+        IIcon still = iconRegister.registerIcon(MyMod.MODID + ":fluids/carbonyl_sulfide_still");
+        IIcon flow = iconRegister.registerIcon(MyMod.MODID + ":fluids/carbonyl_sulfide_flow");
+        definedFluid.setIcons(still, flow);
+        this.blockIcon = still;
     }
 
     @Override

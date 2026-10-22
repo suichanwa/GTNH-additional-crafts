@@ -4,7 +4,7 @@ import net.minecraftforge.fluids.Fluid;
 
 public class BioTarFluid extends Fluid {
 
-    private static final int BIO_TAR_COLOR = 0x3A2413;
+    private static final int BIO_TAR_COLOR = 0x4A2E1A;
 
     public BioTarFluid() {
         super("bio_tar");

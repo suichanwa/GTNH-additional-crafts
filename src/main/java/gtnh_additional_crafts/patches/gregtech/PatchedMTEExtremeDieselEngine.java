@@ -7,13 +7,12 @@ import gregtech.api.enums.Materials;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.recipe.check.CheckRecipeResult;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.common.tileentities.machines.multi.MTEExtremeDieselEngine;
+import gregtech.common.tileentities.machines.multi.MTEExtremeCombustionEngine;
 import gtnh_additional_crafts.Config;
 import gtnh_additional_crafts.fluid.ModFluids;
 
-public class PatchedMTEExtremeDieselEngine extends MTEExtremeDieselEngine {
+public class PatchedMTEExtremeDieselEngine extends MTEExtremeCombustionEngine {
 
     private BoostMode boostMode = BoostMode.NONE;
 
@@ -84,22 +83,22 @@ public class PatchedMTEExtremeDieselEngine extends MTEExtremeDieselEngine {
             .addInfo("Supply high rating fuel and 8000L of Lubricant per hour to run")
             .addInfo("Supply 40L/s of Liquid Oxygen to boost output (optional)")
             .addInfo(
-                "Cryonitrox boost uses " + GTUtility.formatNumbers(cryonitroxConsumptionPerSecond)
+                "Cryonitrox boost uses " + String.format("%,d", cryonitroxConsumptionPerSecond)
                     + "L/s and reaches "
                     + (Config.lceCryonitroxBoostedMaxEfficiency / 100)
                     + "% fuel efficiency")
             .addInfo(
-                "Liquid Oxygen boost: up to " + GTUtility.formatNumbers(oxygenOutput)
+                "Liquid Oxygen boost: up to " + String.format("%,d", oxygenOutput)
                     + "EU/t at "
                     + (Config.lceOxygenBoostedMaxEfficiency / 100)
                     + "% fuel efficiency")
             .addInfo(
-                "Cryonitrox boost: up to " + GTUtility.formatNumbers(cryonitroxOutput)
+                "Cryonitrox boost: up to " + String.format("%,d", cryonitroxOutput)
                     + "EU/t at "
                     + (Config.lceCryonitroxBoostedMaxEfficiency / 100)
                     + "% fuel efficiency")
             .addInfo("You need to wait for it to reach 300% to output full power")
-            .addPollutionAmount(getPollutionPerSecond(null))
+            .addPollutionAmount(getPollutionPerSecond((ItemStack) null))
             .beginStructureBlock(3, 3, 4, false)
             .addController("Front center")
             .addCasingInfoRange("Robust Tungstensteel Machine Casing", 16, 22, false)

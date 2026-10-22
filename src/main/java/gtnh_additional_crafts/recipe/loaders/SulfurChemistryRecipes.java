@@ -1,12 +1,10 @@
 package gtnh_additional_crafts.recipe.loaders;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.MaterialsKevlar;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
@@ -14,6 +12,7 @@ import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.fluids.GTPPFluids;
+import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.fluid.ModFluids;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
@@ -39,7 +38,7 @@ public final class SulfurChemistryRecipes {
     public static void registerCalciumCyanamideRecipes() {
         // Frank-Caro nitrogen-fixation process, step 1: CaC2 + N2 -> CaCN2 + C, needs the same
         // ~1000-1100C furnace tier that forms Calcium Carbide itself.
-        ItemStack calciumCarbide = MaterialsKevlar.CalciumCarbide.getDust(3);
+        ItemStack calciumCarbide = Materials.CalciumCarbide.getDust(3);
         FluidStack nitrogenForCyanamide = FluidLookup.getFluidOrGas(Materials.Nitrogen, 1000L);
         FluidStack calciumCyanamideOutput = ModFluids.getCalciumCyanamide(1000);
         ItemStack carbonByproduct = Materials.Carbon.getDust(1);
@@ -92,12 +91,11 @@ public final class SulfurChemistryRecipes {
 
     public static void registerCalciumHypochloriteRecipe() {
         // Bleaching powder: 2 Ca(OH)2 + 2 Cl2 -> Ca(ClO)2 + CaCl2 + 2 H2O.
-        Item hydratedLimeItem = gtPlusPlus.core.item.ModItems.dustCalciumHydroxide;
-        if (hydratedLimeItem == null) {
+        ItemStack hydratedLime = GregtechItemList.CalciumHydroxideDust.get(2L);
+        if (hydratedLime == null || hydratedLime.getItem() == null) {
             MyMod.logInfo("Skipped Calcium Hypochlorite recipe: Hydrated Lime Dust is missing.");
             return;
         }
-        ItemStack hydratedLime = new ItemStack(hydratedLimeItem, 2);
         FluidStack chlorine = FluidLookup.getFluidOrGas(Materials.Chlorine, 2000L);
         FluidStack calciumHypochlorite = ModFluids.getCalciumHypochlorite(1000);
         ItemStack calciumChloride = bartworks.system.material.WerkstoffLoader.CalciumChloride.get(OrePrefixes.dust, 3);
@@ -231,7 +229,7 @@ public final class SulfurChemistryRecipes {
     private static void registerCarbonDisulfideCharcoalBlastFurnaceRecipe() {
         ItemStack charcoal = GTOreDictUnificator.get(OrePrefixes.gem, Materials.Charcoal, 8L);
         ItemStack sulfurDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 16L);
-        ItemStack darkAsh = GTOreDictUnificator.get(OrePrefixes.dust, Materials.DarkAsh, 2L);
+        ItemStack darkAsh = GTOreDictUnificator.get(OrePrefixes.dust, Materials.AshDark, 2L);
         FluidStack carbonDisulfide = getCarbonDisulfide(3000);
 
         if (charcoal == null || sulfurDust == null || darkAsh == null || carbonDisulfide == null) {

@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.Fluid;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gtnh_additional_crafts.MyMod;
 
 public class BlockBioTarFluid extends BlockFluidClassic {
 
@@ -20,7 +21,10 @@ public class BlockBioTarFluid extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        definedFluid.setIcons(iconRegister.registerIcon("water_still"), iconRegister.registerIcon("water_flow"));
+        IIcon still = iconRegister.registerIcon(MyMod.MODID + ":fluids/bio_tar_still");
+        IIcon flow = iconRegister.registerIcon(MyMod.MODID + ":fluids/bio_tar_flow");
+        definedFluid.setIcons(still, flow);
+        this.blockIcon = still;
     }
 
     @Override

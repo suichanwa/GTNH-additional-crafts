@@ -8,7 +8,6 @@ import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtnh_additional_crafts.MyMod;
 import gtnh_additional_crafts.fluid.ModFluids;
 import gtnh_additional_crafts.recipe.util.FluidLookup;
@@ -107,10 +106,10 @@ public final class RocketFuelRecipes {
     }
 
     private static boolean hasRocketFuelRecipe(FluidStack fuel) {
-        if (fuel == null || GTPPRecipeMaps.rocketFuels == null) {
+        if (fuel == null || RecipeMaps.rocketFuels == null) {
             return false;
         }
-        for (GTRecipe recipe : GTPPRecipeMaps.rocketFuels.getAllRecipes()) {
+        for (GTRecipe recipe : RecipeMaps.rocketFuels.getAllRecipes()) {
             if (recipe == null || recipe.mFluidInputs == null) {
                 continue;
             }
@@ -124,21 +123,13 @@ public final class RocketFuelRecipes {
     }
 
     private static void addRocketFuelRecipe(FluidStack fuel, int fuelValue) {
-        if (fuel == null || fuel.getFluid() == null || GTPPRecipeMaps.rocketFuels == null) {
+        if (fuel == null || fuel.getFluid() == null || RecipeMaps.rocketFuels == null) {
             return;
         }
-        GTPPRecipeMaps.rocketFuels.add(
-            new GTRecipe(
-                false,
-                GTValues.emptyItemStackArray,
-                GTValues.emptyItemStackArray,
-                null,
-                GTValues.emptyIntArray,
-                new FluidStack[] { new FluidStack(fuel.getFluid(), 1000) },
-                GTValues.emptyFluidStackArray,
-                0,
-                0,
-                fuelValue));
+        GTRecipeBuilder.builder()
+            .fluidInputs(new FluidStack(fuel.getFluid(), 1000))
+            .specialValue(fuelValue)
+            .addTo(RecipeMaps.rocketFuels);
     }
 
 }

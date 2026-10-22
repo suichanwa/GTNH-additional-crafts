@@ -47,7 +47,7 @@ public class PatchedMTESOFuelCellMK1 extends MTESOFuelCellMK1 {
         tt.addMachineType("Gas Turbine")
             .addInfo("Oxidizes gas fuels to generate electricity without polluting the environment")
             .addInfo(
-                "Consumes up to " + GTUtility.formatNumbers((long) EU_PER_TICK * 20L)
+                "Consumes up to " + String.format("%,d", (long) EU_PER_TICK * 20L)
                     + "EU worth of fuel with up to 100% efficiency each second")
             .addInfo("Steam production requires the SOFC to heat up completely first")
             .addInfo("Outputs " + EU_PER_TICK + "EU/t and " + STEAM_PER_SEC + "L/s Steam")

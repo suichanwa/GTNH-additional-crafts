@@ -16,7 +16,6 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.GTUtility;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
 import gtPlusPlus.core.material.nuclear.MaterialsNuclides;
 import gtnh_additional_crafts.MyMod;
@@ -67,7 +66,7 @@ public final class NuclearFuelRecipes {
             .fluidOutputs(MaterialsNuclides.LiFBeF2ThF4UF4.getFluidStack(1000))
             .duration(16 * GTRecipeBuilder.MINUTES)
             .eut(2048)
-            .addTo(GTPPRecipeMaps.fissionFuelProcessingRecipes);
+            .addTo(RecipeMaps.fissionFuelProcessingRecipes);
 
         GTValues.RA.stdBuilder()
             .itemInputs(GTUtility.getIntegratedCircuit(32))
@@ -84,7 +83,7 @@ public final class NuclearFuelRecipes {
             .fluidOutputs(MaterialsNuclides.LiFBeF2ZrF4UF4.getFluidStack(1000))
             .duration(20 * GTRecipeBuilder.MINUTES)
             .eut(4096)
-            .addTo(GTPPRecipeMaps.fissionFuelProcessingRecipes);
+            .addTo(RecipeMaps.fissionFuelProcessingRecipes);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(
@@ -97,7 +96,7 @@ public final class NuclearFuelRecipes {
             .duration(1 * GTRecipeBuilder.MINUTES + 40 * GTRecipeBuilder.SECONDS)
             .eut(0)
             .metadata(GTRecipeConstants.LFTR_OUTPUT_POWER, 40960)
-            .addTo(GTPPRecipeMaps.liquidFluorineThoriumReactorRecipes);
+            .addTo(RecipeMaps.liquidFluorineThoriumReactorRecipes);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(
@@ -116,7 +115,7 @@ public final class NuclearFuelRecipes {
             .duration(1 * GTRecipeBuilder.MINUTES + 40 * GTRecipeBuilder.SECONDS)
             .eut(0)
             .metadata(GTRecipeConstants.LFTR_OUTPUT_POWER, 24576)
-            .addTo(GTPPRecipeMaps.liquidFluorineThoriumReactorRecipes);
+            .addTo(RecipeMaps.liquidFluorineThoriumReactorRecipes);
 
         MyMod.logInfo(
             "Registered LFTR thorium/plutonium expansion: Reactor Fuel Processing Plant crafts (IC-31/IC-32) plus LFTR thorium-only and hybrid burn profiles.");

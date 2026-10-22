@@ -57,7 +57,7 @@ public final class SolderingFuelBinderRecipes {
 
     public static void registerSuperFuelBinderBeeswaxRecipes() {
         ItemStack beeswax = resolveForestryBeeswax(8);
-        FluidStack advancedGlue = Materials.AdvancedGlue.getFluid(100L);
+        FluidStack advancedGlue = Materials.GlueAdvanced.getFluid(100L);
 
         if (beeswax == null || advancedGlue == null) {
             MyMod.logInfo(
@@ -151,7 +151,7 @@ public final class SolderingFuelBinderRecipes {
         ItemStack metalDust = GTOreDictUnificator.get(OrePrefixes.dust, metal, 1L);
         ItemStack woodDust = GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wood, 4L);
         ItemStack output = ItemList.SFMixture.get(outputAmount);
-        FluidStack advancedGlue = Materials.AdvancedGlue.getFluid(100L);
+        FluidStack advancedGlue = Materials.GlueAdvanced.getFluid(100L);
 
         if (sulfurDust == null || metalDust == null || woodDust == null || output == null || advancedGlue == null) {
             MyMod.logInfo(

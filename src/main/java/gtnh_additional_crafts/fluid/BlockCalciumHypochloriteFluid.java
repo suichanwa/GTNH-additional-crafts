@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.Fluid;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gtnh_additional_crafts.MyMod;
 
 public class BlockCalciumHypochloriteFluid extends BlockFluidClassic {
 
@@ -20,7 +21,10 @@ public class BlockCalciumHypochloriteFluid extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        definedFluid.setIcons(iconRegister.registerIcon("water_still"), iconRegister.registerIcon("water_flow"));
+        IIcon still = iconRegister.registerIcon(MyMod.MODID + ":fluids/calcium_hypochlorite_still");
+        IIcon flow = iconRegister.registerIcon(MyMod.MODID + ":fluids/calcium_hypochlorite_flow");
+        definedFluid.setIcons(still, flow);
+        this.blockIcon = still;
     }
 
     @Override

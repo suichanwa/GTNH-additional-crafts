@@ -25,14 +25,15 @@ import gregtech.api.enums.Materials;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatchDynamo;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.recipe.maps.FuelBackend;
+import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GTPPMultiBlockBase;
 import gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.production.MTELargeSemifluidGenerator;
 import gtnh_additional_crafts.Config;
@@ -115,24 +116,24 @@ public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerato
             .addInfo("Supply Semifluid Fuels and 2000L of Lubricant per hour to run")
             .addInfo("Supply 80L/s Oxygen to boost output (optional)")
             .addInfo(
-                "Titanium gearboxes replace steel gearboxes: up to " + GTUtility.formatNumbers(titaniumBoostedOutput)
+                "Titanium gearboxes replace steel gearboxes: up to " + String.format("%,d", titaniumBoostedOutput)
                     + "EU/t with higher fuel use")
             .addInfo(
-                "Screwdriver right-click toggles performance mode: up to " + GTUtility.formatNumbers(maxBoostedOutput)
+                "Screwdriver right-click toggles performance mode: up to " + String.format("%,d", maxBoostedOutput)
                     + "EU/t, more oxygen/lubricant use, lower fuel efficiency")
             .addInfo("Supports standard and 16A dynamo hatches")
             .addInfo(
-                "Steel build: " + GTUtility.formatNumbers(steelDefaultOutput)
+                "Steel build: " + String.format("%,d", steelDefaultOutput)
                     + "EU/t default, "
-                    + GTUtility.formatNumbers(steelBoostedOutput)
+                    + String.format("%,d", steelBoostedOutput)
                     + "EU/t with oxygen")
             .addInfo(
-                "Titanium build: " + GTUtility.formatNumbers(titaniumDefaultOutput)
+                "Titanium build: " + String.format("%,d", titaniumDefaultOutput)
                     + "EU/t default, "
-                    + GTUtility.formatNumbers(titaniumBoostedOutput)
+                    + String.format("%,d", titaniumBoostedOutput)
                     + "EU/t with oxygen")
             .addInfo(
-                "Performance + oxygen: " + GTUtility.formatNumbers(performanceBoostedOutput)
+                "Performance + oxygen: " + String.format("%,d", performanceBoostedOutput)
                     + "EU/t on steel gearboxes")
             .addPollutionAmount(getPollutionPerSecond(null))
             .beginStructureBlock(3, 3, 4, false)
@@ -167,7 +168,7 @@ public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerato
             return SimpleCheckRecipeResult.ofFailure("no_lubricant");
         }
 
-        FuelBackend fuelBackend = (FuelBackend) GTPPRecipeMaps.semiFluidFuels.getBackend();
+        FuelBackend fuelBackend = (FuelBackend) RecipeMaps.semiFluidFuels.getBackend();
         for (FluidStack storedFluid : storedFluids) {
             GTRecipe fuelRecipe = fuelBackend.findFuel(storedFluid);
             if (fuelRecipe == null) {
@@ -206,11 +207,20 @@ public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerato
     }
 
     @Override
-    public boolean checkMachine(IGregTechTileEntity baseMetaTileEntity, ItemStack stack) {
+    public void checkMachine(IGregTechTileEntity baseMetaTileEntity, ItemStack stack,
+        java.util.List<StructureError> aErrorList) {
         resetStructureState();
-        boolean structureValid = checkPiece(STRUCTURE_PIECE_MAIN, 1, 1, 0);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, 1, 1, 0, aErrorList)) {
+            return;
+        }
         titaniumGearboxInstalled = titaniumGearboxCount == REQUIRED_GEARBOXES && steelGearboxCount == 0;
-        return structureValid && casingCount >= MINIMUM_CASINGS && hasValidGearboxConfiguration() && checkHatch();
+        if (casingCount < MINIMUM_CASINGS || !hasValidGearboxConfiguration()) {
+            return;
+        }
+        checkCasingMin(aErrorList, casingCount, MINIMUM_CASINGS);
+        checkHasMaintenanceHatch(aErrorList);
+        checkHasMufflerHatch(aErrorList);
+        checkHasInputHatch(aErrorList);
     }
 
     @Override
@@ -285,15 +295,10 @@ public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerato
     }
 
     @Override
-    public String[] getExtraInfoData() {
-        String[] base = super.getExtraInfoData();
-        if (base == null) {
-            base = new String[0];
-        }
-        String[] extended = Arrays.copyOf(base, base.length + 2);
-        extended[base.length] = "Gearbox Mode: " + (titaniumGearboxInstalled ? "Titanium" : "Steel");
-        extended[base.length + 1] = "Performance Mode: " + (performanceMode ? "Enabled" : "Disabled");
-        return extended;
+    public void getExtraInfoData(List<String> list) {
+        super.getExtraInfoData(list);
+        list.add("Gearbox Mode: " + (titaniumGearboxInstalled ? "Titanium" : "Steel"));
+        list.add("Performance Mode: " + (performanceMode ? "Enabled" : "Disabled"));
     }
 
     private void incrementCasingCount() {
@@ -521,7 +526,7 @@ public class PatchedMTELargeSemifluidGenerator extends MTELargeSemifluidGenerato
                     mte -> buildHatchAdder(MTELargeSemifluidGenerator.class)
                         .atLeast(HatchElement.Muffler, HatchElement.InputHatch, HatchElement.Maintenance)
                         .casingIndex(mte.getCasingTextureIndex())
-                        .dot(1)
+                        .hint(1)
                         .buildAndChain(
                             onElementPass(
                                 machine -> ((PatchedMTELargeSemifluidGenerator) machine).incrementCasingCount(),

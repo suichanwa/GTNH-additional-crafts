@@ -4,7 +4,7 @@ import net.minecraftforge.fluids.Fluid;
 
 public class CarbonylSulfideFluid extends Fluid {
 
-    private static final int CARBONYL_SULFIDE_COLOR = 0xE8E4C9;
+    private static final int CARBONYL_SULFIDE_COLOR = 0xE6D87A;
 
     public CarbonylSulfideFluid() {
         super("carbonyl_sulfide");

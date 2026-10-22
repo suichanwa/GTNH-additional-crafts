@@ -2,8 +2,8 @@ package gtnh_additional_crafts.patches.gregtech;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
-import gregtech.common.tileentities.machines.multi.MTEDieselEngine;
-import gregtech.common.tileentities.machines.multi.MTEExtremeDieselEngine;
+import gregtech.common.tileentities.machines.multi.MTEExtremeCombustionEngine;
+import gregtech.common.tileentities.machines.multi.MTELargeCombustionEngine;
 import gtnh_additional_crafts.MyMod;
 
 public final class DieselEngineOxidizerPatch {
@@ -45,7 +45,8 @@ public final class DieselEngineOxidizerPatch {
             if (existing instanceof PatchedMTEExtremeDieselEngine) {
                 continue;
             }
-            if (existing.getClass() != MTEDieselEngine.class && existing.getClass() != MTEExtremeDieselEngine.class) {
+            if (existing.getClass() != MTELargeCombustionEngine.class
+                && existing.getClass() != MTEExtremeCombustionEngine.class) {
                 continue;
             }
 
@@ -54,7 +55,7 @@ public final class DieselEngineOxidizerPatch {
 
             GregTechAPI.METATILEENTITIES[i] = null;
             try {
-                if (existing.getClass() == MTEExtremeDieselEngine.class) {
+                if (existing.getClass() == MTEExtremeCombustionEngine.class) {
                     new PatchedMTEExtremeDieselEngine(i, metaName, localName);
                     MyMod.logInfo("Patched ECE MetaTileEntity " + i + " for Cryonitrox/Liquid Oxygen boost support.");
                 } else {
@@ -70,7 +71,7 @@ public final class DieselEngineOxidizerPatch {
 
         patchApplied = true;
         if (patchedCount == 0) {
-            MyMod.logInfo("Skipped LCE oxidizer patch: MTEDieselEngine not found.");
+            MyMod.logInfo("Skipped LCE oxidizer patch: MTELargeCombustionEngine not found.");
             return;
         }
 

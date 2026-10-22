@@ -21,9 +21,10 @@ public class BlockCryonitroxFluid extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        definedFluid.setIcons(
-            iconRegister.registerIcon(MyMod.MODID + ":fluids/cryonitrox_oxidizer_still"),
-            iconRegister.registerIcon(MyMod.MODID + ":fluids/cryonitrox_oxidizer_flow"));
+        IIcon still = iconRegister.registerIcon(MyMod.MODID + ":fluids/cryonitrox_oxidizer_still");
+        IIcon flow = iconRegister.registerIcon(MyMod.MODID + ":fluids/cryonitrox_oxidizer_flow");
+        definedFluid.setIcons(still, flow);
+        this.blockIcon = still;
     }
 
     @Override

@@ -146,9 +146,9 @@ public class SodiumBatteryX16Item extends Item implements ISpecialElectricItem, 
         tooltip.add(
             EnumChatFormatting.AQUA + StatCollector.translateToLocalFormatted(
                 "gt.item.desc.eu_info",
-                GTUtility.formatNumbers(getStoredCharge(stack)),
-                GTUtility.formatNumbers(MAX_CHARGE),
-                GTUtility.formatNumbers(TRANSFER_LIMIT)) + EnumChatFormatting.GRAY);
+                String.format("%,d", getStoredCharge(stack)),
+                String.format("%,d", MAX_CHARGE),
+                String.format("%,d", TRANSFER_LIMIT)) + EnumChatFormatting.GRAY);
         tooltip.add(EnumChatFormatting.GREEN + "IV-Tier" + EnumChatFormatting.GRAY);
     }
 

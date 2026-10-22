@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.MaterialsKevlar;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.fluids.GTPPFluids;
@@ -46,7 +45,7 @@ public final class NaphthaXyleneRecipes {
             "1,2-Dimethylbenzene",
             11);
         registerXyleneHydrodealkylationRecipe(
-            FluidLookup.getFluidOrGas(MaterialsKevlar.IIIDimethylbenzene, 1000L),
+            FluidLookup.getFluidOrGas(Materials.IIIDimethylbenzene, 1000L),
             "1,3-Dimethylbenzene",
             13);
     }
