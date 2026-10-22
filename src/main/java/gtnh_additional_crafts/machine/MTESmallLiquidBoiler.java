@@ -16,10 +16,10 @@ public class MTESmallLiquidBoiler extends MTEBoilerLiquidBase {
             aID,
             aName,
             aNameRegional,
-            new String[] { "An early way to get Steam Power from Liquid Fuels", "Produces 150L of Steam per second",
+            new String[] { "An early way to get Steam Power from Liquid Fuels", "Produces 160L of Steam per second",
                 "Causes " + GTMod.proxy.mPollutionSmallCoalBoilerPerSecond + " Pollution per second",
-                "Fuels (1000L): Creosote (96s), Biomass (72s), Oil (60s), Fish Oil (48s), Seed Oil (36s)",
-                "Consumes fuel in 100L increments" },
+                "Fuels (1000L): Creosote (160s), Biomass (120s), Oil (100s), Fish Oil (80s), Seed Oil (60s)",
+                "Consumes fuel in 100L increments (16s / 100L Creosote)" },
             16000,
             new ITexture[0]);
     }
@@ -73,7 +73,7 @@ public class MTESmallLiquidBoiler extends MTEBoilerLiquidBase {
 
     @Override
     protected int getProductionPerSecond() {
-        return 150;
+        return 160;
     }
 
     @Override

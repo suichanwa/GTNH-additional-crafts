@@ -44,4 +44,12 @@ public class ClientProxy extends CommonProxy {
         ClientCommandHandler.instance.registerCommand(new OpenConfigClientCommand());
     }
 
+    @Override
+    public void postInit(cpw.mods.fml.common.event.FMLPostInitializationEvent event) {
+        super.postInit(event);
+        if (cpw.mods.fml.common.Loader.isModLoaded("NotEnoughItems")) {
+            gtnh_additional_crafts.client.nei.NEIModConfig.init();
+        }
+    }
+
 }

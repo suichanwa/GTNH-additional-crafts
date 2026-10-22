@@ -16,10 +16,10 @@ public class MTELargeLiquidBoiler extends MTEBoilerLiquidBase {
             aID,
             aName,
             aNameRegional,
-            new String[] { "High Pressure Liquid-burning Steam Boiler", "Produces 300L of Steam per second",
+            new String[] { "High Pressure Liquid-burning Steam Boiler", "Produces 320L of Steam per second",
                 "Causes " + GTMod.proxy.mPollutionHighPressureCoalBoilerPerSecond + " Pollution per second",
-                "Fuels (1000L): Creosote (24s), Biomass (18s), Oil (15s), Fish Oil (12s), Seed Oil (9s)",
-                "Consumes fuel in 100L increments (2x burn rate)" },
+                "Fuels (1000L): Creosote (40s), Biomass (30s), Oil (25s), Fish Oil (20s), Seed Oil (15s)",
+                "Consumes fuel in 100L increments (4x burn rate, 4s / 100L Creosote)" },
             32000,
             new ITexture[0]);
     }
@@ -73,7 +73,7 @@ public class MTELargeLiquidBoiler extends MTEBoilerLiquidBase {
 
     @Override
     protected int getProductionPerSecond() {
-        return 300;
+        return 320;
     }
 
     @Override
