@@ -68,7 +68,7 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
                     }
                 }
             }
-            this.fuelStack = new PositionedStack(fuels, 34, 42);
+            this.fuelStack = new PositionedStack(fuels, 31, 37);
 
             List<ItemStack> waters = new ArrayList<>();
             ItemStack waterDisplay = GTUtility.getFluidDisplayStack(Materials.Water.getFluid(1000L), false);
@@ -76,7 +76,7 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
                 waters.add(waterDisplay);
             }
             waters.add(new ItemStack(Items.water_bucket));
-            this.waterStack = new PositionedStack(waters, 34, 18);
+            this.waterStack = new PositionedStack(waters, 31, 11);
 
             List<ItemStack> boilers = new ArrayList<>();
             ItemStack small = ModMachines.getSmallLiquidBoiler(1L);
@@ -87,10 +87,10 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
             if (large != null) {
                 boilers.add(large);
             }
-            this.boilerStack = new PositionedStack(boilers, 78, 8);
+            this.boilerStack = new PositionedStack(boilers, 75, 9);
 
             ItemStack steamDisplay = GTUtility.getFluidDisplayStack(Materials.Steam.getGas(1000L), false);
-            this.steamStack = new PositionedStack(steamDisplay, 116, 26);
+            this.steamStack = new PositionedStack(steamDisplay, 117, 32);
         }
 
         @Override
@@ -162,7 +162,7 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
 
     @Override
     public String getGuiTexture() {
-        return "textures/gui/container/furnace.png";
+        return "gtnh_additional_crafts:textures/gui/nei_liquid_boiler.png";
     }
 
     @Override
@@ -187,7 +187,7 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
 
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(74, 30, 24, 17), "liquid_boiler_fuels"));
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(71, 32, 24, 17), "liquid_boiler_fuels"));
     }
 
     @Override
@@ -268,8 +268,7 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
     public void drawBackground(int recipe) {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GuiDraw.changeTexture(this.getGuiTexture());
-        GuiDraw.drawTexturedModalRect(0, 0, 5, 11, 166, 65);
-        GuiDraw.drawRect(0, 65, 166, 65, 0x18000000);
+        GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 166, 130);
     }
 
     @Override
@@ -279,35 +278,48 @@ public class NEILiquidBoilerHandler extends TemplateRecipeHandler {
         }
         CachedLiquidBoilerRecipe rec = (CachedLiquidBoilerRecipe) this.arecipes.get(recipe);
 
-        drawProgressBar(74, 30, 176, 14, 24, 17, 40, 0);
-        drawProgressBar(55, 43, 176, 0, 14, 14, 40, 3);
+        drawProgressBar(71, 32, 176, 14, 24, 17, 40, 0);
+        drawProgressBar(52, 38, 176, 0, 14, 14, 40, 3);
 
-        int y = 68;
-        GuiDraw.drawString(
-            "Fuel: " + EnumChatFormatting.DARK_GREEN + rec.fuel.getLocalizedName(),
-            8,
-            y,
-            0x303030,
-            false);
-        y += 11;
-        GuiDraw.drawString("Burn Time (1000L):", 8, y, 0x404040, false);
+        int y = 66;
+        GuiDraw.drawString("Fuel: " + EnumChatFormatting.DARK_GREEN + rec.fuel.getLocalizedName(), 11, y, 0x202020, false);
+        y += 10;
+        GuiDraw.drawString("Burn Time (1000L):", 11, y, 0x404040, false);
         y += 10;
         GuiDraw.drawString(
-            " Small: " + rec.burnTimeBronze + "s (" + (rec.burnTimeBronze / 10) + "s / 100L)",
-            12,
+            " Small: " + EnumChatFormatting.GOLD + rec.burnTimeBronze + "s"
+                + EnumChatFormatting.DARK_GRAY + " (" + (rec.burnTimeBronze / 10) + "s / 100L)",
+            13,
             y,
-            0x855010,
+            0x202020,
             false);
         y += 10;
         GuiDraw.drawString(
-            " Steel: " + rec.burnTimeSteel + "s (" + (rec.burnTimeSteel / 10) + "s / 100L)",
-            12,
+            " Steel: " + EnumChatFormatting.BLUE + rec.burnTimeSteel + "s"
+                + EnumChatFormatting.DARK_GRAY + " (" + (rec.burnTimeSteel / 10) + "s / 100L)",
+            13,
             y,
-            0x204070,
+            0x202020,
             false);
-        y += 11;
-        GuiDraw.drawString("Steam: 160 L/s (Small) | 320 L/s (Steel)", 8, y, 0x155515, false);
         y += 10;
-        GuiDraw.drawString("Pollution: 20/s (Small) | 30/s (Steel)", 8, y, 0x552020, false);
+        GuiDraw.drawString(
+            "Steam: " + EnumChatFormatting.DARK_GREEN + "160 L/s"
+                + EnumChatFormatting.DARK_GRAY + " (Sm) | "
+                + EnumChatFormatting.DARK_GREEN + "320 L/s"
+                + EnumChatFormatting.DARK_GRAY + " (St)",
+            11,
+            y,
+            0x202020,
+            false);
+        y += 10;
+        GuiDraw.drawString(
+            "Pollution: " + EnumChatFormatting.RED + "20/s"
+                + EnumChatFormatting.DARK_GRAY + " (Sm) | "
+                + EnumChatFormatting.RED + "30/s"
+                + EnumChatFormatting.DARK_GRAY + " (St)",
+            11,
+            y,
+            0x202020,
+            false);
     }
 }
